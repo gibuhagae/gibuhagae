@@ -2,60 +2,70 @@
 <div id="layout" class="admin-member">
     <div class="layout-member">
         <!-- 관리자 페이지 배너 -->
-            <nav class="side-banner">
-                <!-- 배너 타이틀 -->
-                <div class="banner-title">
-                    <img class=banner-logo-img src="/images/gibuhagae.png" alt="야옹아 기부하개">
-                    <div class="banner-title-text">관리자 페이지</div>
-                </div>
+        <nav class="side-banner">
+            <!-- 배너 타이틀 -->
+            <div class="banner-title">
+                <img class=banner-logo-img src="/images/gibuhagae.png" alt="야옹아 기부하개">
+                <div class="banner-title-text">관리자 페이지</div>
+            </div>
 
-                <!-- 배너 버튼 목록 -->
-                <ul class="banner-button-list">
-                    <li class="banner-button member">
-                        <div class="button-title">회원 관리</div>
-                    </li>
-                    <li class="banner-button item">
-                        <div class="button-title">상품 관리</div>
-                    </li>
-                    <li class="banner-button buy">
-                        <div class="button-title">매입 관리</div>
-                    </li>
-                    <li class="banner-button order">
-                        <div class="button-title">주문 관리</div>
-                    </li>
-                    <li class="banner-button donation">
-                        <div class="button-title">기부금 관리</div>
-                    </li>
-                    <li class="banner-button statistics">
-                        <div class="button-title">정산 관리</div>
-                    </li>
-                    <li class="banner-button tomain">
-                        <div class="button-title">메인으로</div>
-                    </li>
-                </ul>
-            </nav>
+            <!-- 배너 버튼 목록 -->
+            <ul class="banner-button-list">
+                <li class="banner-button member">
+                    <div class="button-title" onclick="location.href='/member/list'">회원 관리</div>
+                </li>
+                <li class="banner-button item">
+                    <div class="button-title" onclick="location.href='/productManagement/product-admin'">상품 관리</div>
+                </li>
+                <li class="banner-button buy">
+                    <div class="button-title" onclick="location.href='/buyManagement/buy-admin'">매입 관리</div>
+                </li>
+                <li class="banner-button order">
+                    <div class="button-title" onclick="location.href='/order/order-new'">주문 관리</div>
+                </li>
+                <li class="banner-button donation">
+                    <div class="button-title" onclick="location.href='/donatepage/donate-admin'">기부금 관리</div>
+                </li>
+                <li class="banner-button statistics">
+                    <div class="button-title" onclick="location.href='/totalsales/totalsale-admin'">정산 관리</div>
+                </li>
+                <li class="banner-button tomain">
+                    <div class="button-title" onclick="location.href='http://localhost:8080/'">메인으로</div>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 <script>
-    //모든 <li> 요소를 가져온다.
-    var listItems = document.querySelectorAll(".banner-button-list li");
+    // 현재 페이지의 URL 가져오는 코드
+    const currentPageUrl = window.location.pathname;
 
-    //이벤트 리스너를 추가
-    listItems.forEach(function(item) {
-        item.addEventListener("click", function() {
-            // 이전에 선택한 <li> 요소의 배경 색상 스타일을 제거
-            if (selectedItem) {
-                selectedItem.classList.remove("gradient-bg");
-            }
+    // includes 로 주소 찾아서 버튼에 컬러 추가
+    if (currentPageUrl.includes("/order/order-new")) {
+        const orderButton = document.querySelector(".order");
+        orderButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
+    }
+    if (currentPageUrl.includes("/member/list")){
+        const memberButton = document.querySelector(".member");
+        memberButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
+    }
+    if (currentPageUrl.includes("/productManagement/product-admin")){
+        const itemButton = document.querySelector(".item");
+        itemButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
+    }
+    if (currentPageUrl.includes("/buyManagement/buy-admin")){
+        const buyButton = document.querySelector(".buy");
+        buyButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
+    }
+    if (currentPageUrl.includes("/donatepage/donate-admin")){
+        const donationButton = document.querySelector(".donation");
+        donationButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
+    }
+    if (currentPageUrl.includes("/totalsales/totalsale-admin")){
+        const statisticsButton = document.querySelector(".statistics");
+        statisticsButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
+    }
 
-            // 클릭된 <li> 요소에 그라데이션 배경 스타일을 추가
-            item.classList.add("gradient-bg");
 
-            // 현재 선택한 <li> 요소를 저장
-            selectedItem = item;
-        });
-    });
-
-    // 이전에 선택한 <li> 요소를 저장할 변수
-    var selectedItem = null;
 </script>
+
