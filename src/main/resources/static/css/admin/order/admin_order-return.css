@@ -1,0 +1,21 @@
+#orderReturn {
+    margin-left: 2%;
+    margin-right: 73%;
+
+}
+
+#ReturnList {
+    width: 150px;
+    height: 50px;
+    font-size: 1.15em;
+    font-family: 'Noto Sans KR', sans-serif;
+    white-space: nowrap;
+}
+
+#returnList-img {
+    width: 17px;
+    height: 17px;
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+}

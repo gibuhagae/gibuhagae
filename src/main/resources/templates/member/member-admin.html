@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- meta tag : metadata(정보에 대한 정보) 제공
+    화면에 표시되지는 않지만 검색 엔진/브라우저에 읽힘 -->
+    <meta charset="UTF-8">
+    <!-- 뷰 포트 : 화면상의 화상 표시 영역. 너비를 디바이스에 맞춤. 기본 배율은 1.
+   데스크탑 화면과 모바일의 뷰 포트는 차이가 있기 때문에 필요한 설정. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 회원 관리</title>
+    <!-- 외부 스타일 시트 -->
+    <link rel="stylesheet" href="/css/admin/admin_nav.css" type="text/css">
+    <!-- Noto Sans Korean 글씨체 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div th:replace="/common/admin-nav.html"></div>
+
+<div class="member-contents">
+    <div class="member-contents-title">회원 정보</div>
+
+    <hr>
+    <!--데이터 테이블-->
+    <table style="margin: auto">
+        <tr>
+            <td>회원 번호</td>
+            <td>아이디</td>
+            <td>주소지</td>
+            <td>전화번호</td>
+            <td>적립금</td>
+        </tr>
+    </table>
+
+    <hr>
+
+</div>
+
+</body>
+</html>

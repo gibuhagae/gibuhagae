@@ -1,0 +1,18 @@
+#orderCancel {
+    margin-left: 2%;
+    margin-right: 73%;
+
+}
+
+#cancelList-img {
+    width: 17px;
+    height: 17px;
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+}
+
+#cancelList {
+    width: 150px;
+    white-space: nowrap;
+}
