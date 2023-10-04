@@ -1,0 +1,274 @@
+@charset "UTF-8";  /* 인코딩 문자 깨짐 방지 */
+
+html {
+    /* 사용자가 설정한 문자 크기 그대로 반영 될 수 있도록 */
+    font-size: 100%;
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+}
+
+*{
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    color: black;
+    margin: 0;
+}
+
+div {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* board 페이지 기본 설정 */
+#board {
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+/* 게시판 제목 */
+.board-title {
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 800;
+    color: rgba(108, 106, 106, 0.7);
+    font-size: 25px;
+}
+
+.title-divider {
+    width: 100px;
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+    display: inline-block;
+    align-content: center;
+    opacity: 1;
+}
+
+
+.board-content {
+    margin: 100px auto 0 auto;
+    width: 100%;
+}
+
+.board-container {
+    width: 80%;
+    margin: 70px auto 0 auto;
+}
+
+.board-body {
+    display: flex;
+}
+
+/* 좌측 게시판 네비 탭 */
+.board-tab {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 35px;
+}
+
+.board-tab button {
+    width: 95px;
+    background-color: rgba(211, 211, 211, 0.5);
+    margin-bottom: 30px;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    color: #6C6A6A;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.board-btn:hover {
+    background-color: rgba(255, 127, 80, 0.7);
+}
+
+
+/* 게시글 테이블 영역 */
+.board-table {
+    margin: 0 auto;
+    border-spacing: 80px 20px;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.board-table th {
+    padding: 5px;
+    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+    text-align: center;
+}
+
+.board-table td {
+    padding: 5px;
+    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 15px;
+    text-align: center;
+}
+
+.th1 {
+    width: 30px;
+}
+
+.th2 {
+    width: 50px;
+}
+
+.th3 {
+    width: 350px;
+}
+
+.th4 {
+    width: 70px;
+}
+
+.th5 {
+    width: 100px;
+}
+
+.th6 {
+    width: 60px;
+}
+
+.th7 {
+    width: 60px;
+}
+
+.board-page-nav {
+    margin: 0 auto;
+    border-spacing: 80px 20px;
+    width: 70%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.board-page-nav table {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 15px;
+    text-align: center;
+    margin: 30px auto 0 auto;
+    width:30%;
+    border-collapse: collapse;
+}
+
+.board-page-nav tr {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.board-button {
+    margin: 50px auto 0 auto;
+    width: 90%;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+.board-button button {
+    width: 10%;
+    border: #6C6A6A 1px solid;
+    border-radius: 10px;
+    margin-left: 15px;
+    padding: 3px;
+    color: #6C6A6A;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+}
+
+/* Q&A 관련 구역 */
+.qna-content {
+    padding: 100px 30px 50px 30px;
+}
+
+.qna-container {
+    padding-top: 70px;
+}
+
+/* 공지 테이블 영역 */
+.qna-table {
+    margin: 0 auto;
+    border-spacing: 80px 20px;
+    width: 70%;
+    border-collapse: collapse;
+}
+
+.qna-table th {
+    padding: 5px;
+    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+    text-align: center;
+}
+
+.qna-table td {
+    padding: 5px;
+    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 15px;
+    text-align: center;
+}
+
+.qna-page-nav {
+    margin: 0 auto;
+    border-spacing: 80px 20px;
+    width: 70%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.qna-page-nav table {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 15px;
+    text-align: center;
+    margin: 30px auto 0 auto;
+    width:30%;
+    border-collapse: collapse;
+}
+
+.qna-page-nav tr {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.qna-button {
+    margin: 50px auto 0 auto;
+    width: 70%;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+.qna-button button {
+    width: 10%;
+    border: #6C6A6A 1px solid;
+    border-radius: 10px;
+    margin-left: 15px;
+    padding: 3px;
+    color: #6C6A6A;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+}
