@@ -1,0 +1,28 @@
+#swapList-img {
+    width: 17px;
+    height: 17px;
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+}
+
+#swapList {
+    width: 150px;
+    white-space: nowrap;
+}
+
+#changeReady {
+    width: 200px;
+    height: 50px;
+    white-space: nowrap;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#changeShipping {
+    width: 200px;
+    height: 50px;
+    white-space: nowrap;
+    margin-right: 50.7%;
+}
+

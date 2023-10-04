@@ -1,0 +1,75 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리자 페이지 - 정산 관리</title>
+
+    <link rel="stylesheet" href="/css/admin/admin_nav.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/totalsales/totalsales.css" type="text/css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap"
+          rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+
+    <script src="/js/admin/totalsales/totalsales.js"></script>
+</head>
+<body>
+<div th:replace="/common/admin-nav.html"></div>
+
+<div id="salesContainer">
+    <h1 id="totalSales-title">정산관리</h1>
+    <hr>
+    <h2 id="todaySales-title">Today매출</h2>
+
+    <div class="today-sales">
+        <div id="amount-price" class="today-box">결제금액<p>코드추가</p></div>
+        <div id="return-price" class="today-box">환불금액<p>코드추가</p></div>
+        <div id="amount-count" class="today-box">결제건수<p>코드추가</p></div>
+        <div id="cer-count" class="today-box">취소/교환/반품 수<p>코드추가</p></div>
+        <div id="delivery-count" class="today-box">배송처리<p>코드추가</p></div>
+        <div id="delivery-complete" class="today-box">배송완료<p>코드추가</p></div>
+        <div id="net-sales" class="today-box">순매출<p>코드추가</p></div>
+    </div>
+    <div class="selectSearch-box">
+    <h2>기간별 매출 검색</h2>
+        <div id="sales-dateSearch">
+            <label for="sales-endDate"> 시작날짜
+            <input id="sales-StartDate" class="salesDate"> ~&nbsp;&nbsp;
+            </label>
+            <label for="sales-endDate"> 종료날짜
+                <input id="sales-endDate" class="salesDate">
+            </label>
+            <input type="submit" id="searchBtn" value="조회">
+
+            <div class="selectSearch-box">
+                <button class="filterDate" value="1">1개월</button>
+                <button class="filterDate" value="2">3개월</button>
+                <button class="filterDate" value="3">6개월</button>
+                <button class="filterDate" value="4">1년</button>
+            </div>
+
+        </div>
+    </div>
+            <div class="today-sales">
+                <div id="amount-price2" class="today-box">결제금액<p>코드추가</p></div>
+                <div id="return-price2" class="today-box">환불금액<p>코드추가</p></div>
+                <div id="amount-count2" class="today-box">결제건수<p>코드추가</p></div>
+                <div id="cer-count2" class="today-box">취소/교환/반품 수<p>코드추가</p></div>
+                <div id="delivery-count2" class="today-box">배송처리<p>코드추가</p></div>
+                <div id="delivery-complete2" class="today-box">배송완료<p>코드추가</p></div>
+                <div id="net-sales2" class="today-box">순매출<p>코드추가</p></div>
+            </div>
+
+
+</div>
+
+
+</body>
+</html>
