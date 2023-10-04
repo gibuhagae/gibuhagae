@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/basket.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/icons8-pug-48.png">
+    <!-- <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css"> -->
+    <title>basket</title>
+</head>
+<body>
+    <div id="progress-wrap">
+        <div id="progress-cart">
+            <div class="cart-wrap">
+                <div class="img-wrap" id="cart-img-wrap"><img src="/images/solar-cart-outline.png">
+                </div>
+                <div><p>장바구니</p></div>
+            </div>
+            <div class="cart-wrap">
+                <img src="/images/line.png">
+            </div>
+            <div class="cart-wrap">
+                <div class="img-wrap"><img src="/images/fluent-payment-24-regular.png">
+                </div>
+                <div><p>주문/결제</p></div>
+            </div>
+            <div><img src="/images/line.png"></div>
+            <div class="cart-wrap">
+                <div class="img-wrap"><img src="/images/group.png">
+                </div>
+                <div><p>주문 완료</p></div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div id="table-wrap">
+            <table>
+                <thead>
+                <tr id="head">
+                    <th><h2>장바구니</h2><br></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="name-bar">
+                    <td><span>전체(<em>0</em>)</span></td><td><input type="checkbox" name="check-item"></td><td><p>이미지</p></td><td><p>상품 정보</p></td><td><p>수량</p></td><td><p>상품구매금액</p></td><td><p>할인금액</p></td><td><p>적립금</p></td><td><p>배송비</p></td>
+                </tr>
+                <tr class="cart-detail">
+                    <td><em>0</em></td>
+                    <td><input type="checkbox" name="check-item"></td>
+                    <td><a href=""><img src="/images/image-3.jpg"></a></td>
+                    <td><div><a href="">특수견 15kg 영양사료</a></div></td>
+                    <td><span><select><option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">5+</option>
+            </select></span></td>
+                    <td><div data-sale-price="46,700">46,700</div></td>
+                    <td><div data-discount-price="10,200">10,200</div></td>
+                    <td><div data-discount-price="10,200">-</div></td>
+                    <td><div data-discount-price="10,200"><span>무료</span></div></td>
+                </tr>
+                </tr>
+                <tr class="cart-detail">
+                    <td><em>0</em></td>
+                    <td><input type="checkbox" name="check-item"></td>
+                    <td><a href=""><img src="/images/image-2.jpg"></a></td>
+                    <td><div><a href="">라오네스 반려동물 하네스</a></div></td>
+                    <td><span><select><option value="1" selected>1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">5+</option>
+        </select></span></td>
+                    <td><div data-sale-price="20,200">20,200</div></td>
+                    <td><div data-discount-price="-">-</div></td>
+                    <td><div data-discount-price="10,200">-</div></td>
+                    <td><div data-discount-price="10,200"><span>무료</span></div></td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="total-price">
+                <div id="price-area">
+                    <span>상품구매금액</span>
+                    <em>66,900</em>
+                    <span> </span>
+                    <span id="plus">
+                    <img src="/images/plus-symbol-button.png">
+                    <span class="sr-only">더하기</span>
+                </span>
+                    <span>배송비</span>
+                    <em>0</em>
+                    <span id="equal">
+                    <img src="/images/equal-mathematical-sign.png">
+                    <span class="sr-only">는</span>
+                </span>
+                    <em>66,900</em>
+                </div>
+            </div>
+        </div>
+        <div id="clear-wrapper">
+            <div id="clear-area">
+                <div>
+                    <div>
+                        <img src="/images/group.jpg">
+                    </div>
+                    <div><p class="message">선택상품을</p></div>
+
+                    <div><p class="message">|</p></div>
+                    <div><img src="/images/iconoir-xbox-x.jpg"></div>
+                    <div><p class="message">삭제하기</p>
+                    </div>
+                </div>
+                <div>
+                    <a href=""><div><img src="/images/clearcart.png"><p class="message" id="throw">장바구니비우기</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+        <div id="order-text">
+            <div id="order-area">
+                <div>
+                    <img src="/images/formkit-won.jpg">
+                </div>
+                <div><p class="text-message">총 상품금액</p></div>
+                <div><p class="text-message">|</p></div>
+                <div><p class="text-message">총 배송비</p></div>
+                <div><p class="text-message">|</p></div>
+                <div><p class="text-message">결제예정금액</p></div>
+            </div>
+        </div>
+        <div id="order-amount">
+            <div id="amount-area">
+                <div id="amount-area-left">
+                    <div>
+                        66,900
+                    </div>
+                    <div>
+                        원
+                    </div>
+                    <div>
+                        <img src="/images/plus-symbol-button.png">
+                    </div>
+                    <div>
+                        0
+                    </div>
+                    <div>
+                        원
+                    </div>
+                    <div>
+                        <img src="/images/equal-mathematical-sign.png">
+                    </div>
+                    <div>
+                        66,900
+                    </div>
+                    <div>
+                        원
+                    </div>
+                </div>
+                <div id="amount-area-right">
+                    <a href=""><div id="first-child">
+                        <div>
+                            <img src="/images/vectorcheck.png">
+                        </div>
+                        <div>
+                            전체주문
+                        </div>
+                    </div></a>
+                    <a href=""><div id="second-child">
+                        <div>
+                            <img src="/images/orderbyselect.png">
+                        </div>
+                        <div>
+                            선택주문
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+        <div id="condition-cart">
+            <div id="condition-cart-left">
+                <div id="cart-img-area">
+                    <img src="/images/whitecart.png">
+                </div>
+            </div>
+            <div id="condition-cart-right">
+                <div>
+                    <div>
+                        <img src="/images/material-symbols-info-outline.png">
+                    </div>
+                    <div>
+                        장바구니 이용안내
+                    </div>
+                </div>
+                <div>
+                    1. lorem ipsum
+                </div>
+                <div>
+                    2. lorem ipsum
+                </div>
+                <div>
+                    3. lorem ipsum
+                </div>
+                <div>
+                    4. lorem ipsum
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div id="footer-area">
+                <div id="footer-main">
+                    <div>
+
+                    </div>
+                    <div id="footer-icon">
+                        <div>
+                            <img src="/images/mdi-instagram.png">
+                        </div>
+                        <div>
+                            <img src="/images/simple-icons-kakaotalk.png">
+                        </div>
+                        <div>
+                            <img src="/images/mdi-facebook.png">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        팀: 그루브 가디언즈
+                    </div>
+                    <div>
+                        사업자 등록 번호 : 000-00-00000
+                    </div>
+                    <div>
+                        사업자 정보 확인 통신판매업 : 제 2023-서울종로H-1511호
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        사업장소재지 : 서울특별시 종로구 종로2가 탑골공원
+                    </div>
+                    <div>
+                        대표번호 : 000-000
+                    </div>
+                    <div>
+                        이메일 : hihello@gmail.com
+                    </div>
+                </div>
+                <div>
+                    <p>(주) 야옹아!기부하개는 통신판매 중개자로서 통신판매의 당사자가 아닙니다. 본 상품은 개별판마재 등록 상품으로 상품정보, 거래에 관한 의무와 책임은 각 판매자에게 있습니다.</p>
+                </div>
+                <div>
+                    <div>
+                        <img src="/images/icon-park-outline-symbol.png">
+                    </div>
+                    <div>
+                        2023. 야옹아!기부하개 All rights reserved designed by 야옹아!기부하개
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>
