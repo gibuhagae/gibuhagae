@@ -12,49 +12,49 @@
 </head>
 
 <body>
-<div class="container"> <!-- 컨테이너 -->
-    <div class="popup-wrap" id="popup"> <!-- //모달을 감쌀 박스 -->
-        <div class="popup"> <!--실질적 모달팝업 -->
-            <div class="popup-head">	<!-- 로고 영역 -->
-                <span class="head-title">게시판 관리</span>
-            </div>
-            <div class="popup-body">	<!--컨텐츠 영역 -->
-                <div class="body-content">
-                    <div class="body-titlebox">
-                        <h1>공지 등록</h1>
-                    </div>
-                    <div class="body-contentbox">
-                        <form id="noticeRegistForm" action="/board/notice/registNotice" method="post">
-                            <table>
-                                <tr>
-                                    <td>제목</td>
-                                    <td colspan="3"><input type="text" name="title" style="width: 600px;" ></td>
-                                </tr>
-                                <tr>
-                                    <td>작성자</td>
-                                    <td colspan="3"><input type="text" name="writer" style="width: 200px;"></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td colspan="3">
-                                        <textarea name="body" cols="80" rows="15" style="resize: none;"></textarea>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br>
-                            <br>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div id="registButton">
-                <button id="pop-btn close" type="button" th:onclick="'location.href=\'/board/notice\''">
-                    취소</button>
-                <button type="submit" id="pop-btn confirm">등록하기</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="container"> &lt;!&ndash; 컨테이너 &ndash;&gt;-->
+<!--    <div class="popup-wrap" id="popup"> &lt;!&ndash; //모달을 감쌀 박스 &ndash;&gt;-->
+<!--        <div class="popup"> &lt;!&ndash;실질적 모달팝업 &ndash;&gt;-->
+<!--            <div class="popup-head">	&lt;!&ndash; 로고 영역 &ndash;&gt;-->
+<!--                <span class="head-title">게시판 관리</span>-->
+<!--            </div>-->
+<!--            <div class="popup-body">	&lt;!&ndash;컨텐츠 영역 &ndash;&gt;-->
+<!--                <div class="body-content">-->
+<!--                    <div class="body-titlebox">-->
+<!--                        <h1>공지 등록</h1>-->
+<!--                    </div>-->
+<!--                    <div class="body-contentbox">-->
+<!--                        <form id="noticeRegistForm" action="/board/notice/registNotice" method="post">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td>제목</td>-->
+<!--                                    <td colspan="3"><input type="text" name="title" style="width: 600px;" ></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>작성자</td>-->
+<!--                                    <td colspan="3"><input type="text" name="writer" style="width: 200px;"></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td></td>-->
+<!--                                    <td colspan="3">-->
+<!--                                        <textarea name="body" cols="80" rows="15" style="resize: none;"></textarea>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <br>-->
+<!--                            <br>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div id="registButton">-->
+<!--                <button id="pop-btn close" type="button" th:onclick="'location.href=\'/board/notice\''">-->
+<!--                    취소</button>-->
+<!--                <button type="submit" id="pop-btn confirm">등록하기</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="notice" id="board">
     <!-- 헤더(로고, 상단 메뉴)-->
@@ -153,8 +153,50 @@
                 <button type="button" class="N">숨기기</button>
                 <button type="button" id="modal-open" >작성하기</button>
             </div>
+            <div class="popup-wrap" id="popup"> <!-- //모달을 감쌀 박스 -->
+                <div class="popup"> <!--실질적 모달팝업 -->
+                    <div class="popup-head">	<!-- 로고 영역 -->
+                        <span class="head-title">게시판 관리</span>
+                    </div>
+                    <div class="popup-body">	<!--컨텐츠 영역 -->
+                        <div class="body-content">
+                            <div class="body-titlebox">
+                                <h1>공지 등록</h1>
+                            </div>
+                            <div class="body-contentbox">
+                                <form id="noticeRegistForm" action="/board/notice/registNotice" method="post">
+                                    <table>
+                                        <tr>
+                                            <td>제목</td>
+                                            <td colspan="3"><input type="text" name="title" style="width: 600px;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>작성자</td>
+                                            <td colspan="3"><input type="text" name="writer" style="width: 200px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="3">
+                                                <textarea name="body" cols="80" rows="15" style="resize: none;"></textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <br>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="registButton">
+                        <button id="pop-btn close" type="button" th:onclick="'location.href=\'/board/notice\''">
+                            취소</button>
+                        <button type="submit" id="pop-btn confirm">등록하기</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 
 <script src="/js/board.js"></script>
