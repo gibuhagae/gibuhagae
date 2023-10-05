@@ -1,350 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gibuhagae(main)</title>
-    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/main.css" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
-</head>
-<body>
-<!-- 메인페이지 -->
-<div id="main" class="main">
-    <!-- 헤더(로고, 상단 메뉴)-->
-    <div class="main-header">
-        <!-- 헤더 상단 로고 및 메뉴  -->
-        <div class="main-header-top">
-            <div class="header-top-content">
-                <div class="header-logo">
-                    <img class="header-logo-logo" src="/images/main/home button.png">
-                </div>
-                <ul class="navigation">
-                    <li><a href="11">로그인</a></li>
-                    <li><a href="11">/&nbsp;&nbsp;&nbsp;&nbsp;회원가입</a></li>
-                    <li><a href="11">배송조회</a></li>
-                    <li><a href="11">마이샵</a></li>
-                    <li><a href="/board/notice">게시판관리</a></li>
-                    <!------------------------관리자 로그인시 공지사항이 게시판 관리로 변경되어야함 --------------------------->
-                </ul>
-            </div>
-        </div>
-        <!-- 헤더 중간 메인 로고 -->
-        <div class="main-header-mid">
-            <div class="header-mid-content">
-                <img class="main-logo-img" src="/images/main/로고1.png">
-            </div>
-        </div>
-        <!-- 카테고리 메뉴 -->
-        <div class="category-nav-content" id="category">
-            <ul class="category-nav">
-                <li><a href="22">반려동물</a>
-                    <ul>
-                        <li><a href="33">반려견</a></li>
-                        <li><a href="33">반려묘</a></li>
-                    </ul>
-                </li>
-                <li><a href="productList/product">간식</a>
-                    <ul>
-                        <li><a href="33">강아지껌</a></li>
-                        <li><a href="33">수제간식</a></li>
-                        <li><a href="33">캔/파우치</a></li>
-                        <li><a href="33">고양이간식</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">사료</a>
-                    <ul>
-                        <li><a href="33">퍼피(1세 미만)</a></li>
-                        <li><a href="33">어덜트(1~7세)</a></li>
-                        <li><a href="33">시니어(7세 이상)</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">미용용품</a>
-                    <ul>
-                        <li><a href="33">드라이기/발톱관리용품</a></li>
-                        <li><a href="33">샴푸/린스</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">패션용품</a>
-                    <ul>
-                        <li><a href="33">일반의류</a></li>
-                        <li><a href="33">코스튬</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">위생용품</a>
-                    <ul>
-                        <li><a href="33">기저귀/배변용품</a></li>
-                        <li><a href="33">눈/귀 위생용품</a></li>
-                        <li><a href="33">넥카라</a></li>
-                        <li><a href="33">고양이 화장실/모래</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">장난감/훈련용품</a>
-                    <ul>
-                        <li><a href="33">강아지 장난감</a></li>
-                        <li><a href="33">고양이 장난감</a></li>
-                        <li><a href="33">캣타워</a></li>
-                        <li><a href="33">훈련용품</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- 메인페이지에 출력되는 기타 리스트들 -->
-    <div class="main-list">
-        <!-- 배너 -->
-        <div class="main-banner" id="banner">
-            <br>
-            <br>
-            <br>
-            <br>
-            배너자리배너자리배너자리배너자리배너자리배너자리배너자리배너자리배너자리
-        </div>
-        <br>
-        <!-- 메인 베스트 아이템 영역 -->
-        <div class="main-best-product">
-            <br>
-            <!-- 타이틀 -->
-            <div class="best-product-title">
-                | BEST ITEM |
-            </div>
-            <!--슬라이드에 들어갈 콘텐츠 -->
-            <div class="best-product-content" >
-                <div class="slider-container">
-                    <!-- 슬라이드 사진 -->
-                    <div class="slider-wrapper">
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog1.jpg" alt="Image 1">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog2.jpg" alt="Image 2">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog3.jpg" alt="Image 3">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog4.jpg" alt="Image 4">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog5.jpg" alt="Image 5">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog6.jpg" alt="Image 6">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog7.jpg" alt="Image 7">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog8.jpg" alt="Image 8">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog9.jpg" alt="Image 9">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- 슬라이드 이동 버튼 -->
-                    <button class="prev-btn" onclick="prevSlide()">&lsaquo;</button>
-                    <button class="next-btn" onclick="nextSlide()">&rsaquo;</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <!-- 메인 신상품 영역-->
-    <div class="main-new-product">
-        <br>
-        <br>
-        <div class="new-product-title">
-            | New Arrival |
-        </div>
-        <div class="new-product-container">
-            <div class="new-product-wrapper">
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/1.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/2.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/3.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/4.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/5.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/6.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/7.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/8.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/9.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/10.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/11.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/12.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/13.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/14.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/15.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/16.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/17.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/18.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/19.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/20.jpg">
-                    </a>
-                </div>
-            </div>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-        </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <!-- footer -->
-    <footer>
-        <div id="footer-area">
-            <div id="footer-main">
-                <div class="footer-logo">
-                    <img src="/images/navigation/menu-logo.png">
-                </div>
-                <div id="footer-icon">
-                    <div>
-                        <img src="/images/main/instagram.png">
-                    </div>
-                    <div>
-                        <img src="/images/main/kakao.png">
-                    </div>
-                    <div>
-                        <img src="/images/main/facebook.png">
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div>
-                    팀: 그루브 펫 가디언즈
-                </div>
-                <div>
-                    사업자 등록 번호 : 000-00-00000
-                </div>
-                <div>
-                    사업자 정보 확인 통신판매업 : 제 2023-서울종로H-1511호
-                </div>
-            </div>
-            <div>
-                <div>
-                    사업장소재지 : 서울특별시 종로구 종로2가 탑골공원
-                </div>
-                <div>
-                    대표번호 : 000-000
-                </div>
-                <div>
-                    이메일 : hihello@gmail.com
-                </div>
-            </div>
-            <div>
-                <p>(주) 야옹아!기부하개는 통신판매 중개자로서 통신판매의 당사자가 아닙니다. 본 상품은 개별판마재 등록 상품으로 상품정보, 거래에 관한 의무와 책임은 각 판매자에게 있습니다.</p>
-            </div>
-            <div>
-                <div>
-                    <img src="/images/main/symbol.png">
-                </div>
-                <div>
-                    2023. 야옹아!기부하개 All rights reserved designed by 야옹아!기부하개
-                </div>
-            </div>
-        </div>
-    </footer>
+<head>
+    <meta charset="UTF-8" />
+    <title>여기가 메인페이지 입니다.</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/event.js"></script>
+
+    <script>
+        const message = '[[${message}]]';
+        message && alert(message);
+    </script>
+
+</head>
+
+<body>
+<h1>Spring Security Project에 오신 걸 환영합니다.</h1>
+
+<div>
+    <th:block sec:authorize="isAuthenticated()">
+        <button onclick="location.href='/member/myPage'">마이페이지</button>
+        <button id="logout" type="button">로그아웃</button>
+        <button id="withdraw" type="button">회원탈퇴</button>
+    </th:block>
+    <th:block sec:authorize="isAnonymous()">
+        <button onclick="window.open('/login/Login', '로그인창', 'popup')">테스트창</button>
+        <button type="button" id="indexLogBtn">로그인</button>
+        <button onclick="location.href='/join/Join'">회원가입</button>
+    </th:block>
 </div>
 
-<!-- 슬라이드 이동 JS -->
-<script src="/js/main.js"></script>
+<div>
+    <button onclick="location.href='/menu/list'">메뉴보기</button>
+    <th:block sec:authorize="hasAnyRole('user', 'admin')">
+        <button onclick="location.href='/order/regist'">주문하기</button>
+    </th:block>
+    <th:block sec:authorize="hasRole('admin')">
+        <button onclick="location.href='/admin/dashboard'">관리자메뉴</button>
+    </th:block>
+</div>
+
 </body>
 </html>

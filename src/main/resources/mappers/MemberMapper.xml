@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.member.dao.MemberMapper">
+
+    <resultMap id="memberResultMap" type="com.gibuhagae.gibuhagae.member.dto.MemberDTO">
+        <id property="memberNo" column="MEMBER_NO"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="memberPhone" column="MEMBER_PHONE"/>
+        <result property="zipcode" column="ZIPCODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="registDate" column="REGIST_DATE"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="donatePrice" column="DONATE_PRICE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="activationStatus" column="ACTIVATION_STATUS"/>
+    </resultMap>
+
+    <resultMap id="memberFunctionInfosResultMap" type="com.gibuhagae.gibuhagae.member.dto.MemberFunctionInfosDTO">
+        <result property="MemberId" column="MEMBER_ID"/>
+        <result property="isSavedId" column="IS_SAVED_ID"/>
+        <result property="isRememberedId" column="IS_REMEMBERED_ID"/>
+    </resultMap>
+
+    <select id="findMemberById" resultMap="memberResultMap">
+        SELECT
+            MEMBER_NO,
+            MEMBER_NAME,
+            MEMBER_PHONE,
+            ZIPCODE,
+            ADDRESS,
+            REGIST_DATE,
+            UPDATE_DATE,
+            EMAIL,
+            DONATE_PRICE,
+            PASSWORD,
+            USER_ID,
+            USER_CODE,
+            LOGIN_TYPE,
+            ACTIVATION_STATUS
+        FROM
+            MEMBER
+        WHERE
+            USER_ID = #{ userId }
+    </select>
+
+    <select id="selectFindIdInfos" resultMap="memberResultMap">
+        SELECT
+            MEMBER_NAME,
+            REGIST_DATE,
+            EMAIL,
+            USER_ID,
+            LOGIN_TYPE
+        FROM
+            MEMBER
+        WHERE
+            ACTIVATION_STATUS = 'Y' AND
+            MEMBER_NAME = #{ mName } AND
+            EMAIL = #{ mEmail }
+    </select>
+
+    <select id="selectFindPwdInfos" resultMap="memberResultMap">
+        SELECT
+            MEMBER_NAME,
+            EMAIL,
+            USER_ID,
+            LOGIN_TYPE
+        FROM
+            MEMBER
+        WHERE
+            ACTIVATION_STATUS = 'Y' AND
+            MEMBER_NAME = #{ mName } AND
+            USER_ID = #{ mId } AND
+            EMAIL = #{ mEmail }
+    </select>
+
+    <insert id="registMember">
+        INSERT
+        INTO MEMBER (
+        MEMBER_NO,
+        MEMBER_NAME,
+        MEMBER_PHONE,
+        ZIPCODE,
+        ADDRESS,
+        REGIST_DATE,
+        UPDATE_DATE,
+        EMAIL,
+        DONATE_PRICE,
+        PASSWORD,
+        USER_ID,
+        USER_CODE,
+        LOGIN_TYPE,
+        ACTIVATION_STATUS
+        )
+        VALUES (
+        SEQ_MEMBER_NO.NEXTVAL,
+        #{ memberName },
+        #{ memberPhone },
+        #{ zipcode },
+        #{ address },
+        sysdate,
+        sysdate,
+        #{ email },
+        '1',
+        #{ password },
+        #{ userId },
+        'user',
+        '개인회원',
+        'y'
+        )
+    </insert>
+
+    <select id="selectMemberId" resultType="string">
+        SELECT
+            USER_ID
+        FROM
+            MEMBER
+        WHERE
+            ACTIVATION_STATUS = 'Y' AND
+            USER_ID = #{ userId }
+    </select>
+
+    <update id="modifyMemberPwdById">
+        UPDATE
+            MEMBER
+        SET
+            PASSWORD = #{ password }
+        WHERE
+            ACTIVATION_STATUS = 'Y' AND
+            USER_ID = #{ userId }
+    </update>
+
+    <update id="deleteMember">
+        UPDATE
+            MEMBER
+        SET
+            ACTIVATION_STATUS = 'N'
+        WHERE
+            ACTIVATION_STATUS = 'Y' AND
+            USER_ID = #{ userId }
+    </update>
+
+</mapper>

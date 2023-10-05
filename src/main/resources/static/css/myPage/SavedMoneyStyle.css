@@ -1,0 +1,131 @@
+@charset "UTF-8";  
+
+html {
+    background-color: white;
+    font-size: 100%;
+}
+
+.myPageCategory {
+    position: absolute;
+    top: 32%;
+    left: 3%;
+}
+
+#categoryTitle {
+    font-size: 2.3rem;
+    position: relative;
+    margin-bottom: 10%;
+}
+
+.categoryBtn {
+    
+    width: 100%;
+    height: 30px;
+}
+
+.categoryBtn:not(#orderHiorderListTitlestoryInquiry){
+    margin-top: 10%;
+}
+
+.categoryBtn:not(#savedMoney){
+    background-color: #d9d9d9;
+}
+
+#savedMoney {
+    background-color: ivory;
+}
+
+#orderHistoryInquiry:hover, 
+#creInquiry:hover,
+#mInforModify:hover,
+#interestProduct:hover,
+#recentViewedProduct:hover,
+#savedMoney:hover {
+    background-color: rgba(217, 217, 217, 0);
+}
+
+.savedArea {
+    position: absolute;
+    top: 32%;
+    left: 30%;
+}
+
+#savedTitle{
+    position: relative;
+    margin-left: 5%;
+    bottom: 15px;
+    font-weight: bold;
+}
+
+#moneyImg{
+    margin-bottom: 8%;
+    
+    position: relative;
+    margin-left: 35%;
+}
+
+.hrLine {
+    position: absolute;
+    border: 1px solid black(128, 18, 18);
+    width: 100%;
+}
+
+#line2 {
+    margin-top: 5%;
+}
+
+#line3 {
+    margin-top: 11%;
+}
+
+#line4 {
+    margin-top: 16%;
+}
+
+#line5 {
+    margin-top: 22%;
+}
+
+#line6 {
+    margin-top: 27%;
+}
+
+.priceText {
+    position: relative;
+    left: 70%;
+}
+
+.detailTable {
+    position: relative;
+    margin-top: 10%;
+}
+
+#savedMoneyText {
+    
+}
+
+#savedMoneydetailText {
+    color: #d6d6d6
+}
+
+.sMoneyCategory {
+    width: 130px;
+    height: 30px;
+}
+
+.sMoneyContent {
+    width: 130px;
+    height: 30px;
+}
+
+#line7 {
+    margin-top: 5%;
+}
+
+#line8 {
+    margin-top: 7%;
+}
+
+#line9 {
+    margin-top: 13%;
+}
