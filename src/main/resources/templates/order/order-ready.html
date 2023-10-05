@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- meta tag : metadata(정보에 대한 정보) 제공
+    화면에 표시되지는 않지만 검색 엔진/브라우저에 읽힘 -->
+    <meta charset="UTF-8">
+    <!-- 뷰 포트 : 화면상의 화상 표시 영역. 너비를 디바이스에 맞춤. 기본 배율은 1.
+   데스크탑 화면과 모바일의 뷰 포트는 차이가 있기 때문에 필요한 설정. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 배송준비중</title>
+    <!-- 외부 스타일 시트 -->
+    <link rel="stylesheet" href="/css/admin/admin_nav.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/order/admin_order.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/order/admin_order-ready.css" type="text/css">
+    <!-- Noto Sans Korean 글씨체 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <!-- 외부 script -->
+    <script type="text/javascript" src="/js/admin/order/order.js"></script>
+</head>
+
+<body>
+
+<div th:replace="/common/admin-nav.html"></div>
+
+<div class="order-categoryMenu">
+    <header>
+        <h1 class="order-title">주문관리</h1>
+    </header>
+    <div class="order-board">
+        <ul class="order-category">
+            <li class="category" id="new-order" ><div>신규주문</div></li>
+            <li class="category" id="post-ready"><div>배송준비중</div></li>
+            <li class="category" id="post-shipping"><div>배송중</div></li>
+            <li class="category" id="post-complete"><div>배송완료</div></li>
+            <li class="category" id="post-cancel"><div>취소요청</div></li>
+            <li class="category" id="post-return"><div>반품요청</div></li>
+            <li class="category" id="post-swap"><div>교환요청</div></li>
+        </ul>
+    </div>
+
+
+    <div class="order-view">
+        <button id="sendBtn" class="order-btn">발송처리</button>
+        <button id="cancelBtn" class="order-btn">판매취소</button>
+        <button id="returnBtn" class="order-btn">반품처리</button>
+        <button id="swapBtn" class="order-btn">교환처리</button>
+    </div>
+
+    <div class="order-list">
+        <div id="order-num" class="orderList-title"><input type="checkbox" id="orderNum-ck" class="ckBox"><label for="orderNum-ck">주문번호/시각</label> </div>
+        <div id="order-item" class="orderList-title">주문상품</div>
+        <div id="order-price" class="orderList-title">상품금액</div>
+        <div id="order-count" class="orderList-title">수량</div>
+        <div id="order-message" class="orderList-title">요청사항</div>
+        <div id="order-delivery" class="orderList-title">배송</div>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+</body>
+</html>

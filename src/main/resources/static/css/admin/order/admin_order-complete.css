@@ -1,0 +1,16 @@
+#changeReady {
+    white-space: nowrap;
+    width: 200px;
+    margin-left: 30px;
+    margin-right: 2%;
+}
+
+#changeShipping {
+    white-space: nowrap;
+    width: 200px;
+    margin-right: 34.7%;
+}
+
+#returnBtn {
+    margin-right: 2%;
+}
