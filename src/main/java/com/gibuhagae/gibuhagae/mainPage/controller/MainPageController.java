@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/main")
 public class MainPageController {
 
-    @GetMapping("/index")
+    @GetMapping("/mainPage")
     public String getMain() {
 
-        return "main/index";
+        return "main/mainPage";
     }
 }
