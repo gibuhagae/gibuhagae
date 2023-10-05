@@ -21,6 +21,12 @@
             <hr class="title-divider">
         </div>
         <div class="board-container">
+            <select id="select1">
+                <option value="selected" selected>답변상태</option>
+                <option value="Y">완료</option>
+                <option value="N">대기중</option>
+            </select>
+            <br>
             <div class="board-body">
                 <div class="board-tab">
                     <button type="button" class="board-btn" th:onclick="|location.href='/board/notice'|">NOTICE
