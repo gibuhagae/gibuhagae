@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/payment.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/icons8-pug-48.png">
+    <!-- <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css"> -->
+    <title>payment</title>
+    <script type="text/javascript" src="/js/payment.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="progress-wrap">
+        <div id="progress-cart">
+            <div class="cart-wrap">
+                <div class="img-wrap"><img src="/images/solar-cart-outline.png">
+                </div>
+                <div><p>장바구니</p></div>
+            </div>
+            <div class="cart-wrap">
+                <img src="/images/line.png">
+            </div>
+            <div class="cart-wrap">
+                <div class="img-wrap" id="cart-img-wrap"><img src="/images/fluent-payment-24-regular.png">
+                </div>
+                <div><p>주문/결제</p></div>
+            </div>
+            <div><img src="/images/line.png"></div>
+            <div class="cart-wrap">
+                <div class="img-wrap"><img src="/images/group.png">
+                </div>
+                <div><p>주문 완료</p></div>
+            </div>
+        </div>
+    </div>
+    <div id="addr-box">
+        <div class="addr-header">
+            <br>
+            <h2>배송지</h2>
+            <br>
+        </div>
+        <div id="addr-body">
+            <div id="select-addr-tab">
+                <div id="left-addr" class="both-addr">
+                    <input id="newaddr" name="addrs" value="N" type="radio" checked>
+                    <label for="newaddr">기본 배송지</label>
+                </div>
+                <div id="right-addr" class="both-addr">
+                    <input id="orginaddr" name="addrs" value="O" type="radio">
+                    <label for="orginaddr">새로운 배송지</label>
+                </div>
+            </div>
+            <div id="type-write">
+                <div id="name-area">
+                    <div id="name-header">
+                        <div>받는사람</div>
+                        <div><img src="/images/bg_required.png"></div>
+                    </div>
+
+                    <input id="text-write" value type="text">
+
+                </div>
+                <div id="addr-area">
+                    <div class="addr-header">
+                        <div>주소</div>
+                        <div><img src="/images/bg_required.png"></div>
+                    </div>
+                    <div id="zip-code">
+                        <input id="zip-code-write" type="text" placeholder="우편번호">
+                        <button id="search-addr">주소검색</button>
+                    </div>
+
+                    <input id="addr1" type="text" placeholder="기본주소">
+
+                    <input id="addr2" type="text" placeholder="나머지 주소(선택 입력 가능)">
+
+                </div>
+                <div id="phone-num">
+                    <div id="phone-header">
+                        <div>휴대전화</div>
+                        <div><img src="/images/bg_required.png"></div>
+                    </div>
+                    <div id="phone-body">
+                        <select id="phone-value">
+                            <option value="010" selected>
+                                010
+                            </option>
+                            <option value="011">
+                                011
+                            </option>
+                            <option value="016">
+                                016
+                            </option>
+                            <option value="017">
+                                017
+                            </option>
+                            <option value="018">
+                                018
+                            </option>
+                            <option value="019">
+                                019
+                            </option>
+                        </select>
+                        -
+                        <input type="text">
+                        -
+                        <input type="text">
+
+                    </div>
+                </div>
+                <div id="email">
+                    <div id="email-header">
+                        <div>이메일</div>
+                        <div><img src="/images/bg_required.png"></div>
+                    </div>
+                    <div id="email-body">
+                        <input type="text">
+                        @
+                        <input id="domain" type="text">
+
+                        <select id="etcoption">
+                            <option value="selected" selected>-이메일 선택-</option>
+                            <option value="naver.com">naver.com</option>
+                            <option value="daum.net">daum.net</option>
+                            <option value="nate.com">nate.com</option>
+                            <option value="hotmail.com">hotmail.com</option>
+                            <option value="yahoo.com">yahoo.com</option>
+                            <option value="empas.com">empas.com</option>
+                            <option value="korea.com">korea.com</option>
+                            <option value="gmail.com">gamil.com</option>
+                            <option value="etc">직접입력</option>
+                        </select>
+                        <input id="email-write" type="text" placeholder="직접입력" style="display: none;" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="shipping-message">
+            <select id="shipping-message-option">
+                <option value="select-option" selected>메세지 선택(선택 사항)</option>
+                <option value="message1">배송 전에 미리 연락바랍니다.</option>
+                <option value="message2">부재 시 경비실에 맡겨주세요.</option>
+                <option value="message3">부재 시 문앞에 놓아주세요</option>
+                <option value="message4">직접 입력</option>
+            </select>
+            <input id="shipping-message-area" type="text">
+        </div>
+        <div id="set-main-addr">
+            <input id="check-box-addr" type="checkbox">
+            <label for="check-box-addr">기본 배송지로 저장</label>
+        </div>
+        <div id="item-detail">
+            <div id="item-header">
+                주문상품
+            </div>
+            <div id="item-category1">
+                <div class="item-image">
+                    <img src="/images/image-3.jpg">
+                </div>
+                <div class="detail-text">
+                    <div class="top">
+                        <div>특수견 15kg 영양사료 [옵션:핑크|M]  수량:1개</div>
+                        <div><button class="x-button" type="button"></button></div>
+                    </div>
+                    <div class="bottom">
+                        <em>46,700원</em>
+                    </div>
+                </div>
+            </div>
+            <div id="item-category2">
+                <div class="item-image">
+                    <img src="/images/image-2.jpg">
+                </div>
+                <div class="detail-text">
+                    <div class="top">
+                        <div>라오네스 반려동물 하네스            수량:1개</div>
+                        <div><button class="x-button" type="button"></button></div>
+                    </div>
+                    <div class="bottom">
+                        <em>46,700원</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="shipping-price">
+            <div>배송비</div>
+            <div><em>0</em>(무료)원</div>
+        </div>
+        <div id="discount-area">
+            <div id="discount-header"><div>할인/부가결제</div></div>
+            <div id="discount-body">
+                <div>적립금</div>
+                <div><input type="text" id="discount-write" placeholder="0원"><button id="discount-button">전액 사용</button></div>
+            </div>
+            <div id="discount-foot">
+                <div>보유잔액 : <em>2,000</em>원</div>
+            </div>
+        </div>
+        <div id="total-price-area">
+            <div id="price-info-header">
+                <div>결제정보</div>
+            </div>
+            <div id="price-info-body">
+                <div>
+                    <div>주문상품</div>
+                    <div><em>66,900</em>원</div>
+                </div>
+                <div>
+                    <div>배송비</div>
+                    <div>+<em>0</em>원</div>
+                </div>
+                <div>
+                    <div>할인/부가결제</div>
+                    <div>-<em>0</em>원</div>
+                </div>
+                <div>
+                    <div>최종 결제 금액</div>
+                    <div><em>66,900</em>원</div>
+                </div>
+            </div>
+        </div>
+        <div id="check-payment">
+            <div id="payment-method">
+                <div>결제수단</div>
+            </div>
+            <div id="payment-card">
+                <input id="paymethod1" name="select-pay" type="radio">
+                <label for="paymethod1">
+                    <img src="/images/ico_card.gif">
+                </label>
+            </div>
+            <div id="payment-acount">
+                <input id="paymethod2" name="select-pay" type="radio">
+                <label for="paymethod2">
+                    <img src="/images/ico_realtime.gif">
+                </label>
+            </div>
+        </div>
+        <div id="paycard-info">
+            <div id="select-card">
+                <div id="select-card-name">
+                    <div>카드선택</div>
+                    <div><img src="/images/bg_required.png"></div>
+                </div>
+                <div>
+                    <select>
+                        <option value="selected" selected>선택해주세요.</option>
+                        <option value="card1">삼성카드</option>
+                        <option value="card2">신한카드</option>
+                        <option value="card3">KB국민카드</option>
+                        <option value="card4">현대카드</option>
+                    </select>
+                </div>
+            </div>
+            <div id="installment-period">
+                <div id="period-name">
+                    <div>할부기간</div>
+                    <div><img src="/images/bg_required.png"></div>
+                </div>
+                <div>
+                    <select>
+                        <option value="selected" selected>일시불</option>
+                        <option value="period1">2개월</option>
+                        <option value="period1">3개월</option>
+                        <option value="period1">6개월</option>
+                        <option value="period1">12개월</option>
+                    </select>
+                </div>
+            </div>
+            <div id="pay-info">
+                <div id="pay-info-name">
+                    <div>결제안내</div>
+                    <div><img src="/images/bg_required.png"></div>
+                </div>
+                <div>
+                    <div id="type1"><a href="">안심클릭안내</a></div>
+                    <div id="type2"><a href="">안전결제(ISP)안내</a></div>
+                </div>
+            </div>
+            <div class="pay-footer">
+                <input id="save-payment1" type="checkbox">
+                <label for="save-payment1">결제수단 입력정보를 다음에도 사용</label>
+            </div>
+        </div>
+        <div id="realtime-payment">
+            <div id="acount-wrap">
+                <div id="acount-name">
+                    <div>예금주명</div>
+                    <div><img src="/images/bg_required.png"></div>
+                </div>
+                <input id="receiptment-name" type="text" placeholder="이름을 입력하세요.">
+            </div>
+            <div id="receipt-check">
+                <div>현금영수증</div>
+                <div><img src="/images/bg_required.png"></div>
+            </div>
+            <div id="receipt-button">
+                <div id="receipt-left">
+                    <input id="check-receipt" value="O" name="realtime-receipt" type="radio" checked>
+                    <label for="check-receipt">현금영수증 신청</label>
+                </div>
+                <div id="receipt-right">
+                    <input id="uncheck-receipt" value="N" name="realtime-receipt" type="radio">
+                    <label for="uncheck-receipt">신청안함</label>
+                </div>
+            </div>
+            <div class="pay-footer">
+                <input id="save-payment2" type="checkbox">
+                <label for="save-payment2">결제수단 입력정보를 다음에도 사용</label>
+            </div>
+        </div>
+        <div id="reward-amount">
+            <div>적립 혜택</div>
+            <div><em>1,000</em>원 예정</div>
+        </div>
+        <div id="donation-area">
+            <div id="donation-box">
+                <div>
+                    <div><em>1000</em>원은 적립하지 않고 기부할래요.</div>
+                    <div>
+                        <label class="switch-button">
+                            <input type="checkbox"/>
+                            <span class="onoff-switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div><em>고양이</em>님의 작은 나눔으로 180마리의 길냥이들이 배부를 수 있어요.</div>
+                    <div><img src="/images/dog1.png"></div>
+                </div>
+            </div>
+        </div>
+        <div id="agreement-area">
+            <div id="agree-header">
+                <div>구매조건 확인 및 결제 진행 동의</div>
+                <div><button type="button" id="agree-button">보기</button></div>
+            </div>
+            <ul id="agree-message">
+                <li>
+                    무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다. 무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기 바랍니다.
+                </li>
+                <li>
+                    최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.
+                </li>
+            </ul>
+            <div>
+                <div>주문 내용을 확인하였으며 이에 동의합니다.</div>
+            </div>
+        </div>
+        <div>
+            <div id="order-confirm">
+                <button type="button" id="confirm-all">
+                    <em>66,900</em>원 결제하기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
