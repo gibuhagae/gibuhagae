@@ -1,0 +1,39 @@
+// const body = document.querySelector('body');
+// const modal = document.querySelector('.modal');
+// const btnOpenPopup = document.querySelector('.btn-open-popup');
+//
+// btnOpenPopup.addEventListener('click', () => {
+//     modal.classList.toggle('show');
+//
+//     if (modal.classList.contains('show')) {
+//         body.style.overflow = 'hidden';
+//     }
+// });
+//
+// modal.addEventListener('click', (event) => {
+//     if (event.target === modal) {
+//         modal.classList.toggle('show');
+//
+//         if (!modal.classList.contains('show')) {
+//             body.style.overflow = 'auto';
+//         }
+//     }
+// });
+//
+
+
+$(function(){
+    $("#pop-btn.confirm").click(function(){
+        modalClose();
+        //컨펌 이벤트 처리
+    });
+    $("#modal-open").click(function(){
+        $("#popup").css('display','flex').hide().fadeIn();
+    });
+    $("#close").click(function(){
+        modalClose();
+    });
+    function modalClose(){
+        $("#popup").fadeOut();
+    }
+});

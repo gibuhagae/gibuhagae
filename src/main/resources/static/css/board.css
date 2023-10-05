@@ -198,77 +198,117 @@ a {
     padding: 100px 30px 50px 30px;
 }
 
-.qna-container {
-    padding-top: 70px;
+
+/* 공지등록 */
+
+.popup-wrap{
+    background-color:rgba(0,0,0,.3);
+/*배경색과 투명도로 살짝 어둡지만 투명한 배경*/
+/*허공에 붕 떠있는 느낌을 주고 싶으면 안넣어도 무방*/
+    justify-content:center; /* 수평 중앙정렬 */
+    align-items:center;     /* 수직 중앙정렬 */
+    position:fixed;          /* 포지션 픽스, 화면이 스크롤되더라도 고정되기 위함 */
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;               /* 모든 방향에 0을 주면 화면에 꽉차게 됩니다. */
+    display:none;
+/*이벤트가 발생할 때 띄우기 위해 숨김*/
+/*처음부터 보이게 하는 상황이라면 display:flex;*/
+    padding:15px;
+/*반응형의 경우 padding이 없으면 박스가 화면에 붙어서 안이뻐짐*/
 }
 
-/* 공지 테이블 영역 */
-.qna-table {
-    margin: 0 auto;
-    border-spacing: 80px 20px;
-    width: 70%;
-    border-collapse: collapse;
+.popup{
+    width:100%;               /*반응형 이기 때문에 가로값은 100*/%
+max-width:400px;          /*팝업의 최대 크기지정*/
+border-radius:10px;       /*둥글둥글한 디자인을 위해 각을 없앱니다.*/
+overflow:hidden;          /* 각을 없앴을 때 내부 영역이 튀어나오는걸 방지*/
+background-color:#264db5; /*배경색*/
+/*//팝업이 허공에 떠있는 듯한 느낌을 주기 위한 그림자 효과.*/
+box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
 }
 
-.qna-table th {
-    padding: 5px;
-    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
+.popup-head{
+    width:100%;
+/*부모요소를 따라가기 때문에 굳이 가로값을 주지 않아도 되지만 일부 ie에서 인식 못하는 문제가 있음*/
+    height:50px;   /*헤드 영역 높이*/
+    display:flex; /*로고 이미지나 텍스트를 중앙 정렬하기 위한 flex 및 정렬*/
+    align-items:center;
+    justify-content:center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 800;
+    color: #6C6A6A;
+    font-size: 40px;
+}
+
+.popup-body{
+width:100%;
+    background-color:#ffffff;
+}
+.body-content{
+width:100%;
+    padding:30px;
+}
+.body-titlebox{
+text-align:center;
+width:100%;
+    height:40px;
+    margin-bottom:10px;
+}
+.body-contentbox{
+word-break:break-word;
+overflow-y:auto;
+min-height:100px;
+}
+
+/*.regist-title {*/
+/*    text-align: center;*/
+/*    font-family: 'Noto Sans KR', sans-serif;*/
+/*    font-weight: 800;*/
+/*    color: #6C6A6A;*/
+/*    font-size: 40px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.regist-content {*/
+/*    width: 1200px;*/
+/*    height: 770px;*/
+/*    padding: 30px;*/
+/*}*/
+
+/*form#noticeRegistForm {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+
+#noticeRegistForm td {
+    width: 13%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 20px;
+}
+
+#noticeRegistForm input, textarea {
+    border: lightgray 1px solid;
+    margin: 10px 0 0 15px;
+}
+
+#registButton {
+    width: 90%;
+    text-align: right;
+    margin: 25px;
+}
+
+#registButton button {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     color: #6C6A6A;
     font-size: 20px;
-    text-align: center;
-}
-
-.qna-table td {
-    padding: 5px;
-    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
-    color: #6C6A6A;
-    font-size: 15px;
-    text-align: center;
-}
-
-.qna-page-nav {
-    margin: 0 auto;
-    border-spacing: 80px 20px;
-    width: 70%;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-.qna-page-nav table {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
-    color: #6C6A6A;
-    font-size: 15px;
-    text-align: center;
-    margin: 30px auto 0 auto;
-    width:30%;
-    border-collapse: collapse;
-}
-
-.qna-page-nav tr {
-    padding-top: 50px;
-    text-align: center;
-}
-
-.qna-button {
-    margin: 50px auto 0 auto;
-    width: 70%;
-    border-collapse: collapse;
-    text-align: right;
-}
-
-.qna-button button {
-    width: 10%;
-    border: #6C6A6A 1px solid;
+    padding: 10px;
+    width: 105px;
+    background-color: lightgray;
     border-radius: 10px;
-    margin-left: 15px;
-    padding: 3px;
-    color: #6C6A6A;
-    background-color: rgba(0, 0, 0, 0.2);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 500;
+    margin-left: 20px;
 }

@@ -13,6 +13,13 @@ public class BoardController {
 
         return "/board/notice/notice";
     }
+
+    @GetMapping("/registNotice")
+    public String getRegistNotice(){
+
+        return "/board/notice/registNotice";
+    }
+
     @GetMapping("/qna")
     public String getQna(){
 
