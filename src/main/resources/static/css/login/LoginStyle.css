@@ -1,0 +1,130 @@
+@charset "UTF-8";  
+
+html {
+    background-color: white;
+    font-size: 100%;
+}
+
+.inputArea {
+    
+    background-color: #d9d9d9;
+}
+
+.buttonArea {
+    
+}
+
+#title {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 17%;
+}
+
+#subTitle {
+    font-size: 20px;
+    position: absolute;
+    left: 40%;
+    bottom: 52%;
+}
+
+#uLine {
+    width: 20%;
+    margin-top: 2.5%;
+    margin-left: 40%;
+}
+
+.sectionLogin {
+}
+
+.loginForm #loginId{
+    width: 20%;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+.loginForm #loginPwd{
+    width: 20%;
+    position: absolute;
+    top: 53%;
+    left: 40%;
+}
+
+.loginForm .loginSave{
+    width: 20%;
+    position: absolute;
+    top: 56%;
+    left: 40%;
+}
+
+#naverLogin {
+    position: absolute;
+    width: 9.5%;
+    top: 62%;
+    left: 40%;
+    background-color: #3AB80D;
+}
+
+#kakaoLogin {
+    position: absolute;
+    width: 9.5%;
+    top: 62%;
+    left: 50.5%;
+    background-color: #fee60d;
+}
+
+.loginForm #loginBtn {
+    position: absolute;
+    width: 20%;
+    top: 59%;
+    left: 40%;
+    background-color: rgb(77, 77, 77);
+}
+
+#loginBtn:hover{
+    background-color: rgba(217, 217, 217, 50);
+}
+
+#naverLogin:hover {
+    background-color: rgba(217, 217, 217, 50);
+}
+
+#kakaoLogin:hover {
+    background-color: rgba(217, 217, 217, 50);
+}
+
+#bLine {
+    width: 20%;
+    margin-top: 9%;
+    margin-left: 40%;
+}
+
+.etcFunction {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 25px;
+    position: absolute;
+    top: 67%;
+    left: 39%;
+}
+
+#idFindBtn:hover{
+    background-color: rgba(217, 217, 217, 50);
+}
+
+#pwdFindBtn:hover {
+    background-color: rgba(217, 217, 217, 50);
+}
+
+#joinBtn {
+    color: rgb(102, 216, 195);
+    font-weight: bold;
+}
+
+#joinBtn:hover {
+    background-color: rgba(217, 217, 217, 50);
+}
+
+
+
+

@@ -1,0 +1,147 @@
+html {
+    background-color: white;
+}
+
+.joinHr {
+    border: solid 1px rgb(210, 214, 222);
+    margin-top: 1%;
+}
+
+#joinHr1 {
+    position: relative;
+    bottom: 4%;
+}
+
+.joinArea {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+}
+
+.joinArea .joinForm {
+    width: 55%;
+}
+
+.pwdArea, .pwdChkArea, .nameArea, .phoneArea, .addrArea, .emailArea {
+    margin-top: 2%;
+}
+
+.joinInput {
+    color: rgb(185, 190, 201);
+}
+
+.inputBG, .inputBG2, .inputBG3 {
+    background-color: #d7d7d7;
+}
+
+#inputPhone1 {
+    -webkit-appearance:button;
+}
+
+#inputId, #inputName, #inputPhone1, inputPhone2, inputPhone3,
+#inputPost, #inputBasicAddr, #inputRAddr, #inputEmail {
+    font-weight: bold;
+}
+
+#inputId {
+    position: relative;
+    left: 6.4%;
+}
+
+#inputPwd {
+    position: relative;
+    left: 4.5%;
+}
+
+#inputName {
+    position: relative;
+    left: 8.3%;
+}
+
+#inputPhone1, #inputPhone2, #inputPhone3 {
+    position: relative;
+    left: 4.5%;
+}
+
+#inputPost, #inputPostBtn, #inputBasicAddr, #inputRAddr {
+    position: relative;
+    left: 8.3%;
+}
+
+#inputBasicAddr {
+    margin-top: 1%;
+    margin-left: 6.3%;
+    width: 40%;
+}
+
+#inputRAddr {
+    margin-top: 1%;
+    margin-left: 6.3%;
+    width: 60%;
+}
+
+#inputEmail {
+    position: relative;
+    left: 6.4%;
+}
+
+.joinArea .joinTitle {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 28%;
+    left: 28%;
+}
+
+.inputBG {
+    width: 30%;
+}
+
+.inputBG2 {
+    width: 10%;
+}
+
+.InputBG3 {
+    width: 10%;
+}
+
+#inputPost {
+    width: 13%;
+}
+
+#idSpan {
+    position: relative;
+    left: 7.6%;
+}
+
+#pwdSpan {
+    position: relative;
+    left: 5.2%;
+}
+
+#inputPostBtn {
+    background-color: rgb(103, 196, 145);
+    border: solid 1px black;
+    width: 12%;
+}
+
+.joinFunBtns {
+    position: absolute;
+    margin-top: 3%;
+    top: 85%;
+    left: 50%;
+
+}
+
+.joinFunBtns #joinBtn {
+    position: relative;
+    left: -100%;
+}
+
+.joinFunBtns #cancelBtn {
+}
+
+#joinBtn:hover,
+#cancelBtn:hover {
+    background-color: rgba(217, 217, 217, 50);
+}
