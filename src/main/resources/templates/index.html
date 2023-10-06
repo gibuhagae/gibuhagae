@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
+
 </head>
 <body>
 <!-- 메인페이지 -->
@@ -20,8 +21,8 @@
         <!-- 헤더 상단 로고 및 메뉴  -->
         <div class="main-header-top">
             <div class="header-top-content">
-                <div class="header-logo">
-                    <img class="header-logo-logo" src="/images/main/home button.png">
+                <div class="admin-page">
+                    <a href="123">관리자 페이지</a>
                 </div>
                 <ul class="navigation">
                     <li><a href="11">로그인</a></li>
@@ -36,7 +37,9 @@
         <!-- 헤더 중간 메인 로고 -->
         <div class="main-header-mid">
             <div class="header-mid-content">
+                <a href="">
                 <img class="main-logo-img" src="/images/main/로고1.png">
+                </a>
             </div>
         </div>
         <!-- 카테고리 메뉴 -->
@@ -91,6 +94,7 @@
                         <li><a href="33">훈련용품</a></li>
                     </ul>
                 </li>
+                <li><a href="/board/notice">공지사항</a></li>
             </ul>
         </div>
     </div>
@@ -98,11 +102,25 @@
     <div class="main-list">
         <!-- 배너 -->
         <div class="main-banner" id="banner">
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="/images/main/배너1.jpg">
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="/images/main/배너2.jpg">
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="/images/main/배너3.jpg">
+                </div>
+            </div>
             <br>
-            <br>
-            <br>
-            <br>
-            배너자리배너자리배너자리배너자리배너자리배너자리배너자리배너자리배너자리
+            <div style="text-align:center">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
         </div>
         <br>
         <!-- 메인 베스트 아이템 영역 -->
@@ -346,5 +364,6 @@
 
 <!-- 슬라이드 이동 JS -->
 <script src="/js/main.js"></script>
+
 </body>
 </html>
