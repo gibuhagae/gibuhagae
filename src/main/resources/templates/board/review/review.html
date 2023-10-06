@@ -21,6 +21,12 @@
             <hr class="title-divider">
         </div>
         <div class="board-container">
+            <select id="select1">
+                <option value="selected" selected>선택하기</option>
+                <option value="Y">활성</option>
+                <option value="N">비활성</option>
+            </select>
+            <br>
             <div class="board-body">
                 <div class="board-tab">
                     <button type="button" class="board-btn" th:onclick="|location.href='/board/notice'|">NOTICE
@@ -34,6 +40,7 @@
                     <thead>
                     <tr>
                         <th class="th1"></th>
+                        <th class="th7">상태</th>
                         <th class="th2">NO</th>
                         <th class="th3">제목</th>
                         <th class="th4">작성자</th>
@@ -44,6 +51,7 @@
                     <tbody>
                     <tr>
                         <td><input type="checkbox" name="board-checkbox"></td>
+                        <td>Y</td>
                         <td>1</td>
                         <td>첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글</td>
                         <td>관리자</td>
@@ -52,6 +60,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="board-checkbox"></td>
+                        <td>Y</td>
                         <td>2</td>
                         <td>두번째글</td>
                         <td>관리자</td>
@@ -60,6 +69,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="board-checkbox"></td>
+                        <td>Y</td>
                         <td>3</td>
                         <td>세번째글</td>
                         <td>관리자</td>
@@ -68,6 +78,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="board-checkbox"></td>
+                        <td>Y</td>
                         <td>4</td>
                         <td>네번째글</td>
                         <td>관리자</td>
@@ -76,6 +87,7 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="board-checkbox"></td>
+                        <td>Y</td>
                         <td>5</td>
                         <td>다섯번째글</td>
                         <td>관리자</td>
@@ -97,7 +109,8 @@
                 </table>
             </nav>
             <div class="board-button">
-                <button type="button" class="delete">삭제</button>
+                <button type="button" class="Y">활성화</button>
+                <button type="button" class="N">비활성화</button>
             </div>
         </div>
     </div>

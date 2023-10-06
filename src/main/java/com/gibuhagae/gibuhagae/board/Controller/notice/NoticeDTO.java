@@ -13,13 +13,13 @@ import java.util.List;
 @ToString
 public class NoticeDTO {
 
-private Long no;
-private String title;
-private String body;
-private MemberDTO writer;
-private int count;
-private Date createDate;
-private Date modifyDate;
-private String status;
-private List<AttachmentDTO> attachmentList;
+private int noticeNo;          //공지번호
+private String noticeTitle;     //공지제목
+private String noticeContent;   //공지내용
+private MemberDTO memberNo;     //회원번호(작성자)
+private int views;              //조회수
+private Date writeDate;         //작성일자
+private Date updateDate;        //수정일자
+private Date deleteDate;        //삭제일자(비활성화일자)
+private String status;          //상태
 }
