@@ -145,23 +145,27 @@ a {
 }
 
 .th3 {
-    width: 350px;
+    width: 300px;
 }
 
 .th4 {
-    width: 70px;
+    width: 60px;
 }
 
 .th5 {
-    width: 100px;
+    width: 150px;
 }
 
 .th6 {
-    width: 60px;
+    width: 50px;
 }
 
 .th7 {
     width: 60px;
+}
+
+.th8 {
+    width: 80px;
 }
 
 .board-page-nav {

@@ -1,4 +1,4 @@
-package com.gibuhagae.gibuhagae.board.Controller.review;
+package com.gibuhagae.gibuhagae.board.dto;
 
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 import lombok.Getter;
