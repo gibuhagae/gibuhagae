@@ -12,4 +12,10 @@ public interface BoardMapper {
     int selectTotalCount();
 
     List<NoticeDTO> selectNoticeList(SelectCriteria selectCriteria);
+
+    void incrementNoticeCount(Long no);
+
+    NoticeDTO selectNoticeDetail(Long no);
+
+    void insertNotice(NoticeDTO notice);
 }

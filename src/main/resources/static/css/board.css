@@ -70,7 +70,7 @@ a {
     display: flex;
     flex-direction: column;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     position: relative;
     top: 35px;
@@ -124,10 +124,11 @@ a {
     color: #6C6A6A;
     font-size: 20px;
     text-align: center;
+
 }
 
 .board-table td {
-    padding: 5px;
+    padding: 8px;
     border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
@@ -161,11 +162,15 @@ a {
 }
 
 .th7 {
-    width: 60px;
+    width: 40px;
 }
 
 .th8 {
     width: 80px;
+}
+
+.th9 {
+    width: 70px;
 }
 
 .board-page-nav {
@@ -193,7 +198,7 @@ a {
 }
 
 .board-button {
-    margin: 50px auto 0 auto;
+    margin: 30px auto 0 auto;
     width: 85%;
     border-collapse: collapse;
     text-align: right;
@@ -301,11 +306,12 @@ a {
     font-weight: 600;
     color: #6C6A6A;
     font-size: 20px;
+    padding-right: 15px;
 }
 
 #registForm input, textarea {
     border: lightgray 1px solid;
-    margin: 10px 0 0 15px;
+    margin-top: 10px;
     padding: 5px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
@@ -329,4 +335,44 @@ a {
     background-color: lightgray;
     border-radius: 10px;
     margin-left: 20px;
+}
+
+/* 게시글 세부내용 창 */
+#detailForm {
+    width: 100%;
+    padding-right: 100px;
+    padding-left: 100px;
+}
+.detailForm {
+    margin: 100px auto 0 auto;
+    width: 100%;
+}
+
+.detailForm td {
+    padding: 15px 0px 0px 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 20px;
+}
+
+.detailForm p {
+    border: lightgray 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.detailForm button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+    padding: 10px;
+    width: 105px;
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-top: 30px;
 }

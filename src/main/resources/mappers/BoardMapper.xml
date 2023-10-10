@@ -14,7 +14,7 @@
         <result property="status" column="STATUS"/>
 
         <association property="memberNo" resultMap="memberResultMap"/>
-<!--        <collection property="replyList" resultMap="replyResultMap"/>-->
+        <!--        <collection property="replyList" resultMap="replyResultMap"/>-->
     </resultMap>
 
     <resultMap type="com.gibuhagae.gibuhagae.member.dto.MemberDTO" id="memberResultMap">
@@ -33,10 +33,6 @@
         <result property="loginType" column="LOGIN_TYPE"/>
         <result property="activationStatus" column="ACTIVATION_STATUS"/>
     </resultMap>
-
-
-
-
 
 
 
@@ -78,7 +74,7 @@
                           , C.UPDATE_DATE
                           , C.STATUS
                       FROM NOTICE_BOARD C
-                ORDER BY C.NOTICE_NO ASC
+                ORDER BY C.NOTICE_NO DESC
                 ) B
             <![CDATA[
                   WHERE ROWNUM <= #{endRow}
@@ -86,8 +82,52 @@
                   )A
                  JOIN MEMBER D ON (A.MEMBER_NO = D.MEMBER_NO)
         WHERE A.RNUM >= #{startRow}
-        ORDER BY A.NOTICE_NO ASC
+        ORDER BY A.NOTICE_NO DESC
     </select>
 
+    <update id="incrementNoticeCount">
+        UPDATE
+            NOTICE_BOARD A
+        SET A.VIEWS = A.VIEWS + 1
+        WHERE A.NOTICE_NO = #{ noticeNo }
+    </update>
+
+    <select id="selectNoticeDetail" resultMap="generalBoardResultMap">
+        SELECT
+               A.NOTICE_NO
+             , A.NOTICE_TITLE
+             , A.NOTICE_CONTENT
+             , A.VIEWS
+             , B.MEMBER_NAME
+             , A.STATUS
+             , A.WRITE_DATE
+            FROM NOTICE_BOARD A
+            JOIN MEMBER B ON (A.MEMBER_NO = B.MEMBER_NO)
+           WHERE A.NOTICE_NO = #{ noticeNo }
+    </select>
+
+    <insert id="insertNotice">
+        INSERT
+        INTO NOTICE_BOARD A
+            (
+             A.NOTICE_NO
+           , A.NOTICE_TITLE
+           , A.NOTICE_CONTENT
+           , A.WRITE_DATE
+           , A.VIEWS
+           , A.MEMBER_NO
+           , A.STATUS
+           )
+        VALUES
+            (
+            SEQ_NOTICE_NO.NEXTVAL
+                , #{ noticeTitle }
+                , #{ noticeContent }
+                , SYSDATE
+                , 0
+                , 1
+                , 'Y'
+            )
+    </insert>
 </mapper>
 

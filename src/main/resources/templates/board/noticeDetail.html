@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Gibuhagae(notice)</title>
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/board.css" rel="stylesheet" type="text/css">
+    <link href="/css/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/board.js"></script>
 </head>
 <body>
-
+<div id="detailForm">
+<div th:replace="/common/board/navigation.html"></div>
+<div style="margin-top: 100px;" class="detailForm">
+    <table style="margin: auto">
+        <tr>
+            <td>제목</td>
+            <td style="width: 600px;" ><p th:text="${ notice.noticeTitle }"></p></td>
+        </tr>
+        <tr>
+            <td>작성자</td>
+            <td style="width: 200px;"><p th:text="${ notice.memberNo.memberName }"></p></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td>
+                <textarea name="body" cols="80" rows="15" style="resize: none;"
+                          th:text="${ notice.noticeContent }"></textarea>
+            </td>
+        </tr>
+    </table>
+    <div align="center">
+        <button type="button" id="modify">수정하기</button>
+        <button type="button" th:onclick="'location.href=\'/board/notice\''">돌아가기</button>
+    </div>
+</div>
+</div>
 </body>
 </html>

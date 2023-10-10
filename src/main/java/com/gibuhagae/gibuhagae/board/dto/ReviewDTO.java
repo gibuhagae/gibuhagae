@@ -14,8 +14,9 @@ public class ReviewDTO {
 
     private int reviewNo;           //리뷰번호
     private String reviewTitle;     //리뷰제목
+    private String reviewContent;   //리뷰내용
     private int grade;              //평점
-    private MemberDTO memberNoo;    //회원번호(작성자)
+    private MemberDTO memberNo;    //회원번호(작성자)
     private Date registDate;        //등록일
     private Date updateDate;        //수정일
     private Date deleteDate;        //삭제일

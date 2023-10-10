@@ -27,4 +27,4 @@ $(function(){
 //
 // fileInput.addEventListener("change", handleFiles);
 
-// 공지사항 작성하기 모달
+

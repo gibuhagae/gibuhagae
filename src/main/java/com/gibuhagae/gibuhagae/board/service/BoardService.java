@@ -7,6 +7,7 @@ import com.gibuhagae.gibuhagae.common.paging.SelectCriteria;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Slf4j
 @Service
+@Transactional
 public class BoardService {
 
     /* 생성자를 이용한 의존성 주입 */
@@ -31,7 +33,7 @@ public class BoardService {
         log.info("noticeList totalCount : {}", totalCount);
 
         /* 페이징 처리와 연관 된 값을 계산하여 SelectCriteria 타입의 객체에 담기 */
-        int limit = 7;          // 한 페이지에 보여 줄 게시물의 수
+        int limit = 10;          // 한 페이지에 보여 줄 게시물의 수
         int buttonAmount = 5;   // 한 번에 보여질 페이징 버튼의 수
         SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
         log.info("noticeList selectCriteria : {}", selectCriteria);
@@ -46,5 +48,19 @@ public class BoardService {
 
         return noticeListAndPaging;
 
+    }
+
+    public NoticeDTO selectNoticeDetail(Long no) {
+
+        /* 조회수 증가 로직 호출 */
+        boardMapper.incrementNoticeCount(no);
+
+        /* 게시글 상세 내용 조회 후 리턴 */
+        return boardMapper.selectNoticeDetail(no);
+    }
+
+    public void registNotice(NoticeDTO notice) {
+
+        boardMapper.insertNotice(notice);
     }
 }
