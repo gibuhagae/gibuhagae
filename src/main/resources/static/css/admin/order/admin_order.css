@@ -95,6 +95,7 @@ header {
     flex-direction: row;
     background-color: white;
     margin-top: 20px;
+    margin-bottom: 2px;
 }
 
 .order-btn:hover{
@@ -112,7 +113,7 @@ header {
 
 #order-num {
     line-height: 65px;
-    width: 300px;
+    width: 307px;
     height: 65px;
     border-right: solid 2px black;
 }
@@ -126,7 +127,7 @@ header {
 }
 
 #order-item {
-    width: 400px;
+    width: 350px;
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
@@ -140,7 +141,7 @@ header {
 }
 
 #order-count {
-    width: 150px;
+    width: 100px;
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
@@ -154,7 +155,7 @@ header {
 }
 
 #order-message {
-    width: 250px;
+    width: 350px;
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
@@ -164,6 +165,102 @@ header {
     cursor: pointer;
     transform: scale(1.1);
 }
+
+.newOrderList {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.15em;
+    border: 1px solid black;
+
+}
+
+.order-data{
+    text-align: center;
+    width: 260px;
+    height: 100px;
+    display: grid;
+    grid-column: auto;
+}
+
+.order-data2 {
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    padding: 0;
+    width: 330px;
+}
+#listCk {
+    width: 20px;
+    height: 20px;
+
+}
+
+#listCk:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#orderData-1 {
+    font-size: 0.8em;
+}
+
+#orderData-6 {
+    width: 137px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+#orderData-7 {
+    width: 93px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+#orderData-8 {
+    width: 328px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+.order-data3 {
+    width: 183px;
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+.order-data3 select {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom: 2%;
+    font-size: 0.8em;
+
+}
+
+.order-data3 option {
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+}
+
+.order-data3 input {
+    font-size: 0.7em;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.registBtn {
+    width: 130px;
+}
+
+
+
+
 
 
 
