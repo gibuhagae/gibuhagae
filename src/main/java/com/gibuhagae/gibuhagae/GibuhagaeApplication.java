@@ -11,7 +11,12 @@ import org.springframework.context.annotation.ComponentScan;
 public class GibuhagaeApplication {
 
 	public static void main(String[] args) {
+
+		System.out.println("시작");
+
 		SpringApplication.run(GibuhagaeApplication.class, args);
+
+		System.out.println("끝");
 	}
 
 }

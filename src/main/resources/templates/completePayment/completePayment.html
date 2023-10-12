@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/completePayment.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/icons8-pug-48.png">
+    <!-- <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css"> -->
+    <title>completePayment</title>
+</head>
+<body>
+<div id="wrap">
+    <div id="progress-wrap">
+        <div id="progress-cart">
+            <div class="cart-wrap">
+                <div class="img-wrap"><img src="/images/solar-cart-outline.png">
+                </div>
+                <div><p>장바구니</p></div>
+            </div>
+            <div class="cart-wrap">
+                <img src="/images/line.png">
+            </div>
+            <div class="cart-wrap">
+                <div class="img-wrap" ><img src="/images/fluent-payment-24-regular.png">
+                </div>
+                <div><p>주문/결제</p></div>
+            </div>
+            <div><img src="/images/line.png"></div>
+            <div class="cart-wrap">
+                <div class="img-wrap" id="cart-img-wrap"><img src="/images/group.png">
+                </div>
+                <div><p>주문 완료</p></div>
+            </div>
+        </div>
+    </div>
+    <div id="table-wrap">
+        <table>
+            <thead>
+            <tr id="head">
+                <th><div><h2>주문 목록</h2></div><br></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="name-bar">
+                <td colspan="2">상품정보</td><td>주문일자</td><td>주문번호</td><td>주문금액(수량)</td><td>주문상태</td>            </tr>
+            <tr class="order-detail">
+                <td><a href=""><img src="/images/image-3.jpg"></a></td>
+                <td><div><a href="">특수견 15kg 영양사료</a></div></td>
+                <td><div date-sale>2023.09.12</div></td>
+                <td><div date-sale-no>1012345123</div></td>
+                <td>
+                    <div data-sale-price="46,700">46,700</div>
+                    <div class="item-amount"><em>1</em>개</div>
+                </td>
+                <td><div order-condition>입금완료</div></td>
+            </tr>
+            </tr>
+            <tr class="order-detail">
+                <td><a href=""><img src="/images/image-2.jpg"></a></td>
+                <td><div><a href="">라오네스 반려동물 하네스</a></div></td>
+                <td><div date-sale>2023.09.12</div></td>
+                <td><div date-sale-no>10012345124</div></td>
+                <td>
+                    <div data-sale-price="20,200">20,200</div>
+                    <div class="item-amount"><em>1</em>개</div>
+                </td>
+                <td><div order-condition>입금완료</div></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="total-amount-area">
+        <div id="total-amount">
+            <div>합계</div>
+            <div><em>66,900</em>원</div>
+        </div>
+        <div id="price-detail">
+            <div id="detail1" class="details">
+                <div class="cal-detail">할인금액</div>
+                <div><em>10,200</em>원</div>
+            </div>
+            <div id="detail2" class="details">
+                <div class="cal-detail">배송비</div>
+                <div><em>0</em>원</div>
+            </div>
+            <div id="detail3" class="details">
+                <div class="cal-detail">적립금</div>
+                <div><em>1000</em>원</div>
+            </div>
+            <div id="detail4" class="details">
+                <div>합계</div>
+                <div><em>66,900</em>원</div>
+            </div>
+        </div>
+    </div>
+    <div id="to-main">
+        <div id="to-main-box">
+            <button type="button" id="main-button">메인으로</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
