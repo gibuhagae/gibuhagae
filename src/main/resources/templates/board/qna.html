@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gibuhagae(notice)</title>
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/board.css" rel="stylesheet" type="text/css">
+    <link href="/css/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+</head>
+<body>
+<div class="qna" id="board">
+    <!-- 헤더(로고, 상단 메뉴)-->
+    <div th:replace="/common/board/navigation"></div>
+    <!-- 게시판 내용 리스트 영역 -->
+    <div class="board-content">
+        <div class="board-title">
+            Q&A<br>
+            <hr class="title-divider">
+        </div>
+        <div class="board-container">
+            <select id="select1">
+                <option value="selected" selected>답변상태</option>
+                <option value="Y">완료</option>
+                <option value="N">대기중</option>
+            </select>
+            <br>
+            <div class="board-body">
+                <div class="board-tab">
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/notice'|">NOTICE
+                    </button>
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/qna'|">Q&A</button>
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/review'|">REVIEW
+                    </button>
+                </div>
+                <!-- 공지 리스트 테이블 -->
+                    <table class="board-table">
+                        <thead>
+                        <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
+                            <th class="th1"></th>
+                            <th class="th2">글번호</th>
+                            <th class="th9">유형</th>
+                            <th class="th3">제목</th>
+                            <th class="th4">작성자</th>
+                            <th class="th5">작성일</th>
+                            <th class="th8">답변상태</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="qna : ${ qnaList }">
+                            <td><input type="checkbox" name="notice-checkbox"></td>
+                            <td th:text="${ qna.inquiryNo }"></td>
+                            <td th:text="${ qna.inquiryType }"></td>
+                            <td th:text="${ qna.inquiryContent }" style="cursor: pointer;"></td>
+                            <td th:text="${ qna.memberNo.memberName }"></td>
+                            <td th:text="${ qna.writeDate }"></td>
+                            <td th:text="${ qna.status }"></td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- 페이지 네비게이션 -->
+
+                <div class="board-button">
+                    <button type="button" class="delete">삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
