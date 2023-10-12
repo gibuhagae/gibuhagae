@@ -1,21 +1,26 @@
 package com.gibuhagae.gibuhagae.member.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @ToString
-public class MemberDTO  implements UserDetails {
+@AllArgsConstructor
+@NoArgsConstructor
+public class MemberDTO implements UserDetails  {
+
     private Long memberNo;
     private String memberName;
-    private String memberPhone;
+    private String phone;
     private String zipcode;
     private String address;
     private Date registDate;
@@ -24,37 +29,47 @@ public class MemberDTO  implements UserDetails {
     private String donatePrice;
     private String password;
     private String userId;
-    private Long userCode;
+    private String userCode;
     private String loginType;
-    private String activationStatus;
+    private String ActivationStatus;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<GrantedAuthority> role = new HashSet<>();
+
+            role.add(new SimpleGrantedAuthority(userCode));
+
+        return role;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return userId;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

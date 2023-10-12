@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gibuhagae.gibuhagae.board.dao.BoardMapper">
 
-    <resultMap type="com.gibuhagae.gibuhagae.board.dto.NoticeDTO" id="generalBoardResultMap">
+    <resultMap type="com.gibuhagae.gibuhagae.board.dto.NoticeDTO" id="generalNoticeResultMap">
         <id property="noticeNo" column="NOTICE_NO"/>
         <result property="noticeTitle" column="NOTICE_TITLE"/>
         <result property="noticeContent" column="NOTICE_CONTENT"/>
@@ -33,20 +33,20 @@
         <result property="activationStatus" column="ACTIVATION_STATUS"/>
     </resultMap>
 
-<!--    <resultMap type="com.gibuhagae.gibuhagae.board.dto.QnaDTO" id="generalBoardResultMap">-->
-<!--        <id property="inquiryNo" column="INQUIRY_NO"/>-->
-<!--        <result property="inquiryType" column="INQUIRY_TYPE"/>-->
-<!--        <result property="itemCode" column="ITEM_CODE"/>-->
-<!--        <result property="inquiryContent" column="INQUIRY_CONTENT"/>-->
-<!--        <result property="writeDate" column="WRITE_DATE"/>-->
-<!--        <result property="updateDate" column="UPDATE_DATE"/>-->
-<!--        <result property="deleteDate" column="DELETE_DATE"/>-->
-<!--        <result property="status" column="ANSWER_STATUS"/>-->
+    <resultMap type="com.gibuhagae.gibuhagae.board.dto.QnaDTO" id="generalQnaResultMap">
+        <id property="inquiryNo" column="INQUIRY_NO"/>
+        <result property="inquiryType" column="INQUIRY_TYPE"/>
+        <result property="inquiryTitle" column="INQUIRY_TITLE"/>
+        <result property="inquiryContent" column="INQUIRY_CONTENT"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="writeDate" column="WRITE_DATE"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="status" column="ANSWER_STATUS"/>
+        <result property="deleteDate" column="DELETE_DATE"/>
 
-<!--        <association property="memberNo" resultMap="memberResultMap"/>-->
-<!--        &lt;!&ndash;        <collection property="replyList" resultMap="replyResultMap"/>&ndash;&gt;-->
-<!--    </resultMap>-->
-
+        <association property="memberNo" resultMap="memberResultMap"/>
+        <!--        <collection property="replyList" resultMap="replyResultMap"/>-->
+    </resultMap>
 
 
 
@@ -57,7 +57,7 @@
     </select>
 
 
-    <select id="selectNoticeList" resultMap="generalBoardResultMap">
+    <select id="selectNoticeList" resultMap="generalNoticeResultMap">
         SELECT
               A.NOTICE_NO
              , A.NOTICE_TITLE
@@ -106,7 +106,7 @@
         WHERE A.NOTICE_NO = #{ noticeNo }
     </update>
 
-    <select id="selectNoticeDetail" resultMap="generalBoardResultMap">
+    <select id="selectNoticeDetail" resultMap="generalNoticeResultMap">
         SELECT
                A.NOTICE_NO
              , A.NOTICE_TITLE
@@ -170,10 +170,11 @@
     </select>
 
 
-    <select id="selectQnaList" resultMap="generalBoardResultMap">
+    <select id="selectQnaList" resultMap="generalQnaResultMap">
         SELECT
                A.INQUIRY_NO
              , A.INQUIRY_TYPE
+             , A.INQUIRY_TITLE
              , A.INQUIRY_CONTENT
              , A.ITEM_CODE
              , D.MEMBER_NAME
@@ -184,6 +185,7 @@
                      ROWNUM RNUM
                    , B.INQUIRY_NO
                    , B.INQUIRY_TYPE
+                   , B.INQUIRY_TITLE
                    , B.INQUIRY_CONTENT
                    , B.ITEM_CODE
                    , B.MEMBER_NO
@@ -194,6 +196,7 @@
                       SELECT
                                C.INQUIRY_NO
                               , C.INQUIRY_TYPE
+                              , C.INQUIRY_TITLE
                               , C.INQUIRY_CONTENT
                               , C.ITEM_CODE
                               , C.MEMBER_NO
@@ -210,6 +213,21 @@
                  JOIN MEMBER D ON (A.MEMBER_NO = D.MEMBER_NO)
         WHERE A.RNUM >= #{startRow}
         ORDER BY A.INQUIRY_NO DESC
+    </select>
+
+    <select id="selectQnaDetail" resultMap="generalQnaResultMap">
+        SELECT
+               A.INQUIRY_NO
+             , A.INQUIRY_TYPE
+             , A.INQUIRY_TITLE
+             , A.INQUIRY_CONTENT
+             , A.ITEM_CODE
+             , B.MEMBER_NAME
+             , A.WRITE_DATE
+             , A.ANSWER_STATUS
+        FROM QNA A
+                 JOIN MEMBER B ON (A.MEMBER_NO = B.MEMBER_NO)
+        WHERE A.INQUIRY_NO = #{ inquiryNo }
     </select>
 </mapper>
 

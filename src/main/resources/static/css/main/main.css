@@ -209,8 +209,8 @@ a {
 /* 메인 내 베스트상품 구역 */
 .main-best-product {
     width: 1400px;
-    height: 430px;
-    margin: 30px auto 0 auto;
+    height: 500px;
+    margin: 30px auto 30px auto;
 }
 
 .best-product-title {

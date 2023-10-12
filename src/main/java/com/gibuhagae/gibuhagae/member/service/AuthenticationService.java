@@ -11,24 +11,18 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class AuthenticationService implements UserDetailsService {
+
     private final MemberMapper memberMapper;
 
-    public AuthenticationService(MemberMapper memberMapper) {
-        this.memberMapper = memberMapper;
-    }
+    public AuthenticationService(MemberMapper memberMapper) { this.memberMapper = memberMapper; }
 
     @Override
-    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException  {
-        System.out.println("loadUserByUsername 호출");
-        
-        log.info("memberId : {}", memberId);
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
-        MemberDTO findMember = memberMapper.findMemberById(memberId);
+        MemberDTO member = memberMapper.findByUserId(userId);
+        if(member == null) throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다");
 
-        if(findMember == null) throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다");
-
-        log.info("member : {}", findMember);
-
-        return findMember;
+        return member;
     }
+
 }

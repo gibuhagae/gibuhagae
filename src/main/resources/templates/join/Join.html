@@ -7,25 +7,15 @@
     <title>Join</title>
     <!-- 외부 스타일 시트 -->
     <link href="/css/join/joinStyle.css" rel="stylesheet" type="text/css">
+    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
     <!-- 리셋 CSS : 브라우저별로 디폴트로 적용 된 CSS(여백, 폰트 등)에 차이가 있으므로
    브라우저별로 다르게 보일 수 있어 리셋 CSS를 활용한다. -->
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <header class="headerBanner">
-        야옹아 기부하게
-    </header>
-
-    <nav class="itemCategory">
-        <a id="snack" href="snack.html"> 간식 </a>
-        <a id="petFood" href="petFood.html"> 사료 </a>
-        <a id="beautyProduct" href="beautyProduct.html"> 미용용품 </a>
-        <a id="fashionProduct" href="fashionProduct.html"> 패션용품 </a>
-        <a id="cleanProduct" href="cleanProduct.html"> 위생용품 </a>
-        <a id="toyAndTrainingProduct" href="toyAndTrainingProduct.html"> 장난감/훈련용품 </a>
-        <a id="notice" href="notice.html"> 공지사항 </a>
-    </nav>
+<!-- 헤더 부분 -->
+<div th:replace="/common/board/navigation"></div>
 
     <section class="joinArea">
 

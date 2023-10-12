@@ -1,0 +1,93 @@
+<form id="registAdminMember" method="post" action="/productManagement/insert">
+    <div class="modal-container">
+        <div class="modal-wrap" id="modal">
+            <div class="detail-modal">
+                <div class="modal-head">
+                    <span class="modal-head-title">상품 등록</span>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body-content">
+                        <div class="modal-body-content-box">
+                            <div class="member-table-wrapper">
+                                <table class="member-info-table">
+                                    <tr class="input-member-info-row">
+                                        <td class="title-design">상품명</td>
+                                        <td><input class="regist-input-design" type="text" name="itemName"
+                                                   id="itemName" placeholder="상품명 입력" required></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-member-info-row">
+                                        <td class="title-design">카테고리</td>
+                                        <td><select id="inputState" class="form-control">
+                                        </select></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-member-info-row">
+                                        <td class="title-design">대표 이미지</td>
+                                        <td><input class="regist-input-design" type="password" maxlength="13"
+                                                   name="password2" placeholder="비밀번호를 다시 한번 입력해주세요" required></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-member-info-row">
+                                        <td class="title-design">상세 이미지</td>
+                                        <td><input class="regist-input-design" type="text" name="name" placeholder="이름"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-member-info-row">
+                                        <td class="title-design">전화번호</td>
+                                        <td><input class="regist-input-design" type="tel" name="phone" id="phone" placeholder="-빼고 숫자만 입력"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-member-info-row">
+                                        <td class="title-design">이메일</td>
+                                        <td><input class="regist-input-design" type="email" name="email" placeholder="ex) gibuhagae@example.com"></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <table class="member-info-table">
+                                    <tr class="input-member-info-row">
+                                        <td class="title-design">판매 상태</td>
+                                        <td>
+                                            <select>
+                                                <option>판매</option>
+                                                <option>품절</option>
+                                                <option>단종</option>
+                                                <option>중지</option>
+                                            </select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="commit-btn footer-btn">등록</button>
+                    <button type="button" class="close-btn footer-btn" id="close-btn">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--<script>-->
+<!--    $(function () {-->
+<!--        $("#addbtn-admin").click(function () {-->
+<!--            $("#modal").css('display', 'flex').hide().fadeIn();-->
+<!--            //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과-->
+<!--        });-->
+<!--        $("#close-btn").click(function () {-->
+<!--            modalClose(); //모달 닫기 함수 호출-->
+<!--        });-->
+<!--        function modalClose() {-->
+<!--            $("#modal").fadeOut(); //페이드아웃 효과-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+
+
+
+</body>
+</html>

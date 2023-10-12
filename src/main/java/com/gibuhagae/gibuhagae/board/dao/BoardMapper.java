@@ -22,9 +22,15 @@ public interface BoardMapper {
 
     void updateNotice(NoticeDTO notice);
 
-    void deleteNotice(Long no);
+//    void deleteNotice(Long no);
+
+    int selectQnaTotalCount();
 
     List<QnaDTO> selectQnaList(SelectCriteria selectCriteria);
 
-    int selectQnaTotalCount();
+
+    void incrementQnaCount(Long no);
+
+
+    QnaDTO selectQnaDetail(Long no);
 }
