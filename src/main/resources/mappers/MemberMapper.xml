@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.member.dao.MemberMapper">
+
+    <resultMap id="memberResultMap" type="com.gibuhagae.gibuhagae.member.dto.MemberDTO">
+        <id property="memberNo" column="MEMBER_NO"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="memberPhone" column="MEMBER_PHONE"/>
+        <result property="zipcode" column="ZIPCODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="registDate" column="REGIST_DATE"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="donatePrice" column="DONATE_PRICE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="activationStatus" column="ACTIVATION_STATUS"/>
+    </resultMap>
+
+    <select id="findMemberById" resultMap="memberResultMap">
+        SELECT
+        MEMBER_NO,
+        MEMBER_NAME,
+        MEMBER_PHONE,
+        ZIPCODE,
+        ADDRESS,
+        REGIST_DATE,
+        UPDATE_DATE,
+        EMAIL,
+        DONATE_PRICE,
+        PASSWORD,
+        USER_ID,
+        USER_CODE,
+        LOGIN_TYPE,
+        ACTIVATION_STATUS
+        FROM
+        MEMBER
+        WHERE
+        USER_ID = #{ userID }
+    </select>
+
+    <insert id="registMember">
+        INSERT
+        INTO MEMBER (
+        MEMBER_NO,
+        MEMBER_NAME,
+        MEMBER_PHONE,
+        ZIP_CODE,
+        ADDRESS,
+        REGIST_DATE,
+        UPDATE_DATE,
+        EMAIL,
+        DONATE_PRICE,
+        PASSWORD,
+        USER_ID,
+        USER_CODE,
+        LOGIN_TYPE,
+        ACTIVATION_STATUS
+        )
+        VALUES (
+        1L,
+        #{ memberName },
+        #{ memberPhone },
+        #{ zipcode },
+        #{ address },
+        null,
+        null,
+        #{ email },
+        '1',
+        #{ password },
+        #{ userId },
+        1L,
+        'user',
+        'y'
+        )
+    </insert>
+
+</mapper>

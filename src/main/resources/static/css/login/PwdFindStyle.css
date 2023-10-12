@@ -1,0 +1,100 @@
+@charset "UTF-8";  
+
+html {
+    background-color: white;
+    font-size: 100%;
+}
+
+.inputArea {
+    
+    background-color: #d9d9d9;
+    width: 20%;
+}
+
+.buttonArea {
+    
+}
+
+#title {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 17%;
+}
+
+#subTitle {
+    font-size: 20px;
+    position: absolute;
+    left: 40%;
+    bottom: 52%;
+}
+
+#uLine {
+    width: 20%;
+    margin-top: 1%;
+    margin-left: 40%;
+}
+
+.loginForm {
+    width: 30%;
+}
+
+.loginForm #idLabel {
+    position: absolute;
+    left: 40%;
+    top: 47%;
+}
+
+.loginForm #idFind{
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+.loginForm #nameLabel {
+    position: absolute;
+    top: 54%;
+    left: 40%;
+}
+
+.loginForm #nameFind{
+    position: absolute;
+    top: 57%;
+    left: 40%;
+}
+
+.loginForm #emailLabel {
+    position: absolute;
+    top: 61%;
+    left: 40%;
+}
+
+.loginForm #emailFind{
+    position: absolute;
+    top: 64%;
+    left: 40%;
+}
+
+#bLine {
+    width: 20%;
+    margin-top: 12%;
+    margin-left: 40%;
+}
+
+.etcFunction {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 25px;
+    position: absolute;
+    top: 72%;
+    left: 40%;
+}
+
+#idFindBtn, #cancelBtn {
+    
+}
+
+#idFindBtn:hover, #cancelBtn:hover {
+    background-color: rgba(217, 217, 217, 50);
+}
+
+

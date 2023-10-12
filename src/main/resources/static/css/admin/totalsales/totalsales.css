@@ -1,0 +1,154 @@
+#salesContainer {
+    font-size: 100%;
+    height: 100%;
+    margin-left: 350px;
+    background-color: white;
+}
+
+#totalSales-title {
+    padding-left: 1%;
+    padding-top: 0.5%;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom: 0.5%;
+}
+
+#todaySales-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    padding-left: 2%;
+    color: #d55050;
+}
+
+.today-sales {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 70px 70px 70px 70px;
+    border: solid 1px black;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.today-box {
+    border: solid 1px black;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    padding-left: 1%;
+    line-height: 70px;
+}
+#amount-price2,
+#amount-price {
+    display: flex;
+    flex-direction: row;
+}
+
+#amount-price2 p,
+#amount-price p {
+    margin-left: 70%;
+    color: #5591E4;
+}
+
+#amount-count2,
+#amount-count {
+    display: flex;
+    flex-direction: row;
+}
+
+#amount-count2 p,
+#amount-count p {
+    margin-left: 70%;
+    color: #5591E4;
+}
+
+#return-price2,
+#return-price {
+    display: flex;
+    flex-direction: row;
+}
+
+#return-price2 p,
+#return-price p {
+    margin-left: 70%;
+    color: #5591E4;
+}
+
+#cer-count2,
+#cer-count{
+    display: flex;
+    flex-direction: row;
+}
+
+#cer-count2 p,
+#cer-count p {
+    margin-left: 60.5%;
+    color: #5591E4;
+}
+
+#delivery-count2,
+#delivery-count {
+    display: flex;
+    flex-direction: row;
+}
+
+#delivery-count2 p,
+#delivery-count p {
+    margin-left: 70%;
+    color: #5591E4;
+}
+
+#delivery-complete2,
+#delivery-complete {
+    display: flex;
+    flex-direction: row;
+}
+
+#delivery-complete2 p,
+#delivery-complete p {
+    margin-left: 70%;
+    color: #5591E4;
+}
+
+#net-sales2,
+#net-sales {
+    display: flex;
+    flex-direction: row;
+    grid-column: span 2;
+    font-size: 1.2em;
+}
+
+#net-sales2 p,
+#net-sales p {
+    margin-left: 42.5%;
+    color: #5591E4;
+}
+
+.selectSearch-box {
+    background-color: #e8e8e7;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 0.1%;
+}
+
+.selectSearch-box h2 {
+    padding-bottom: 1%;
+    color: #6197e8;
+}
+
+#sales-dateSearch {
+    display: flex;
+    flex-direction: row;
+}
+
+.filterDate {
+    background-color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 100px;
+    height: 30px;
+}
+
+#searchBtn {
+    margin-left: 1%;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: white;
+    width: 80px;
+    height: 30px;
+}

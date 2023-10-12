@@ -12,7 +12,11 @@
             <!-- 배너 버튼 목록 -->
             <ul class="banner-button-list">
                 <li class="banner-button member">
+
                     <div class="button-title" onclick="location.href='/member/list'">회원 관리</div>
+
+                    <div class="button-title" onclick="location.href='/member/member-admin'">회원 관리</div>
+
                 </li>
                 <li class="banner-button item">
                     <div class="button-title" onclick="location.href='/productManagement/product-admin'">상품 관리</div>
@@ -24,7 +28,11 @@
                     <div class="button-title" onclick="location.href='/order/order-new'">주문 관리</div>
                 </li>
                 <li class="banner-button donation">
+
                     <div class="button-title" onclick="location.href='/donatepage/donate-admin'">기부금 관리</div>
+
+                    <div class="button-title" onclick="location.href='/donate/donate-admin'">기부금 관리</div>
+
                 </li>
                 <li class="banner-button statistics">
                     <div class="button-title" onclick="location.href='/totalsales/totalsale-admin'">정산 관리</div>
@@ -36,6 +44,7 @@
         </nav>
     </div>
 </div>
+
 <script>
     // 현재 페이지의 URL 가져오는 코드
     const currentPageUrl = window.location.pathname;
@@ -68,4 +77,8 @@
 
 
 </script>
+
+<script src="/js/admin/nav/nav.js"></script>
+
+
 

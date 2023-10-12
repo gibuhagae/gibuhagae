@@ -1,5 +1,6 @@
 package com.gibuhagae.gibuhagae.member.controller;
 
+
 import com.gibuhagae.gibuhagae.common.exception.member.MemberModifyException;
 import com.gibuhagae.gibuhagae.common.exception.member.MemberRegistException;
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,4 +128,52 @@ public class MemberController {
 
 
 
+@Slf4j
+@Controller
+@RequestMapping(value = {"/login", "/join", "/myPage"})
+public class MemberController {
+    private final MemberService memberService;
+//    private final AuthenticationService authenticationService;
+//    private final MessageSourceAccessor messageSourceAccessor;
+//    private final PasswordEncoder passwordEncoder;
+
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+//    public MemberController(MemberService memberService, AuthenticationService authenticationService, MessageSourceAccessor messageSourceAccessor, PasswordEncoder passwordEncoder) {
+//        this.memberService = memberService;
+//        this.authenticationService = authenticationService;
+//        this.messageSourceAccessor = messageSourceAccessor;
+//        this.passwordEncoder = passwordEncoder;
+//    }
+
+    /* 로그인 페이지 이동 */
+    @GetMapping("/Login")
+    public void registPage(){
+        System.out.println("로그인 자바 호출");
+    }
+
+    /* 회원 가입 페이지 이동 */
+    @GetMapping("/Join")
+    public void joinPage(){
+        System.out.println("회원가입 페이지 이동");
+    }
+
+    @PostMapping("/Join")
+    public String memberJoin(@ModelAttribute MemberDTO member, RedirectAttributes rttr){
+
+        System.out.println("회원가입 버튼 눌렀음.");
+
+        memberService.joinMember(member);
+        //rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.join"));
+
+        return "redirect:/login/Login";
+    }
+
+    // 마이페이지 이동
+    @GetMapping("/MyPage")
+    public void myPage() {
+        System.out.println("마이페이지");
+    }
 }
