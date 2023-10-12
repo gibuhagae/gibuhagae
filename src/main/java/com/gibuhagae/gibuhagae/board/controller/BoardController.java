@@ -1,4 +1,4 @@
-package com.gibuhagae.gibuhagae.board.Controller;
+package com.gibuhagae.gibuhagae.board.controller;
 
 import com.gibuhagae.gibuhagae.board.dto.NoticeDTO;
 import com.gibuhagae.gibuhagae.board.service.BoardService;
@@ -7,10 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -30,8 +27,6 @@ public class BoardController {
     public String getNotice(@RequestParam(defaultValue = "1") int page,
                             Model model){
 
-        log.info("notice page : {}", page);
-
         Map<String, Object> noticeListAndPaging = boardService.selectNotice(page);
         model.addAttribute("paging", noticeListAndPaging.get("paging"));
         model.addAttribute("noticeList", noticeListAndPaging.get("noticeList"));
@@ -43,34 +38,50 @@ public class BoardController {
     public String getNoticeDetail(@RequestParam Long no, Model model){
 
         NoticeDTO noticeDetail = boardService.selectNoticeDetail(no);
-        log.info("noticeDetail : {}", noticeDetail);
         model.addAttribute("notice", noticeDetail);
         return "board/noticeDetail";
     }
 
-//    @GetMapping("/regist")
-//    public String getRegistNotice() {
-//        return "board/notice";
-//    }
 
     /* notice.html과 NoticeMapper.xml을 참조하여 공지글 삽입이 되도록 구현 */
     @PostMapping("/notice")
     public String registNotice(NoticeDTO notice, @AuthenticationPrincipal MemberDTO memberNo){
 
         notice.setMemberNo(memberNo);
-        log.info("registNotice notice : {}", notice);
-
         boardService.registNotice(notice);
+        return "redirect:/board/notice";
+    }
+
+    @PostMapping("/detail")
+    public String updateNotice(@RequestParam("noticeNo") Long noticeNo, @ModelAttribute("notice") NoticeDTO notice) {
+
+        boardService.updateNotice(notice);
 
         return "redirect:/board/notice";
     }
 
+//    @DeleteMapping("/detail")
+//    public String deleteNotice(Long no){
+//
+//        boardService.deleteNotice(no);
+//
+//        return "redirect:/board/notice";
+//    }
 
-    @GetMapping("/qna")
-    public String getQna(){
+
+    @GetMapping("/qna")             // 기본 페이지는 1페이지로
+    public String getQna(@RequestParam(defaultValue = "1") int page,
+                            Model model){
+        log.info("------111111 : {}", page);
+        Map<String, Object> qnaListAndPaging = boardService.selectQna(page);
+        log.info("------2222222 : {}", qnaListAndPaging);
+//        model.addAttribute("paging", qnaListAndPaging.get("paging"));
+//        model.addAttribute("qnaList", qnaListAndPaging.get("qnaList"));
 
         return "board/qna";
     }
+
+    
 
     @GetMapping("/registQna")
     public String getRegistQna(){

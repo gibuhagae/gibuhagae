@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/product.css" rel="stylesheet" type="text/css">
+    <link href="/css/board.css" rel="stylesheet" type="text/css">
+    <link href="/css/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<!-- 상품 상세 페이지 -->
+<div class="productDetail" id="productDetail">
+    <!-- 헤더(로고, 상단 메뉴)-->
+    <div th:replace="/common/board/navigation"></div>
+    <!-- 상세페이지 컨텐츠 구역 -->
+    <div class="productDetail-content">
+        <!-- 상단 상품 정보 및 주문 구역 -->
+        <div class="pd-container">
+            <!-- 상품 썸네일 사진 -->
+            <div class="pd-container-thumbnail">
+                <img src="/images/product/Pmain/p-main1.jpg">
+            </div>
+            <!-- 정보 구역 -->
+            <div class="pd-container-info">
+                <span class="pd-container-title">상품 이름이름 입니다.</span>
+                <span class="pd-container-price" style="border-bottom: rgba(108, 106, 106, 0.3) 1px solid;">37,200원</span>
+                <div class="pd-option">
+                    옵션
+                    <br>
+                    내용
+                    <br>
+                    들어갈
+                    <br>
+                    예정
+                </div>
+            </div>
+        </div>
+        <div class="pd-container-nav">
+        <ul class="pd-container-navnav">
+            <li><a>|</a></li>
+            <li><a href="#sunImg">상품정보</a></li>
+            <li><a>|</a></li>
+            <li><a href="#review">상품후기</a></li>
+            <li><a>|</a></li>
+            <li><a href="#qna">상품문의</a></li>
+            <li><a>|</a></li>
+        </ul>
+        </div>
+        <div class="pd-container-subImg" id="sunImg">
+            <img src="/images/product/Psub/p-sub1.jpg">
+        </div>
+        <div class="pd-container-review" id="review">
+            <div class="pd-review-title">
+                <a>REVIEW</a>
+            </div>
+            <!-- 리뷰 리스트 테이블 -->
+            <table class="board-table">
+                <thead>
+                <tr style="border-top: #6C6A6A 2px solid;">
+                    <th class="th2" style="width: 30px">NO</th>
+                    <th class="th3" style="width: 170px">제목</th>
+                    <th class="th6" style="width: 30px">평점</th>
+                    <th class="th4" style="width: 30px">작성자</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>두우우우웅우우번째</td>
+                    <td>5/5</td>
+                    <td>뽀둥뽀둥</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글</td>
+                    <td>4.5/5</td>
+                    <td>흑임자</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pd-container-qna" id="qna">
+            <div class="pd-qna-title">
+                <a>Q & A</a>
+            </div>
+            <!-- 리뷰 리스트 테이블 -->
+            <table class="board-table">
+                <thead>
+                <tr style="border-top: #6C6A6A 2px solid;">
+                    <th class="th2" style="width: 30px">NO</th>
+                    <th class="th5" style="width: 30px">분류</th>
+                    <th class="th3" style="width: 170px">제목</th>
+                    <th class="th6" style="width: 30px">작성자</th>
+                    <th class="th4" style="width: 30px">작성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>상품문의</td>
+                    <td>두우우우웅우우번째</td>
+                    <td>뽀둥뽀둥</td>
+                    <td>작성일</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>배송문의</td>
+                    <td>첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글</td>
+                    <td>흑임자</td>
+                    <td>작성일</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+         <div class="PageMoveButton">
+        <a class="up-logo" style="margin-bottom: 40px">▲</a>
+    </div>
+        <div class="PageMoveButton">
+        <a class="down-logo">▼</a>
+    </div>
+    </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const topBtn = document.querySelector(".up-logo");
+
+        topBtn.onclick = () => {
+            window.scrollTo({ top: 0, behavior: "auto" });
+        };
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const topBtn = document.querySelector(".down-logo");
+
+        topBtn.onclick = () => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "auto" });
+        };
+    });
+</script>
+<footer>
+    <div id="footer-area">
+        <div id="footer-main">
+            <div class="footer-logo">
+                <img src="/images/navigation/menu-logo.png">
+            </div>
+            <div id="footer-icon">
+                <div>
+                    <img src="/images/main/instagram.png">
+                </div>
+                <div>
+                    <img src="/images/main/kakao.png">
+                </div>
+                <div>
+                    <img src="/images/main/facebook.png">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                팀: 그루브 펫 가디언즈
+            </div>
+            <div>
+                사업자 등록 번호 : 000-00-00000
+            </div>
+            <div>
+                사업자 정보 확인 통신판매업 : 제 2023-서울종로H-1511호
+            </div>
+        </div>
+        <div>
+            <div>
+                사업장소재지 : 서울특별시 종로구 종로2가 탑골공원
+            </div>
+            <div>
+                대표번호 : 000-000
+            </div>
+            <div>
+                이메일 : hihello@gmail.com
+            </div>
+        </div>
+        <div>
+            <p>(주) 야옹아!기부하개는 통신판매 중개자로서 통신판매의 당사자가 아닙니다. 본 상품은 개별판마재 등록 상품으로 상품정보, 거래에 관한 의무와 책임은 각 판매자에게 있습니다.</p>
+        </div>
+        <div>
+            <div>
+                <img src="/images/main/symbol.png">
+            </div>
+            <div>
+                2023. 야옹아!기부하개 All rights reserved designed by 야옹아!기부하개
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

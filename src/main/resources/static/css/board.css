@@ -344,31 +344,43 @@ a {
     padding-left: 100px;
 }
 .detailForm {
-    margin: 100px auto 0 auto;
-    width: 100%;
+    width: 80%;
+    margin: auto;
 }
 
-.detailForm td {
-    padding: 15px 0px 0px 15px;
+.detailForm tr{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 600;
     color: #6C6A6A;
     font-size: 20px;
 }
 
-.detailForm p {
-    border: lightgray 1px solid;
+.detailForm th {
+    background-color: rgba(108, 106, 106, 0.1);
+}
+
+.detailForm td {
+    padding: 2px 15px 2px 15px;
     font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     color: #6C6A6A;
-    font-size: 18px;
-    padding: 5px;
+    font-size: 20px;
+}
+
+.detailForm textarea {
+   width: 100%;
+   height: 100%;
+   font-family: 'Noto Sans KR', sans-serif;
+   font-weight: 400;
+   color: #6C6A6A;
+   font-size: 18px;
+
 }
 
 .detailForm button {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
-    color: #6C6A6A;
+    color: rgb(108, 106, 106);
     font-size: 20px;
     padding: 10px;
     width: 105px;

@@ -23,7 +23,6 @@
             NOTICE<br>
             <hr class="title-divider">
         </div>
-
         <div class="board-container">
             <select id="select1">
                 <option value="selected" selected>선택하기</option>
@@ -41,7 +40,7 @@
                 </div>
                 <!-- 공지 리스트 테이블 -->
                 <table class="board-table">
-                    <tr>
+                    <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
                         <th class="th1"></th>
                         <th class="th7">상태</th>
                         <th class="th2">글번호</th>
@@ -92,12 +91,14 @@
                 </th:block>
             </div>
             <div class="board-button">
-                <button type="button" class="delete">삭제</button>
+                <button type="button" id="delete">삭제</button>
                 <button type="button" id="modal-open">작성하기</button>
             </div>
         </div>
     </div>
 </div>
+
+
 <!-- 공지등록 modal -->
 <!-- //모달을 감쌀 박스 -->
 <div class="popup-wrap" id="popup">
