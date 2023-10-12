@@ -1,26 +1,12 @@
 package com.gibuhagae.gibuhagae.order.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
+
 import com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO;
 import com.gibuhagae.gibuhagae.order.service.OrderService;
-import com.gibuhagae.gibuhagae.productManagement.dto.ItemDTO;
-import com.gibuhagae.gibuhagae.productManagement.dto.ItemOptionDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.Session;
-import org.springframework.beans.factory.support.ManagedList;
-import org.springframework.core.annotation.Order;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
