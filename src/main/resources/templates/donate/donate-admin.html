@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리자 페이지 - 기부금 관리</title>
+
+    <link rel="stylesheet" href="/css/admin/admin_nav.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/donate/donate.css" type="text/css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap"
+          rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+
+    <script src="/js/admin/donate/donate.js"></script>
+
+    <!-- 차트 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 차트 레이블 라이브러리-->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+<body>
+<div th:replace="/common/admin-nav.html"></div>
+
+    <div class="donate-container">
+
+        <div class="donate-view">
+
+            <div class="total-infoBox">
+
+            <div class="total-donateBox">
+                <p>총 누적 기부금(원)</p>
+                <div id="total-donatePrice" class="totalDiv">해당 코드 추가</div>
+            </div>
+
+            <div class="total-donateBox">
+                <p>총 누적 기부고객(명)</p>
+                <div id="total-donateMember" class="totalDiv">해당 코드 추가</div>
+            </div>
+
+            </div>
+
+
+            <div id="donate-memberList-div">
+                <table id="donate-memberList">
+
+                    <tr>
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>구매 금액</th>
+                        <th>적립금 기부 금액</th>
+                        <th>총 적립 기부금액</th>
+                    </tr>
+                    <tr>
+                        <td>해당 코드 입력</td>
+                        <td>해당 코드 입력</td>
+                        <td>해당 코드 입력</td>
+                        <td>해당 코드 입력</td>
+                        <td>해당 코드 입력</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="donate-chart">
+
+                <select id="yearSelect">
+                    <option value="2020">2020년</option>
+                    <option value="2021">2021년</option>
+                    <option value="2022">2022년</option>
+                    <option value="2023" selected>2023년</option>
+                    <!-- 추가된 연도를 자동으로 표시하기 위해 필요한 옵션 -->
+                </select>
+
+
+                <canvas id="total-donateChart"></canvas>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
