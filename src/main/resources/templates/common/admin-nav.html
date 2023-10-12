@@ -12,7 +12,7 @@
             <!-- 배너 버튼 목록 -->
             <ul class="banner-button-list">
                 <li class="banner-button member">
-                    <div class="button-title" onclick="location.href='/member/list'">회원 관리</div>
+                    <div class="button-title" onclick="location.href='/memberManagement/member-admin'">회원 관리</div>
                 </li>
                 <li class="banner-button item">
                     <div class="button-title" onclick="location.href='/productManagement/product-admin'">상품 관리</div>
@@ -45,7 +45,7 @@
         const orderButton = document.querySelector(".order");
         orderButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
     }
-    if (currentPageUrl.includes("/member/list")){
+    if (currentPageUrl.includes("/memberManagement/member-admin")){
         const memberButton = document.querySelector(".member");
         memberButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
     }

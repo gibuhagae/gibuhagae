@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.productManagement.dao.ProductMapper">
+
+    <resultMap id="productResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ProductDTO">
+        <id property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"></result>
+        <result property="saleStatus" column="SALE_STATUS"></result>
+        <result property="registDate" column="REGIST_DATE"></result>
+        <result property="categoryCode" column="CATEGORY_CODE"></result>
+        <result property="totalCount" column="TOTAL_COUNT"></result>
+        <result property="itemName" column="ITEM_NAME"></result>
+
+        <association property="category" resultMap="categoryResultMap"/>
+        <collection property="option" resultMap="optionResultMap"/>
+        <collection property="attachmentList" resultMap="attachmentResultMap"/>
+    </resultMap>
+
+
+    <resultMap id="categoryResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.CategoryDTO">
+        <id property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+    </resultMap>
+
+
+    <resultMap id="optionResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.OptionDTO">
+        <id property="optionCode" column="OPTION_CODE"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="salePrice" column="SALE_PRICE"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="count" column="COUNT"/>
+    </resultMap>
+
+    <resultMap id="attachmentResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.AttachmentDTO">
+        <id property="fileNo" column="FILE_NO"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="filePath" column="FILE_PATH"/>
+        <result property="fileSave" column="FILE_SAVE"/>
+        <result property="fileExt" column="FILE_EXT"/>
+        <result property="fileVolume" column="FILE_VOLUME"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="reviewNo" column="REVIEW_NO"/>
+        <result property="inquiryNo" column="INQUIRY_NO"/>
+        <result property="bannerNo" column="BANNER_NO"/>
+        <result property="refundNo" column="REFUND_NO"/>
+    </resultMap>
+
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+               COUNT(*)
+          FROM ITEM A
+        <if test="searchCondition == 'category'">
+            JOIN ITEM_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        </if>
+        <where>
+            <if test="searchCondition == 'category'">
+                B.CATEGORY_NAME LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'itemCode'">
+                A.ITEM_CODE = #{ searchValue }
+            </if>
+            <if test="searchCondition == 'itemName'">
+                A.ITEM_NAME LIKE '%' || #{ searchValue } || '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="selectProductList" resultMap="productResultMap">
+        SELECT
+               A.ITEM_CODE
+             , A.ITEM_NAME
+             , A.CATEGORY_CODE
+             , D.CATEGORY_NAME
+             , A.SALE_STATUS
+             , A.REGIST_DATE
+             , D.CATEGORY_CODE
+             , A.TOTAL_COUNT
+             , D.REF_CATEGORY_CODE
+          FROM (SELECT
+                       ROWNUM RNUM
+                     , B.ITEM_CODE
+                     , B.ITEM_NAME
+                     , B.SALE_STATUS
+                     , B.REGIST_DATE
+                     , B.CATEGORY_CODE
+                     , B.TOTAL_COUNT
+                 FROM (SELECT
+                              C.ITEM_CODE
+                            , C.ITEM_NAME
+                            , C.SALE_STATUS
+                            , C.REGIST_DATE
+                            , C.CATEGORY_CODE
+                            , C.TOTAL_COUNT
+                         FROM ITEM C
+        <if test="searchCondition == 'category'">
+            JOIN ITEM_CATEGORY D ON (C.CATEGORY_CODE = D.CATEGORY_CODE)
+        </if>
+        <where>
+            <if test="searchCondition == 'category'">
+                D.CATEGORY_NAME LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'itemCode'">
+                C.ITEM_CODE = #{ searchValue }
+            </if>
+            <if test="searchCondition == 'itemName'">
+                C.ITEM_NAME LIKE '%' || #{ searchValue } || '%'
+            </if>
+        </where>
+        ORDER BY C.ITEM_CODE DESC
+        ) B
+        <![CDATA[
+                  WHERE ROWNUM <= #{ endRow }
+                  ]]>
+        ) A
+        JOIN ITEM_CATEGORY D ON (A.CATEGORY_CODE = D.CATEGORY_CODE)
+        WHERE A.RNUM >= #{ startRow }
+        ORDER BY 1 DESC
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

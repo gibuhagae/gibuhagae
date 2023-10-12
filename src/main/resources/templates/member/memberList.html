@@ -9,7 +9,8 @@
     <title>관리자 페이지 - 회원 관리</title>
 
     <!-- 외부 스타일 시트 -->
-    <link rel="stylesheet" href="/css/Management_nav.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin-nav.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin-member.css" type="text/css">
     <!-- Noto Sans Korean 글씨체 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,108 +19,254 @@
 
     <!--jquery 라이브러리-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <!--    &lt;!&ndash;데이터 테이블&ndash;&gt;-->
-    <!--    <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>-->
-    <!--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>-->
-
-    <script>
-        $(function () {
-            $(".table-each-tr").click(function () {
-                $(".member-detail-modal").css('display', 'flex').hide().fadeIn();
-                //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
-            });
-            $(".detail-close-btn").click(function () {
-                modalClose(); //모달 닫기 함수 호출
-            });
-
-            function modalClose() {
-                $(".member-detail-modal").fadeOut(); //페이드아웃 효과
-            }
-        });
-    </script>
-
 </head>
 
 <body>
 
+<!-- 관리자페이지 nav 메뉴 -->
 <div th:replace="/common/admin-nav.html"></div>
 
-<div class="member-contents">
-    <div class="member-contents-title">회원 정보</div>
-    <div align="center" class="memberList-table">
+<!-- 회원 리스트 조회 -->
+<div class="admin-contents">
+    <div class="admin-contents-title">회원 정보</div>
+    <div align="center" class="admin-contents-List-table">
         <table id="memberList" width="95%">
             <colgroup>
+                <col width="7.5%">
                 <col width="10%">
-                <col width="15%">
-                <col width="15%">
+                <col width="10%">
+                <col width="10%">
                 <col width="25%">
-                <col width="20%">
                 <col width="15%">
+                <col width="7.5%">
+                <col width="7.5%">
             </colgroup>
-            <thead class="member-list-table-head">
+            <thead class="admin-list-table-head">
             <tr>
                 <th>회원 번호</th>
                 <th>아이디</th>
                 <th>이름</th>
+                <th>우편 번호</th>
                 <th>주소지</th>
                 <th>전화번호</th>
                 <th>적립금(원)</th>
             </tr>
             </thead>
-            <tbody class="member-list-table-contents">
-            <tr class="table-each-tr" th:each="m : ${memberList}">
-                <td class=member-list-contents th:text="${m.no}"></td>
-                <td class=member-list-contents th:text="${m.userId}"></td>
-                <td class=member-list-contents th:text="${m.name}"></td>
-                <td class=member-list-contents th:text="${m.address}"></td>
-                <td class=member-list-contents th:text="${m.phone}"></td>
-                <td class=member-list-contents th:text="${m.donatePrice}"></td>
+            <tbody class="admin-list-table-contents">
+            <tr id="table-each-tr" th:each="m, iterStat : ${memberList}">
+                <td class=list-contents id="detailModalNeed" th:text="${m.no}"></td>
+                <td class=list-contents th:text="${m.userId}"></td>
+                <td class=list-contents th:text="${m.name}"></td>
+                <td class=list-contents th:text="${m.zipcode}"></td>
+                <td class=list-contents th:text="${m.address}"></td>
+                <td class=list-contents th:text="${m.phone}"></td>
+                <td class=list-contents th:text="${m.donatePrice}"></td>
+                <td>
+                    <button id="modalBtn" th:index="${iterStat.index}" onclick="showModal(this.getAttribute('index'))">
+                        상세 정보
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 
-    <form id="modifyMemberDetail" method="post" action="/member/modify">
-        <div class="member-detail-modal" th:each="m : ${memberList}">
-            <div class="modal-container">
-                <div class="modal-wrap" id="detail-modal">
-                    <div class="modal">
-                        <div class="modal-head">
-                            <span class="modal-head-title">회원 상세 정보</span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="modal-body-content">
-                                <div class="modal-body-content-box">
-                                    <div class="input-member-table-wrapper">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail-modal-footer">
-                            <button type="submit" class="detail-commit-btn footer-btn">등록</button>
-                            <button type="button" class="detail-close-btn footer-btn" id="detail-close-btn">취소</button>
+
+    <form id="modifyMember" method="post" action="/memberManagement/member-admin/modify">
+        <!-- 회원 상세 정보 및 수정 모달창 -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-head">
+                    <span class="modal-head-title">회원 상세정보</span>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body-content">
+                        <div class="member-table-wrapper">
+                            <table class="member-info-table">
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">회원 번호</td>
+                                    <td><span class="info-design info-content" id="modalMemberNo"></span></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">아이디</td>
+                                    <td><span class="info-design info-content" id="modalUserId"></span></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">이름</td>
+                                    <td><span class="info-design info-content" id="modalMemberName"></span></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">전화번호</td>
+                                    <td><span class="info-design info-content" id="modalMemberPhone"></span></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">이메일</td>
+                                    <td><span class="info-design info-content" id="modalEmail"></span></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <table class="member-info-table">
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">로그인 타입</td>
+                                    <td><span class="info-design info-content" id="modalLoginType"></span></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">우편 번호</td>
+                                    <td><span class="info-design info-content" id="modalZipcode"></span></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">주소</td>
+                                    <td><span class="info-design info-content" id="modalAddress"></span></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">적립금</td>
+                                    <td><input type="text" class="info-design info-content modify"
+                                               id="modalDonatePrice"></input></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="input-member-info-row">
+                                    <td class="title-design">활성화 상태</td>
+                                    <td>
+                                        <select class="info-design info-content modify" id="modalActivationStatus">
+                                            <option value="Y">Y</option>
+                                            <option value="N">N</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="footer-btn removebtn" id="detailModalRemoveBtn"
+                            onclick="modifyMember()">수정
+                    </button>
+                    <button type="button" class="footer-btn close-btn" id="detailModalCloseBtn" onclick="closeModal()">
+                        닫기
+                    </button>
                 </div>
             </div>
         </div>
     </form>
 
+    <!-- 회원 상세정보 띄울 모달 창 자바 스크립트 코드  -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function showModal(index) {
+            // 클릭한 행의 정보를 가져오기 위해 index를 사용
+            const memberList = [[${memberList}]];
+            console.log(memberList)
+            console.log(index)
+            var clickedMember = memberList[index];
 
+            // clickedMember 객체에서 필요한 정보를 추출
+            var no = clickedMember.no;
+            var userId = clickedMember.userId;
+            var name = clickedMember.name;
+            var phone = clickedMember.phone;
+            var email = clickedMember.email;
+            var loginType = clickedMember.loginType;
+            var zipcode = clickedMember.zipcode;
+            var address = clickedMember.address;
+            var donatePrice = clickedMember.donatePrice;
+            var activationStatus = clickedMember.activationStatus;
+
+            var inputDonatePrice = document.getElementById("modalDonatePrice");
+            inputDonatePrice.value = donatePrice;
+
+            // "modalActivationStatus" select 요소 선택
+            var selectElement = document.getElementById("modalActivationStatus");
+
+            // "activationStatus" 값과 일치하는 option을 선택
+            for (var i = 0; i < selectElement.options.length; i++) {
+                if (selectElement.options[i].value === activationStatus) {
+                    selectElement.selectedIndex = i;
+                    break;
+                }
+            }
+
+            // 가져온 정보를 해당 HTML 요소에 삽입.
+            $("#modalMemberNo").text(no);
+            $("#modalUserId").text(userId);
+            $("#modalMemberName").text(name);
+            $("#modalMemberPhone").text(phone);
+            $("#modalEmail").text(email);
+            $("#modalLoginType").text(loginType);
+            $("#modalZipcode").text(zipcode);
+            $("#modalAddress").text(address);
+            $("#modalDonatePrice").text(donatePrice);
+
+            // 모달 창을 표시합니다.
+            $("#myModal").show();
+        }
+
+        /* 모달창 닫기 */
+        function closeModal() {
+            $("#myModal").hide();
+        }
+
+        /* 적립금과 활성화 상태 수정 (N으로 바뀌면 로그인 불가)*/
+        function modifyMember() {
+            // id로 node 값 얻어오기
+            const modalMemberNo = document.getElementById("modalMemberNo");
+            const fixNo = modalMemberNo.innerHTML;
+
+            const modalDonatePrice = document.getElementById("modalDonatePrice");
+            const inputDonatePrice = modalDonatePrice.value;
+
+            const modalActivationStatus = document.getElementById("modalActivationStatus");
+            const inputActivationStatus = modalActivationStatus.value;
+
+
+            console.log(fixNo);
+            console.log(inputDonatePrice);
+            console.log(inputActivationStatus);
+
+            // AJAX 요청을 보냅니다.
+            $.ajax({
+                type: "POST", // 또는 "GET", "PUT" 등 HTTP 요청 방식 선택
+                url: "member-admin/modify", // 컨트롤러 엔드포인트 URL
+                data: {
+                    inputDonatePrice: inputDonatePrice,
+                    inputActivationStatus: inputActivationStatus,
+                    fixNo: fixNo
+                }, // 데이터 전달
+                success: function () {
+                    alert("성공적으로 변경되었습니다.");
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+        }
+
+        /*]]>*/
+    </script>
+
+
+    <!-- 페이징 처리 -->
     <div id="paging" align="center" style="margin-bottom: 20px">
 
         <th:block
                 th:if="${ paging.searchCondition != null and (paging.searchValue != null && !paging.searchValue.isEmpty()) }">
             <!-- 맨 앞으로 이동 -->
             <button class="paging-button"
-                    th:onclick="'location.href=\'/member/list?page=1&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">
+                    th:onclick="'location.href=\'/memberManagement/member-admin?page=1&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">
                 &lt;&lt;
             </button>
 
             <!-- 이전 페이지로 이동 -->
             <button class="paging-button"
-                    th:onclick="'location.href=\'/member/list?page=' + @{${paging.page - 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+                    th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${paging.page - 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
                     th:disabled="${ paging.page <= 1 }">&lt;
             </button>
 
@@ -127,20 +274,20 @@
             <th:block
                     th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
                 <button class="paging-button"
-                        th:onclick="'location.href=\'/member/list?page=' + @{${page}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+                        th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${page}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
                         th:text="${ page }" th:disabled="${ paging.page eq page }">
                 </button>
             </th:block>
 
             <!-- 다음 페이지로 이동 -->
             <button class="paging-button"
-                    th:onclick="'location.href=\'/member/list?page=' + @{${paging.page + 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+                    th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${paging.page + 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
                     th:disabled="${ paging.page >= paging.maxPage }">>
             </button>
 
             <!-- 맨 끝으로 이동 -->
             <button class="paging-button"
-                    th:onclick="'location.href=\'/member/list?page=' + @{${paging.maxPage}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">
+                    th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${paging.maxPage}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">
                 >>
             </button>
 
@@ -149,11 +296,11 @@
         <th:block
                 th:if="${ (paging.searchCondition != null && paging.searchValue == '') || paging.searchCondition == null }">
             <!-- 맨 앞으로 이동 -->
-            <button class="paging-button" th:onclick="'location.href=\'/member/list?page=1\''">&lt;&lt;</button>
+            <button class="paging-button" th:onclick="'location.href=\'/memberManagement/member-admin?page=1\''">&lt;&lt;</button>
 
             <!-- 이전 페이지로 이동 -->
             <button class="paging-button"
-                    th:onclick="'location.href=\'/member/list?page=' + @{${paging.page - 1}} + '\''"
+                    th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${paging.page - 1}} + '\''"
                     th:disabled="${ paging.page <= 1 }">&lt;
             </button>
 
@@ -161,20 +308,20 @@
             <th:block
                     th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
                 <button class="paging-button"
-                        th:onclick="'location.href=\'/member/list?page=' + @{${page}} + '\''"
+                        th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${page}} + '\''"
                         th:text="${ page }" th:disabled="${ paging.page eq page }">
                 </button>
             </th:block>
 
             <!-- 다음 페이지로 이동 -->
             <button class="paging-button"
-                    th:onclick="'location.href=\'/member/list?page=' + @{${paging.page + 1}} + '\''"
+                    th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${paging.page + 1}} + '\''"
                     th:disabled="${ paging.page >= paging.maxPage }">>
             </button>
 
             <!-- 맨 끝으로 이동 -->
             <button class="paging-button"
-                    th:onclick="'location.href=\'/member/list?page=' + @{${paging.maxPage}} + '\''">>>
+                    th:onclick="'location.href=\'/memberManagement/member-admin?page=' + @{${paging.maxPage}} + '\''">>>
             </button>
         </th:block>
     </div>
@@ -183,15 +330,12 @@
 
     <!-- 추가 버튼 모달 => memberInsertModal.html -->
     <div class="bottom-part">
-        <button class="action-button addbtn" id="addbtn-member">추가</button>
+        <button class="action-button addbtn" id="addbtn-admin">추가</button>
         <div th:replace="/member/memberInsertModal.html"></div>
-
-        <!-- 삭제 버튼 -->
-        <button class="action-button removebtn">삭제</button>
 
         <!--검색 버튼-->
         <div class="search-form" align="right" style="margin-right: 35px;">
-            <form id="member-searchForm" action="/member/list">
+            <form id="searchForm" action="/memberManagement/member-admin">
                 <select name="searchCondition" id="searchCondition" class="search-select">
                     <option value="userId" th:selected="${ paging.searchCondition eq 'userId'}">아이디</option>
                     <option value="name" th:selected="${ paging.searchCondition eq 'name'}">이름</option>
@@ -202,11 +346,7 @@
                 <button type="submit" class="action-button">조회</button>
             </form>
         </div>
-
-
     </div>
 </div>
-
-
 </body>
 </html>

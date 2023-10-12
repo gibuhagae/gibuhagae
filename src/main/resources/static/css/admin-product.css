@@ -30,77 +30,13 @@ img {
     height: 100%;
 }
 
-/* side banner design */
-
-.side-banner {
-    width: 350px;
-    position: absolute;
-    height: 100%;
-    background-color: #ECF4FF;
-}
-
-/* side-banner logo */
-.banner-logo-img {
-    width: 105px;
-    height: 45px;
-}
-
-.banner-title {
-    margin-top: 20px;
-    margin-left: 60px;
-    margin-bottom: 7vh;
-    background-color: #ECF4FF;
-}
-
-/* side-banner title 텍스트*/
-.banner-title-text {
-    font-size: 35px;
-    font-family: 'Noto Sans KR', sans-serif;
-    margin-left: 12px;
-}
-
-.banner-button-list {
-    padding-left: 0;
-    background-color: #ECF4FF;;
-}
-
-/* side-banner button 디자인 */
-.banner-button {
-    width: 295px;
-    height: 60px;
-    background-color: #E4E7EE;
-    /* background: linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%); */
-    border-radius: 30px;
-    display: table;
-    margin: auto auto 3.5vh auto;
-}
-
-.gradient-bg {
-    background: linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%);
-}
-
-/* side-banner button 텍스트*/
-.button-title {
-    font-size: 23px;
-    font-weight: 600;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-/* main으로 가는 button 간격 조절 */
-.tomain {
-    margin-top: 9vh;
-}
-
-
-/* banner 옆 contents 부분*/
-.member-contents {
+/* side banner 옆 contents 부분*/
+.admin-contents {
     margin-left: 350px;
 }
 
 /* contents title */
-.member-contents-title {
+.admin-contents-title {
     text-align: center;
     font-size: 35px;
     font-weight: bold;
@@ -108,27 +44,27 @@ img {
 }
 
 /* memberList 테이블 */
-.memberList-table {
+.admin-contents-List-table {
     margin-top: 3.2%;
     height: 550px;
 }
 
 /* 테이블 th*/
-.member-list-table-head {
-    border-top : 1px solid #C4BEBE;
-    border-bottom : 1px solid #C4BEBE;
+.admin-list-table-head {
+    border-top: 1px solid #C4BEBE;
+    border-bottom: 1px solid #C4BEBE;
     height: 45px;
 }
 
 /* 테이블 th 글꼴 스타일 */
 th {
-    color:#6C757D;
+    color: #6C757D;
     font-size: 20px;
     font-weight: lighter;
 }
 
 /* table contents 글꼴 스타일 */
-.member-list-table-contents {
+.admin-list-table-contents {
     background-color: #D9D9D9;
     text-align: center;
     font-size: 17px;
@@ -136,15 +72,19 @@ th {
 }
 
 /* table contents 1 row*/
-.member-list-contents {
+.list-contents {
     background-color: #D9D9D9;
     text-align: center;
     border-bottom: 1px solid #C4BEBE;
 }
 
 /* table contents 1row 높이 */
-.table-each-tr {
+.list-contents {
     height: 47.5px;
+}
+
+#table-each-tr td {
+    border-bottom: 1px solid #C4BEBE;
 }
 
 /* paging-button 디자인*/
@@ -178,9 +118,10 @@ th {
     margin-right: 20px;
 }
 
-.removebtn {
-    margin-right: auto;
+#addbtn-admin {
+    margin-right: 60%;
 }
+
 
 /* 검색창 입력부분 디자인 */
 .input-search-content {
@@ -194,7 +135,7 @@ th {
 
 /* 검색창 조건 선택 디자인 */
 .search-select {
-    width: 80px;
+    width: 90px;
     height: 45px;
     border-radius: 10px;
     border: 1px solid #000;
@@ -202,10 +143,9 @@ th {
 }
 
 /*------------------------------------------------------------------------------------*/
-
 /* 모달창 디자인 */
-.modal-wrap, .member-detail-modal{
-    background-color: rgba(0,0,0,0.3);
+.modal-wrap, #myModal {
+    background-color: rgba(0, 0, 0, 0.3);
     justify-content: center;
     align-items: center;
     position: fixed; /*화면이 스크롤 되더라도 고정되기 위함*/
@@ -218,12 +158,12 @@ th {
 }
 
 /* 모달 실제 창 */
-.modal {
+#modal {
     width: 100%;
-    max-width: 70%;
-    border-radius: 10px;
+    /*max-width: 70%;*/
+    /*border-radius: 10px;*/
     overflow: hidden; /* 각 없앴을 때 내부 영역이 튀어나오는걸 방지 */
-    box-shadow: 5px 10px 10px 1px rgba(0,0,0,0.3);
+    box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, 0.3);
 }
 
 /* 모달 창 헤드*/
@@ -234,6 +174,7 @@ th {
     align-items: center;
     justify-content: center;
     background-color: #ECF4FF;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .modal-head-title {
@@ -247,7 +188,7 @@ th {
 }
 
 .modal-body-content {
-    padding:20px; /* 좌우에 내용이 붙으면 보기 안좋기 때문에 간격 띄움 */
+    padding: 20px; /* 좌우에 내용이 붙으면 보기 안좋기 때문에 간격 띄움 */
 }
 
 .modal-body-content-box {
@@ -260,10 +201,14 @@ th {
 .modal-footer {
     width: 100%;
     background-color: #FFFFFF;
-
+    border-radius: 0px 0px 10px 10px;
 }
 
-.footer-btn, .detail-footer-btn {
+.modal-close-btn {
+    border-radius: 0px 0px 10px 10px;
+}
+
+.footer-btn {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -282,67 +227,6 @@ th {
     font-weight: 560;
 }
 
-.commit-btn, detail-commit-btn {
+.commit-btn, .removebtn {
     margin-left: 80%;
 }
-
-/* 관리자 등록 모달창 contents*/
-.insert-title-design {
-    font-size: 20px;
-    font-weight: bolder;
-    margin-right: 30px;
-}
-
-.regist-input-design {
-    width: 300px;
-    height: 40px;
-    border-radius: 20px;
-    border: 1px solid #000;
-    background: #FFF;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border-color: #6C757D;
-}
-
-.input-member-table-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.input-member-info-table {
-    border-collapse: separate; /* 테이블의 경계를 구분 */
-    border-spacing: 20px; /* 행 간격 조절 (원하는 크기로 조절) */
-}
-
-#duplicationCheck, #searchZipCode {
-    width: 85px;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    background: #5591E4;
-    font-size: 15px;
-    color: #FFF;
-}
-
-#searchZipCode {
-    width: 105px;
-}
-
-.necessary {
-    width: 15px;
-    height: 14px;
-    flex-shrink: 0;
-    fill: #D7D4F3;
-}
-
-
-
-
-
-
-
-
-
-
-

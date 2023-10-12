@@ -2,10 +2,12 @@ package com.gibuhagae.gibuhagae.member.controller;
 
 import com.gibuhagae.gibuhagae.common.exception.member.MemberModifyException;
 import com.gibuhagae.gibuhagae.common.exception.member.MemberRegistException;
+import com.gibuhagae.gibuhagae.common.exception.member.MemberRemoveException;
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 import com.gibuhagae.gibuhagae.member.service.AuthenticationService;
 import com.gibuhagae.gibuhagae.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +28,7 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/memberManagement")
 @Slf4j
 public class MemberController {
 
@@ -46,7 +48,7 @@ public class MemberController {
     }
 
     /* MemberList 조회 */
-    @GetMapping("list")
+    @GetMapping("/member-admin")
     public String getMemberList(@RequestParam(defaultValue = "1") int page,
                                 @RequestParam(required = false) String searchCondition,
                                 @RequestParam(required = false) String searchValue,
@@ -61,6 +63,7 @@ public class MemberController {
         searchMap.put("searchValue", searchValue);
 
        Map<String, Object> memberListAndPaging =  memberService.selectMemberList(searchMap, page);
+
         model.addAttribute("paging", memberListAndPaging.get("paging"));
         model.addAttribute("memberList", memberListAndPaging.get("memberList"));
 
@@ -70,10 +73,10 @@ public class MemberController {
 
     /* 관리자 회원 insert */
     @PostMapping("/insert")
-    public String insertMember(@ModelAttribute MemberDTO member, String zipcode, String address1, String address2,
+    public String insertMember(@ModelAttribute MemberDTO member, String address1, String address2,
                                RedirectAttributes rttr) throws MemberRegistException {
 
-        String address = zipcode + "$" + address1 + "$" + address2;
+        String address =  address1 + "$" + address2;
         member.setAddress(address);
         member.setPassword(passwordEncoder.encode(member.getPassword()));
         member.setUserCode("ADMIN");
@@ -84,7 +87,7 @@ public class MemberController {
 
         rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.insert"));
 
-        return "redirect:/member/list";
+        return "redirect:/memberManagement/member-admin";
     }
 
     /* id 중복 체크 : 비동기 통신 */
@@ -109,19 +112,18 @@ public class MemberController {
         return newAuth;
     }
 
+    /* 회원정보 조회 및 수정 */
+    @PostMapping("/member-admin/modify")
+    public ResponseEntity<Void> modifyMember(@Param("fixNo") Long fixNo, @Param("inputDonatePrice") String inputDonatePrice, @Param("inputActivationStatus") String inputActivationStatus) throws MemberModifyException {
 
-    /* 회원 정보 화면 이동 (수정 가능) */
-    @PostMapping("/modify")
-    public String modifyMember(MemberDTO modifyMember, String zipCode, String address1, String address2,RedirectAttributes rttr) throws MemberModifyException {
+        MemberDTO member = new MemberDTO();
+        member.setNo(fixNo);
+        member.setDonatePrice(inputDonatePrice);
+        member.setActivationStatus(inputActivationStatus);
 
-        String address = zipCode + "$" + address1 + "$" + address2;
-        modifyMember.setAddress(address);
+        memberService.modifyMember(member);
 
-        memberService.modifyMember(modifyMember);
-
-        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
-
-        return "redirect:/member/list";
+        return ResponseEntity.ok().build();
     }
 
 

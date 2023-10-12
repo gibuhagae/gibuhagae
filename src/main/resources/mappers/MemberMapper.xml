@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.member.dao.MemberMapper">
+
+
+    <resultMap id="memberResultMap" type="com.gibuhagae.gibuhagae.member.dto.MemberDTO">
+        <id property="no" column="MEMBER_NO"/>
+        <result property="name" column="MEMBER_NAME"/>
+        <result property="phone" column="MEMBER_PHONE"/>
+        <result property="zipcode" column="ZIPCODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="registDate" column="REGIST_DATE"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="donatePrice" column="DONATE_PRICE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="activationStatus" column="ACTIVATION_STATUS"/>
+    </resultMap>
+
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+        COUNT(*)
+        FROM MEMBER A
+        <where>
+            <if test="searchCondition == 'userId'">
+                A.USER_ID = #{ searchValue }
+            </if>
+            <if test="searchCondition == 'name'">
+                A.MEMBER_NAME LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'phone'">
+                A.MEMBER_PHONE LIKE '%' || #{ searchValue } || '%'
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectMemberList" resultMap="memberResultMap">
+        SELECT
+               A.MEMBER_NO
+             , A.MEMBER_NAME
+             , A.MEMBER_PHONE
+             , A.ZIPCODE
+             , A.ADDRESS
+             , A.REGIST_DATE
+             , A.UPDATE_DATE
+             , A.EMAIL
+             , A.DONATE_PRICE
+             , A.PASSWORD
+             , A.USER_ID
+             , A.USER_CODE
+             , A.LOGIN_TYPE
+             , A.ACTIVATION_STATUS
+          FROM (SELECT
+                       ROWNUM RNUM
+                     , B.MEMBER_NO
+                     , B.MEMBER_NAME
+                     , B.MEMBER_PHONE
+                     , B.ZIPCODE
+                     , B.ADDRESS
+                     , B.REGIST_DATE
+                     , B.UPDATE_DATE
+                     , B.EMAIL
+                     , B.DONATE_PRICE
+                     , B.PASSWORD
+                     , B.USER_ID
+                     , B.USER_CODE
+                     , B.LOGIN_TYPE
+                     , B.ACTIVATION_STATUS
+                  FROM (SELECT
+                               C.MEMBER_NO
+                             , C.MEMBER_NAME
+                             , C.MEMBER_PHONE
+                             , C.ZIPCODE
+                             , C.ADDRESS
+                             , C.REGIST_DATE
+                             , C.UPDATE_DATE
+                             , C.EMAIL
+                             , C.DONATE_PRICE
+                             , C.PASSWORD
+                             , C.USER_ID
+                             , C.USER_CODE
+                             , C.LOGIN_TYPE
+                             , C.ACTIVATION_STATUS
+                          FROM MEMBER C
+        <where>
+            <if test="searchCondition == 'userId'">
+                C.USER_ID = #{ searchValue }
+            </if>
+            <if test="searchCondition == 'name'">
+                C.MEMBER_NAME LIKE '%' || #{ searchValue } || '%' AND #{searchValue} IS NOT NULL AND LENGTH(#{searchValue}) > 0
+            </if>
+            <if test="searchCondition == 'phone'">
+                C.MEMBER_PHONE LIKE '%' || #{ searchValue } || '%' AND #{searchValue} IS NOT NULL AND LENGTH(#{searchValue}) > 0
+            </if>
+        </where>
+        ORDER BY C.MEMBER_NO
+        ) B
+        <![CDATA[
+                  WHERE ROWNUM <= #{ endRow }
+                  ]]>
+        ) A
+        WHERE A.RNUM >= #{ startRow }
+    </select>
+
+    <select id="findByUserId" resultType="com.gibuhagae.gibuhagae.member.dto.MemberDTO">
+        SELECT
+               MEMBER_NO
+             , MEMBER_NAME
+             , MEMBER_PHONE
+             , ZIPCODE
+             , ADDRESS
+             , REGIST_DATE
+             , UPDATE_DATE
+             , EMAIL
+             , DONATE_PRICE
+             , PASSWORD
+             , USER_ID
+             , USER_CODE
+             , LOGIN_TYPE
+             , ACTIVATION_STATUS
+          FROM MEMBER A
+         WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="insertMember">
+        INSERT
+          INTO MEMBER
+        (
+          MEMBER_NO
+        , MEMBER_NAME
+        , MEMBER_PHONE
+        , ZIPCODE
+        , ADDRESS
+        , REGIST_DATE
+        , UPDATE_DATE
+        , EMAIL
+        , DONATE_PRICE
+        , PASSWORD
+        , USER_ID
+        , USER_CODE
+        , LOGIN_TYPE
+        , ACTIVATION_STATUS
+        )
+        VALUES
+        (
+          SEQ_MEMBER_NO.NEXTVAL
+        , #{name, jdbcType=VARCHAR}
+        , #{phone, jdbcType=VARCHAR}
+        , #{zipcode, jdbcType=VARCHAR}
+        , #{address, jdbcType=VARCHAR}
+        , SYSDATE
+        , SYSDATE
+        , #{email, jdbcType=VARCHAR}
+        , #{donatePrice, jdbcType=VARCHAR}
+        , #{password, jdbcType=VARCHAR}
+        , #{userId, jdbcType=VARCHAR}
+        , #{userCode, jdbcType=VARCHAR}
+        , #{loginType, jdbcType=VARCHAR}
+        , #{ActivationStatus, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="selectMemberByUserId" resultType="string">
+        SELECT
+               USER_ID
+          FROM MEMBER
+         WHERE USER_ID = #{ userId }
+    </select>
+
+    <select id="selectMemberDetail" resultMap="memberResultMap">
+        SELECT
+               A.MEMBER_NO
+             , A.MEMBER_NAME
+             , A.MEMBER_PHONE
+             , A.ZIPCODE
+             , A.ADDRESS
+             , A.REGIST_DATE
+             , A.UPDATE_DATE
+             , A.EMAIL
+             , B.DONATE_PRICE
+             , A.PASSWORD
+             , A.USER_ID
+             , A.USER_CODE
+             , A.LOGIN_TYPE
+             , A.ACTIVATION_STATUS
+          FROM MEMBER A
+         LEFT JOIN ORDER_MANAGEMENT B ON (A.MEMBER_NO = B.MEMBER_NO)
+         WHERE A.MEMBER_NO = #{ no }
+    </select>
+
+<!--    <update id="updateMember">-->
+<!--        UPDATE-->
+<!--               MEMBER-->
+<!--           SET MEMBER_PHONE = #{ phone }-->
+<!--             , ZIPCODE = #{ zipcode }-->
+<!--             , ADDRESS = #{ address }-->
+<!--             , UPDATE_DATE = #{ updateDate }-->
+<!--             , EMAIL = #{ email }-->
+<!--         WHERE ACTIVATION_STATUS = 'Y'-->
+<!--           AND MEMBER_NO = #{ no }-->
+<!--    </update>-->
+
+        <update id="modifyMember" parameterType="com.gibuhagae.gibuhagae.member.dto.MemberDTO">
+            UPDATE
+                   MEMBER
+               SET DONATE_PRICE = #{ donatePrice }
+                  , ACTIVATION_STATUS = #{ activationStatus }
+             WHERE MEMBER_NO = #{ no }
+        </update>
+
+
+        <update id="deleteMember">
+                UPDATE
+                       MEMBER
+                   SET ACTIVATION_STATUS = 'N'
+                 WHERE MEMBER_NO = #{ no }
+        </update>
+
+
+
+
+
+</mapper>
