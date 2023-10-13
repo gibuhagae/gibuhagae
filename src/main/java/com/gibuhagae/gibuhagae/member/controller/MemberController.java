@@ -54,7 +54,7 @@ public class MemberController {
 
         System.out.println("회원가입 버튼 눌렀음.");
 
-        memberService.joinMember(member);
+//        memberService.joinMember(member);
         //rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.join"));
 
         return "redirect:/login/Login";
