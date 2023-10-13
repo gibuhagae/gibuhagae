@@ -1,6 +1,7 @@
 package com.gibuhagae.gibuhagae.board.controller;
 
 import com.gibuhagae.gibuhagae.board.dto.NoticeDTO;
+import com.gibuhagae.gibuhagae.board.dto.QnaDTO;
 import com.gibuhagae.gibuhagae.board.service.BoardService;
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class BoardController {
         return "board/notice";
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/noticeDetail")
     public String getNoticeDetail(@RequestParam Long no, Model model){
 
         NoticeDTO noticeDetail = boardService.selectNoticeDetail(no);
@@ -49,10 +50,11 @@ public class BoardController {
 
         notice.setMemberNo(memberNo);
         boardService.registNotice(notice);
+
         return "redirect:/board/notice";
     }
 
-    @PostMapping("/detail")
+    @PostMapping("/noticeDetail")
     public String updateNotice(@RequestParam("noticeNo") Long noticeNo, @ModelAttribute("notice") NoticeDTO notice) {
 
         boardService.updateNotice(notice);
@@ -72,26 +74,23 @@ public class BoardController {
     @GetMapping("/qna")             // 기본 페이지는 1페이지로
     public String getQna(@RequestParam(defaultValue = "1") int page,
                             Model model){
-        log.info("------111111 : {}", page);
+
         Map<String, Object> qnaListAndPaging = boardService.selectQna(page);
-        log.info("------2222222 : {}", qnaListAndPaging);
-//        model.addAttribute("paging", qnaListAndPaging.get("paging"));
-//        model.addAttribute("qnaList", qnaListAndPaging.get("qnaList"));
+
+        model.addAttribute("paging", qnaListAndPaging.get("paging"));
+        model.addAttribute("qnaList", qnaListAndPaging.get("qnaList"));
 
         return "board/qna";
     }
 
-    
+    @GetMapping("/qnaDetail")
+    public String getQnaDetail(@RequestParam Long no, Model model){
 
-    @GetMapping("/registQna")
-    public String getRegistQna(){
+        QnaDTO qnaDetail = boardService.selectQnaDetail(no);
+        model.addAttribute("qna", qnaDetail);
 
-        return "board/registQna";
+        return "board/qnaDetail";
     }
 
-    @GetMapping("/review")
-    public String getReview(){
 
-        return "board/review";
-    }
 }

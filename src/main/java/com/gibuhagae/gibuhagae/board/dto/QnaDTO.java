@@ -14,6 +14,7 @@ public class QnaDTO {
 
     private int inquiryNo;          //문의번호
     private String inquiryType;     //문의유형
+    private String inquiryTitle;     //문의제목
     private String inquiryContent;  //문의내용
     private Long itemCode;          //상품코드
     private MemberDTO memberNo;     //회원번호

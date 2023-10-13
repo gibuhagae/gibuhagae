@@ -33,20 +33,20 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 /* 요청에 대한 권한 체크 */
-                .authorizeHttpRequests()
-                .antMatchers("/static/css/**", "/js/**", "/images/**").permitAll()
-                .antMatchers("/board/**", "/thumbnail/**", "/member/update", "/member/delete", "/myPage/MyPage").hasRole("MEMBER")
-                /* 위에 서술 된 패턴 외의 요청은 인증 되지 않은 사용자도 요청 허가 */
-                .anyRequest().permitAll()
-                .and()
-                /* 로그인 설정 */
-                .formLogin()
-                .loginPage("/login/Login")
-                .defaultSuccessUrl("/")
-                .failureForwardUrl("/member/loginfail")
-                .usernameParameter("memberId")
-                .passwordParameter("memberPwd")
-                .and()
+//                .authorizeHttpRequests()
+//                .antMatchers("/static/css/**", "/js/**", "/images/**").permitAll()
+//                .antMatchers("/board/**", "/thumbnail/**", "/member/update", "/member/delete", "/myPage/MyPage").hasRole("MEMBER")
+//                /* 위에 서술 된 패턴 외의 요청은 인증 되지 않은 사용자도 요청 허가 */
+//                .anyRequest().permitAll()
+//                .and()
+//                /* 로그인 설정 */
+//                .formLogin()
+//                .loginPage("/login/Login")
+//                .defaultSuccessUrl("/")
+//                .failureForwardUrl("/member/loginfail")
+//                .usernameParameter("memberId")
+//                .passwordParameter("memberPwd")
+//                .and()
                 /* 로그아웃 설정 */
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))

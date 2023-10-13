@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Gibuhagae(notice)</title>
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/board.css" rel="stylesheet" type="text/css">
-    <link href="/css/navigation.css" rel="stylesheet" type="text/css">
+    <link href="/css/board/board.css" rel="stylesheet" type="text/css">
+    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -53,7 +53,7 @@
                         <td><input type="checkbox" name="checkbox"></td>
                         <td th:text="${ notice.status }"></td>
                         <td th:text="${ notice.noticeNo }"></td>
-                        <td th:text="${ notice.noticeTitle }" th:onclick="|location.href='/board/detail?no=${ notice.noticeNo }'|" style="cursor: pointer;"></td>
+                        <td th:text="${ notice.noticeTitle }" th:onclick="|location.href='/board/noticeDetail?no=${ notice.noticeNo }'|" style="cursor: pointer;"></td>
                         <td th:text="${ notice.memberNo.memberName }"></td>
                         <td th:text="${ notice.writeDate }"></td>
                         <td th:text="${ notice.views }"></td>
@@ -129,7 +129,7 @@
                             </tr>
                         </table>
                         <div id="registButton">
-                            <button id="pop-btn-close" type="button" th:onclick="'location.href=\'/board/notice\''">
+                            <button id="pop-btn-close" type="button" >
                                 취소</button>
                             <button type="submit" id="pop-btn-confirm">등록하기</button>
                         </div>

@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gibuhagae(main)</title>
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/main/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/product/product.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/button.js"></script>
+    <script type="text/javascript" src="/js/event.js"></script>
 
 </head>
-
 <body>
-
 <!-- 메인페이지 -->
 <div id="main" class="main">
     <!-- 헤더(로고, 상단 메뉴)-->
@@ -27,15 +23,17 @@
         <div class="main-header-top">
             <div class="header-top-content">
                 <div class="admin-page">
-                    <a href="123">관리자 페이지</a>
+                    <!-- 관리자 로그인시 보일 관리자 버튼 -->
+                    <a href="order/order-new.html">관리자 페이지</a>
                 </div>
+                <!-- 상단 네비 -->
                 <ul class="navigation">
                     <li><a href="11">로그인</a></li>
                     <li><a href="11">/&nbsp;&nbsp;&nbsp;&nbsp;회원가입</a></li>
                     <li><a href="11">배송조회</a></li>
                     <li><a href="11">마이샵</a></li>
                     <li><a href="/board/notice">게시판관리</a></li>
-                    <!------------------------관리자 로그인시 공지사항이 게시판 관리로 변경되어야함 --------------------------->
+                    <!------------------------관리자 로그인 시 게시판 관리 보일 예정 평소에 없음 --------------------------->
                 </ul>
             </div>
         </div>
@@ -129,7 +127,7 @@
         </div>
         <br>
         <!-- 메인 베스트 아이템 영역 -->
-        <div class="main-best-product">
+        <div class="main-best-product" id="mainBestProduct">
             <br>
             <!-- 타이틀 -->
             <div class="best-product-title">
@@ -306,26 +304,96 @@
                 </div>
             </div>
 
-<!-- 로그인 시 생기는 창! 혁이가 만들었음! -->
-<th:block sec:authorize="isAnonymous()">
-    <div>
-        <input type="button" value="로그인" id="login">
-        <input type="button" value="회원가입" id="join">
-    </div>
-</th:block>
-
-
-<th:block sec:authorize="isAuthenticated()">
-    <div>
-        <h3><span sec:authentication="principal.nickname"></span>님의 방문을 환영합니다.</h3>
-        <div>
-            <input type="button" value="마이페이지" id="myPage">
         </div>
     </div>
-</th:block>
+        <div class="PageMoveButton" id="pageMoveButton">
+            <a class="up-logo">▲</a>
+        </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
 
-<h1 align="center">index</h1>
+            const topBtn = document.querySelector(".up-logo");
+            topBtn.onclick = () => {
+                window.scrollTo({ top: 0, behavior: "auto" });
+            };
+        });
+    </script>
+    <br>
+    <br>
+    <br>
+    <!-- footer -->
+    <footer>
+        <div id="footer-area">
+            <div id="footer-main">
+                <div class="footer-logo">
+                    <img src="/images/navigation/menu-logo.png">
+                </div>
+                <div id="footer-icon">
+                    <div>
+                        <img src="/images/main/instagram.png">
+                    </div>
+                    <div>
+                        <img src="/images/main/kakao.png">
+                    </div>
+                    <div>
+                        <img src="/images/main/facebook.png">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    팀: 그루브 펫 가디언즈
+                </div>
+                <div>
+                    사업자 등록 번호 : 000-00-00000
+                </div>
+                <div>
+                    사업자 정보 확인 통신판매업 : 제 2023-서울종로H-1511호
+                </div>
+            </div>
+            <div>
+                <div>
+                    사업장소재지 : 서울특별시 종로구 종로2가 탑골공원
+                </div>
+                <div>
+                    대표번호 : 000-000
+                </div>
+                <div>
+                    이메일 : hihello@gmail.com
+                </div>
+            </div>
+            <div>
+                <p>(주) 야옹아!기부하개는 통신판매 중개자로서 통신판매의 당사자가 아닙니다. 본 상품은 개별판마재 등록 상품으로 상품정보, 거래에 관한 의무와 책임은 각 판매자에게 있습니다.</p>
+            </div>
+            <div>
+                <div>
+                    <img src="/images/main/symbol.png">
+                </div>
+                <div>
+                    2023. 야옹아!기부하개 All rights reserved designed by 야옹아!기부하개
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <!-- 로그인 시 생기는 창! 혁이가 만들었음! -->
+<!--<th:block sec:authorize="isAnonymous()">-->
+<!--    <div>-->
+<!--        <input type="button" value="로그인" id="login">-->
+<!--        <input type="button" value="회원가입" id="join">-->
+<!--    </div>-->
+<!--</th:block>-->
+
+<!--<th:block sec:authorize="isAuthenticated()">-->
+<!--    <div>-->
+<!--        <h3><span sec:authentication="principal.nickname"></span>님의 방문을 환영합니다.</h3>-->
+<!--        <div>-->
+<!--            <input type="button" value="마이페이지" id="myPage">-->
+<!--        </div>-->
+<!-- </div>-->
+<!--</th:block>-->
+
+</div>
 
 <!-- 슬라이드 이동 JS -->
 <script src="/js/main.js"></script>
