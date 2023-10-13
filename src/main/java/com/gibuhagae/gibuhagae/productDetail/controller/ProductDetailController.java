@@ -1,5 +1,6 @@
 package com.gibuhagae.gibuhagae.productDetail.controller;
 
+import com.gibuhagae.gibuhagae.board.dto.NoticeDTO;
 import com.gibuhagae.gibuhagae.board.dto.QnaDTO;
 import com.gibuhagae.gibuhagae.board.service.BoardService;
 import org.springframework.stereotype.Controller;
@@ -29,5 +30,14 @@ public class ProductDetailController {
 
 
         return "productDetail/productDetail";
+    }
+
+    @GetMapping("/productQnaDetail/{no}")
+    public String getProductQnaDetail(@RequestParam Long no, Model model){
+
+        QnaDTO qnaDetail = boardService.selectQnaDetail(no);
+        model.addAttribute("qna", qnaDetail);
+
+        return "board/QnaDetail";
     }
 }

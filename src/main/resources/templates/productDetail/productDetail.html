@@ -53,14 +53,17 @@
             <li><a>|</a></li>
         </ul>
         </div>
-        <div class="pd-container-subImg" id="sunImg">
-            <img src="/images/product/Psub/p-sub1.jpg">
+        <div class="detailInfo showStep" id="sunImg">
+            <div class="content">
+                <img src="/images/product/Psub/p-sub1.jpg">
+            </div>
         </div>
+
         <div class="pd-container-review" id="review">
             <div class="pd-review-title">
                 <a>REVIEW</a>
             </div>
-            <!-- 리뷰 리스트 테이블 -->
+            <!-- 후기 리스트 테이블 -->
             <table class="board-table">
                 <thead>
                 <tr style="border-top: #6C6A6A 2px solid;">
@@ -139,7 +142,7 @@
                 <tr th:each="qna : ${ qnaList }">
                     <td th:text="${ qna.inquiryNo }"></td>
                     <td th:text="${ qna.inquiryType }"></td>
-                    <td th:text="${ qna.inquiryTitle}" th:onclick="|location.href='/board/detail?no=${ qna.inquiryNo }'|" style="cursor: pointer;"></td>
+                    <td th:text="${ qna.inquiryTitle}" th:onclick="|location.href='/board/QnaDetail?no=${ qna.inquiryNo }'|" style="cursor: pointer;"></td>
                     <td th:text="${ qna.memberNo.memberName }"></td>
                     <td th:text="${ qna.writeDate }"></td>
                 </tr>
