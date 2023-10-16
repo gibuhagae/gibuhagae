@@ -1,0 +1,583 @@
+@charset "UTF-8";  /* 인코딩 문자 깨짐 방지 */
+
+html {
+    /* 사용자가 설정한 문자 크기 그대로 반영 될 수 있도록 */
+    font-size: 100%;
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+}
+
+*{
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    color: black;
+    margin: 0;
+}
+
+div {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 상품 페이지 기본 설정 */
+#product {
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+/* 상품 리스트 페이지 */
+
+.product-content {
+    padding-top: 50px;
+}
+
+/* 리스트 내 상품 분류 네비 구역 */
+.product-list-category {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 800;
+    color: #6C6A6A;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-divider {
+    width: 45px;
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+    display: inline-block;
+    align-content: center;
+    opacity: 1;
+    margin-top: 5px;
+}
+
+.product-list-subcategory {
+    display: flex;
+    padding: 50px 300px 0 300px;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.product-list-subcategory a {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 15px;
+}
+
+.product-list-subcategory a:hover {
+    color: rgb(241, 130, 60);
+}
+
+/* 상품 리스트 구역 */
+.product-container {
+    width: 1400px;
+    display: block;
+    margin: 0 auto;
+}
+
+.product-list-top{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+}
+
+.product-list-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 17px;
+    text-align: center;
+}
+
+.product-list-filter {
+    width: 400px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.product-list-filter ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.title-divider1 {
+    margin-bottom: 8px;
+    width: 1400px;
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+}
+
+.title-divider2 {
+    margin-top: 11px;
+    width: 1400px;
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+}
+
+/* 상품 하나하나 */
+.product-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    flex-direction: row;
+    padding-top: 70px;
+}
+
+.pd-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-list {
+    flex-basis: 25%;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-list img {
+    width: 300px;
+    height: 400px;
+}
+
+/* 상품 이미지 하단 정보 구역 */
+.list-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    width: 300px;
+    white-space: nowrap;
+}
+
+.pd-option-info{
+    text-align: left;
+    width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 15px;
+}
+
+.pd-option-info td {
+    padding: 10px 0 10px 0;
+}
+
+.pd-option-info tr{
+    border-bottom: rgba(108, 106, 106, 0.1) 1px solid;
+    padding: 5px 0 5px 0;
+}
+
+
+/* 상품 상세 페이지 */
+#productDetail {
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.productDetail-content {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+    flex-direction: column;
+}
+
+/* 상품 썸네일 및 옵션 선택 구간 */
+.pd-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding-bottom: 100px;
+    border-bottom: rgba(108, 106, 106, 0.3) 1px solid;
+}
+
+.pd-container-thumbnail img {
+    width: 550px;
+    height: 550px;
+}
+
+.pd-container-info {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+    width: 40%;
+    padding: 20px 10px 10px 10px;
+}
+
+.pd-container-price {
+    display: flex;
+    flex-direction: row;
+    width: 35%;
+    justify-content: space-evenly;
+}
+
+.pd-option {
+    padding: 20px 5px 0 5px;
+}
+
+.pd-title-inner {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 18px;
+    padding-bottom: 2px;
+}
+
+.explain {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 13px;
+    padding: 10px 0 20px 0;
+}
+.pd-price-inner {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 18px;
+    padding-bottom: 2px;
+}
+
+.selected-option {
+    margin: 10px 0 10px 0;
+    padding: 10px;
+}
+
+.selected-pd-price {
+    margin: 10px 0 10px 0;
+    padding: 10px;
+}
+
+.pd-buy-button {
+    border-top: rgba(108, 106, 106, 0.1) 1px solid;
+    padding: 20px 0 20px 0;
+}
+
+.pd-buy-button ul {
+    text-align: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.pd-buy-button li {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #6C6A6A;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 20px 0 20px 0;
+    border-radius: 3px;
+}
+
+#pdOption {
+    border: rgba(0, 0, 0, 0.8);
+    border-radius: 2px;
+    appearance: auto;
+}
+
+/* 컨테이너 내 이동 구간 */
+.pd-container-nav {
+    display: flex;
+    justify-content: center;
+}
+
+
+ul.pd-container-navnav {
+    display: flex;
+    width: 23%;
+    justify-content: space-evenly;
+    padding: 100px 0 50px 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #6C6A6A;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+/* 상세 설명 구간 */
+.detailInfo {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 후기 구간 */
+.pd-container-review {
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+    padding: 30px 0 70px 0;
+    /* width: 80%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pd-review-title {
+    padding: 30px 0 60px 0;
+}
+
+.pd-review-title a {
+    border-bottom: #6C6A6A 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 25px;
+}
+
+table.board-table {
+    width: 70%;
+}
+
+/* 후기 작성하기 버튼 */
+.write-btn {
+    background-color: lightgray;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    position: relative;
+    left: 500px;
+    top: 30px;
+}
+
+/* 문의 구간 */
+.pd-container-qna {
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+    padding: 30px 0 70px 0;
+    /* width: 80%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pd-container-qna {
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+}
+
+.pd-qna-title {
+    padding: 30px 0 60px 0;
+}
+
+.pd-qna-title a {
+    border-bottom: #6C6A6A 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 25px;
+}
+
+/* 페이지 최상단으로 올라가기 버튼 */
+#pageMoveButton {
+    display: none;
+}
+
+.up-logo, .up-logo a, .down-logo, .down-logo a{
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    opacity: .5;
+    font-size: 25px;
+    text-align: center;
+}
+
+
+/* 후기 등록 모달 */
+
+#popup, #popup1{
+    background-color:rgba(0,0,0,.3);
+    justify-content:center; /* 수평 중앙정렬 */
+    align-items:center;     /* 수직 중앙정렬 */
+    position:fixed;          /* 포지션 픽스, 화면이 스크롤되더라도 고정되기 위함 */
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display: none;
+    padding:15px;
+}
+
+.popup{
+    width:65%;
+    border-radius:10px;
+    overflow:hidden;
+    background-color: #ffffff;
+    box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+
+}
+
+.popup-head{
+    width:100%;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    color: #6C6A6A;
+    font-size: 36px;
+    border-bottom: rgba(108, 106, 106, 0.2) 2px solid;
+}
+
+.popup-body{
+    width:100%;
+    background-color:#ffffff;
+}
+.body-content{
+    width:100%;
+    padding-top:10px;
+}
+.body-titlebox{
+    text-align:center;
+    padding: 20px;
+}
+.body-contentbox{
+    word-break:break-word;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* 문의 모달 */
+/* 문의 유형 선택 */
+select#select {
+    border: lightgray 1px solid;
+    padding: 5px;
+    appearance: auto;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 18px;
+}
+
+#registForm td, #registForm th {
+    padding-right: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 20px;
+}
+
+#registForm1 td, #registForm1 th {
+    padding-right: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 20px;
+}
+
+#registForm input, textarea {
+    border: lightgray 1px solid;
+    margin-top: 10px;
+    padding: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: rgba(108, 106, 106, 1);
+    font-size: 18px;
+}
+
+#registForm1 input, textarea {
+    border: lightgray 1px solid;
+    margin-top: 10px;
+    padding: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: rgba(108, 106, 106, 1);
+    font-size: 18px;
+}
+
+#registButton, #registButton1{
+    width: 90%;
+    text-align: right;
+    margin: 25px;
+}
+
+#registButton button, #registButton1 button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+    padding: 10px;
+    width: 105px;
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+
+
+
+/* footer */
+#footer-area {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+
+#footer-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+#footer-icon {
+    display: flex;
+    gap: 50px;
+}
+
+#footer-area > div:nth-child(2) {
+    display: grid;
+    justify-content: left;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#footer-area > div:nth-child(3) {
+    display: grid;
+    justify-content: left;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#footer-area > div:nth-child(5) {
+    display: flex;
+    justify-content: left;
+    gap: 40px;
+}
+
+#footer-area > div:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+#footer-area > div:nth-child(3) {
+    margin-bottom: 25px;
+}
+
+#footer-area > div:nth-child(3), #footer-area > div:nth-child(2) {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+#footer-area > div:first-child {
+    margin-bottom: 20px;
+}

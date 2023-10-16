@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>관리자 페이지 - 상품 관리</title>
+
+    <!-- 뷰 포트  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 외부 스타일 시트 -->
+    <link rel="stylesheet" href="/css/admin-nav.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin-product.css" type="text/css">
+
+    <!-- Noto Sans Korean 글씨체 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap"
+          rel="stylesheet">
+
+    <!--jquery 라이브러리-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+<!-- 관리자페이지 nav 메뉴 -->
+<div th:replace="/common/admin-nav.html"></div>
+
+<div class="admin-contents">
+    <div class="admin-contents-title">상품 정보</div>
+    <div align="center" class="admin-contents-List-table">
+        <table id="memberList" width="95%">
+            <colgroup>
+                <col width="15%">
+                <col width="25%">
+                <col width="20%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
+            </colgroup>
+            <thead class="admin-list-table-head">
+            <tr>
+                <th>상품 코드</th>
+                <th>상품명</th>
+                <th>카테고리</th>
+                <th>수량</th>
+                <th>판매 상태</th>
+            </tr>
+            </thead>
+            <tbody class="admin-list-table-contents">
+            <tr id="table-each-tr" th:each="p, iterStat : ${productList}">
+                <td class=list-contents id="detailModalNeed" th:text="${p.itemCode}"></td>
+                <td class=list-contents th:text="${p.itemName}"></td>
+                <td class=list-contents th:text="${p.category.categoryName}"></td>
+                <td class=list-contents th:text="${p.totalCount}"></td>
+                <td class=list-contents th:text="${p.saleStatus}"></td>
+                <td>
+                    <button id="modalBtn" th:index="${iterStat.index}" onclick="showModal(this.getAttribute('index'))">
+                        상세 정보
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 페이징 처리 -->
+    <div id="paging" align="center" style="margin-bottom: 20px">
+
+        <th:block
+                th:if="${ paging.searchCondition != null and (paging.searchValue != null && !paging.searchValue.isEmpty()) }">
+            <!-- 맨 앞으로 이동 -->
+            <button class="paging-button"
+                    th:onclick="'location.href=\'/productManagement/product-admin?page=1&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">
+                &lt;&lt;
+            </button>
+
+            <!-- 이전 페이지로 이동 -->
+            <button class="paging-button"
+                    th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${paging.page - 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+                    th:disabled="${ paging.page <= 1 }">&lt;
+            </button>
+
+            <!-- 숫자 버튼 -->
+            <th:block
+                    th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+                <button class="paging-button"
+                        th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${page}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+                        th:text="${ page }" th:disabled="${ paging.page eq page }">
+                </button>
+            </th:block>
+
+            <!-- 다음 페이지로 이동 -->
+            <button class="paging-button"
+                    th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${paging.page + 1}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''"
+                    th:disabled="${ paging.page >= paging.maxPage }">>
+            </button>
+
+            <!-- 맨 끝으로 이동 -->
+            <button class="paging-button"
+                    th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${paging.maxPage}} + '&searchCondition=' + @{${paging.searchCondition}} + '&searchValue=' + @{${paging.searchValue}} + '\''">
+                >>
+            </button>
+
+        </th:block>
+
+        <th:block
+                th:if="${ (paging.searchCondition != null && paging.searchValue == '') || paging.searchCondition == null }">
+            <!-- 맨 앞으로 이동 -->
+            <button class="paging-button" th:onclick="'location.href=\'/productManagement/product-admin?page=1\''">&lt;&lt;</button>
+
+            <!-- 이전 페이지로 이동 -->
+            <button class="paging-button"
+                    th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${paging.page - 1}} + '\''"
+                    th:disabled="${ paging.page <= 1 }">&lt;
+            </button>
+
+            <!-- 숫자 버튼 -->
+            <th:block
+                    th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+                <button class="paging-button"
+                        th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${page}} + '\''"
+                        th:text="${ page }" th:disabled="${ paging.page eq page }">
+                </button>
+            </th:block>
+
+            <!-- 다음 페이지로 이동 -->
+            <button class="paging-button"
+                    th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${paging.page + 1}} + '\''"
+                    th:disabled="${ paging.page >= paging.maxPage }">>
+            </button>
+
+            <!-- 맨 끝으로 이동 -->
+            <button class="paging-button"
+                    th:onclick="'location.href=\'/productManagement/product-admin?page=' + @{${paging.maxPage}} + '\''">
+                >>
+            </button>
+        </th:block>
+    </div>
+
+    <!--페이지 하단 버튼 (추가, 삭제, 검색)-->
+
+    <!-- 추가 버튼 모달 => memberInsertModal.html -->
+    <div class="bottom-part">
+        <button class="action-button addbtn" id="addbtn-admin">추가</button>
+
+        <script>
+            if(document.getElementById("addbtn-admin")) {
+                const $registItem = document.getElementById("addbtn-admin");
+                $registItem.onclick = function() {
+                    location.href = "/productManagement/regist";
+                }
+            }
+        </script>
+        <div th:replace="/productManagement/productInsertModal.html"></div>
+
+        <!--검색 버튼-->
+        <div class="search-form" align="right" style="margin-right: 35px;">
+            <form id="searchForm" action="/productManagement/product-admin">
+                <select name="searchCondition" id="searchCondition" class="search-select">
+                    <option value="category" th:selected="${ paging.searchCondition eq 'category'}">카테고리명</option>
+                    <option value="itemCode" th:selected="${ paging.searchCondition eq 'itemCode'}">상품코드</option>
+                    <option value="itemName" th:selected="${ paging.searchCondition eq 'itemName'}">상품명</option>
+                </select>
+                <input type="search" id="searchValue" name="searchValue" class="input-search-content"
+                       th:value=" ${ paging.searchValue }">
+                <button type="submit" class="action-button">조회</button>
+            </form>
+        </div>
+
+        <!--        <script>-->
+        <!--            document.getElementById("searchCondition").addEventListener("change", function() {-->
+        <!--                var isItemCode = this.value === "itemCode";-->
+        <!--                var searchValueField = document.getElementById("searchValue");-->
+
+        <!--                searchValueField.addEventListener("input", function() {-->
+        <!--                    if (isItemCode && isNaN(this.value)) {-->
+        <!--                        this.value = "";-->
+        <!--                    }-->
+        <!--                });-->
+        <!--            });-->
+        <!--        </script>-->
+    </div>
+</div>
+
+</body>
+</html>

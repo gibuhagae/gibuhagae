@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gibuhagae(notice)</title>
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/board/board.css" rel="stylesheet" type="text/css">
+    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/board.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div class="notice" id="board">
+    <!-- 헤더(로고, 상단 메뉴)-->
+    <div th:replace="/common/board/navigation"></div>
+
+    <!-- 게시판 내용 리스트 영역 -->
+    <div class="board-content">
+        <div class="board-title">
+            NOTICE<br>
+            <hr class="title-divider">
+        </div>
+        <div class="board-container">
+            <select id="select1">
+                <option value="selected" selected>선택하기</option>
+                <option value="Y">활성</option>
+                <option value="N">비활성</option>
+            </select>
+            <br>
+            <div class="board-body">
+                <div class="board-tab">
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/notice'|">NOTICE
+                    </button>
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/qna'|">Q&A</button>
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/review'|">REVIEW
+                    </button>
+                </div>
+                <!-- 공지 리스트 테이블 -->
+                <table class="board-table">
+                    <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
+                        <th class="th7" style="width: 50px">상태</th>
+                        <th class="th2" style="width: 50px">글번호</th>
+                        <th class="th3" style="width: 300px">제목</th>
+                        <th class="th4" style="width: 60px">작성자</th>
+                        <th class="th5" style="width: 150px">작성일</th>
+                        <th class="th6" style="width: 50px">조회</th>
+                    </tr>
+                    <tr th:each="notice : ${ noticeList }" >
+                        <td th:text="${ notice.status }"></td>
+                        <td th:text="${ notice.noticeNo }"></td>
+                        <td th:text="${ notice.noticeTitle }" th:onclick="|location.href='/board/noticeDetail?no=${ notice.noticeNo }'|" style="cursor: pointer;"></td>
+                        <td th:text="${ notice.memberNo.memberName }"></td>
+                        <td th:text="${ notice.writeDate }"></td>
+                        <td th:text="${ notice.views }"></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- 페이징 바 -->
+            <div id="paging" align="center" style="margin-top: 20px;">
+                <th:block>
+                    <!-- 맨 앞으로 이동 -->
+                    <button th:onclick="'location.href=\'/board/notice?page=1\''">&lt;&lt;</button>
+
+                    <!-- 이전 페이지로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/notice?page=' + @{${paging.page - 1}} + '\''"
+                            th:disabled="${ paging.page <= 1 }">&lt;</button>
+
+                    <!-- 숫자 버튼 -->
+                    <th:block
+                            th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+                        <button
+                                th:onclick="'location.href=\'/board/notice?page=' + @{${page}} + '\''"
+                                th:text="${ page }" th:disabled="${ paging.page eq page }">
+                        </button>
+                    </th:block>
+
+                    <!-- 다음 페이지로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/notice?page=' + @{${paging.page + 1}} + '\''"
+                            th:disabled="${ paging.page >= paging.maxPage }">></button>
+
+                    <!-- 맨 끝으로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/notice?page=' + @{${paging.maxPage}} + '\''">>></button>
+                </th:block>
+            </div>
+            <div class="board-button">
+                <button type="button" id="modal-open">작성하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 공지등록 modal -->
+<!-- //모달을 감쌀 박스 -->
+<div class="popup-wrap" id="popup">
+    <!--실질적 모달팝업 -->
+    <div class="popup">
+        <!-- 로고 영역 -->
+        <div class="popup-head">
+            <span class="head-title">게시판 관리</span>
+        </div>
+        <div class="popup-body">
+            <!--컨텐츠 영역 -->
+            <div class="body-content">
+                <div class="body-titlebox">
+                    <h1>공지 등록</h1>
+                </div>
+                <div class="body-contentbox">
+                    <form id="registForm" action="/board/notice" method="post">
+                        <table>
+                            <tr>
+                                <td>제목</td>
+                                <td colspan="3"><input type="text" name="noticeTitle" placeholder="&nbsp;&nbsp;제목을 입력해주세요." style="width: 600px;" ></td>
+                            </tr>
+                            <tr>
+                                <td>내용</td>
+                                <td colspan="3">
+                                    <textarea name="noticeContent" placeholder="&nbsp;&nbsp;내용을 입력해주세요." cols="80" rows="15" style="resize: none;"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="registButton">
+                            <button id="pop-btn-close" type="button" th:onclick="'location.href=\'/board/notice\''">
+                                취소</button>
+                            <button type="submit" id="pop-btn-confirm">등록하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<form action="/basket/regist" method="post">
+    <div class="cart-detail" th:each="productDetail : ${productDetail}">
+    <div><input class="item-checkbox" type="checkbox" name="check-item"></div>
+                             <div>
+                             <img class="cart-item-img" th:src="${productDetail.imgSrc}">
+
+                             </div>
+                             <div class="cart-item-title" colspan="2" th:text="${productDetail.productManagementList.itemName}"></div>
+                                <input id="itemCode" type="hidden" name="optionDetailCode.productManagementList.itemCode" th:value="${productDetail.productManagementList.itemCode}">
+                             <div>
+                                 <div class="cart-item-option" th:text="${productDetail.optionName}"></div>
+                                 <input id="optionCode" type="hidden" name="optionDetailCode.optionCode" th:value="${productDetail.optionCode}">
+                             </div>
+                             <div>
+                                 <div class="cart-quantity-wrap">
+                                     <input id="count" name="optionDetailCode.count" class="cart-quantity-input" type="number" th:value="${productDetail.count}">
+
+                                     <div class="btn-wrap">
+                                         <button type="button" class="plus-btn">+</button>
+                                         <button type="button" class="minus-btn">-</button>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div>
+                                 <div class="cart-price" th:text="${productDetail.salePrice}"></div>
+                             </div>
+                             <div>
+                                 <div class="cart-dicount-price">-</div>
+                             </div>
+                             <div>
+                                 <div class="shipping-price">-</div>
+                             </div>
+                             <div>
+                                 <div><button class="remove-btn" type="button">삭제</button></div>
+                             </div>
+
+            <button type="button" class="tocart" onclick="addBasket()">장바구니추가</button>
+    </div>
+</form>
+<script>
+
+    const $tocart = document.getElementsByClassName('tocart');
+    const $cartImg = document.getElementsByClassName('cart-item-img');
+    const $cartItemTitle = document.getElementsByClassName('cart-item-title');
+    const $itemCode = document.getElementById('itemCode').value;
+    const $optionCode = document.getElementById('optionCode').value;
+    const $optionName = document.getElementsByClassName('cart-item-option');
+    const $count = document.getElementById('count').value;
+    const $price = document.getElementsByClassName('cart-price');
+
+    function addBasket() {
+        const basket = {
+            // "itemImg": $cartImg,
+            // "itemName": $cartItemTitle,
+            itemCode: $itemCode,
+            // "optionName": $optionName,
+            optionCode: $optionCode,
+            count: $count
+            // "price": $price
+        }
+        fetch("/basket/regist", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify(basket)
+        })
+            .then(result => result.text())
+            .then(result => {
+                alert(result);
+                if (result === "실패") {
+                    alert("장바구니에 이미 있습니다.");
+                } else if (result === "성공"){
+                    console.log(basket);
+                    alert("장바구니에 담았습니다.")
+
+                }
+                location.reload();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+
+    // let plusBtn = document.getElementsByClassName('plus-btn');
+    // let minusBtn = document.getElementsByClassName('minus-btn');
+    //
+    // plusBtn.addEventListener('click' , () => {
+    //     let quantityUp = document.getElementsByClassName('cart-quantity-input');
+    //     quantityUp.value = parseInt(quantityInput.value) + 1;
+    //
+    // });
+    //
+    // minusBtn.addEventListener('click', () => {
+    //     let quantityDown = document.getElementsByClassName('cart-quantity-input');
+    //     let currentValue = parseInt(quantityDown.value);
+    //     if (currentValue > 1) {
+    //         quantityInput.value = currentValue - 1;
+    //     }
+    // });
+
+
+</script>
+</body>
+</html>

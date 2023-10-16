@@ -5,105 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gibuhagae(productList)</title>
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/product.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/button.js"></script>
+    <link href="/css/product/product.css" rel="stylesheet" type="text/css">
+    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 <!--상품 리스트 페이지 -->
 <div class="product" id="product">
-    <!-- 메인 제외한 다른 페이지에서 사용 될 헤더 -->
-    <div class="other-header">
-        <div class="other-header-content">
-            <div class="other-nav-left">
-                <div class="other-header-logo">
-                    <a href="/">
-                    <img src="/images/navigation/menu-logo.png">
-                    </a>
-                </div>
-                <div class="search">
-                    <s_search>
-                        <fieldset>
-                            <input type="text" name="search" value="" placeholder="검색어를 입력하세요."
-                                   onkeypress="if(event.keyCode == 13){  }">
-                            <button type="button" onclick=""></button>
-                        </fieldset>
-                    </s_search>
-                </div>
-            </div>
-            <div class="other-nav-right">
-                <div class="other-nav">
-                    <ul class="nav-mypage">
-                        <img src="/images/navigation/마이페이지.png">
-                        <li><a href="44">마이페이지</a></li>
-                    </ul>
-                    <ul class="nav-delivery">
-                        <img src="/images/navigation/배송.png">
-                        <li><a href="44">배송조회</a></li>
-                    </ul>
-                    <ul class="nav-cart">
-                        <img src="/images/navigation/장바구니.png">
-                        <li><a href="44">장바구니</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- 카테고리 메뉴 -->
-        <div class="category-nav-content" id="category">
-            <ul class="category-nav">
-                <li><a href="22">반려동물</a>
-                    <ul>
-                        <li><a href="33">반려견</a></li>
-                        <li><a href="33">반려묘</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">간식</a>
-                    <ul>
-                        <li><a href="33">강아지껌</a></li>
-                        <li><a href="33">수제간식</a></li>
-                        <li><a href="33">캔/파우치</a></li>
-                        <li><a href="33">고양이간식</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">사료</a>
-                    <ul>
-                        <li><a href="33">퍼피(1세 미만)</a></li>
-                        <li><a href="33">어덜트(1~7세)</a></li>
-                        <li><a href="33">시니어(7세 이상)</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">미용용품</a>
-                    <ul>
-                        <li><a href="33">드라이기/발톱관리용품</a></li>
-                        <li><a href="33">샴푸/린스</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">패션용품</a>
-                    <ul>
-                        <li><a href="33">일반의류</a></li>
-                        <li><a href="33">코스튬</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">위생용품</a>
-                    <ul>
-                        <li><a href="33">기저귀/배변용품</a></li>
-                        <li><a href="33">눈/귀 위생용품</a></li>
-                        <li><a href="33">넥카라</a></li>
-                        <li><a href="33">고양이 화장실/모래</a></li>
-                    </ul>
-                </li>
-                <li><a href="22">장난감/훈련용품</a>
-                    <ul>
-                        <li><a href="33">강아지 장난감</a></li>
-                        <li><a href="33">고양이 장난감</a></li>
-                        <li><a href="33">캣타워</a></li>
-                        <li><a href="33">훈련용품</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!-- 헤더(로고, 상단 메뉴)-->
+    <div th:replace="/common/board/navigation"></div>
+    <!-- 상품 리스트 영역 -->
     <div class="product-content">
+        <!-- 상품 리스트 네비게이션 -->
         <div class="product-list-nav">
             <div class="product-list-category">
                 간식
@@ -130,12 +46,14 @@
         <br>
         <br>
         <br>
+        <!-- 상품 리스트 컨테이너 -->
         <div class="product-container">
             <hr class="title-divider1">
             <div class="product-list-top">
                 <div class="product-list-title">
                     PRODUCT LIST
                 </div>
+                <!-- 필터링 구역 -->
                 <div class="product-list-filter">
                     <ul>
                         <li class="filter">
@@ -157,111 +75,239 @@
                 </div>
             </div>
             <hr class="title-divider2">
+            <!-- 상품 리스트 이미지들 -->
             <div class="product-list-wrapper">
                 <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/1.jpg">
+                    <a href="/productDetail/productDetail">
+                        <img src="/images/product/Pmain/p-main1.jpg">
+                        <div class="list-info-wrapper">
+                            <span class="pd-title" style="font-size: 18px; padding-bottom: 5px; border-bottom: rgba(108,106,106,0.3) 1px solid">러비더비 젤리타입 치킨비프 24EA 반려동물식품</span>
+                            <div class="pd-price" style="padding-top: 5px;">
+                             <span class="product-discount" style="padding-right: 4px;">
+                                 <span style="color: #d55050;">30</span>
+                                 <span style="color: #d55050;">🠗</span>
+                             </span>
+                                <span class="discount-price" style="font-weight: 800; padding-right: 4px;">57,000원</span>
+                                <span class="price">
+                                 <span style="text-decoration: line-through; color: #6C6A6A; font-size: 18px;">83,000원</span>
+                             </span>
+                            </div>
+                        </div>
                     </a>
                 </div>
                 <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/2.jpg">
+                    <a href="/productDetail/productDetail?no=${ item.itemCode }">
+                        <img src="/images/product/Pmain/p-main1.jpg">
+                        <div class="list-info-wrapper">
+                            <span class="pd-title" style="font-size: 18px; padding-bottom: 5px; border-bottom: rgba(108,106,106,0.3) 1px solid">러비더비 젤리타입 치킨비프 24EA 반려동물식품</span>
+                            <div class="pd-price" style="padding-top: 5px;">
+                             <span class="product-discount" style="padding-right: 4px;">
+                                 <span style="color: #d55050;">30</span>
+                                 <span style="color: #d55050;">🠗</span>
+                             </span>
+                                <span class="discount-price" style="font-weight: 800; padding-right: 4px;">57,000원</span>
+                                <span class="price">
+                                 <span style="text-decoration: line-through; color: #6C6A6A; font-size: 18px;">83,000원</span>
+                             </span>
+                            </div>
+                        </div>
                     </a>
                 </div>
                 <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/3.jpg">
+                    <a href="/productDetail/productDetail">
+                        <img src="/images/product/Pmain/p-main1.jpg">
+                        <div class="list-info-wrapper">
+                            <span class="pd-title" style="font-size: 18px; padding-bottom: 5px; border-bottom: rgba(108,106,106,0.3) 1px solid">러비더비 젤리타입 치킨비프 24EA 반려동물식품</span>
+                            <div class="pd-price" style="padding-top: 5px;">
+                             <span class="product-discount" style="padding-right: 4px;">
+                                 <span style="color: #d55050;">30</span>
+                                 <span style="color: #d55050;">🠗</span>
+                             </span>
+                                <span class="discount-price" style="font-weight: 800; padding-right: 4px;">57,000원</span>
+                                <span class="price">
+                                 <span style="text-decoration: line-through; color: #6C6A6A; font-size: 18px;">83,000원</span>
+                             </span>
+                            </div>
+                        </div>
                     </a>
                 </div>
                 <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/4.jpg">
+                    <a href="/productDetail/productDetail">
+                        <img src="/images/product/Pmain/p-main1.jpg">
+                        <div class="list-info-wrapper">
+                            <span class="pd-title" style="font-size: 18px; padding-bottom: 5px; border-bottom: rgba(108,106,106,0.3) 1px solid">러비더비 젤리타입 치킨비프 24EA 반려동물식품</span>
+                            <div class="pd-price" style="padding-top: 5px;">
+                             <span class="product-discount" style="padding-right: 4px;">
+                                 <span style="color: #d55050;">30</span>
+                                 <span style="color: #d55050;">🠗</span>
+                             </span>
+                                <span class="discount-price" style="font-weight: 800; padding-right: 4px;">57,000원</span>
+                                <span class="price">
+                                 <span style="text-decoration: line-through; color: #6C6A6A; font-size: 18px;">83,000원</span>
+                             </span>
+                            </div>
+                        </div>
                     </a>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/5.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/6.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/7.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/8.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/9.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/10.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/11.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-list">
                     <a href="123">
                         <img src="/images/main/12.jpg">
                     </a>
+                    <div class="list-info-wrapper">
+                        <div class="product-title">
+                            <span>
+                                상품 이름이름이름 입니다.
+                            </span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-price">
+                                37,200원
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/13.jpg">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/14.jpg">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/15.jpg">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/16.jpg">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/17.jpg">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/18.jpg">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/19.jpg">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <a href="123">
-                        <img src="/images/main/20.jpg">
-                    </a>
-                </div>
-        </div>
+           </div>
         </div>
     </div>
+    <div class="PageMoveButton" id="pageMoveButton">
+        <a class="up-logo" style="margin-bottom: 40px">▲</a>
+        <a class="down-logo">▼</a>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const topBtn = document.querySelector(".up-logo");
 
+            topBtn.onclick = () => {
+                window.scrollTo({ top: 0, behavior: "auto" });
+            };
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            const topBtn = document.querySelector(".down-logo");
+
+            topBtn.onclick = () => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: "auto" });
+            };
+        });
+    </script>
     <!-- footer -->
     <footer>
         <div id="footer-area">

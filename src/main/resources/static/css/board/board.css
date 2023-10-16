@@ -1,0 +1,355 @@
+@charset "UTF-8";  /* 인코딩 문자 깨짐 방지 */
+
+html {
+    /* 사용자가 설정한 문자 크기 그대로 반영 될 수 있도록 */
+    font-size: 100%;
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+}
+
+*{
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    color: black;
+    margin: 0;
+}
+
+div {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* board 페이지 기본 설정 */
+#board {
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+
+/* 게시판 제목 */
+.board-title {
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 800;
+    color: rgba(108, 106, 106, 0.7);
+    font-size: 25px;
+}
+
+.title-divider {
+    width: 100px;
+    border-top: rgba(108, 106, 106, 0.3) 1px solid;
+    display: inline-block;
+    align-content: center;
+    opacity: 1;
+}
+
+
+.board-content {
+    margin: 100px auto 0 auto;
+    width: 100%;
+}
+
+.board-container {
+    width: 80%;
+    margin: 70px auto 0 auto;
+}
+
+.board-body {
+    display: flex;
+}
+
+/* 좌측 게시판 네비 탭 */
+.board-tab {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    top: 35px;
+}
+
+.board-tab button {
+    width: 95px;
+    background-color: rgba(211, 211, 211, 0.5);
+    margin-bottom: 30px;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    color: #6C6A6A;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.board-btn:hover {
+    background-color: rgba(255, 127, 80, 0.7);
+}
+
+/* 게시글 필터링  드롭다운 리스트 */
+#select1 {
+    left: 1180px;
+    bottom: 30px;
+    border: #6C6A6A 1px solid;
+    padding: 0 5px 0 5px;
+    border-radius: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 17px;
+    appearance: auto;
+    position: relative;
+}
+
+/* 게시글 테이블 영역 */
+.board-table {
+    margin: 0 auto;
+    border-spacing: 80px 20px;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.board-table th {
+    padding: 5px;
+    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+.board-table td {
+    padding: 8px;
+    border-bottom: rgba(108, 106, 106, 0.7) 1px solid;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 15px;
+    text-align: center;
+}
+
+.board-page-nav {
+    margin: 0 auto;
+    border-spacing: 80px 20px;
+    width: 70%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.board-page-nav table {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #6C6A6A;
+    font-size: 15px;
+    text-align: center;
+    margin: 30px auto 0 auto;
+    width:30%;
+    border-collapse: collapse;
+}
+
+.board-page-nav tr {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.board-button {
+    margin: 30px auto 0 auto;
+    width: 85%;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+.board-button button {
+    width: 8%;
+    border: rgba(0, 0, 0, 0.5) 1px solid;
+    border-radius: 10px;
+    margin-left: 15px;
+    padding: 3px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+}
+
+.board-button button:hover {
+    background-color: rgba(255, 127, 80, 0.6);
+}
+
+
+/* Q&A 관련 구역 */
+.qna-content {
+    padding: 100px 30px 50px 30px;
+}
+
+
+/* 공지 등록 모달 */
+
+#popup{
+    background-color:rgba(0,0,0,.3);
+/*배경색과 투명도로 살짝 어둡지만 투명한 배경*/
+/*허공에 붕 떠있는 느낌을 주고 싶으면 안넣어도 무방*/
+    justify-content:center; /* 수평 중앙정렬 */
+    align-items:center;     /* 수직 중앙정렬 */
+    position:fixed;          /* 포지션 픽스, 화면이 스크롤되더라도 고정되기 위함 */
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;               /* 모든 방향에 0을 주면 화면에 꽉차게 됩니다. */
+    display: none;
+/*이벤트가 발생할 때 띄우기 위해 숨김*/
+/*처음부터 보이게 하는 상황이라면 display:flex;*/
+    padding:15px;
+/*반응형의 경우 padding이 없으면 박스가 화면에 붙어서 안이뻐짐*/
+}
+
+.popup{
+    width:65%;               /*반응형 이기 때문에 가로값은 100*/
+    border-radius:10px;       /*둥글둥글한 디자인을 위해 각을 없앱니다.*/
+    overflow:hidden;          /* 각을 없앴을 때 내부 영역이 튀어나오는걸 방지*/
+    background-color: #ffffff; /*배경색*/
+    /*//팝업이 허공에 떠있는 듯한 느낌을 주기 위한 그림자 효과.*/
+    box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+
+}
+
+.popup-head{
+    width:100%;
+/*부모요소를 따라가기 때문에 굳이 가로값을 주지 않아도 되지만 일부 ie에서 인식 못하는 문제가 있음*/
+    height:70px;   /*헤드 영역 높이*/
+    display:flex; /*로고 이미지나 텍스트를 중앙 정렬하기 위한 flex 및 정렬*/
+    align-items:center;
+    justify-content:center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    color: #6C6A6A;
+    font-size: 36px;
+    border-bottom: rgba(108, 106, 106, 0.2) 2px solid;
+}
+
+.popup-body{
+    width:100%;
+    background-color:#ffffff;
+}
+.body-content{
+    width:100%;
+    padding-top:10px;
+}
+.body-titlebox{
+    text-align:center;
+    padding: 20px;
+}
+.body-contentbox{
+    word-break:break-word;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/*.regist-title {*/
+/*    text-align: center;*/
+/*    font-family: 'Noto Sans KR', sans-serif;*/
+/*    font-weight: 800;*/
+/*    color: #6C6A6A;*/
+/*    font-size: 40px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+
+#registForm td {
+    width: 13%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 20px;
+    padding-right: 15px;
+}
+
+#registForm input, textarea {
+    border: lightgray 1px solid;
+    margin-top: 10px;
+    padding: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: rgba(108, 106, 106, 1);
+    font-size: 18px;
+}
+
+#registButton {
+    width: 90%;
+    text-align: right;
+    margin: 25px;
+}
+
+#registButton button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+    padding: 10px;
+    width: 105px;
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+/* 게시글 세부내용 창 */
+#detailForm {
+    width: 100%;
+    padding-right: 100px;
+    padding-left: 100px;
+}
+.detailForm {
+    width: 80%;
+    margin: auto;
+}
+
+.detailForm tr{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 20px;
+}
+
+.detailForm th {
+    background-color: rgba(108, 106, 106, 0.1);
+}
+
+.detailForm td {
+    padding: 2px 15px 2px 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 20px;
+}
+
+.detailForm textarea {
+   width: 100%;
+   height: 100%;
+   font-family: 'Noto Sans KR', sans-serif;
+   font-weight: 400;
+   color: #6C6A6A;
+   font-size: 18px;
+
+}
+
+.detailForm button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: rgb(108, 106, 106);
+    font-size: 20px;
+    padding: 10px;
+    width: 105px;
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-top: 30px;
+}

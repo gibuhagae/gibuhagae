@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gibuhagae(board)</title>
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/board/board.css" rel="stylesheet" type="text/css">
+    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+</head>
+<body>
+<div class="review" id="board">
+    <!-- 헤더(로고, 상단 메뉴)-->
+    <div th:replace="/common/board/navigation"></div>
+    <!-- 게시판 내용 리스트 영역 -->
+    <div class="board-content">
+        <div class="board-title">
+            REVIEW<br>
+            <hr class="title-divider">
+        </div>
+        <div class="board-container">
+            <select id="select1">
+                <option value="selected" selected>선택하기</option>
+                <option value="Y">활성</option>
+                <option value="N">비활성</option>
+            </select>
+            <br>
+            <div class="board-body">
+                <div class="board-tab">
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/notice'|">NOTICE
+                    </button>
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/qna'|">Q&A</button>
+                    <button type="button" class="board-btn" th:onclick="|location.href='/board/review'|">REVIEW
+                    </button>
+                </div>
+                <!-- 리뷰 리스트 테이블 -->
+                <table class="board-table">
+                    <thead>
+                    <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
+                        <th class="th7" style="width: 40px;">상태</th>
+                        <th class="th2" style="width: 50px;">글번호</th>
+                        <th class="th9" style="width: 150px">상품이름</th>
+                        <th class="th3" style="width: 300px;">제목</th>
+                        <th class="th4" style="width: 60px;">작성자</th>
+                        <th class="th5" style="width: 150px;">작성일</th>
+                        <th class="th6" style="width: 50px;">평점</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="review : ${ reviewList}">
+                        <td th:text="${ review.showStatus}"></td>
+                        <td th:text="${ review.reviewNo }"></td>
+                        <td th:text="${ review.itemCode.itemName }"></td>
+                        <td th:text="${ review.reviewTitle }"></td>
+                        <td th:text="${ review.memberNo.memberName }"></td>
+                        <td th:text="${ review.registDate }"></td>
+                        <td th:text="${ review.grade }"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 페이지 네비게이션 -->
+            <div id="paging" align="center" style="margin-top: 20px;">
+                <th:block>
+                    <!-- 맨 앞으로 이동 -->
+                    <button th:onclick="'location.href=\'/board/review?page=1\''">&lt;&lt;</button>
+
+                    <!-- 이전 페이지로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/review?page=' + @{${paging.page - 1}} + '\''"
+                            th:disabled="${ paging.page <= 1 }">&lt;</button>
+
+                    <!-- 숫자 버튼 -->
+                    <th:block
+                            th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+                        <button
+                                th:onclick="'location.href=\'/board/review?page=' + @{${page}} + '\''"
+                                th:text="${ page }" th:disabled="${ paging.page eq page }">
+                        </button>
+                    </th:block>
+
+                    <!-- 다음 페이지로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/review?page=' + @{${paging.page + 1}} + '\''"
+                            th:disabled="${ paging.page >= paging.maxPage }">></button>
+
+                    <!-- 맨 끝으로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/review?page=' + @{${paging.maxPage}} + '\''">>></button>
+                </th:block>
+            </div>
+            <div class="board-button">
+                <button type="button" class="delete">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
