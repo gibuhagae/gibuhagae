@@ -1,266 +1,540 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/basket.css" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/x-icon" href="/images/icons8-pug-48.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="/css/checkout/basket/basket.css" rel="stylesheet" type="text/css">
+    <link href="/images/icons8-pug-48.png" rel="icon" type="image/x-icon">
     <!-- <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css"> -->
     <title>basket</title>
+    <!--    <script src="/js/checkout/basket/basket.js" type="text/javascript"></script>-->
 </head>
 <body>
-    <div id="progress-wrap">
-        <div id="progress-cart">
-            <div class="cart-wrap">
-                <div class="img-wrap" id="cart-img-wrap"><img src="/images/solar-cart-outline.png">
-                </div>
-                <div><p>장바구니</p></div>
+<div id="progress-wrap">
+    <div id="progress-cart">
+        <div class="cart-wrap">
+            <div class="img-wrap" id="cart-img-wrap"><img src="/images/solar-cart-outline.png">
             </div>
-            <div class="cart-wrap">
-                <img src="/images/line.png">
+            <div><p>장바구니</p></div>
+        </div>
+        <div class="cart-wrap">
+            <img src="/images/line.png">
+        </div>
+        <div class="cart-wrap">
+            <div class="img-wrap"><img src="/images/fluent-payment-24-regular.png">
             </div>
-            <div class="cart-wrap">
-                <div class="img-wrap"><img src="/images/fluent-payment-24-regular.png">
-                </div>
-                <div><p>주문/결제</p></div>
+            <div><p>주문/결제</p></div>
+        </div>
+        <div><img src="/images/line.png"></div>
+        <div class="cart-wrap">
+            <div class="img-wrap"><img src="/images/group.png">
             </div>
-            <div><img src="/images/line.png"></div>
-            <div class="cart-wrap">
-                <div class="img-wrap"><img src="/images/group.png">
-                </div>
-                <div><p>주문 완료</p></div>
+            <div><p>주문 완료</p></div>
+        </div>
+    </div>
+</div>
+<section>
+    <div id="table-wrap">
+        <table id="table">
+            <thead>
+            <tr id="head">
+                <th colspan="2">
+                    <h2>장바구니</h2><br>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody id="tbody">
+            <tr id="name-bar">
+                <td><input id="select-all" name="check-item" type="checkbox"></td>
+                <td>
+                    <p>이미지</p>
+                </td>
+                <td colspan="2">
+                    <p>상품 정보</p>
+                </td>
+                <td>
+                    <p>옵션</p>
+                </td>
+                <td>
+                    <p>수량</p>
+                </td>
+                <td>
+                    <p>상품금액</p>
+                </td>
+                <td>
+                    <p>할인금액</p>
+                </td>
+                <td>
+                    <p>배송비</p>
+                </td>
+                <td></td>
+            </tr>
+            <tbody class="cart-items">
+            <tr class="cart-detail" th:each="cart : ${basket}">
+                <td>
+                    <input class="item-checkbox" name="check-item" type="checkbox">
+                </td>
+                <td>
+                    <img class="cart-item-img" th:src="${cart.optionDetailCode.imgSrc}">
+                </td>
+                <td class="cart-item-title" colspan="2"
+                    th:text="${cart.optionDetailCode.productManagementList.itemName}"></td>
+                <td>
+                    <div class="cart-item-option" th:text="${cart.optionDetailCode.optionName}"></div>
+                </td>
+                <td>
+                    <div class="cart-quantity-wrap">
+                        <input id="cart-quantity-input" th:value="${cart.count}" type="number" onchange="quantityChanged(event)">
+                        <div class="btn-wrap">
+                            <button class="plus-btn" onclick="plusClicked(event)">+
+                                <input type="hidden" th:value="${cart.basketNo}" id="plusBtn">
+                            </button>
+                            <button name class="minus-btn" onclick="minusClicked(event)">-
+                                <input type="hidden" th:value="${cart.basketNo}" id="minusBtn">
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div id="cart-price" th:text="${cart.optionDetailCode.salePrice}">
+                    </div>
+                </td>
+                <td>
+                    <div class="cart-dicount-price">-</div>
+                </td>
+                <td>
+                    <div class="hasShippingPrice"></div>
+                </td>
+                <td>
+                    <div>
+                        <button class="remove-btn" type="submit" onclick="selectDel(event)">삭제
+                            <input type="hidden" id="removeBtn" th:value="${cart.basketNo}">
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="total-price">
+            <div id="price-area">
+                <span>상품구매금액</span>
+                <span class="cart-item-price"></span>
+                <span> </span>
+                <span id="plus">
+                        <img src="/images/plus-symbol-button.png">
+                        <span class="sr-only">더하기</span>
+                    </span>
+                <span>배송비</span>
+                <span class="total-shipping-price1"></span>
+                <span id="equal">
+                        <img src="/images/equal-mathematical-sign.png">
+                        <span class="sr-only">는</span>
+                    </span>
+                <span id="cart-total-price"></span>
             </div>
         </div>
     </div>
-    <section>
-        <div id="table-wrap">
-            <table>
-                <thead>
-                <tr id="head">
-                    <th><h2>장바구니</h2><br></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr id="name-bar">
-                    <td><span>전체(<em>0</em>)</span></td><td><input type="checkbox" name="check-item"></td><td><p>이미지</p></td><td><p>상품 정보</p></td><td><p>수량</p></td><td><p>상품구매금액</p></td><td><p>할인금액</p></td><td><p>적립금</p></td><td><p>배송비</p></td>
-                </tr>
-                <tr class="cart-detail">
-                    <td><em>0</em></td>
-                    <td><input type="checkbox" name="check-item"></td>
-                    <td><a href=""><img src="/images/image-3.jpg"></a></td>
-                    <td><div><a href="">특수견 15kg 영양사료</a></div></td>
-                    <td><span><select><option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">5+</option>
-            </select></span></td>
-                    <td><div data-sale-price="46,700">46,700</div></td>
-                    <td><div data-discount-price="10,200">10,200</div></td>
-                    <td><div data-discount-price="10,200">-</div></td>
-                    <td><div data-discount-price="10,200"><span>무료</span></div></td>
-                </tr>
-                </tr>
-                <tr class="cart-detail">
-                    <td><em>0</em></td>
-                    <td><input type="checkbox" name="check-item"></td>
-                    <td><a href=""><img src="/images/image-2.jpg"></a></td>
-                    <td><div><a href="">라오네스 반려동물 하네스</a></div></td>
-                    <td><span><select><option value="1" selected>1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">5+</option>
-        </select></span></td>
-                    <td><div data-sale-price="20,200">20,200</div></td>
-                    <td><div data-discount-price="-">-</div></td>
-                    <td><div data-discount-price="10,200">-</div></td>
-                    <td><div data-discount-price="10,200"><span>무료</span></div></td>
-                </tr>
-                </tbody>
-            </table>
-            <div id="total-price">
-                <div id="price-area">
-                    <span>상품구매금액</span>
-                    <em>66,900</em>
-                    <span> </span>
-                    <span id="plus">
+    <div id="clear-wrapper">
+        <div id="clear-area">
+            <button id="clear-button" type="submit" onclick="clearCart()">
+                <input type="hidden" id="clearCart" th:value="${memberNo}">
+                <img src="/images/clearcart.png">
+                <p class="message" id="throw">장바구니비우기</p>
+            </button>
+        </div>
+    </div>
+    <div id="order-text">
+        <div id="order-area">
+            <div>
+                <img src="/images/formkit-won.jpg">
+            </div>
+            <div>
+                <p class="text-message">총 상품금액</p>
+            </div>
+            <div>
+                <p class="text-message">|</p>
+            </div>
+            <div>
+                <p class="text-message">총 배송비</p>
+            </div>
+            <div>
+                <p class="text-message">|</p>
+            </div>
+            <div>
+                <p class="text-message">결제예정금액</p>
+            </div>
+        </div>
+    </div>
+    <div id="order-amount">
+        <div id="amount-area">
+            <div id="amount-area-left">
+                <div id="cart-item-price">
+                </div>
+                <div>
+                    원
+                </div>
+                <div>
                     <img src="/images/plus-symbol-button.png">
-                    <span class="sr-only">더하기</span>
-                </span>
-                    <span>배송비</span>
-                    <em>0</em>
-                    <span id="equal">
+                </div>
+                <div class="total-shipping-price2">
+                </div>
+                <div>
+                    원
+                </div>
+                <div>
                     <img src="/images/equal-mathematical-sign.png">
-                    <span class="sr-only">는</span>
-                </span>
-                    <em>66,900</em>
+                </div>
+                <div class="cart-total-price">
+                </div>
+                <div>
+                    원
+                </div>
+            </div>
+            <div id="amount-area-right">
+                <div id="second-child">
+                    <img src="/images/orderbyselect.png">
+                    <button class="purchase-btn" type="submit">
+                        구매하기
+                    </button>
                 </div>
             </div>
         </div>
-        <div id="clear-wrapper">
-            <div id="clear-area">
+    </div>
+    <div id="condition-cart">
+        <div id="condition-cart-left">
+            <div id="cart-img-area">
+                <img src="/images/whitecart.png">
+            </div>
+        </div>
+        <div id="condition-cart-right">
+            <div>
                 <div>
-                    <div>
-                        <img src="/images/group.jpg">
-                    </div>
-                    <div><p class="message">선택상품을</p></div>
+                    <img src="/images/material-symbols-info-outline.png">
+                </div>
+                <div>
+                    장바구니 이용안내
+                </div>
+            </div>
+            <div>
+                1. lorem ipsum
+            </div>
+            <div>
+                2. lorem ipsum
+            </div>
+            <div>
+                3. lorem ipsum
+            </div>
+            <div>
+                4. lorem ipsum
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div id="footer-area">
+            <div id="footer-main">
+                <div>
 
-                    <div><p class="message">|</p></div>
-                    <div><img src="/images/iconoir-xbox-x.jpg"></div>
-                    <div><p class="message">삭제하기</p>
+                </div>
+                <div id="footer-icon">
+                    <div>
+                        <img src="/images/mdi-instagram.png">
+                    </div>
+                    <div>
+                        <img src="/images/simple-icons-kakaotalk.png">
+                    </div>
+                    <div>
+                        <img src="/images/mdi-facebook.png">
                     </div>
                 </div>
+            </div>
+            <div>
                 <div>
-                    <a href=""><div><img src="/images/clearcart.png"><p class="message" id="throw">장바구니비우기</p>
-                    </div></a>
+                    팀: 그루브 가디언즈
+                </div>
+                <div>
+                    사업자 등록 번호 : 000-00-00000
+                </div>
+                <div>
+                    사업자 정보 확인 통신판매업 : 제 2023-서울종로H-1511호
+                </div>
+            </div>
+            <div>
+                <div>
+                    사업장소재지 : 서울특별시 종로구 종로2가 탑골공원
+                </div>
+                <div>
+                    대표번호 : 000-000
+                </div>
+                <div>
+                    이메일 : hihello@gmail.com
+                </div>
+            </div>
+            <div>
+                <p>(주) 야옹아!기부하개는 통신판매 중개자로서 통신판매의 당사자가 아닙니다. 본 상품은 개별판마재 등록 상품으로 상품정보, 거래에 관한 의무와 책임은 각 판매자에게 있습니다.</p>
+            </div>
+            <div>
+                <div>
+                    <img src="/images/icon-park-outline-symbol.png">
+                </div>
+                <div>
+                    2023. 야옹아!기부하개 All rights reserved designed by 야옹아!기부하개
                 </div>
             </div>
         </div>
-        <div id="order-text">
-            <div id="order-area">
-                <div>
-                    <img src="/images/formkit-won.jpg">
-                </div>
-                <div><p class="text-message">총 상품금액</p></div>
-                <div><p class="text-message">|</p></div>
-                <div><p class="text-message">총 배송비</p></div>
-                <div><p class="text-message">|</p></div>
-                <div><p class="text-message">결제예정금액</p></div>
-            </div>
-        </div>
-        <div id="order-amount">
-            <div id="amount-area">
-                <div id="amount-area-left">
-                    <div>
-                        66,900
-                    </div>
-                    <div>
-                        원
-                    </div>
-                    <div>
-                        <img src="/images/plus-symbol-button.png">
-                    </div>
-                    <div>
-                        0
-                    </div>
-                    <div>
-                        원
-                    </div>
-                    <div>
-                        <img src="/images/equal-mathematical-sign.png">
-                    </div>
-                    <div>
-                        66,900
-                    </div>
-                    <div>
-                        원
-                    </div>
-                </div>
-                <div id="amount-area-right">
-                    <a href=""><div id="first-child">
-                        <div>
-                            <img src="/images/vectorcheck.png">
-                        </div>
-                        <div>
-                            전체주문
-                        </div>
-                    </div></a>
-                    <a href=""><div id="second-child">
-                        <div>
-                            <img src="/images/orderbyselect.png">
-                        </div>
-                        <div>
-                            선택주문
-                        </div>
-                    </div></a>
-                </div>
-            </div>
-        </div>
-        <div id="condition-cart">
-            <div id="condition-cart-left">
-                <div id="cart-img-area">
-                    <img src="/images/whitecart.png">
-                </div>
-            </div>
-            <div id="condition-cart-right">
-                <div>
-                    <div>
-                        <img src="/images/material-symbols-info-outline.png">
-                    </div>
-                    <div>
-                        장바구니 이용안내
-                    </div>
-                </div>
-                <div>
-                    1. lorem ipsum
-                </div>
-                <div>
-                    2. lorem ipsum
-                </div>
-                <div>
-                    3. lorem ipsum
-                </div>
-                <div>
-                    4. lorem ipsum
-                </div>
-            </div>
-        </div>
-        <footer>
-            <div id="footer-area">
-                <div id="footer-main">
-                    <div>
+    </footer>
+</section>
+<script>
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ready)
+    } else {
+        ready();
+    }
 
-                    </div>
-                    <div id="footer-icon">
-                        <div>
-                            <img src="/images/mdi-instagram.png">
-                        </div>
-                        <div>
-                            <img src="/images/simple-icons-kakaotalk.png">
-                        </div>
-                        <div>
-                            <img src="/images/mdi-facebook.png">
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        팀: 그루브 가디언즈
-                    </div>
-                    <div>
-                        사업자 등록 번호 : 000-00-00000
-                    </div>
-                    <div>
-                        사업자 정보 확인 통신판매업 : 제 2023-서울종로H-1511호
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        사업장소재지 : 서울특별시 종로구 종로2가 탑골공원
-                    </div>
-                    <div>
-                        대표번호 : 000-000
-                    </div>
-                    <div>
-                        이메일 : hihello@gmail.com
-                    </div>
-                </div>
-                <div>
-                    <p>(주) 야옹아!기부하개는 통신판매 중개자로서 통신판매의 당사자가 아닙니다. 본 상품은 개별판마재 등록 상품으로 상품정보, 거래에 관한 의무와 책임은 각 판매자에게 있습니다.</p>
-                </div>
-                <div>
-                    <div>
-                        <img src="/images/icon-park-outline-symbol.png">
-                    </div>
-                    <div>
-                        2023. 야옹아!기부하개 All rights reserved designed by 야옹아!기부하개
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </section>
+    function ready() {
+
+        initializeCheckbox();
+
+        handleCheckboxEvents();
+
+        // updatePrice();
+
+        updateCartTotal();
+    }
+
+    function initializeCheckbox() {
+        let seletAll = document.getElementById('select-all');
+        let eachBox = document.getElementsByClassName('item-checkbox');
+        seletAll.checked = true;
+        for (let i = 0; i < eachBox.length; i++) {
+
+            eachBox[i].checked = true;
+        }
+    }
+
+    function handleCheckboxEvents() {
+        let seletAll = document.getElementById('select-all');
+        let eachBox = document.getElementsByClassName('item-checkbox');
+
+        seletAll.addEventListener('click', () => {
+
+            for (let i = 0; i < eachBox.length; i++) {
+                eachBox[i].checked = seletAll.checked;
+            }
+            updateCartTotal();
+        });
+
+        for (let i = 0; i < eachBox.length; i++) {
+            eachBox[i].addEventListener('click', () => {
+
+                count = 0;
+
+                for (let i = 0; i < eachBox.length; i++) {
+                    if (eachBox[i].checked == true) {
+                        count++;
+                    }
+                }
+
+                if (eachBox.length == count) {
+                    seletAll.checked = true;
+                } else {
+                    seletAll.checked = false;
+                }
+                updateCartTotal();
+            });
+        }
+    }
+
+    // 수량 증가 버튼 클릭 시 실행될 함수
+    function plusClicked(event) {
+        let button = event.target;
+        let plusBtn = button.parentElement.querySelector('#plusBtn').value;
+        // let optionCode = button.parentElement.querySelector('#optionCode').value;
+
+        console.log(plusBtn);
+        // console.log(optionCode);}&optionCode=${optionCode}
+        fetch(`/quantity/plus?basketNo=${plusBtn}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                "basketNo": plusBtn
+                // "itemCode": itemCode,
+                // "optionCode": optionCode
+            })
+        })
+            .then(result => result.text())
+            .then(result => {
+                updateCartTotal(result);
+                location.reload();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    function minusClicked(event) {
+        let button = event.target;
+        let minusBtn = button.parentElement.querySelector('#minusBtn').value;
+        let quantityInput = button.parentElement.parentElement.querySelector('#cart-quantity-input');
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            console.log(minusBtn);
+            // console.log(optionCode);}&optionCode=${optionCode}
+            fetch(`/quantity/minus?basketNo=${minusBtn}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    "basketNo": minusBtn
+                    // "itemCode": itemCode,
+                    // "optionCode": optionCode
+                })
+            })
+                .then(result => result.text())
+                .then(result => {
+                    updateCartTotal(result);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+        else {
+            quantityInput.value = 1;
+        }
+
+
+    }
+
+    // function quantityChanged(event) {
+    //     let button = event.target;
+    //     let qtyChanged = button.parentElement.parentElement.querySelector('#cart-quantity-input');
+    //     console.log(qtyChanged);
+    //     let quantity = parseInt(qtyChanged.value);
+    //     if (quantity > 1) {
+    //
+    //         fetch(`/quantity/changed`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json; charset=UTF-8'
+    //             },
+    //             body: JSON.stringify({
+    //                 "basketNo": qtyChanged,
+    //                 "count": quantity
+    //             })
+    //         })
+    //             .then(result => result.text())
+    //             .then(result => {
+    //
+    //                 updatePrice(result);
+    //                 location.reload();
+    //             })
+    //             .catch(error => {
+    //                 console.log(error);
+    //             });
+    //     } else {
+    //         qtyChanged.value = 1;
+    //     }
+    // }
+
+    function selectDel(event) {
+        let button = event.target;
+        let selectBtn = button.parentElement.querySelector('#removeBtn').value;
+
+        console.log(selectBtn);
+
+        fetch(`/select/button?basketNo=${selectBtn}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                "basketNo": selectBtn
+                // "itemCode": itemCode,
+                // "optionCode": optionCode
+            })
+        })
+            .then(result => result.text())
+            .then(result => {
+
+                updateCartTotal(result);
+                location.reload();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    function clearCart() {
+
+        let memberNo = document.getElementById("clearCart").value;
+
+        console.log(memberNo);
+        // console.log(optionCode);}&optionCode=${optionCode}
+        fetch(`/clear/cart?memberNo=${memberNo}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                "memberNo": memberNo
+            })
+        })
+            .then(result => result.text())
+            .then(result => {
+
+                updateCartTotal(result);
+                location.reload();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    // 장바구니 총 가격을 업데이트하는 함수
+    function updateCartTotal() {
+
+        let cartRows = document.getElementsByClassName("cart-detail");
+        itemsPrice = 0;
+        shippingPrice = 0;
+
+        for (let i = 0; i < cartRows.length; i++) {
+
+            let cartRow = cartRows[i];
+            let checkbox = cartRow.querySelector(".item-checkbox");
+            let count = parseInt(cartRow.querySelector("#cart-quantity-input").value);
+            let price = parseInt(cartRow.querySelector("#cart-price").innerText);
+
+            if (checkbox.checked) {
+
+                itemsPrice += price * count;
+
+                if (itemsPrice >= 30000) {
+
+                    shippingPrice = 3000;
+
+                }
+            }
+        }
+        let totalPrice = itemsPrice + shippingPrice;
+        let originItemsPrice = itemsPrice.toLocaleString();
+        let originTotalPrice = totalPrice.toLocaleString();
+
+        console.log(shippingPrice)
+
+        document.querySelector('.cart-item-price').innerText = originItemsPrice;
+        document.querySelector('#cart-item-price').innerText = originItemsPrice;
+        document.querySelector("#cart-total-price").innerText = originTotalPrice + "원";
+        document.querySelector(".cart-total-price").innerText = originTotalPrice;
+        document.querySelector(".total-shipping-price1").innerText = shippingPrice;
+        document.querySelector(".total-shipping-price2").innerText = shippingPrice;
+
+        }
+
+
+</script>
 </body>
 </html>

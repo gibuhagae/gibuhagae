@@ -201,9 +201,19 @@ thead th {
     text-align: left;
 }
 
-tbody tr:first-child {
+#tbody tr:first-child {
     height: 35px;
     text-align: center;
+}
+
+#select-all {
+    width: 17px;
+    height: 17px;
+}
+
+.item-checkbox {
+    width: 17px;
+    height: 17px;
 }
 
 td {
@@ -211,8 +221,70 @@ td {
     text-align: center;
 }
 
-tbody tr:not(:first-child) {
+td:first-child {
+    border-left: none;
+}
+
+td:last-child {
+    border-right: none;
+
+}
+
+#tbody tr:not(:first-child) {
     height: 80px;
+}
+
+.cart-quantity-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#cart-quantity-input {
+    display: flex;
+    width: 30px;
+    height: 21px;
+    border: 1px solid #ececec;
+    text-align: center;
+    background: #fff;
+}
+
+/*input[type='number'] 화살표 없애기*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox  */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+.btn-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.plus-btn, .minus-btn {
+    cursor: pointer;
+}
+
+.remove-btn {
+    cursor: pointer;
+}
+
+.cart-item-amount-wrap {
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.cart-item-amount {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 #total-price {
@@ -259,23 +331,23 @@ tbody tr:not(:first-child) {
     margin: 0 auto;
     /* padding: 20px; */
     margin-top: 20px;
-    border: 0.5px solid black;
+    /* border: 0.5px solid black; */
 }
 
 #clear-area {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 20px;
     padding-top: 35px;
 }
 
-#clear-area div {
+#clear-area button {
     display: flex;
     gap: 10px;
 }
 
-.message {
-    line-height: 30px;
+#clear-button {
+    cursor: pointer;
 }
 
 #throw {
@@ -288,13 +360,15 @@ tbody tr:not(:first-child) {
     height: 30px;
 }
 
-#clear-area > div:nth-child(2) {
+#clear-area button {
     border: 1px solid;
     border-radius: 50px;
     width: 180px;
     display: flex;
     justify-content: center;
     background: lightgray;
+    height: 40px;
+    align-items: center;
 }
 
 #order-text {
@@ -353,10 +427,10 @@ tbody tr:not(:first-child) {
     display: flex;
     gap: 30px;
     align-items: center;
-
+    position: relative;
 }
 
-#amount-area-right > a > div {
+#second-child {
     display: flex;
     gap: 10px;
     width: 180px;
@@ -365,28 +439,28 @@ tbody tr:not(:first-child) {
     align-items: center;
     padding-left: 20px;
     border-radius: 5px;
-}
-
-#first-child {
-    background: rgba(144, 238, 144, 1);
-}
-
-#second-child {
     background-color: #A9A9A9;
 }
 
-#first-child > div:first-child {
-    border: 1px solid black;
+#second-child img{
     width: 26px;
     height: 26px;
-    border-radius: 50px;
     padding: 2px 0 0 2px;
 }
 
-#second-child > div:first-child > img{
-    width: 26px;
-    height: 26px;
-    padding: 2px 0 0 2px;
+.purchase-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: 0;
+    background-color: transparent;
+    font-size: 1.2em;
 }
 
 #condition-cart {

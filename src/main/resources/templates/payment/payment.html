@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/payment.css" rel="stylesheet" type="text/css">
+    <link href="/css/checkout/payment/payment.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/x-icon" href="/images/icons8-pug-48.png">
     <!-- <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css"> -->
     <title>payment</title>
-    <script type="text/javascript" src="/js/payment.js"></script>
+    <script type="text/javascript" src="/js/checkout/payment/payment.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- 아임포트 라이브러리 -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
 <div id="wrap">
@@ -68,7 +72,7 @@
                     </div>
                     <div id="zip-code">
                         <input id="zip-code-write" type="text" placeholder="우편번호">
-                        <button id="search-addr">주소검색</button>
+                        <button id="search-addr" >주소검색</button>
                     </div>
 
                     <input id="addr1" type="text" placeholder="기본주소">
@@ -220,96 +224,96 @@
                 </div>
             </div>
         </div>
-        <div id="check-payment">
-            <div id="payment-method">
-                <div>결제수단</div>
-            </div>
-            <div id="payment-card">
-                <input id="paymethod1" name="select-pay" type="radio">
-                <label for="paymethod1">
-                    <img src="/images/ico_card.gif">
-                </label>
-            </div>
-            <div id="payment-acount">
-                <input id="paymethod2" name="select-pay" type="radio">
-                <label for="paymethod2">
-                    <img src="/images/ico_realtime.gif">
-                </label>
-            </div>
-        </div>
-        <div id="paycard-info">
-            <div id="select-card">
-                <div id="select-card-name">
-                    <div>카드선택</div>
-                    <div><img src="/images/bg_required.png"></div>
-                </div>
-                <div>
-                    <select>
-                        <option value="selected" selected>선택해주세요.</option>
-                        <option value="card1">삼성카드</option>
-                        <option value="card2">신한카드</option>
-                        <option value="card3">KB국민카드</option>
-                        <option value="card4">현대카드</option>
-                    </select>
-                </div>
-            </div>
-            <div id="installment-period">
-                <div id="period-name">
-                    <div>할부기간</div>
-                    <div><img src="/images/bg_required.png"></div>
-                </div>
-                <div>
-                    <select>
-                        <option value="selected" selected>일시불</option>
-                        <option value="period1">2개월</option>
-                        <option value="period1">3개월</option>
-                        <option value="period1">6개월</option>
-                        <option value="period1">12개월</option>
-                    </select>
-                </div>
-            </div>
-            <div id="pay-info">
-                <div id="pay-info-name">
-                    <div>결제안내</div>
-                    <div><img src="/images/bg_required.png"></div>
-                </div>
-                <div>
-                    <div id="type1"><a href="">안심클릭안내</a></div>
-                    <div id="type2"><a href="">안전결제(ISP)안내</a></div>
-                </div>
-            </div>
-            <div class="pay-footer">
-                <input id="save-payment1" type="checkbox">
-                <label for="save-payment1">결제수단 입력정보를 다음에도 사용</label>
-            </div>
-        </div>
-        <div id="realtime-payment">
-            <div id="acount-wrap">
-                <div id="acount-name">
-                    <div>예금주명</div>
-                    <div><img src="/images/bg_required.png"></div>
-                </div>
-                <input id="receiptment-name" type="text" placeholder="이름을 입력하세요.">
-            </div>
-            <div id="receipt-check">
-                <div>현금영수증</div>
-                <div><img src="/images/bg_required.png"></div>
-            </div>
-            <div id="receipt-button">
-                <div id="receipt-left">
-                    <input id="check-receipt" value="O" name="realtime-receipt" type="radio" checked>
-                    <label for="check-receipt">현금영수증 신청</label>
-                </div>
-                <div id="receipt-right">
-                    <input id="uncheck-receipt" value="N" name="realtime-receipt" type="radio">
-                    <label for="uncheck-receipt">신청안함</label>
-                </div>
-            </div>
-            <div class="pay-footer">
-                <input id="save-payment2" type="checkbox">
-                <label for="save-payment2">결제수단 입력정보를 다음에도 사용</label>
-            </div>
-        </div>
+<!--        <div id="check-payment">-->
+<!--            <div id="payment-method">-->
+<!--                <div>결제수단</div>-->
+<!--            </div>-->
+<!--            <div id="payment-card">-->
+<!--                <input id="paymethod1" name="select-pay" type="radio">-->
+<!--                <label for="paymethod1">-->
+<!--                    <img src="/images/ico_card.gif">-->
+<!--                </label>-->
+<!--            </div>-->
+<!--            <div id="payment-acount">-->
+<!--                <input id="paymethod2" name="select-pay" type="radio">-->
+<!--                <label for="paymethod2">-->
+<!--                    <img src="/images/ico_realtime.gif">-->
+<!--                </label>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div id="paycard-info">-->
+<!--            <div id="select-card">-->
+<!--                <div id="select-card-name">-->
+<!--                    <div>카드선택</div>-->
+<!--                    <div><img src="/images/bg_required.png"></div>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <select>-->
+<!--                        <option value="selected" selected>선택해주세요.</option>-->
+<!--                        <option value="card1">삼성카드</option>-->
+<!--                        <option value="card2">신한카드</option>-->
+<!--                        <option value="card3">KB국민카드</option>-->
+<!--                        <option value="card4">현대카드</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div id="installment-period">-->
+<!--                <div id="period-name">-->
+<!--                    <div>할부기간</div>-->
+<!--                    <div><img src="/images/bg_required.png"></div>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <select>-->
+<!--                        <option value="selected" selected>일시불</option>-->
+<!--                        <option value="period1">2개월</option>-->
+<!--                        <option value="period1">3개월</option>-->
+<!--                        <option value="period1">6개월</option>-->
+<!--                        <option value="period1">12개월</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div id="pay-info">-->
+<!--                <div id="pay-info-name">-->
+<!--                    <div>결제안내</div>-->
+<!--                    <div><img src="/images/bg_required.png"></div>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <div id="type1"><a href="">안심클릭안내</a></div>-->
+<!--                    <div id="type2"><a href="">안전결제(ISP)안내</a></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="pay-footer">-->
+<!--                <input id="save-payment1" type="checkbox">-->
+<!--                <label for="save-payment1">결제수단 입력정보를 다음에도 사용</label>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div id="realtime-payment">-->
+<!--            <div id="acount-wrap">-->
+<!--                <div id="acount-name">-->
+<!--                    <div>예금주명</div>-->
+<!--                    <div><img src="/images/bg_required.png"></div>-->
+<!--                </div>-->
+<!--                <input id="receiptment-name" type="text" placeholder="이름을 입력하세요.">-->
+<!--            </div>-->
+<!--            <div id="receipt-check">-->
+<!--                <div>현금영수증</div>-->
+<!--                <div><img src="/images/bg_required.png"></div>-->
+<!--            </div>-->
+<!--            <div id="receipt-button">-->
+<!--                <div id="receipt-left">-->
+<!--                    <input id="check-receipt" value="O" name="realtime-receipt" type="radio" checked>-->
+<!--                    <label for="check-receipt">현금영수증 신청</label>-->
+<!--                </div>-->
+<!--                <div id="receipt-right">-->
+<!--                    <input id="uncheck-receipt" value="N" name="realtime-receipt" type="radio">-->
+<!--                    <label for="uncheck-receipt">신청안함</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="pay-footer">-->
+<!--                <input id="save-payment2" type="checkbox">-->
+<!--                <label for="save-payment2">결제수단 입력정보를 다음에도 사용</label>-->
+<!--            </div>-->
+<!--        </div>-->
         <div id="reward-amount">
             <div>적립 혜택</div>
             <div><em>1,000</em>원 예정</div>
@@ -350,12 +354,43 @@
         </div>
         <div>
             <div id="order-confirm">
-                <button type="button" id="confirm-all">
+                <button type="button" id="confirm-all" onclick="requestPay()">
                     <em>66,900</em>원 결제하기
                 </button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function requestPay() {
+        console.log("h1");
+        var IMP = window.IMP;
+        IMP.init("imp22625430"); // 예: imp00000000
+        console.log("h2");
+        // IMP.request_pay(param, callback) 결제창 호출
+        IMP.request_pay({ // param
+
+            pg: "kakaopay.TC0ONETIME",
+            pay_method: "card",
+            merchant_uid: "6453543",
+            name: "홍길동",
+            amount: 100,
+            buyer_email: "gildong@gmail.com",
+            buyer_name: "홍길동",
+            buyer_tel: "010-4242-4242",
+            buyer_addr: "서울특별시 강남구 신사동",
+            buyer_postcode: "01181"
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                // 결제 성공 시 로직
+                // alert("결제성공")
+            } else {
+                // 결제 실패 시 로직
+                // alert("결제실패")
+            }
+        });
+        console.log("h3");
+    }
+</script>
 </body>
 </html>
