@@ -62,13 +62,13 @@ public class BoardController {
         return "redirect:/board/notice";
     }
 
-//    @DeleteMapping("/detail")
-//    public String deleteNotice(Long no){
-//
-//        boardService.deleteNotice(no);
-//
-//        return "redirect:/board/notice";
-//    }
+    @GetMapping("/detail")
+    public String deleteNotice(Long no){
+
+        boardService.deleteNotice(no);
+
+        return "redirect:/board/notice";
+    }
 
 
     @GetMapping("/qna")             // 기본 페이지는 1페이지로
@@ -91,6 +91,28 @@ public class BoardController {
 
         return "board/qnaDetail";
     }
+
+    @PostMapping("/qna")
+    public String registQna(QnaDTO qna, @AuthenticationPrincipal MemberDTO memberNo){
+
+        qna.setMemberNo(memberNo);
+        boardService.registQna(qna);
+
+        return "redirect:/productDetail/productDetail#qna";
+    }
+
+@GetMapping("/review")             // 기본 페이지는 1페이지로
+public String getReview(@RequestParam(defaultValue = "1") int page,
+                     Model model){
+
+    Map<String, Object> reviewListAndPaging = boardService.selectReview(page);
+
+    model.addAttribute("paging", reviewListAndPaging.get("paging"));
+    model.addAttribute("reviewList", reviewListAndPaging.get("reviewList"));
+
+    return "board/review";
+}
+
 
 
 }

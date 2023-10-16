@@ -15,3 +15,15 @@ $(function(){
         $("#popup1").fadeOut();
     }
 });
+
+// 문의하기 유형 선택
+//     document.getElementById('select').addEventListener('change', function() {
+//     var selectedValue = document.getElementById('select').value;
+//     if (selectedValue === '1') {
+//     document.getElementById('inquiryTypeInput').value = '상품문의';
+// } else if (selectedValue === '2') {
+//     document.getElementById('inquiryTypeInput').value = '기타문의';
+// } else {
+//     document.getElementById('inquiryTypeInput').value = '';
+// }
+// });

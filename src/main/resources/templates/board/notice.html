@@ -41,16 +41,14 @@
                 <!-- 공지 리스트 테이블 -->
                 <table class="board-table">
                     <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
-                        <th class="th1"></th>
-                        <th class="th7">상태</th>
-                        <th class="th2">글번호</th>
-                        <th class="th3">제목</th>
-                        <th class="th4">작성자</th>
-                        <th class="th5">작성일</th>
-                        <th class="th6">조회</th>
+                        <th class="th7" style="width: 50px">상태</th>
+                        <th class="th2" style="width: 50px">글번호</th>
+                        <th class="th3" style="width: 300px">제목</th>
+                        <th class="th4" style="width: 60px">작성자</th>
+                        <th class="th5" style="width: 150px">작성일</th>
+                        <th class="th6" style="width: 50px">조회</th>
                     </tr>
                     <tr th:each="notice : ${ noticeList }" >
-                        <td><input type="checkbox" name="checkbox"></td>
                         <td th:text="${ notice.status }"></td>
                         <td th:text="${ notice.noticeNo }"></td>
                         <td th:text="${ notice.noticeTitle }" th:onclick="|location.href='/board/noticeDetail?no=${ notice.noticeNo }'|" style="cursor: pointer;"></td>
@@ -91,7 +89,6 @@
                 </th:block>
             </div>
             <div class="board-button">
-                <button type="button" id="delete">삭제</button>
                 <button type="button" id="modal-open">작성하기</button>
             </div>
         </div>
@@ -129,7 +126,7 @@
                             </tr>
                         </table>
                         <div id="registButton">
-                            <button id="pop-btn-close" type="button" >
+                            <button id="pop-btn-close" type="button" th:onclick="'location.href=\'/board/notice\''">
                                 취소</button>
                             <button type="submit" id="pop-btn-confirm">등록하기</button>
                         </div>

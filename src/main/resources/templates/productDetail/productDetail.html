@@ -8,6 +8,7 @@
     <link href="/css/board/board.css" rel="stylesheet" type="text/css">
     <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/button.js"></script>
     <script src="/js/productDetail.js" type="text/javascript"></script>
     <script src="/js/productDetail2.js" type="text/javascript"></script>
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
@@ -29,16 +30,89 @@
             </div>
             <!-- 정보 구역 -->
             <div class="pd-container-info">
-                <span class="pd-container-title">상품 이름이름 입니다.</span>
-                <span class="pd-container-price" style="border-bottom: rgba(108, 106, 106, 0.3) 1px solid;">37,200원</span>
-                <div class="pd-option">
-                    옵션
-                    <br>
-                    내용
-                    <br>
-                    들어갈
-                    <br>
-                    예정
+                <span class="pd-container-title" style="font-size: 22px; padding-bottom: 20px;">러비더비 젤리타입 치킨비프 24EA 반려동물식품</span>
+                <div class="pd-container-price" style="padding-bottom: 20px;">
+                    <span class="product-discount">
+                        <span style="color: #d55050;">30</span>
+                        <span style="color: #d55050;">🠗</span>
+                    </span>
+                    <span class="discount-price" style="font-weight: 800;">57,000원</span>
+                    <span class="price">
+                        <span style="text-decoration: line-through; color: #6C6A6A; font-size: 18px;">83,000원</span>
+                    </span>
+                </div>
+                <div class="pd-option" style="border-top: rgba(108,106,106,0.1) 1px solid;">
+                    <div class="pd-option-title" style="border-bottom: rgba(108,106,106,0.1) 1px solid;">
+                        <div class="pd-title-inner">
+                            <span style="border-bottom: rgb(0,0,0) 2px solid; padding-bottom: 2px">상세옵션</span>
+                            <span style="font-size: 14px; font-weight: 400;">/</span>
+                            <span style="font-size: 14px; font-weight: 400;">상품 기본 정보입니다.</span>
+                        </div>
+                    </div>
+                    <div class="pd-option-container">
+                        <table class="pd-option-info">
+                            <colgroup>
+                                <col style="width: 100px;">
+                                <col>
+                            </colgroup>
+                            <tr rel="배송비" class="delivery-price">
+                                <th scope="row">· 배송비</th>
+                                <td>
+                                    <span>3,000원</span>
+                                    <span>(50,000원 이상 구매시 무료)</span>
+                                </td>
+                            </tr>
+                            <tr rel="적립금" class="reward">
+                                <th scope="row">· 적립금</th>
+                                <td>
+                                    <span>580원</span>
+                                    <span>(1%))</span>
+                                </td>
+                            </tr>
+                            <tr rel="상품코드" class="product-code">
+                                <th scope="row">· 상품코드</th>
+                                <td>
+                                    <span>123456</span>
+                                </td>
+                            </tr>
+                            <tr rel="옵션" class="product-option">
+                                <th scope="row">· 옵션</th>
+                                <td>
+                                    <select id="pdOption">
+                                        <option value="selected" selected>-[필수] 옵션을 선택해 주세요.</option>
+                                        <option value="1">1EA</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="explain">
+                        <span>· 최소 주문 수량 1개 이상</span><br>
+                        <span>· 1세트 갯수가 정해져 있는 상품은 낱개 판매가 불가합니다.</span>
+                    </div>
+                    <div class="pd-price-title" style="border-bottom: rgba(108,106,106,0.1) 1px solid;">
+                        <div class="pd-price-inner">
+                            <span style="border-bottom: rgb(0,0,0) 2px solid; padding-bottom: 2px">선택된 옵션</span>
+                            <span style="font-size: 14px; font-weight: 400;">/</span>
+                            <span style="font-size: 14px; font-weight: 400;">선택하신 옵션 입니다.</span>
+                        </div>
+                    </div>
+                    <div class="selected-option" style="height: 50px; border: #6C757D 1px solid;">
+                        선택한 옵션 들어갈 구간
+                    </div>
+                    <div class="selected-pd-price" style="height: 50px;  border: #6C757D 1px solid;">
+                        선택한 옵션 금액 들어갈 구간
+                    </div>
+                    <div class="pd-buy-button">
+                        <ul style="display: flex">
+                            <li class="buy" style="width: 280px; background-color: #DDC6C6;">
+                                <span>
+                                    <strong id="buyBtn">B U Y</strong>
+                                </span>
+                            </li>
+                            <li class="cart" style="width: 230px; border: rgba(108,106,106,0.3) 2px solid ">C A R T</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -184,10 +258,8 @@
             </div>
         </div>
         </div>
-         <div class="PageMoveButton">
+    <div class="PageMoveButton" id="pageMoveButton">
         <a class="up-logo" style="margin-bottom: 40px">▲</a>
-    </div>
-        <div class="PageMoveButton">
         <a class="down-logo">▼</a>
     </div>
     <footer>
@@ -313,43 +385,58 @@
         <div class="popup-body">	<!--컨텐츠 영역 -->
             <div class="body-content">
                 <div class="body-contentbox">
-                    <form id="registForm1">
+                    <form id="registForm1" action="/board/qna" method="post">
                         <table>
                             <tr>
                                 <th scope="row">카테고리</th>
                                 <td name="qnaCategory" style="width: 200px;">
-                                <select id="select">
+                                <select id="select" name="inquiryType">
                                     <option value="selected" selected>선택하세요</option>
-                                    <option value="1">상품문의</option>
-                                    <option value="2">기타문의</option>
+                                    <option value="상품문의">상품문의</option>
+                                    <option value="기타문의">기타문의</option>
                                 </select>
+                                    <input type="text" id="qnaCategoryInput">
+
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">작성자</th>
-                                <td><input type="text" name="writer" style="width: 200px;"></td>
-                            </tr>
+<!--                            <tr>-->
+<!--                                <th scope="row">작성자</th>-->
+<!--                                <td><input type="text" name="writer" style="width: 200px;"></td>-->
+<!--                            </tr>-->
                             <tr>
                                 <th>제목</th>
-                                <td colspan="3"><input type="text" name="title" placeholder="&nbsp;&nbsp;제목을 입력해주세요." style="width: 750px;" ></td>
+                                <td colspan="3"><input type="text" name="inquiryTitle" placeholder="&nbsp;&nbsp;제목을 입력해주세요." style="width: 750px;" ></td>
                             </tr>
                             <tr>
                                 <th>내용</th>
                                 <td colspan="3">
-                                    <textarea name="body" placeholder="&nbsp;&nbsp;내용을 입력해주세요." cols="80" rows="15" style="resize: none;"></textarea>
+                                    <textarea name="inquiryContent" placeholder="&nbsp;&nbsp;내용을 입력해주세요." cols="80" rows="15" style="resize: none;"></textarea>
                                 </td>
                             </tr>
                         </table>
+                        <div id="registButton1">
+                            <button id="pop-btn-close1" type="button" th:onclick="'location.href=\'/productDetail/productDetail\''">
+                                취소</button>
+                            <button type="submit" id="pop-btn-confirm1">등록하기</button>
+                        </div>
                     </form>
                 </div>
-            </div>
-            <div id="registButton1">
-                <button id="pop-btn-close1" type="button" th:onclick="'location.href=\'/productDetail/productDetail\''">
-                    취소</button>
-                <button type="submit" id="pop-btn-confirm1">등록하기</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('select').addEventListener('change', function() {
+        var selectedValue = document.getElementById('select').value;
+        if (selectedValue === '상품문의') {
+            document.getElementById('qnaCategoryInput').value = '상품문의';
+        } else if (selectedValue === '기타문의') {
+            document.getElementById('qnaCategoryInput').value = '기타문의';
+        } else {
+            document.getElementById('qnaCategoryInput').value = '';
+        }
+    });
+</script>
 </body>
 </html>

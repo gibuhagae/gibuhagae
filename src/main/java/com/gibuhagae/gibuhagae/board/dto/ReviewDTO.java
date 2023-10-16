@@ -1,6 +1,7 @@
 package com.gibuhagae.gibuhagae.board.dto;
 
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
+import com.gibuhagae.gibuhagae.productManagement.dto.ItemDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +21,7 @@ public class ReviewDTO {
     private Date registDate;        //등록일
     private Date updateDate;        //수정일
     private Date deleteDate;        //삭제일
-    private Long itemCode;          //상품코드
+    private ItemDTO itemCode;          //상품코드
     private Long optionCode;        //옵션코드
     private String showStatus;      //상태
 

@@ -38,6 +38,13 @@
                     <td th:text="${ qna.writeDate }"></td>
                 </tr>
                 <tr style="border-top: #6C6A6A 1px solid;">
+                    <th scope="row">상품</th>
+                    <td colspan="3">
+<!--                        <input type="hidden" name="noticeNo" th:value="${ qna.inquiryNo }"/>-->
+                        <input type="text" id="itemName" name="itemName" th:value="${ qna.itemCode.itemName }">
+                    </td>
+                </tr>
+                <tr style="border-top: #6C6A6A 1px solid;">
                     <th scope="row">제목</th>
                     <td colspan="3">
                         <input type="hidden" name="noticeNo" th:value="${ qna.inquiryNo }"/>
