@@ -1,18 +1,16 @@
-package com.gibuhagae.payment.controller;
+package com.gibuhagae.gibuhagae.productDetail.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Slf4j
 @Controller
 @RequestMapping("/")
-public class paymentController {
+public class ProductDetailController {
 
-    @GetMapping("/payment")
-    public String getPayment() {
+    @GetMapping("/itemPage")
+    public String addPage() {
 
-        return "payment/payment";
+        return "basket/product";
     }
 }

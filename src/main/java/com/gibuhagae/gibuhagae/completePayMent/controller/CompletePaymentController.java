@@ -1,4 +1,4 @@
-package com.gibuhagae.completePayment.Controller;
+package com.gibuhagae.gibuhagae.completePayMent.controller;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("/")
-public class completePaymentController {
+public class CompletePaymentController {
 
     @GetMapping("/completePayment")
     public String getCompletePayment() {
