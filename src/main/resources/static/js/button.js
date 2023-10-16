@@ -3,7 +3,7 @@ $(function (){
     $("#pageMoveButton").hide();
 
     $(window).scroll(function (){
-       if($(this).scrollTop() > 1000){$("#pageMoveButton").fadeIn();}
+       if($(this).scrollTop() > 600){$("#pageMoveButton").fadeIn();}
        else{$("#pageMoveButton").fadeOut();}
     });
 });

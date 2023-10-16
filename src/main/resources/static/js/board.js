@@ -16,6 +16,8 @@ $(function(){
     }
 });
 
+
+
 // 첨부파일
 // const fileInput = document.getElementById("fileUpload");
 // // 또는 const fileInput = $("#fileUpload").get(0);
