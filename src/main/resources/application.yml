@@ -8,6 +8,8 @@ spring:
     username: C##GIBUHAGAE
     password: GIBUHAGAE
 
+
 # Mybatis config
 mybatis:
   mapper-locations: mappers/**/*.xml
+

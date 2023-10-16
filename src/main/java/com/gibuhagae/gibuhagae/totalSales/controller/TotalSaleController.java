@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/totalsales")
+@RequestMapping("/totalSales")
 public class TotalSaleController {
 
-    @GetMapping("/totalsale-admin")
+    @GetMapping("/totalSale-admin")
     public String getTotalSale() {
 
-        return "totalsales/totalsales-admin";
+        return "totalSales/totalSales-admin";
     }
 }

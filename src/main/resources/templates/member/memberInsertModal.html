@@ -1,0 +1,141 @@
+<form id="registAdminMember" method="post" action="/memberManagement/insert">
+    <div class="modal-container">
+        <div class="modal-wrap" id="modal">
+            <div class="detail-modal">
+                <div class="modal-head">
+                    <span class="modal-head-title">관리자 등록</span>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body-content">
+                        <div class="modal-body-content-box">
+                            <div class="regist-table-wrapper">
+                                <table class="regist-info-table">
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">아이디 *</td>
+                                        <td><input class="regist-input-design" type="text" maxlength="13" name="userId"
+                                                   id="userId" placeholder="아이디(영문소문자/숫자, 4~16자)" required></td>
+                                        <td><input class="reist-check-button" type="button" value="중복확인"
+                                                   id="duplicationCheck"></td>
+                                    </tr>
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">비밀번호 *</td>
+                                        <td><input class="regist-input-design" type="password" maxlength="16"
+                                                   name="password" placeholder="비밀번호" required></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">비밀번호 확인 *</td>
+                                        <td><input class="regist-input-design" type="password" maxlength="13"
+                                                   name="password2" placeholder="비밀번호를 다시 한번 입력해주세요" required></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">이름</td>
+                                        <td><input class="regist-input-design" type="text" name="name" placeholder="이름"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">전화번호</td>
+                                        <td><input class="regist-input-design" type="tel" name="phone" id="phone" placeholder="-빼고 숫자만 입력"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">이메일</td>
+                                        <td><input class="regist-input-design" type="email" name="email" placeholder="ex) gibuhagae@example.com"></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <table class="regist-info-table">
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">우편번호</td>
+                                        <td><input class="regist-input-design" type="text" name="zipcode" id="zipcode"
+                                                   placeholder="우편번호검색을 눌러 주소를 입력" readonly></td>
+                                        <td><input type="button" value="우편번호검색" id="searchZipCode"></td>
+                                    </tr>
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">주소</td>
+                                        <td><input class="regist-input-design" type="text" name="address1"
+                                                   id="address1" readonly>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="input-regist-info-row">
+                                        <td class="title-design">상세주소</td>
+                                        <td><input class="regist-input-design" type="text" name="address2"
+                                                   id="address2" placeholder="상세주소를 입력">
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="commit-btn footer-btn">등록</button>
+                    <button type="button" class="close-btn footer-btn" id="close-btn">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+        $("#addbtn-admin").click(function () {
+            $("#modal").css('display', 'flex').hide().fadeIn();
+            //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
+        });
+        $("#close-btn").click(function () {
+            modalClose(); //모달 닫기 함수 호출
+        });
+        function modalClose() {
+            $("#modal").fadeOut(); //페이드아웃 효과
+        }
+    });
+</script>
+
+<!-- id 중복 체크 -->
+<script>
+    if(document.getElementById("duplicationCheck")) {
+
+        const $duplication = document.getElementById("duplicationCheck");
+
+        $duplication.onclick = function() {
+            let userId = document.getElementById("userId").value.trim();
+
+            fetch("/member/idDupCheck", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({userId: userId})
+            })
+                .then(result => result.text())
+                .then(result => alert(result))
+                .catch((error) => error.text().then((res) => alert(res)));
+
+        }
+    }
+</script>
+
+<!-- 주소 라이브러리 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+
+    const $searchZipCode = document.getElementById("searchZipCode");
+
+    $searchZipCode.onclick = function () {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                document.getElementById("zipcode").value = data.zonecode;
+                document.getElementById("address1").value = data.address;
+                document.getElementById("address2").focus();
+            }
+        }).open();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+* {
+    list-style: none;
+}
+
+/* 헤더 기본 설정 */
+.other-header-content {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 150px 20px 100px;
+}
+
+/* 헤더 우측 네비게이션 설정 */
+.other-nav {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* 헤더 우측 네비게이션과 아이콘 설정 */
+.other-nav img {
+    width: 30px;
+    height: 30px;
+}
+.other-nav a {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #6C6A6A;
+    font-size: 11px;
+}
+
+/* 마이페이지 네비게이션 */
+.nav-mypage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 배송조회 네비게이션 */
+.nav-delivery{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 장바구니 네비게이션 */
+.nav-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 헤더 좌측 이미지와 검색창 배치 설정 */
+.other-nav-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 헤더 좌측 이미지 설정 */
+.other-header-logo img {
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
+}
+
+/*검색 버튼*/
+.search button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url(/images/navigation/search.png) no-repeat;
+}
+
+.search {
+    padding-left: 70px;
+    box-sizing: border-box;
+    top: 20px;
+    z-index: 0;
+}
+
+.search fieldset {
+    position: relative;
+    padding-right: 30px;
+    background-color: rgb(235, 235, 235);
+    width: 300px;
+    border-radius: 50px;
+    border: rgba(196, 194, 194, 0.7);
+}
+
+.search input {
+    height: 38px;
+    padding: 0 10px;
+    border: 0;
+    font-size: 12px;
+    line-height: 1.5714;
+    box-sizing: border-box;
+    width: 95%;
+}
+
+.other-nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* 카테고리 메뉴 설정 */
+#category {
+    color: #6C6A6A;
+    line-height: 40px;
+    text-align: center;
+    border-top: #f0f0f0 1px solid;
+    border-bottom: #f0f0f0 2px solid;
+}
+
+.category-nav{
+    display: flex;
+    justify-content: center;
+
+}
+
+/* category태그 자식의 ul의 자식의 li 설정 */
+#category > ul > li {
+    font-size: 17px;
+    float: left;
+    width: 170px;
+    position: relative;
+}
+
+/* 하위 메뉴 감추기 */
+#category > ul > li > ul {
+    font-size: 16px;
+    width: 170px;
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: #f0f0f0 1px solid;
+}
+
+/* 마우스 올릴 시 하위 메뉴 보이기 */
+#category > ul > li:hover > ul {
+    display: grid;
+    min-width: unset;
+}
+
+/* 하위메뉴 선택 시 색상 변경 */
+#category > ul > li > ul > li a:hover {
+    color: rgb(241, 130, 60);
+}
+.category-nav-content ul li {
+    margin-left: 10px;
+    margin-right: 10px;
+    list-style: none;
+}
+
+.category-nav-content a {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    color: #6C6A6A;
+    font-size: 14px;
+}
+
+.category-nav-content a:hover {
+    color: rgb(241, 130, 60);
+}

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.board.dao.BoardMapper">
+
+    <resultMap type="com.gibuhagae.gibuhagae.board.dto.NoticeDTO" id="generalNoticeResultMap">
+        <id property="noticeNo" column="NOTICE_NO"/>
+        <result property="noticeTitle" column="NOTICE_TITLE"/>
+        <result property="noticeContent" column="NOTICE_CONTENT"/>
+        <result property="writeDate" column="WRITE_DATE"/>
+        <result property="views" column="VIEWS"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="status" column="STATUS"/>
+
+        <association property="memberNo" resultMap="memberResultMap"/>
+    </resultMap>
+
+    <resultMap type="com.gibuhagae.gibuhagae.member.dto.MemberDTO" id="memberResultMap">
+        <id property="memberNo" column="MEMBER_NO"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="memberPhone" column="MEMBER_PHONE"/>
+        <result property="zipCode" column="ZIPCODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="registDate" column="REGIST_DATE"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="donatePrice" column="DONATE_PRICE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="activationStatus" column="ACTIVATION_STATUS"/>
+    </resultMap>
+
+    <resultMap type="com.gibuhagae.gibuhagae.board.dto.QnaDTO" id="generalQnaResultMap">
+        <id property="inquiryNo" column="INQUIRY_NO"/>
+        <result property="inquiryType" column="INQUIRY_TYPE"/>
+        <result property="inquiryTitle" column="INQUIRY_TITLE"/>
+        <result property="inquiryContent" column="INQUIRY_CONTENT"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="writeDate" column="WRITE_DATE"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="status" column="ANSWER_STATUS"/>
+        <result property="deleteDate" column="DELETE_DATE"/>
+
+        <association property="memberNo" resultMap="memberResultMap"/>
+        <!--        <collection property="replyList" resultMap="replyResultMap"/>-->
+    </resultMap>
+
+
+
+    <select id="selectTotalCount" resultType="_int">
+        SELECT
+        COUNT(*)
+        FROM NOTICE_BOARD A
+    </select>
+
+
+    <select id="selectNoticeList" resultMap="generalNoticeResultMap">
+        SELECT
+              A.NOTICE_NO
+             , A.NOTICE_TITLE
+             , A.NOTICE_CONTENT
+             , A.WRITE_DATE
+             , A.VIEWS
+             , D.MEMBER_NAME
+             , A.UPDATE_DATE
+             , A.STATUS
+        FROM (SELECT
+                  ROWNUM RNUM
+                   , B.NOTICE_NO
+                   , B.NOTICE_TITLE
+                   , B.NOTICE_CONTENT
+                   , B.WRITE_DATE
+                   , B.VIEWS
+                   , B.MEMBER_NO
+                   , B.UPDATE_DATE
+                   , B.STATUS
+              FROM(
+                  SELECT
+                            C.NOTICE_NO
+                          , C.NOTICE_TITLE
+                          , C.NOTICE_CONTENT
+                          , C.WRITE_DATE
+                          , C.VIEWS
+                          , C.MEMBER_NO
+                          , C.UPDATE_DATE
+                          , C.STATUS
+                      FROM NOTICE_BOARD C
+                ORDER BY C.NOTICE_NO DESC
+                ) B
+            <![CDATA[
+                  WHERE ROWNUM <= #{endRow}
+            ]]>
+                  )A
+                 JOIN MEMBER D ON (A.MEMBER_NO = D.MEMBER_NO)
+        WHERE A.RNUM >= #{startRow}
+        ORDER BY A.NOTICE_NO DESC
+    </select>
+
+    <update id="incrementNoticeCount">
+        UPDATE
+            NOTICE_BOARD A
+        SET A.VIEWS = A.VIEWS + 1
+        WHERE A.NOTICE_NO = #{ noticeNo }
+    </update>
+
+    <select id="selectNoticeDetail" resultMap="generalNoticeResultMap">
+        SELECT
+               A.NOTICE_NO
+             , A.NOTICE_TITLE
+             , A.NOTICE_CONTENT
+             , A.VIEWS
+             , B.MEMBER_NAME
+             , A.STATUS
+             , A.WRITE_DATE
+            FROM NOTICE_BOARD A
+            JOIN MEMBER B ON (A.MEMBER_NO = B.MEMBER_NO)
+           WHERE A.NOTICE_NO = #{ noticeNo }
+    </select>
+
+    <insert id="insertNotice">
+        INSERT
+        INTO NOTICE_BOARD A
+            (
+             A.NOTICE_NO
+           , A.NOTICE_TITLE
+           , A.NOTICE_CONTENT
+           , A.WRITE_DATE
+           , A.VIEWS
+           , A.MEMBER_NO
+           , A.STATUS
+           )
+        VALUES
+            (
+            SEQ_NOTICE_NO.NEXTVAL
+                , #{ noticeTitle }
+                , #{ noticeContent }
+                , SYSDATE
+                , 0
+                , 1
+                , 'Y'
+            )
+    </insert>
+
+    <update id="updateNotice" parameterType="com.gibuhagae.gibuhagae.board.dto.NoticeDTO">
+        UPDATE
+               NOTICE_BOARD A
+           SET
+               A.NOTICE_TITLE = #{ noticeTitle }
+             , A.NOTICE_CONTENT = #{ noticeContent }
+             , A.UPDATE_DATE = SYSDATE
+             , A.MEMBER_NO = 1
+         WHERE A.NOTICE_NO = #{ noticeNo }
+    </update>
+
+<!--    <update id="deleteNotice">-->
+<!--       UPDATE-->
+<!--              NOTICE_BOARD A-->
+<!--          SET A.STATUS = 'N'-->
+<!--        WHERE A.STATUS = 'Y'-->
+<!--          AND A.NOTICE_NO = #{ noticeNo }-->
+<!--    </update>-->
+
+    <select id="selectQnaTotalCount" resultType="_int">
+        SELECT
+            COUNT(*)
+        FROM QNA A
+    </select>
+
+
+    <select id="selectQnaList" resultMap="generalQnaResultMap">
+        SELECT
+               A.INQUIRY_NO
+             , A.INQUIRY_TYPE
+             , A.INQUIRY_TITLE
+             , A.INQUIRY_CONTENT
+             , A.ITEM_CODE
+             , D.MEMBER_NAME
+             , A.WRITE_DATE
+             , A.UPDATE_DATE
+             , A.ANSWER_STATUS
+        FROM (SELECT
+                     ROWNUM RNUM
+                   , B.INQUIRY_NO
+                   , B.INQUIRY_TYPE
+                   , B.INQUIRY_TITLE
+                   , B.INQUIRY_CONTENT
+                   , B.ITEM_CODE
+                   , B.MEMBER_NO
+                   , B.WRITE_DATE
+                   , B.UPDATE_DATE
+                   , B.ANSWER_STATUS
+              FROM(
+                      SELECT
+                               C.INQUIRY_NO
+                              , C.INQUIRY_TYPE
+                              , C.INQUIRY_TITLE
+                              , C.INQUIRY_CONTENT
+                              , C.ITEM_CODE
+                              , C.MEMBER_NO
+                              , C.WRITE_DATE
+                              , C.UPDATE_DATE
+                              , C.ANSWER_STATUS
+                      FROM QNA C
+                      ORDER BY C.INQUIRY_NO DESC
+                  ) B
+            <![CDATA[
+              WHERE ROWNUM <= #{endRow}
+            ]]>
+                  )A
+                 JOIN MEMBER D ON (A.MEMBER_NO = D.MEMBER_NO)
+        WHERE A.RNUM >= #{startRow}
+        ORDER BY A.INQUIRY_NO DESC
+    </select>
+
+    <select id="selectQnaDetail" resultMap="generalQnaResultMap">
+        SELECT
+               A.INQUIRY_NO
+             , A.INQUIRY_TYPE
+             , A.INQUIRY_TITLE
+             , A.INQUIRY_CONTENT
+             , A.ITEM_CODE
+             , B.MEMBER_NAME
+             , A.WRITE_DATE
+             , A.ANSWER_STATUS
+        FROM QNA A
+                 JOIN MEMBER B ON (A.MEMBER_NO = B.MEMBER_NO)
+        WHERE A.INQUIRY_NO = #{ inquiryNo }
+    </select>
+</mapper>
+

@@ -1,0 +1,40 @@
+@charset "UTF-8";  
+
+html {
+    background-color: white;
+    font-size: 100%;
+}
+
+.myPageCategory {
+    position: absolute;
+    top: 32%;
+    left: 3%;
+}
+
+#categoryTitle {
+    font-size: 2.3rem;
+    position: relative;
+    margin-bottom: 10%;
+}
+
+.categoryBtn {
+    width: 100%;
+    height: 30px;
+}
+
+.categoryBtn:not(#orderHistoryInquiry){
+    margin-top: 10%;
+}
+
+.categoryBtn {
+    background-color: #d9d9d9;
+}
+
+#orderHistoryInquiry:hover, 
+#creInquiry:hover,
+#mInforModify:hover,
+#interestProduct:hover,
+#recentViewedProduct:hover,
+#savedMoney:hover {
+    background-color: rgba(217, 217, 217, 0);
+}
