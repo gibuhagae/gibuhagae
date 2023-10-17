@@ -1,16 +1,26 @@
 #sendBtn {
     margin-left: 30px;
-    margin-right: 2%;
+    margin-right: 30px;
 }
 
 #readyBtn {
-    margin-right: 33%;
+    margin-right: 435px;
 }
 
 #cancelBtn {
-    margin-right: 2%;
+    margin-right: 30px;
 }
 
 #returnBtn {
-    margin-right: 2%;
+    margin-right: 30px
 }
+
+.order-container {
+    max-height: 680px;
+    overflow: auto;
+}
+
+
+
+
+

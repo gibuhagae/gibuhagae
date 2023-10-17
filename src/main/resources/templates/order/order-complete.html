@@ -42,25 +42,54 @@
     </ul>
   </div>
 
-
-  <div class="order-view">
-    <button id="changeReady" class="order-btn">배송준비중으로 전환</button>
-    <button id="changeShipping" class="order-btn">배송중으로 전환</button>
-    <button id="returnBtn" class="order-btn">반품처리</button>
-    <button id="swapBtn" class="order-btn">교환처리</button>
-  </div>
+    <label for="search-Box">
+      <strong>검색</strong>
+    </label>
+    <input type="search" id="search-Box" placeholder="검색">
 
   <div class="order-list">
-    <div id="order-num" class="orderList-title"><input type="checkbox" id="orderNum-ck" class="ckBox"><label for="orderNum-ck">주문번호/시각</label> </div>
+    <div id="order-num" class="orderList-title">주문번호/일자/ID/수취인</div>
     <div id="order-item" class="orderList-title">주문상품</div>
     <div id="order-price" class="orderList-title">상품금액</div>
-    <div id="order-count" class="orderList-title">수량</div>
+    <div id="order-count" class="orderList-title">수량(EA)</div>
     <div id="order-message" class="orderList-title">요청사항</div>
-    <div id="order-delivery" class="orderList-title">배송</div>
-
+    <div id="order-delivery" class="orderList-title">주소/운송장조회</div>
   </div>
-  <div class="order-container">
 
+  <div class="order-container">
+    <table class="completeListArea">
+      <tbody>
+      <!-- 주문 데이터를 순환하며 표시 -->
+      <tr th:each="order : ${orderList}" class="newOrderList">
+        <td class="order-data">
+          <p th:text="${order.orderNo}" id="orderData-1"></p>
+          <p th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}" id="orderData-2"></p>
+          <p th:text="${order.userId}" id="orderData-12"></p>
+          <p th:text="${order.recipientName}" id="orderData-3"></p>
+        </td>
+
+        <td class="order-data2">
+          <span th:text="${order.itemName}" id="orderData-4"></span>
+          <span th:text="${order.optionName}" id="orderData-5"></span>
+        </td>
+
+        <td th:text="${order.paymentPrice}" id="orderData-6"></td>
+        <td th:text="${order.orderCount}" id="orderData-7"></td>
+        <td th:text="${order.deliveryRequest}" id="orderData-8"></td>
+
+        <td class="order-data3" style="text-align: center">
+          <span th:text="${order.zipCode}" id="Data-zipCode"></span>
+          <span th:text="${order.address}" id="Data-address"></span>
+          <p th:text="${order.addressDetail}" id="Data-addressDetail"></p>
+          <p th:text="${order.postOffice}" id="orderData-9"></p>
+          <span th:text="${order.registrationNo}" id="orderData-10"></span>
+
+
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
   </div>
 
 
@@ -68,7 +97,28 @@
 
 </div>
 
+<script>
+  /* 검색 기능*/
 
+  document.addEventListener('DOMContentLoaded', function () {
+    const payrollSearch = document.querySelector('#search-Box');
+    const payrollTable = document.querySelector('.completeListArea tbody');
+    const allRows = payrollTable.querySelectorAll('tr');
+
+    payrollSearch.addEventListener('keyup', function () {
+      const filterValue = payrollSearch.value.toLowerCase();
+
+      allRows.forEach(function (row) {
+        var rowText = row.textContent.toLowerCase();
+        if (rowText.includes(filterValue)) {
+          row.style.display = ''; // 일치하는 경우 보이게 함
+        } else {
+          row.style.display = 'none'; // 일치하지 않는 경우 숨김
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>

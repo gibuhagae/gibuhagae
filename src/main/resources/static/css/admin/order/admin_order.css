@@ -6,9 +6,6 @@
     background-color: white;
 }
 
-.order-view {
-    background-color: white;
-}
 
 .order-title {
     padding-top: 1.2%;
@@ -42,7 +39,7 @@ header {
     margin-right: 5%;
 }
 #post-complete {
-    margin-right: 20%;
+    margin-right: 25%;
 }
 #post-cancel {
     margin-right: 7%;
@@ -91,11 +88,12 @@ header {
 }
 
 .order-list {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1.1fr 1.77fr 0.5fr 0.5fr 1.7fr 2fr;
     background-color: white;
     margin-top: 20px;
     margin-bottom: 2px;
+    ;
 }
 
 .order-btn:hover{
@@ -113,7 +111,7 @@ header {
 
 #order-num {
     line-height: 65px;
-    width: 307px;
+    /*width: 228px;*/
     height: 65px;
     border-right: solid 2px black;
 }
@@ -127,35 +125,35 @@ header {
 }
 
 #order-item {
-    width: 350px;
+    /*width: 360px;*/
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
 }
 
 #order-price {
-    width: 150px;
+    /*width: 154px;*/
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
 }
 
 #order-count {
-    width: 100px;
+    /*width: 73px;*/
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
 }
 
 #order-delivery {
-    width: 200px;
+    /*width: 450px;*/
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
 }
 
 #order-message {
-    width: 350px;
+    /*width:  330px;*/
     height: 65px;
     border-right: solid 2px black;
     line-height: 65px;
@@ -170,15 +168,13 @@ header {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 1.15em;
     border: 1px solid black;
-
 }
 
 .order-data{
     text-align: center;
-    width: 260px;
-    height: 100px;
-    display: grid;
-    grid-column: auto;
+    width: 223px;
+    height: auto;
+
 }
 
 .order-data2 {
@@ -188,15 +184,15 @@ header {
     border-right: 1px solid black;
     border-left: 1px solid black;
     padding: 0;
-    width: 330px;
+    width: 366px;
 }
-#listCk {
+#selectedOrders {
     width: 20px;
     height: 20px;
 
 }
 
-#listCk:hover {
+#selectedOrders:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
@@ -206,7 +202,7 @@ header {
 }
 
 #orderData-6 {
-    width: 137px;
+    width: 102px;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
     border-right: 1px solid black;
@@ -214,7 +210,7 @@ header {
 }
 
 #orderData-7 {
-    width: 93px;
+    width: 100px;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
     border-right: 1px solid black;
@@ -222,7 +218,7 @@ header {
 }
 
 #orderData-8 {
-    width: 328px;
+    width:350px;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
     border-right: 1px solid black;
@@ -230,7 +226,7 @@ header {
 }
 
 .order-data3 {
-    width: 183px;
+    width: 390px;
     border-right: 1px solid black;
     text-align: center;
 }
@@ -254,9 +250,71 @@ header {
     margin-bottom: 2%;
 }
 
+
+#orderData-11 {
+    width: 300px;
+
+}
+
+#orderData-10 {
+    width: 180px;
+}
+
+#orderData-12 {
+    margin-bottom: 1px;
+}
+
 .registBtn {
     width: 130px;
 }
+
+.w-btn-blue {
+    background-color: #6aafe6;
+    color: #ffffff;
+}
+
+.w-btn-blue-outline {
+    border: 3px solid #6aafe6;
+    color: #6e6e6e;
+}
+
+.w-btn-blue-outline:hover {
+    background-color: #6aafe6;
+    color: #d4dfe6;
+}
+
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.w-btn-outline:hover {
+    letter-spacing: 2px;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.w-btn:active {
+    transform: scale(1.2);
+}
+
+.w-btn-outline:active {
+    transform: scale(1.2);
+}
+
+#Data-addressDetail {
+    margin-bottom: 2px;
+}
+
+#Data-zipCode {
+    margin-right: 2px;
+}
+
+#Data-address {
+    margin-left: 2px;
+}
+
 
 
 

@@ -14,3 +14,16 @@
 #returnBtn {
     margin-right: 2%;
 }
+
+.order-container {
+    max-height: 600px;
+    overflow: auto;
+}
+
+/* 검색박스 스타일 */
+#search-Box {
+    padding: 0.5rem;
+    margin-top: 1.5rem;
+    margin-right: 1.5rem;
+}
+
