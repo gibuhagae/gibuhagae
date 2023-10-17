@@ -1,15 +1,16 @@
 package com.gibuhagae.gibuhagae.order.controller;
 
 
+import com.gibuhagae.gibuhagae.order.dto.CancelListDTO;
 import com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO;
+import com.gibuhagae.gibuhagae.order.dto.ReturnRequestDTO;
+import com.gibuhagae.gibuhagae.order.dto.SwapRequestDTO;
 import com.gibuhagae.gibuhagae.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +21,12 @@ public class OrderController {
 
     private final OrderService orderService;
 
+
+
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+
 
 
     @GetMapping("/order-new")
@@ -31,6 +35,9 @@ public class OrderController {
 
         List<OrderManagementDTO> newOrderList = orderService.selectNewOrderList();
 
+
+        log.info(newOrderList.toString());
+
         model.addAttribute("newOrderList", newOrderList);
 
         return "order/order-new";
@@ -38,55 +45,176 @@ public class OrderController {
     }
 
     @PostMapping("/order-new")
-    public String updatePost(@RequestParam("deliveryCompany") String deliveryCompany,
-                             @RequestParam("trackingNumber") String trackingNumber,
-                             @RequestParam("selectedOrderNo") String selectedOrderNo,
+    public String updatePost(@RequestParam(required = false) String deliveryCompany,
+                             @RequestParam(required = false) String registrationNo,
+                             @RequestParam(required = false) Long selectedOrderNo,
+                             @RequestParam(required = false) String orderStatus,
                              Model model) {
 
 
-        int trackingN = Integer.parseInt(trackingNumber);
 
-        orderService.updatePost(deliveryCompany, trackingNumber, selectedOrderNo);
+        orderService.updatePost(deliveryCompany, registrationNo, selectedOrderNo);
+        orderService.updateOrderStatus(orderStatus, selectedOrderNo);
 
 
-        //model.addAttribute("updatePost", orderManagementList);
-        return "redirect:order-new";
+
+        model.addAttribute("deliveryCompany", deliveryCompany);
+        model.addAttribute("registrationNo", registrationNo);
+
+
+
+        return "redirect:/order/order-new";
     }
+
+
 
 
     @GetMapping("/order-ready")
-    public String getOrderReady() {
+    public String getOrderReady(Model model) {
 
-        return "/order/order-ready";
+        List<OrderManagementDTO> orderReadyList = orderService.OrderReadyList();
+
+        model.addAttribute("orderList" , orderReadyList);
+
+        return "order/order-ready";
     }
+
+    @PostMapping("/order-ready")
+    public String updateReadyPost(@RequestParam("deliveryCompany") String deliveryCompany,
+                             @RequestParam("registrationNo") String registrationNo,
+                             @RequestParam("selectedOrderNo") Long selectedOrderNo,
+                             @RequestParam("orderStatus") String orderStatus,
+                             Model model) {
+
+
+
+        orderService.updatePost(deliveryCompany, registrationNo, selectedOrderNo);
+        orderService.updateOrderStatus(orderStatus, selectedOrderNo);
+
+
+        model.addAttribute("deliveryCompany", deliveryCompany);
+        model.addAttribute("trackingNumber", registrationNo);
+        model.addAttribute("orderStatus", orderStatus);
+
+
+
+        return "redirect:/order/order-ready";
+    }
+
+
+
 
     @GetMapping("/order-shipping")
-    public String getOderShipping() {
+    public String getOderShipping(Model model) {
 
-        return "/order/order-shipping";
+        List<OrderManagementDTO> orderList = orderService.selectShippingOrderList();
+
+        model.addAttribute("orderList" , orderList);
+
+        return "order/order-shipping";
     }
 
-    @GetMapping("/order-complete")
-    public String getOderComplete() {
+    @PostMapping("/order-shipping")
+    public String updateShippingOrderStatus(@RequestParam("selectedOrderNo") Long selectedOrderNo,
+                                            @RequestParam("orderStatus") String orderStatus,
+                                             Model model) {
 
-        return "/order/order-complete";
+
+        orderService.updateOrderStatus(orderStatus, selectedOrderNo);
+
+
+        model.addAttribute("orderStatus", orderStatus);
+
+
+
+        return "redirect:/order/order-shipping";
+    }
+
+
+    @GetMapping("/order-complete")
+    public String getOderComplete(Model model) {
+
+        List<OrderManagementDTO> orderList = orderService.orderCompleteList();
+
+        model.addAttribute("orderList", orderList);
+
+        return "order/order-complete";
+    }
+
+    @PostMapping("/order-complete")
+    public String updateCompleteOrderStatus(@RequestParam("selectedOrderNo") Long selectedOrderNo,
+                                            @RequestParam("orderStatus") String orderStatus,
+                                            Model model) {
+
+
+        orderService.updateOrderStatus(orderStatus, selectedOrderNo);
+
+
+        model.addAttribute("orderStatus", orderStatus);
+
+
+        return "redirect:/order/order-complete";
     }
 
     @GetMapping("/order-cancel")
-    public String getOderCancel() {
+    public String getOderCancel(Model model) {
 
-        return "/order/order-cancel";
+        List<OrderManagementDTO> orderCancelList = orderService.orderCancelList();
+        List<CancelListDTO> cancelList = orderService.selectCancelOrderList();
+
+        model.addAttribute("orderCancelList", orderCancelList);
+        model.addAttribute("cancelList", cancelList);
+
+        return "order/order-cancel";
+    }
+
+    @PostMapping("/order-cancel")
+    public String cancelOrder(@RequestParam("selectedOrderNo") Long selectedOrderNo) {
+
+        orderService.cancelOrder(selectedOrderNo);
+
+        return "redirect:/order/order-cancel";
     }
 
     @GetMapping("/order-return")
-    public String getOrderReturn() {
+    public String getOrderReturn(Model model) {
+
+    List<OrderManagementDTO> returnList = orderService.orderReturnList();
+    List<ReturnRequestDTO> returnDetailList = orderService.returnDetailList();
+
+    model.addAttribute("returnList" , returnList);
+    model.addAttribute("returnDetailList", returnDetailList);
 
         return "/order/order-return";
     }
 
+    @PostMapping("/order-return")
+    public String returnOrder(@RequestParam("selectedOrderNo") Long selectedOrderNo) {
+
+        orderService.returnOrder(selectedOrderNo);
+
+        return "redirect:/order/order-return";
+    }
+
+
     @GetMapping("/order-swap")
-    public String getOrderSwap() {
+    public String getOrderSwap(Model model) {
+
+        List<SwapRequestDTO> swapDetailList = orderService.swapDetailList();
+        List<OrderManagementDTO> swapRequestList = orderService.orderSwapList();
+
+        model.addAttribute("swapRequestList" , swapRequestList);
+        model.addAttribute("swapDetailList", swapDetailList);
 
         return "/order/order-swap";
+    }
+
+    @PostMapping("/order-swap")
+    public String swapOrder(@RequestParam("selectedOrderNo") Long selectedOrderNo,
+                            @RequestParam("orderStatus") String orderStatus) {
+
+        orderService.swapOrder(selectedOrderNo, orderStatus);
+
+        return "redirect:/order/order-swap";
     }
 }

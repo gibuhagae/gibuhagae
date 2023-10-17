@@ -9,3 +9,11 @@
     margin-right: 2%;
 }
 
+.postForm {
+    margin-top: 1%;
+}
+
+.order-container {
+    max-height: 680px;
+    overflow: auto;
+}

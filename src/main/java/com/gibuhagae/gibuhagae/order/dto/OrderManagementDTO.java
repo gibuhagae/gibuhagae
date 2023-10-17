@@ -19,13 +19,20 @@ public class OrderManagementDTO {
  private String cerStatus;
  private String totalOrderPrice;
  private String donatePrice;
-
+ private String address;
+ private String addressDetail;
+ private String zipCode;
  private String recipientName;
  private String itemName;
  private String optionName;
  private String registrationNo;
  private String postOffice;
  private String deliveryRequest;
+ private String userId;
+ private String refundReason;
+ private Long refundNo;
+ private Long swapNo;
+ private String swapReason;
 
  
 

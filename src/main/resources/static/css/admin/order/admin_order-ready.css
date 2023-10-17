@@ -10,3 +10,8 @@
 #returnBtn {
     margin-right: 2%;
 }
+
+.order-container {
+    max-height: 680px;
+    overflow: auto;
+}
