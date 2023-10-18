@@ -17,7 +17,7 @@
 <div id="detailForm">
 <div th:replace="/common/board/navigation.html"></div>
 <div style="margin-top: 100px;" class="detailForm">
-    <form method="post" action="/board/detail">
+    <form method="post" action="/board/noticeDetail">
     <table style="width: 100%">
         <colgroup>
             <col width="15%"/>
@@ -51,9 +51,9 @@
         </tr>
     </table>
     <div align="center">
-        <button type="submit" id="modify">수정하기</button>
-        <a th:href="@{/board/detail(no=${ notice.noticeNo })}">삭제하기</a>
-        <button type="button" th:onclick="'location.href=\'/board/notice\''">목록으로</button>
+        <button type="submit" id="modify">수정</button>
+        <button><a th:href="@{/board/detail(no=${ notice.noticeNo })}">삭제</a></button>
+        <button type="button" th:onclick="'location.href=\'/board/notice\''">목록</button>
     </div>
     </form>
 </div>

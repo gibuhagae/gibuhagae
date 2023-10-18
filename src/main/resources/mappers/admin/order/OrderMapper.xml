@@ -65,6 +65,20 @@
         <result property="cancelDate" column="CANCEL_DATE"/>
     </resultMap>
 
+
+    <resultMap id="itemResultMap" type="com.gibuhagae.gibuhagae.product.dto.ItemDTO">
+        <id property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="saleStatus" column="SALE_STATUS"/>
+        <result property="registDate" column="REGIST_DATE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="totalCount" column="TOTAL_COUNT"/>
+    </resultMap>
+
+    <resultMap id="itemOptionMap" type="com.gibuhagae.gibuhagae.product.dto.ItemDTO">
+        <id property="optionCode" column="OPTION_CODE"/>
+        <id property="itemCode" column="ITEM_CODE"/>
+
     <resultMap id="swapOrderListResultMap" type="com.gibuhagae.gibuhagae.order.dto.SwapRequestDTO">
         <id property="orderNo" column="ORDER_NO"/>
         <id property="swapNumber" column="SWAP_NUMBER"/>
@@ -72,6 +86,7 @@
         <result property="orderCount" column="ORDER_COUNT"/>
         <result property="paymentPrice" column="PAYMENT_PRICE"/>
         <result property="itemName" column="ITEM_NAME"/>
+
         <result property="optionName" column="OPTION_NAME"/>
         <result property="userId" column="USER_ID"/>
         <result property="zipCode" column="ZIPCODE"/>

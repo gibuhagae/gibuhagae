@@ -98,7 +98,8 @@ public class BoardController {
         qna.setMemberNo(memberNo);
         boardService.registQna(qna);
 
-        return "redirect:/productDetail/productDetail#qna";
+
+        return "redirect:/product/productDetail";
     }
 
 @GetMapping("/review")             // 기본 페이지는 1페이지로

@@ -1,5 +1,6 @@
 package com.gibuhagae.gibuhagae.config;
 
+
 import com.gibuhagae.gibuhagae.member.service.AuthenticationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

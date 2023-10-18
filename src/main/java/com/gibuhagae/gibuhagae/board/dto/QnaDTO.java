@@ -1,7 +1,6 @@
 package com.gibuhagae.gibuhagae.board.dto;
-
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
-import com.gibuhagae.gibuhagae.productManagement.dto.ItemDTO;
+import com.gibuhagae.gibuhagae.product.dto.ItemDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
