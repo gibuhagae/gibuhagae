@@ -57,7 +57,7 @@
         <result property="postOffice" column="POSTOFFICE"/>
     </resultMap>
 
-    <resultMap id="itemResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ItemDTO">
+    <resultMap id="itemResultMap" type="com.gibuhagae.gibuhagae.product.dto.ItemDTO">
         <id property="itemCode" column="ITEM_CODE"/>
         <result property="itemName" column="ITEM_NAME"/>
         <result property="saleStatus" column="SALE_STATUS"/>
@@ -66,7 +66,7 @@
         <result property="totalCount" column="TOTAL_COUNT"/>
     </resultMap>
 
-    <resultMap id="itemOptionMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ItemOptionDTO">
+    <resultMap id="itemOptionMap" type="com.gibuhagae.gibuhagae.product.dto.ItemDTO">
         <id property="optionCode" column="OPTION_CODE"/>
         <id property="itemCode" column="ITEM_CODE"/>
         <result property="optionName" column="OPTION_NAME"/>

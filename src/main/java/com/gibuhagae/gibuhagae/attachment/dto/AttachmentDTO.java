@@ -15,7 +15,7 @@ public class AttachmentDTO {
     private String filePath;    //경로명
     private String fileSave;    //저장명
     private String fileExt;     //확장자명
-    private  String fileVolume; //용량
+    private String fileVolume; //용량
     private String fileType;    //구분
     private Long itemCode;      //상품코드
     private Long reviewNo;      //리뷰번호

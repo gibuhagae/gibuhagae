@@ -48,7 +48,7 @@
         <!--        <collection property="replyList" resultMap="replyResultMap"/>-->
     </resultMap>
 
-    <resultMap type="com.gibuhagae.gibuhagae.productManagement.dto.ItemDTO" id="itemResultMap">
+    <resultMap type="com.gibuhagae.gibuhagae.product.dto.ItemDTO" id="itemResultMap">
         <id property="itemCode" column="ITEM_CODE"/>
         <result property="itemName" column="ITEM_NAME"/>
         <result property="saleStatus" column="SALE_STATUS"/>
@@ -79,6 +79,7 @@
         SELECT
         COUNT(*)
         FROM NOTICE_BOARD A
+       WHERE STATUS = 'Y'
     </select>
 
 
@@ -121,6 +122,7 @@
                   )A
                  JOIN MEMBER D ON (A.MEMBER_NO = D.MEMBER_NO)
         WHERE A.RNUM >= #{startRow}
+          AND STATUS = 'Y'
         ORDER BY A.NOTICE_NO DESC
     </select>
 
@@ -241,6 +243,7 @@
         ORDER BY A.INQUIRY_NO DESC
     </select>
 
+
     <select id="selectQnaDetail" resultMap="generalQnaResultMap">
         SELECT
                A.INQUIRY_NO
@@ -276,7 +279,7 @@
                 , #{ inquiryType }
                 , #{ inquiryTitle }
                 , #{ inquiryContent }
-                , 1
+                , #{ item.itemCode }
                 , 1
                 , SYSDATE
                 , 'N'

@@ -58,9 +58,10 @@
                 </tr>
             </table>
             <div align="center">
-                <button type="submit" id="modify">수정하기</button>
-                <!--        <a th:href="@{/board/detail(no=${ notice.noticeNo })}">삭제하기</a>-->
-                <button type="button" th:onclick="'location.href=\'/productDetail/productDetail\''">목록으로</button>
+                <button type="submit" id="modify">수정</button>
+                <button><a th:href="@{/board/detail(no=${ qna.inquiryNo })}">삭제</a></button>
+                <button type="button" th:onclick="'location.href=\'/product/productDetail\''">목록</button>
+
             </div>
         </form>
     </div>

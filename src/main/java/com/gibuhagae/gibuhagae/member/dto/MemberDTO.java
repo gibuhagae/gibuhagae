@@ -38,7 +38,7 @@ public class MemberDTO implements UserDetails  {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> role = new HashSet<>();
 
-        role.add(new SimpleGrantedAuthority(userCode));
+            role.add(new SimpleGrantedAuthority(userCode));
 
         return role;
     }
