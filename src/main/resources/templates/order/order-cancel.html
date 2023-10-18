@@ -43,30 +43,162 @@
     </div>
 
 
-    <div class="order-view">
-        <button id="orderCancel" class="order-btn">주문 취소</button>
-        <button id="cancelList" class="order-btn"><img src="/images/readingGlass.png" alt="조회" id="cancelList-img">취소내역 조회</button>
 
+    <div class="order-view">
+        <button id="cancelList" class="order-btn"><img src="/images/readingGlass.png" alt="조회" id="cancelList-img">취소내역 조회</button>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>주문 취소 내역</h2>
+                <label for="search-Box">
+                    <strong>검색</strong>
+                </label>
+                <input type="search" id="search-Box" placeholder="검색">
+                <table class="cancelListArea">
+                    <thead>
+                    <tr>
+                        <th class="cancelOrder-Data">주문번호</th>
+                        <th class="cancelOrder-Data">일자</th>
+                        <th class="cancelOrder-Data">ID</th>
+                        <th class="cancelOrder-Data">수취인</th>
+                        <th class="cancelOrder-Data">주문상품</th>
+                        <th class="cancelOrder-Data">상품금액</th>
+                        <th class="cancelOrder-Data">수량</th>
+                        <th class="cancelOrder-Data">취소일시</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cancel : ${ cancelList }" class="cancelOrderDataList">
+                        <td th:text="${ cancel.orderNo }" class="cancelOrder-Data"></td>
+                        <td th:text="${#dates.format(cancel.orderDate, 'yyyy-MM-dd HH:mm:ss') }" class="cancelOrder-Data"></td>
+                        <td th:text="${cancel.userId}" class="cancelOrder-Data"></td>
+                        <td th:text="${cancel.recipientName}" class="cancelOrder-Data"></td>
+                        <td th:text="${ cancel.itemName +' '+cancel.optionName }" class="cancelOrder-Data"></td>
+                        <td th:text="${ cancel.paymentPrice }" class="cancelOrder-Data"></td>
+                        <td th:text="${ cancel.orderCount}" class="cancelOrder-Data"></td>
+                        <td th:text="${ #dates.format(cancel.cancelDate, 'yyyy-MM-dd HH:mm:ss') }" class="cancelOrder-Data"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button id="modalCloseBtn" type="button">닫기</button>
+            </div>
+        </div>
     </div>
 
     <div class="order-list">
-        <div id="order-num" class="orderList-title"><input type="checkbox" id="orderNum-ck" class="ckBox"><label for="orderNum-ck">주문번호/시각</label> </div>
+        <div id="order-num" class="orderList-title">주문번호/일자/ID/수취인</div>
         <div id="order-item" class="orderList-title">주문상품</div>
         <div id="order-price" class="orderList-title">상품금액</div>
         <div id="order-count" class="orderList-title">수량</div>
-        <div id="order-message" class="orderList-title">취소사유</div>
-        <div id="order-delivery" class="orderList-title">결제방법</div>
-
+        <div id="order-message" class="orderList-title">요청사항</div>
+        <div id="order-delivery" class="orderList-title">처리</div>
     </div>
+
     <div class="order-container">
+        <table>
+            <tbody>
+            <!-- 주문 데이터를 순환하며 표시 -->
+            <tr th:each="order : ${orderCancelList}" class="newOrderList">
+                <td class="order-data">
+                    <p th:text="${order.orderNo}" id="orderData-1"></p>
+                    <p th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}" id="orderData-2"></p>
+                    <p th:text="${order.userId}" id="orderData-12"></p>
+                    <p th:text="${order.recipientName}" id="orderData-3"></p>
+                </td>
 
+                <td class="order-data2">
+                    <span th:text="${order.itemName}" id="orderData-4"></span>
+                    <span th:text="${order.optionName}" id="orderData-5"></span>
+                </td>
+
+                <td th:text="${order.paymentPrice}" id="orderData-6"></td>
+                <td th:text="${order.orderCount}" id="orderData-7"></td>
+                <td th:text="${order.deliveryRequest}" id="orderData-8"></td>
+
+                <td class="order-data3">
+                    <form action="/order/order-cancel" method="post" class="postForm">
+
+                        <input type="hidden" name="selectedOrderNo" th:value="${order.orderNo}" id="selectedOrderNo">
+                        <input type="submit" value="주문취소" class="registBtn w-btn w-btn-blue">
+
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
     </div>
-
-
-
 
 </div>
 
+                    <script>
+
+                        const registBtnElement = document.querySelector('.registBtn');
+
+                        if (registBtnElement) {
+                            registBtnElement.addEventListener('click', function (event) {
+                                // 추가 확인을 요청하는 경고창 표시
+                                const confirmation = confirm('주문을 정말 취소하시겠습니까?');
+
+                                if (!confirmation) {
+                                    event.preventDefault();
+                                }
+                            });
+                        }
+
+
+                        /*---------------------------------취소내역조회 모달 --------------------------------------*/
+                        const openModalButton = document.getElementById('cancelList');
+                        const modal = document.getElementById('myModal');
+                        const closeModalButton = document.getElementById('closeModal');
+                        const closeBtn = document.getElementById('modalCloseBtn');
+
+                        openModalButton.addEventListener('click', function () {
+                            modal.style.display = 'block';
+                        });
+
+                        closeModalButton.addEventListener('click', function () {
+                            modal.style.display = 'none';
+                        });
+
+                        closeBtn.addEventListener('click', function (){
+                            modal.style.display = 'none';
+                        });
+
+                        window.addEventListener('click', function (event) {
+                            if (event.target === modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+
+
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // 검색창 element를 id값으로 가져오기
+                            const payrollSearch = document.querySelector('#search-Box');
+                            // 테이블의 tbody element를 id값으로 가져오기
+                            const payrollTable = document.querySelector('.cancelListArea tbody');
+
+                            //검색창 element에 keyup 이벤트 세팅. 글자 입력 시 마다 발생.
+                            payrollSearch.addEventListener('keyup', function() {
+                                // 사용자가 입력한 검색어의 value값을 가져와 소문자로 변경하여 filterValue에 저장
+                                const filterValue = payrollSearch.value.toLowerCase();
+                                // 현재 tbody안에 있는 모든 tr element를 가져와 rows에 저장
+                                const rows = payrollTable.querySelectorAll('tr');
+
+                                //tr들 for문으로 순회
+                                for (var i = 0; i < rows.length; i++) {
+                                    // 현재 순회중인 tr의 textContent를 소문자로 변경하여 rowText에 저장
+                                    var rowText = rows[i].textContent.toLowerCase();
+                                    // rowText가 filterValue를 포함하면, 해당 tr은 보여지게 하고, 그렇지 않으면 숨긴다.
+                                    if (rowText.includes(filterValue)) {
+                                        rows[i].style.display = '';
+                                    } else {
+                                        rows[i].style.display = 'none';
+                                    }
+                                }
+                            });
+                        });
+                    </script>
 
 
 </body>

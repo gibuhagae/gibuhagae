@@ -15,7 +15,8 @@
     <!-- Noto Sans Korean 글씨체 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap"
+          rel="stylesheet">
     <!-- 파비콘 -->
     <link rel="icon" type="image/x-icon" href="/images/favicon.png">
     <!-- 외부 script -->
@@ -32,26 +33,79 @@
     </header>
     <div class="order-board">
         <ul class="order-category">
-            <li class="category" id="new-order" ><div>신규주문</div></li>
-            <li class="category" id="post-ready"><div>배송준비중</div></li>
-            <li class="category" id="post-shipping"><div>배송중</div></li>
-            <li class="category" id="post-complete"><div>배송완료</div></li>
-            <li class="category" id="post-cancel"><div>취소요청</div></li>
-            <li class="category" id="post-return"><div>반품요청</div></li>
-            <li class="category" id="post-swap"><div>교환요청</div></li>
+            <li class="category" id="new-order">
+                <div>신규주문</div>
+            </li>
+            <li class="category" id="post-ready">
+                <div>배송준비중</div>
+            </li>
+            <li class="category" id="post-shipping">
+                <div>배송중</div>
+            </li>
+            <li class="category" id="post-complete">
+                <div>배송완료</div>
+            </li>
+            <li class="category" id="post-cancel">
+                <div>취소요청</div>
+            </li>
+            <li class="category" id="post-return">
+                <div>반품요청</div>
+            </li>
+            <li class="category" id="post-swap">
+                <div>교환요청</div>
+            </li>
         </ul>
     </div>
 
 
     <div class="order-view">
-        <button id="changeReady" class="order-btn">배송준비중으로 전환</button>
-        <button id="changeShipping" class="order-btn">배송중으로 전환</button>
-        <button id="swapList" class="order-btn"><img src="/images/readingGlass.png" alt="조회" id="swapList-img">교환내역 조회</button>
 
+    <button id="swapList" class="order-btn"><img src="/images/readingGlass.png" alt="조회" id="swapList-img">교환내역 조회
+        </button>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>주문 취소 내역</h2>
+                <label for="search-Box">
+                    <strong>검색</strong>
+                </label>
+                <input type="search" id="search-Box" placeholder="검색">
+                <table class="swapListArea">
+                    <thead>
+                    <tr>
+                        <th class="swapOrder-Data">교환번호</th>
+                        <th class="swapOrder-Data">주문날짜</th>
+                        <th class="swapOrder-Data">ID</th>
+                        <th class="swapOrder-Data">수취인</th>
+                        <th class="swapOrder-Data">핸드폰번호</th>
+                        <th class="swapOrder-Data">주문상품</th>
+                        <th class="swapOrder-Data">상품금액</th>
+                        <th class="swapOrder-Data">수량</th>
+                        <th class="swapOrder-Data">교환사유</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="swapDetil :${ swapDetailList }" class="swapOrderDataList">
+                        <td th:text="${swapDetil.swapNumber}" class="swapOrder-Data"></td>
+                        <td th:text="${#dates.format(swapDetil.orderDate, 'yyyy-MM-dd HH:mm:ss') }"
+                            class="swapOrder-Data"></td>
+                        <td th:text="${swapDetil.userId}" class="swapOrder-Data"></td>
+                        <td th:text="${swapDetil.recipientName}" class="swapOrder-Data"></td>
+                        <td th:text="${swapDetil.recipientPhone}" class="swapOrder-Data"></td>
+                        <td th:text="${ swapDetil.itemName +' '+ swapDetil.optionName }" class="swapOrder-Data"></td>
+                        <td th:text="${ swapDetil.paymentPrice }" class="swapOrder-Data"></td>
+                        <td th:text="${ swapDetil.orderCount}" class="swapOrder-Data"></td>
+                        <td th:text="${ swapDetil.swapReason}" class="swapOrder-Data"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button id="modalCloseBtn" type="button">닫기</button>
+            </div>
+        </div>
     </div>
 
     <div class="order-list">
-        <div id="order-num" class="orderList-title"><input type="checkbox" id="orderNum-ck"><label for="orderNum-ck" class="ckBox">주문번호/시각</label> </div>
+        <div id="order-num" class="orderList-title">주문번호/일자/ID/수취인</div>
         <div id="order-item" class="orderList-title">주문상품</div>
         <div id="order-price" class="orderList-title">상품금액</div>
         <div id="order-count" class="orderList-title">수량</div>
@@ -59,15 +113,120 @@
         <div id="order-delivery" class="orderList-title">배송</div>
 
     </div>
-    <div class="order-container">
 
+
+    <div class="order-container">
+        <table>
+            <tbody>
+            <!-- 주문 데이터를 순환하며 표시 -->
+            <tr th:each="swap : ${swapRequestList}" class="newOrderList">
+                <td class="order-data">
+                    <p th:text="${swap.orderNo}" id="orderData-1"></p>
+                    <p th:text="${#dates.format(swap.orderDate, 'yyyy-MM-dd HH:mm:ss')}" id="orderData-2"></p>
+                    <p th:text="${swap.userId}" id="orderData-12"></p>
+                    <p th:text="${swap.recipientName}" id="orderData-3"></p>
+                </td>
+
+                <td class="order-data2">
+                    <span th:text="${swap.itemName}" id="orderData-4"></span>
+                    <span th:text="${swap.optionName}" id="orderData-5"></span>
+                </td>
+
+                <td th:text="${swap.paymentPrice}" id="orderData-6"></td>
+                <td th:text="${swap.orderCount}" id="orderData-7"></td>
+                <td th:text="${swap.swapReason}" id="orderData-8"></td>
+
+                <td class="order-data3">
+                    <form action="/order/order-swap" method="post" class="postForm">
+                        <select id="orderData-11" name="orderStatus">
+                            <option value="배송준비중" th:selected="${swap.orderStatus} eq '배송준비중'" selected>배송준비중으로 되돌리기
+                            </option>
+                            <option disabled>--------------</option>
+                            <option value="취소요청" th:selected="${swap.orderStatus} eq '취소요청'">취소요청</option>
+                        </select>
+
+                        <input type="hidden" name="selectedOrderNo" th:value="${swap.orderNo}" id="selectedOrderNo">
+                        <input type="submit" value="처리" class="registBtn w-btn w-btn-blue">
+
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
     </div>
 
 
-
-
 </div>
+<script>
+    const registBtnElement = document.querySelector('.registBtn');
+    const selectName = document.getElementById('orderData-11').value;
 
+    if (registBtnElement) {
+        registBtnElement.addEventListener('click', function (event) {
+        // 추가 확인을 요청하는 경고창 표시
+            const confirmation = confirm(selectName +'처리 하시겠습니까?');
+
+            if (!confirmation) {
+                event.preventDefault();
+            }
+        });
+    }
+
+
+    /*---------------------------------반품내역조회 모달 --------------------------------------*/
+    const openModalButton = document.getElementById('swapList');
+    const modal = document.getElementById('myModal');
+    const closeModalButton = document.getElementById('closeModal');
+    const closeBtn = document.getElementById('modalCloseBtn');
+
+    openModalButton.addEventListener('click', function () {
+        modal.style.display = 'block';
+    });
+
+    closeModalButton.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    closeBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    /* 검색 기능*/
+
+        document.addEventListener('DOMContentLoaded', function () {
+        // 검색창 element를 id값으로 가져오기
+        const payrollSearch = document.querySelector('#search-Box');
+        // 테이블의 tbody element를 id값으로 가져오기
+        const payrollTable = document.querySelector('.swapListArea tbody');
+
+        //검색창 element에 keyup 이벤트 세팅. 글자 입력 시 마다 발생.
+        payrollSearch.addEventListener('keyup', function () {
+            // 사용자가 입력한 검색어의 value값을 가져와 소문자로 변경하여 filterValue에 저장
+            const filterValue = payrollSearch.value.toLowerCase();
+            // 현재 tbody안에 있는 모든 tr element를 가져와 rows에 저장
+            const rows = payrollTable.querySelectorAll('tr');
+
+            //tr들 for문으로 순회
+            for (var i = 0; i < rows.length; i++) {
+            // 현재 순회중인 tr의 textContent를 소문자로 변경하여 rowText에 저장
+                var rowText = rows[i].textContent.toLowerCase();
+            // rowText가 filterValue를 포함하면, 해당 tr은 보여지게 하고, 그렇지 않으면 숨긴다.
+                if (rowText.includes(filterValue)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        });
+    });
+</script>
 
 
 </body>

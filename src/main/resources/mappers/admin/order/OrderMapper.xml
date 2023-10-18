@@ -6,12 +6,13 @@
 
     <resultMap id="generalOrderListResultMap" type="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
         <id property="orderNo" column="ORDER_NO"/>
+        <id property="refundNo" column="REFUND_NUMBER"/>
+        <id property="swapNo" column="SWAP_NUMBER"/>
         <result property="orderDate" column="ORDER_DATE"/>
         <result property="orderStatus" column="ORDER_STATUS"/>
         <result property="orderCount" column="ORDER_COUNT"/>
         <result property="donateYN" column="DONATE_YN"/>
         <result property="paymentPrice" column="PAYMENT_PRICE"/>
-        <result property="cancelDate" column="CANCEL_DATE"/>
         <result property="cerStatus" column="CER_STATUS"/>
         <result property="totalOrderPrice" column="TOTAL_ORDER_PRICE"/>
         <result property="donatePrice" column="DONATE_PRICE"/>
@@ -21,41 +22,49 @@
         <result property="registrationNo" column="REGISTRATION_NO"/>
         <result property="postOffice" column="POSTOFFICE"/>
         <result property="deliveryRequest" column="DELIVERY_REQUEST"/>
-
-
-
-
-    </resultMap>
-
-    <resultMap id="memberResultMap" type="com.gibuhagae.gibuhagae.member.dto.MemberDTO">
-        <id property="memberNo" column="MEMBER_NO"/>
-        <result property="memberName" column="MEMBER_NAME"/>
-        <result property="memberPhone" column="MEMBER_PHONE"/>
-        <result property="zipCode" column="ZIPCODE"/>
-        <result property="address" column="ADDRESS"/>
-        <result property="registDate" column="REGIST_DATE"/>
-        <result property="updateDate" column="UPDATE_DATE"/>
-        <result property="email" column="EMAIL"/>
-        <result property="donatePrice" column="DONATE_PRICE"/>
-        <result property="password" column="PASSWORD"/>
         <result property="userId" column="USER_ID"/>
-        <result property="userCode" column="USER_CODE"/>
-        <result property="loginType" column="LOGIN_TYPE"/>
-        <result property="activation_status" column="ACTIVATION_STATUS"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="addressDetail" column="ADDRESS_DETAIL"/>
+        <result property="zipCode" column="ZIPCODE"/>
+        <result property="refundReason" column="REFUND_REASON"/>
+        <result property="swapReason" column="SWAP_REASON"/>
 
     </resultMap>
 
-    <resultMap id="postResultMap" type="com.gibuhagae.gibuhagae.order.dto.PostDTO">
-        <id property="orderNo" column="ORDER_NO"/>
+    <resultMap id="cancelOderListResultMap" type="com.gibuhagae.gibuhagae.order.dto.CancelListDTO">
+         <id property="orderNo" column="ORDER_NO"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderCount" column="ORDER_COUNT"/>
+        <result property="paymentPrice" column="PAYMENT_PRICE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="userId" column="USER_ID"/>
         <result property="recipientName" column="RECIPIENT_NAME"/>
-        <result property="recipientPhone" column="RECIPIENT_PHONE"/>
+        <result property="cancelDate" column="CANCEL_DATE"/>
+        <result property="postOffice" column="POSTOFFICE"/>
+
+    </resultMap>
+
+    <resultMap id="returnOrderListResultMap" type="com.gibuhagae.gibuhagae.order.dto.ReturnRequestDTO">
+        <id property="orderNo" column="ORDER_NO"/>
+        <id property="refundNumber" column="REFUND_NUMBER"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderCount" column="ORDER_COUNT"/>
+        <result property="paymentPrice" column="PAYMENT_PRICE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="userId" column="USER_ID"/>
         <result property="zipCode" column="ZIPCODE"/>
         <result property="address" column="ADDRESS"/>
-        <result property="registrationDate" column="REGISTRATION_DATE"/>
-        <result property="deliveryRequest" column="DELIVERY_REQUEST"/>
+        <result property="addressDetail" column="ADDRESS_DETAIL"/>
+        <result property="refundReason" column="REFUND_REASON"/>
+        <result property="recipientPhone" column="RECIPIENT_PHONE"/>
+        <result property="recipientName" column="RECIPIENT_NAME"/>
         <result property="registrationNo" column="REGISTRATION_NO"/>
         <result property="postOffice" column="POSTOFFICE"/>
+        <result property="cancelDate" column="CANCEL_DATE"/>
     </resultMap>
+
 
     <resultMap id="itemResultMap" type="com.gibuhagae.gibuhagae.product.dto.ItemDTO">
         <id property="itemCode" column="ITEM_CODE"/>
@@ -69,19 +78,164 @@
     <resultMap id="itemOptionMap" type="com.gibuhagae.gibuhagae.product.dto.ItemDTO">
         <id property="optionCode" column="OPTION_CODE"/>
         <id property="itemCode" column="ITEM_CODE"/>
-        <result property="optionName" column="OPTION_NAME"/>
-        <result property="registDate" column="REGIST_DATE"/>
-        <result property="salePrice" column="SALE_PRICE"/>
-        <result property="count" column="COUNT"/>
 
+    <resultMap id="swapOrderListResultMap" type="com.gibuhagae.gibuhagae.order.dto.SwapRequestDTO">
+        <id property="orderNo" column="ORDER_NO"/>
+        <id property="swapNumber" column="SWAP_NUMBER"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderCount" column="ORDER_COUNT"/>
+        <result property="paymentPrice" column="PAYMENT_PRICE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="zipCode" column="ZIPCODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="addressDetail" column="ADDRESS_DETAIL"/>
+        <result property="swapReason" column="SWAP_REASON"/>
+        <result property="recipientPhone" column="RECIPIENT_PHONE"/>
+        <result property="recipientName" column="RECIPIENT_NAME"/>
+        <result property="registrationNo" column="REGISTRATION_NO"/>
+        <result property="postOffice" column="POSTOFFICE"/>
     </resultMap>
+
 
 
     <select id="selectNewOrderList" resultMap="generalOrderListResultMap">
         SELECT
             OM.ORDER_NO,
-            OM.ORDER_DATE,
+            M.USER_ID,
             P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            P.DELIVERY_REQUEST,
+            P.REGISTRATION_NO,
+            P.POSTOFFICE,
+            P.ZIPCODE,
+            P.ADDRESS,
+            P.ADDRESS_DETAIL
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+        WHERE OM.ORDER_STATUS = '신규주문'
+    </select>
+
+    <update id="updatePost" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
+        UPDATE POST
+        SET
+            REGISTRATION_NO = #{ registrationNo },
+            POSTOFFICE = #{ deliveryCompany },
+            REGISTRATION_DATE = SYSTIMESTAMP
+        WHERE ORDER_NO = #{ selectedOrderNo }
+    </update>
+
+    <update id="updateOrderStatus" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
+        UPDATE ORDER_MANAGEMENT
+           SET
+               ORDER_STATUS = #{ orderStatus }
+         WHERE ORDER_NO = #{ selectedOrderNo }
+    </update>
+
+
+<select id="selectShippingOrderList" resultMap="generalOrderListResultMap">
+    SELECT
+        OM.ORDER_NO,
+        M.USER_ID,
+        P.RECIPIENT_NAME,
+        OM.ORDER_DATE,
+        I.ITEM_NAME,
+        IO.OPTION_NAME,
+        OM.PAYMENT_PRICE,
+        OM.ORDER_COUNT,
+        CASE
+            WHEN OM.CER_STATUS = '교환' THEN SM.SWAP_REASON
+            ELSE P.DELIVERY_REQUEST
+            END AS DELIVERY_REQUEST,
+        P.REGISTRATION_NO,
+        P.POSTOFFICE,
+        P.ZIPCODE,
+        P.ADDRESS,
+        P.ADDRESS_DETAIL
+    FROM ORDER_MANAGEMENT OM
+             JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+             JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+             JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+             JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+             JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+             LEFT JOIN SWAP_MANAGEMENT SM ON OD.ORDER_DETAIL_CODE = SM.ORDER_DETAIL_CODE
+    WHERE OM.ORDER_STATUS = '발송처리'
+</select>
+
+    <select id="OrderReadyList" resultMap="generalOrderListResultMap">
+        SELECT
+            OM.ORDER_NO,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            CASE
+                WHEN OM.CER_STATUS = '교환' THEN SM.SWAP_REASON
+                ELSE P.DELIVERY_REQUEST
+                END AS DELIVERY_REQUEST,
+            P.REGISTRATION_NO,
+            P.POSTOFFICE,
+            P.ZIPCODE,
+            P.ADDRESS,
+            P.ADDRESS_DETAIL
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                 LEFT JOIN SWAP_MANAGEMENT SM ON OD.ORDER_DETAIL_CODE = SM.ORDER_DETAIL_CODE
+        WHERE OM.ORDER_STATUS = '배송준비중'
+    </select>
+
+    <select id="orderCompleteList" resultMap="generalOrderListResultMap">
+        SELECT
+            OM.ORDER_NO,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            CASE
+                WHEN OM.CER_STATUS = '교환' THEN SM.SWAP_REASON
+                ELSE P.DELIVERY_REQUEST
+                END AS DELIVERY_REQUEST,
+            P.REGISTRATION_NO,
+            P.POSTOFFICE,
+            P.ZIPCODE,
+            P.ADDRESS,
+            P.ADDRESS_DETAIL
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                 LEFT JOIN SWAP_MANAGEMENT SM ON OD.ORDER_DETAIL_CODE = SM.ORDER_DETAIL_CODE
+        WHERE OM.ORDER_STATUS = '배송완료'
+    </select>
+
+    <select id="orderCancelList" resultMap="generalOrderListResultMap">
+        SELECT
+            OM.ORDER_NO,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
             I.ITEM_NAME,
             IO.OPTION_NAME,
             OM.PAYMENT_PRICE,
@@ -92,15 +246,150 @@
                  JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
                  JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
                  JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
-        WHERE ORDER_STATUS = '신규주문'
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+        WHERE OM.ORDER_STATUS = '취소요청'
     </select>
 
-    <update id="updatePost" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
-        UPDATE POST
-        SET
-            REGISTRATION_NO = #{ trackingNumber },
-            POSTOFFICE = #{ deliveryCompany }
-        WHERE ORDER_NO = #{ selectedOrderNo }
+<update id="cancelOrder" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
+    UPDATE ORDER_MANAGEMENT
+       SET
+           ORDER_STATUS = '취소 된 주문',
+           CER_STATUS = '취소',
+           CANCEL_DATE = SYSTIMESTAMP
+     WHERE ORDER_NO = #{ selectedOrderNo }
+</update>
+
+    <update id="returnOrder" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
+    UPDATE ORDER_MANAGEMENT
+       SET
+           ORDER_STATUS = '반품 된 주문',
+           CER_STATUS = '반품',
+           CANCEL_DATE = SYSTIMESTAMP
+     WHERE ORDER_NO = #{ selectedOrderNo }
+
+
     </update>
+
+
+    <select id="selectCancelOrderList" resultMap="cancelOderListResultMap">
+        SELECT
+            OM.ORDER_NO,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            OM.CANCEL_DATE
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+         WHERE OM.CER_STATUS = '취소'
+    </select>
+
+   <select id="orderReturnList" resultMap="generalOrderListResultMap">
+       SELECT
+           RM.REFUND_NUMBER,
+           OM.ORDER_NO,
+           M.USER_ID,
+           P.RECIPIENT_NAME,
+           OM.ORDER_DATE,
+           I.ITEM_NAME,
+           IO.OPTION_NAME,
+           OM.PAYMENT_PRICE,
+           OM.ORDER_COUNT,
+           RM.REFUND_REASON
+       FROM ORDER_MANAGEMENT OM
+                JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                JOIN REFUND_MANAGEMENT RM ON OD.ORDER_DETAIL_CODE = RM.ORDER_DETAIL_CODE
+       WHERE OM.ORDER_STATUS = '반품요청'
+   </select>
+
+    <select id="returnDetailList" resultMap="returnOrderListResultMap">
+        SELECT
+            RM.REFUND_NUMBER,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            P.RECIPIENT_PHONE,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            OM.CANCEL_DATE,
+            RM.REFUND_REASON
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                 JOIN REFUND_MANAGEMENT RM ON OD.ORDER_DETAIL_CODE = RM.ORDER_DETAIL_CODE
+        WHERE OM.CER_STATUS = '반품'
+
+    </select>
+
+    <select id="orderSwapList" resultMap="generalOrderListResultMap">
+        SELECT
+            SM.SWAP_NUMBER,
+            OM.ORDER_NO,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            SM.SWAP_REASON
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                 JOIN SWAP_MANAGEMENT SM ON OD.ORDER_DETAIL_CODE = SM.ORDER_DETAIL_CODE
+        WHERE OM.ORDER_STATUS = '교환요청'
+    </select>
+
+    <select id="swapDetailList" resultMap="swapOrderListResultMap">
+        SELECT
+            SM.SWAP_NUMBER,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            P.RECIPIENT_PHONE,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            OM.CANCEL_DATE,
+            SM.SWAP_REASON
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                 JOIN SWAP_MANAGEMENT SM ON OD.ORDER_DETAIL_CODE = SM.ORDER_DETAIL_CODE
+        WHERE OM.CER_STATUS = '교환'
+    </select>
+
+    <update id="swapOrder" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
+        UPDATE ORDER_MANAGEMENT
+           SET
+               ORDER_STATUS = #{ orderStatus },
+               CER_STATUS = '교환'
+         WHERE ORDER_NO = #{ selectedOrderNo }
+
+    </update>
+
 
 </mapper>
