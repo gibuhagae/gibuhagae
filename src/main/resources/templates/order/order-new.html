@@ -58,35 +58,27 @@
     </div>
 
 
-    <div class="order-view">
-        <button id="sendBtn" class="order-btn" type="button">발송처리</button>
-        <button id="readyBtn" class="order-btn">배송준비처리</button>
-        <button id="cancelBtn" class="order-btn">판매취소</button>
-        <button id="returnBtn" class="order-btn">반품처리</button>
-        <button id="swapBtn" class="order-btn">교환처리</button>
-    </div>
-
     <div class="order-list">
-        <div id="order-num" class="orderList-title"><input type="checkbox" id="orderNum-ck" class="ckBox"><label
-                for="orderNum-ck">주문번호/시각</label></div>
+        <div id="order-num" class="orderList-title">주문번호/일자/ID/수취인</div>
         <div id="order-item" class="orderList-title">주문상품</div>
         <div id="order-price" class="orderList-title">상품금액</div>
-        <div id="order-count" class="orderList-title">수량</div>
+        <div id="order-count" class="orderList-title">수량(EA)</div>
         <div id="order-message" class="orderList-title">요청사항</div>
-        <div id="order-delivery" class="orderList-title">배송</div>
-
+        <div id="order-delivery" class="orderList-title">운송장등록 및 처리</div>
     </div>
+
+
     <div class="order-container">
         <table>
             <tbody>
             <!-- 주문 데이터를 순환하며 표시 -->
             <tr th:each="order : ${newOrderList}" class="newOrderList">
-                <td><input type="checkbox" name="selectedOrders" th:value="${order.orderNo}" id="listCk"
-                           class="orderCheckbox"></td>
+
                 <td class="order-data">
-                    <span th:text="${order.orderNo}" id="orderData-1"></span>
-                    <span th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}" id="orderData-2"></span>
-                    <span th:text="${order.recipientName}" id="orderData-3"></span>
+                    <p th:text="${order.orderNo}" id="orderData-1" ></p>
+                    <p th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}" id="orderData-2"></p>
+                    <p th:text="${order.userId}" id="orderData-12"></p>
+                    <p th:text="${order.recipientName}" id="orderData-3"></p>
                 </td>
 
                 <td class="order-data2">
@@ -98,16 +90,29 @@
                 <td th:text="${order.orderCount}" id="orderData-7"></td>
                 <td th:text="${order.deliveryRequest}" id="orderData-8"></td>
 
+
                 <td class="order-data3">
-                    <form action="/order/order-new" method="post">
+                    <span th:text="${order.zipCode}" id="Data-zipCode"></span>
+                    <span th:text="${order.address}" id="Data-address"></span>
+                    <p th:text="${order.addressDetail}" id="Data-addressDetail"></p>
+                    <form action="/order/order-new" method="post" class="postForm">
                         <select id="orderData-10" name="deliveryCompany">
-                            <option value="우체국" selected>우체국</option>
-                            <option value="대한통운">대한통운</option>
-                            <option value="롯데">롯데</option>
+                            <option value="우체국" th:selected="${order.postOffice} eq '우체국'" selected>우체국</option>
+                            <option value="대한통운" th:selected="${order.postOffice} eq '대한통운'">대한통운</option>
+                            <option value="롯데" th:selected="${order.postOffice} eq '롯데'">롯데</option>
                         </select>
-                        <input type="text" id="registrationNo" placeholder="송장 번호 입력" name="trackingNumber">
-                        <input type="submit" value="저장하기" class="registBtn">
+                        <input type="text" id="registrationNo" placeholder="송장 번호 입력" name="registrationNo"
+                               th:value="${order.registrationNo}">
+                        <select id="orderData-11" name="orderStatus">
+                            <option value="발송처리" th:selected="${order.orderStatus} eq '발송처리'" selected>발송처리</option>
+                            <option value="배송준비중" th:selected="${order.orderStatus} eq '배송준비중'">배송준비중</option>
+                            <option disabled>--------------</option>
+                            <option value="취소요청" th:selected="${order.orderStatus} eq '취소요청'">취소요청</option>
+                            <option value="교환요청" th:selected="${order.orderStatus} eq '교환요청'">교환요청</option>
+                        </select>
+                        <input type="submit" value="등록하기" class="registBtn w-btn w-btn-blue">
                         <input type="hidden" name="selectedOrderNo" th:value="${order.orderNo}" id="selectedOrderNo">
+
                     </form>
                 </td>
             </tr>
@@ -118,6 +123,32 @@
 
 </div>
 
+<script>
+    /*---------------------------------운송장 번호 정규 표현식  --------------------------------------*/
+    const orderStatusElement = document.getElementById("orderData-11");
+    const registrationElement = document.getElementById('registrationNo');
+    const registBtnElement = document.querySelector('.registBtn');
 
+    if (orderStatusElement && registrationElement && registBtnElement) {
+        registBtnElement.addEventListener('click', function (event) {
+            const orderStatus = orderStatusElement.value;
+
+            if (orderStatus === "취소요청" || orderStatus === "교환요청") {
+                alert('주문 상태 변경 완료');
+
+            } else if (orderStatus === "배송준비중" || orderStatus === "발송처리") {
+
+                const registrationNo = registrationElement.value;
+                if (!/^\d+$/.test(registrationNo)) {
+                    event.preventDefault();
+                    alert('송장 번호를 등록해주세요.\n숫자만 입력 가능합니다. (공백 X)');
+                    registrationElement.value = "";
+                } else {
+                    alert('주문 상태 변경 완료');
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

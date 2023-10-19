@@ -3,6 +3,7 @@ package com.gibuhagae.gibuhagae.board.service;
 import com.gibuhagae.gibuhagae.board.dao.BoardMapper;
 import com.gibuhagae.gibuhagae.board.dto.NoticeDTO;
 import com.gibuhagae.gibuhagae.board.dto.QnaDTO;
+import com.gibuhagae.gibuhagae.board.dto.ReviewDTO;
 import com.gibuhagae.gibuhagae.common.paging.Pagenation;
 import com.gibuhagae.gibuhagae.common.paging.SelectCriteria;
 import lombok.experimental.NonFinal;
@@ -68,6 +69,11 @@ public class BoardService {
 
     }
 
+    public void deleteNotice(Long no) {
+
+        boardMapper.deleteNotice(no);
+    }
+
     public Map<String, Object> selectQna(int page) {
 
         /* 페이징 처리를 위한 전체 게시글 수 확인 */
@@ -94,9 +100,38 @@ public class BoardService {
         return boardMapper.selectQnaDetail(no);
     }
 
+    public Map<String, Object> selectReview(int page) {
 
-//    public void deleteNotice(Long no) {
-//
-//        boardMapper.deleteNotice(no);
-//    }
+        /* 페이징 처리를 위한 전체 게시글 수 확인 */
+        int totalCount = boardMapper.selectReviewTotalCount();
+
+        /* 페이징 처리와 연관 된 값을 계산하여 SelectCriteria 타입의 객체에 담기 */
+        int limit = 10;          // 한 페이지에 보여 줄 게시물의 수
+        int buttonAmount = 5;   // 한 번에 보여질 페이징 버튼의 수
+        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
+
+        /* 요청 페이지 게시글을 조회 */
+        List<ReviewDTO> reviewList = boardMapper.selectReviewList(selectCriteria);
+
+        Map<String, Object> reviewListAndPaging = new HashMap<>();
+        reviewListAndPaging.put("paging", selectCriteria);
+        reviewListAndPaging.put("reviewList", reviewList);
+
+        return reviewListAndPaging;
+    }
+
+    public ReviewDTO selectReviewDetail(Long no) {
+
+        return boardMapper.selectReviewDetail(no);
+    }
+
+
+
+    public void registQna(QnaDTO qna) {
+
+        boardMapper.insertQna(qna);
+    }
+
+
+
 }

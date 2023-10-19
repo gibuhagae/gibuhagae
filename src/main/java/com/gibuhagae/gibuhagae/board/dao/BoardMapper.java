@@ -2,8 +2,10 @@ package com.gibuhagae.gibuhagae.board.dao;
 
 import com.gibuhagae.gibuhagae.board.dto.NoticeDTO;
 import com.gibuhagae.gibuhagae.board.dto.QnaDTO;
+import com.gibuhagae.gibuhagae.board.dto.ReviewDTO;
 import com.gibuhagae.gibuhagae.common.paging.SelectCriteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,15 +24,19 @@ public interface BoardMapper {
 
     void updateNotice(NoticeDTO notice);
 
-//    void deleteNotice(Long no);
+    void deleteNotice(Long no);
 
     int selectQnaTotalCount();
 
     List<QnaDTO> selectQnaList(SelectCriteria selectCriteria);
 
-
-    void incrementQnaCount(Long no);
-
-
     QnaDTO selectQnaDetail(Long no);
+
+    void insertQna(QnaDTO qna);
+
+    int selectReviewTotalCount();
+
+    List<ReviewDTO> selectReviewList(SelectCriteria selectCriteria);
+
+    ReviewDTO selectReviewDetail(Long no);
 }

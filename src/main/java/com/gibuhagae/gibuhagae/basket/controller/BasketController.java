@@ -2,7 +2,6 @@ package com.gibuhagae.gibuhagae.basket.controller;
 
 import com.gibuhagae.gibuhagae.basket.dao.BasketMapper;
 import com.gibuhagae.gibuhagae.basket.dto.BasketDTO;
-import com.gibuhagae.gibuhagae.basket.dto.BasketItemDTO;
 import com.gibuhagae.gibuhagae.basket.service.BasketService;
 import com.gibuhagae.gibuhagae.productDetail.dto.ProductDetailDTO;
 import lombok.extern.slf4j.Slf4j;

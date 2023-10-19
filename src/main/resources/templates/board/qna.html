@@ -40,19 +40,19 @@
                     <table class="board-table">
                         <thead>
                         <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
-                            <th class="th1" style="width: 30px;"></th>
                             <th class="th2" style="width: 50px;">글번호</th>
                             <th class="th9" style="width: 70px;">유형</th>
-                            <th class="th3" style="width: 300px;">제목</th>
+                            <th class="th9" style="width: 150px">상품</th>
+                            <th class="th3" style="width: 280px;">제목</th>
                             <th class="th4" style="width: 60px;">작성자</th>
                             <th class="th5" style="width: 150px;">작성일</th>
-                            <th class="th8" style="width: 60px;">답변상태</th>
+                            <th class="th8" style="width: 70px;">답변상태</th>
                         </tr>
                         </thead>
                         <tr th:each="qna : ${ qnaList }">
-                            <td><input type="checkbox" name="notice-checkbox"></td>
                             <td th:text="${ qna.inquiryNo }"></td>
                             <td th:text="${ qna.inquiryType }"></td>
+                            <td th:text="${ qna.itemCode.itemName }"></td>
                             <td th:text="${ qna.inquiryTitle}" th:onclick="|location.href='/board/qnaDetail?no=${ qna.inquiryNo }'|" style="cursor: pointer;"></td>
                             <td th:text="${ qna.memberNo.memberName }"></td>
                             <td th:text="${ qna.writeDate }"></td>
@@ -90,9 +90,6 @@
                             th:onclick="'location.href=\'/board/qna?page=' + @{${paging.maxPage}} + '\''">>></button>
                 </th:block>
             </div>
-                <div class="board-button">
-                    <button type="button" class="delete">삭제</button>
-                </div>
             </div>
         </div>
     </div>

@@ -15,7 +15,8 @@
     <!-- Noto Sans Korean 글씨체 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap"
+          rel="stylesheet">
     <!-- 파비콘 -->
     <link rel="icon" type="image/x-icon" href="/images/favicon.png">
     <!-- 외부 script -->
@@ -32,34 +33,94 @@
     </header>
     <div class="order-board">
         <ul class="order-category">
-            <li class="category" id="new-order" ><div>신규주문</div></li>
-            <li class="category" id="post-ready"><div>배송준비중</div></li>
-            <li class="category" id="post-shipping"><div>배송중</div></li>
-            <li class="category" id="post-complete"><div>배송완료</div></li>
-            <li class="category" id="post-cancel"><div>취소요청</div></li>
-            <li class="category" id="post-return"><div>반품요청</div></li>
-            <li class="category" id="post-swap"><div>교환요청</div></li>
+            <li class="category" id="new-order">
+                <div>신규주문</div>
+            </li>
+            <li class="category" id="post-ready">
+                <div>배송준비중</div>
+            </li>
+            <li class="category" id="post-shipping">
+                <div>배송중</div>
+            </li>
+            <li class="category" id="post-complete">
+                <div>배송완료</div>
+            </li>
+            <li class="category" id="post-cancel">
+                <div>취소요청</div>
+            </li>
+            <li class="category" id="post-return">
+                <div>반품요청</div>
+            </li>
+            <li class="category" id="post-swap">
+                <div>교환요청</div>
+            </li>
         </ul>
     </div>
 
 
-    <div class="order-view">
-        <button id="changeReady" class="order-btn">배송준비중으로 전환</button>
-        <button id="returnBtn" class="order-btn">반품처리</button>
-        <button id="swapBtn" class="order-btn">교환처리</button>
-    </div>
-
     <div class="order-list">
-        <div id="order-num" class="orderList-title"><input type="checkbox" id="orderNum-ck" class="ckBox"><label for="orderNum-ck">주문번호/시각</label> </div>
+        <div id="order-num" class="orderList-title">주문번호/일자/ID/수취인</div>
         <div id="order-item" class="orderList-title">주문상품</div>
         <div id="order-price" class="orderList-title">상품금액</div>
-        <div id="order-count" class="orderList-title">수량</div>
+        <div id="order-count" class="orderList-title">수량(EA)</div>
         <div id="order-message" class="orderList-title">요청사항</div>
-        <div id="order-delivery" class="orderList-title">배송</div>
-
+        <div id="order-delivery" class="orderList-title">택배사/운송장/처리</div>
     </div>
+
+
+<div class="order-container">
+    <table>
+        <tbody>
+        <!-- 주문 데이터를 순환하며 표시 -->
+        <tr th:each="orderShipping : ${orderList}" class="newOrderList">
+            <td class="order-data">
+                <p th:text="${orderShipping.orderNo}" id="orderData-1"></p>
+                <p th:text="${#dates.format(orderShipping.orderDate, 'yyyy-MM-dd HH:mm:ss')}" id="orderData-2"></p>
+                <p th:text="${orderShipping.userId}" id="orderData-12"></p>
+                <p th:text="${orderShipping.recipientName}" id="orderData-3"></p>
+            </td>
+
+            <td class="order-data2">
+                <span th:text="${orderShipping.itemName}" id="orderData-4"></span>
+                <span th:text="${orderShipping.optionName}" id="orderData-5"></span>
+            </td>
+
+            <td th:text="${orderShipping.paymentPrice}" id="orderData-6"></td>
+            <td th:text="${orderShipping.orderCount}" id="orderData-7"></td>
+            <td th:text="${orderShipping.deliveryRequest}" id="orderData-8"></td>
+
+            <td class="order-data3">
+                <span th:text="${orderShipping.postOffice}" id="orderData-9"></span>
+                <span th:text="${orderShipping.registrationNo}" id="orderData-10"></span>
+                <form action="/order/order-shipping" method="post" class="postForm">
+                    <select id="orderData-11" name="orderStatus">
+                        <option value="배송완료" th:selected="${orderShipping.orderStatus} eq '배송완료'" selected>배송완료</option>
+                        <option value="배송준비중" th:selected="${orderShipping.orderStatus} eq '배송준비중'" selected>배송준비중으로 되돌리기</option>
+                    </select>
+                    <input type="submit" value="이동" class="registBtn w-btn w-btn-blue">
+                    <input type="hidden" name="selectedOrderNo" th:value="${orderShipping.orderNo}" id="selectedOrderNo">
+                </form>
+
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 
+                <script>
+
+                    const orderStatusElement = document.getElementById("orderData-11");
+                const registBtnElement = document.querySelector('.registBtn');
+
+                if (orderStatusElement && registBtnElement) {
+                    document.querySelector('.registBtn').addEventListener('click', function () {
+
+                        alert('주문 상태 변경 완료');
+                    });
+                }
+                </script>
 
 
 </body>

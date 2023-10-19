@@ -7,6 +7,7 @@ import com.gibuhagae.gibuhagae.order.dto.SwapRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {

@@ -40,75 +40,58 @@
                 <table class="board-table">
                     <thead>
                     <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
-                        <th class="th1" style="width: 30px;"></th>
                         <th class="th7" style="width: 40px;">상태</th>
                         <th class="th2" style="width: 50px;">글번호</th>
+                        <th class="th9" style="width: 150px">상품이름</th>
                         <th class="th3" style="width: 300px;">제목</th>
                         <th class="th4" style="width: 60px;">작성자</th>
                         <th class="th5" style="width: 150px;">작성일</th>
-                        <th class="th6" style="width: 50px;">조회</th>
+                        <th class="th6" style="width: 50px;">평점</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="board-checkbox"></td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글</td>
-                        <td>관리자</td>
-                        <td>2023-10-01</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="board-checkbox"></td>
-                        <td>Y</td>
-                        <td>2</td>
-                        <td>두번째글</td>
-                        <td>관리자</td>
-                        <td>2023-10-01</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="board-checkbox"></td>
-                        <td>Y</td>
-                        <td>3</td>
-                        <td>세번째글</td>
-                        <td>관리자</td>
-                        <td>2023-10-01</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="board-checkbox"></td>
-                        <td>Y</td>
-                        <td>4</td>
-                        <td>네번째글</td>
-                        <td>관리자</td>
-                        <td>2023-10-01</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="board-checkbox"></td>
-                        <td>Y</td>
-                        <td>5</td>
-                        <td>다섯번째글</td>
-                        <td>관리자</td>
-                        <td>2023-10-01</td>
-                        <td>1</td>
+                    <tr th:each="review : ${ reviewList}">
+                        <td th:text="${ review.showStatus}"></td>
+                        <td th:text="${ review.reviewNo }"></td>
+                        <td th:text="${ review.itemCode.itemName }"></td>
+                        <td th:text="${ review.reviewTitle }" th:onclick="|location.href='/board/reviewDetail?no=${ review.reviewNo }'|" style="cursor: pointer;"></td>
+                        <td th:text="${ review.memberNo.memberName }"></td>
+                        <td th:text="${ review.registDate }"></td>
+                        <td th:text="${ review.grade }"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <!-- 페이지 네비게이션 -->
-            <nav class="board-page-nav">
-                <table>
-                    <td>이전</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>다음</td>
-                </table>
-            </nav>
+            <div id="paging" align="center" style="margin-top: 20px;">
+                <th:block>
+                    <!-- 맨 앞으로 이동 -->
+                    <button th:onclick="'location.href=\'/board/review?page=1\''">&lt;&lt;</button>
+
+                    <!-- 이전 페이지로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/review?page=' + @{${paging.page - 1}} + '\''"
+                            th:disabled="${ paging.page <= 1 }">&lt;</button>
+
+                    <!-- 숫자 버튼 -->
+                    <th:block
+                            th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+                        <button
+                                th:onclick="'location.href=\'/board/review?page=' + @{${page}} + '\''"
+                                th:text="${ page }" th:disabled="${ paging.page eq page }">
+                        </button>
+                    </th:block>
+
+                    <!-- 다음 페이지로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/review?page=' + @{${paging.page + 1}} + '\''"
+                            th:disabled="${ paging.page >= paging.maxPage }">></button>
+
+                    <!-- 맨 끝으로 이동 -->
+                    <button
+                            th:onclick="'location.href=\'/board/review?page=' + @{${paging.maxPage}} + '\''">>></button>
+                </th:block>
+            </div>
             <div class="board-button">
                 <button type="button" class="delete">삭제</button>
             </div>
