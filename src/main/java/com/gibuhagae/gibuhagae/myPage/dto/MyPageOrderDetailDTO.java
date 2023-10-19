@@ -17,7 +17,7 @@ public class MyPageOrderDetailDTO {
     // 수량
     private int itemCnt;
     // 상품구매금액
-    private String paymentPrice;
+    private int paymentPrice;
     // 주문처리상태
     private String orderStatus;
     // 취소/교환/반품

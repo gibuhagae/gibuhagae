@@ -90,7 +90,7 @@ public class MyPageController {
         System.out.println("moveOrderDetail Call before");
 
         // 주문 상세 정보를 가져온다.
-        List<OrderManagementDTO> orderManagementList = orderService.selectNewOrderList();
+        List<OrderManagementDTO> orderManagementList = orderService.selectNewOrderList2();
 
         // 전송 전용 주문상세DTO 선언
         List<MyPageOrderDetailDTO> myPageOrderDetailDTOList = new ArrayList<>();

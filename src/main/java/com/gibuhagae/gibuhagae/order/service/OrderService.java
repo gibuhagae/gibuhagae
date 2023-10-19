@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class OrderService {
@@ -122,6 +121,12 @@ public class OrderService {
     public boolean insertSwapManagement(String reasonText, String orderDetailCode) {
         int ret = orderMapper.insertSwapManagement(reasonText, orderDetailCode);
         return ret > 0;
+    }
+
+    public List<OrderManagementDTO> selectNewOrderList2() {
+
+
+        return orderMapper.selectNewOrderList2();
     }
 }
 
