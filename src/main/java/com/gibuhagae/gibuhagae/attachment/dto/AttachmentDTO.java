@@ -10,6 +10,9 @@ import lombok.ToString;
 @ToString
 public class AttachmentDTO {
 
+
+
+
     private Long fileNo;        //파일번호
     private String fileName;    //파일명
     private String filePath;    //경로명
