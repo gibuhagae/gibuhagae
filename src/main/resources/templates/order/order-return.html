@@ -50,7 +50,7 @@
                 <span class="close" id="closeModal">&times;</span>
                 <h2>주문 취소 내역</h2>
                 <label for="search-Box">
-                    <strong>검색</strong>
+                    <strong>검색(모든 키워드)</strong>
                 </label>
                 <input type="search" id="search-Box" placeholder="검색">
                 <table class="returnListArea">
@@ -76,7 +76,7 @@
                         <td th:text="${return.recipientName}" class="returnOrder-Data"></td>
                         <td th:text="${return.recipientPhone}" class="returnOrder-Data"></td>
                         <td th:text="${ return.itemName +' '+return.optionName }" class="returnOrder-Data"></td>
-                        <td th:text="${ return.paymentPrice }" class="returnOrder-Data"></td>
+                        <td th:text="${#numbers.formatInteger(return.paymentPrice, 3, 'COMMA')}" class="returnOrder-Data"></td>
                         <td th:text="${ return.orderCount}" class="returnOrder-Data"></td>
                         <td th:text="${ return.refundReason}" class="returnOrder-Data"></td>
                         <td th:text="${ #dates.format(return.cancelDate, 'yyyy-MM-dd HH:mm:ss') }" class="returnOrder-Data"></td>
@@ -94,7 +94,7 @@
         <div id="order-price" class="orderList-title">상품금액</div>
         <div id="order-count" class="orderList-title">수량</div>
         <div id="order-message" class="orderList-title">반품사유</div>
-        <div id="order-delivery" class="orderList-title">결제방법</div>
+        <div id="order-delivery" class="orderList-title">처리</div>
     </div>
 
         <div class="order-container">
@@ -114,12 +114,12 @@
                         <span th:text="${order.optionName}" id="orderData-5"></span>
                     </td>
 
-                    <td th:text="${order.paymentPrice}" id="orderData-6"></td>
+                    <td th:text="${#numbers.formatInteger(order.paymentPrice, 3, 'COMMA')}" id="orderData-6"></td>
                     <td th:text="${order.orderCount}" id="orderData-7"></td>
                     <td th:text="${order.refundReason}" id="orderData-8"></td>
 
                     <td class="order-data3">
-                        <form action="/order/order-swap" method="post" class="postForm">
+                        <form action="/order/order-return" method="post" class="postForm">
 
                             <input type="hidden" name="selectedOrderNo" th:value="${order.orderNo}" id="selectedOrderNo">
                             <input type="submit" value="반품처리" class="registBtn w-btn w-btn-blue">

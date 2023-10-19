@@ -13,13 +13,10 @@
         <result property="totalCount" column="TOTAL_COUNT"/>
 
         <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
-        <result property="optionCode" column="OPTION_CDOE"/>
+        <result property="optionName" column="OPTION_NAME"/>
         <result property="salePrice" column="SALE_PRICE"/>
         <collection property="attachmentList" resultMap="attachmentResultMap"/>
-<!--        <result property="fileNo" column="FILE_NO"/>-->
-<!--        <result property="fileName" column="FILE_NAME"/>-->
-<!--        <result property="fileType" column="FILE_TYPE"/>-->
-<!--        <result property="filePath" column="FILE_PATH"/>-->
+
     </resultMap>
 
     <resultMap id="itemCategoryResultMap" type="com.gibuhagae.gibuhagae.product.dto.ItemCategoryDTO">
@@ -51,6 +48,8 @@
         <result property="bannerNo" column="BANNER_NO"/>
         <result property="refundNo" column="REFUND_NO"/>
     </resultMap>
+
+
 
 
 
@@ -114,6 +113,7 @@
              , A.REGIST_DATE
              , A.CATEGORY_CODE
              , B.SALE_PRICE
+             , B.OPTION_NAME
              , C.FILE_NO
              , C.FILE_NAME
              , C.FILE_TYPE
@@ -133,7 +133,7 @@
              , A.CATEGORY_CODE
              , A.TOTAL_COUNT
              , E.REF_CATEGORY_CODE
-             , D.OPTION_CODE
+             , D.OPTION_NAME
              , D.SALE_PRICE
              , F.FILE_PATH
              , F.FILE_TYPE

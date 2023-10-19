@@ -59,15 +59,13 @@
 
 
     <div class="order-view">
-
-    <button id="swapList" class="order-btn"><img src="/images/readingGlass.png" alt="조회" id="swapList-img">교환내역 조회
-        </button>
+    <button id="swapList" class="order-btn"><img src="/images/readingGlass.png" alt="조회" id="swapList-img">교환내역 조회</button>
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeModal">&times;</span>
-                <h2>주문 취소 내역</h2>
+                <h2>주문 교환 내역</h2>
                 <label for="search-Box">
-                    <strong>검색</strong>
+                    <strong>검색(모든 키워드)</strong>
                 </label>
                 <input type="search" id="search-Box" placeholder="검색">
                 <table class="swapListArea">
@@ -93,7 +91,7 @@
                         <td th:text="${swapDetil.recipientName}" class="swapOrder-Data"></td>
                         <td th:text="${swapDetil.recipientPhone}" class="swapOrder-Data"></td>
                         <td th:text="${ swapDetil.itemName +' '+ swapDetil.optionName }" class="swapOrder-Data"></td>
-                        <td th:text="${ swapDetil.paymentPrice }" class="swapOrder-Data"></td>
+                        <td th:text="${#numbers.formatInteger(swapDetil.paymentPrice, 3, 'COMMA')}" class="swapOrder-Data"></td>
                         <td th:text="${ swapDetil.orderCount}" class="swapOrder-Data"></td>
                         <td th:text="${ swapDetil.swapReason}" class="swapOrder-Data"></td>
                     </tr>
@@ -132,7 +130,7 @@
                     <span th:text="${swap.optionName}" id="orderData-5"></span>
                 </td>
 
-                <td th:text="${swap.paymentPrice}" id="orderData-6"></td>
+                <td th:text="${#numbers.formatInteger(swap.paymentPrice, 3, 'COMMA')}" id="orderData-6"></td>
                 <td th:text="${swap.orderCount}" id="orderData-7"></td>
                 <td th:text="${swap.swapReason}" id="orderData-8"></td>
 
@@ -160,12 +158,11 @@
 </div>
 <script>
     const registBtnElement = document.querySelector('.registBtn');
-    const selectName = document.getElementById('orderData-11').value;
 
     if (registBtnElement) {
         registBtnElement.addEventListener('click', function (event) {
         // 추가 확인을 요청하는 경고창 표시
-            const confirmation = confirm(selectName +'처리 하시겠습니까?');
+            const confirmation = confirm('처리 완료 되었습니다.');
 
             if (!confirmation) {
                 event.preventDefault();

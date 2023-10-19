@@ -62,7 +62,7 @@
 
 
 .returnListArea {
-    width: 70%;
+    width: 100%;
     margin: auto; /* 뷰포트 중앙에 위치 */
     border-collapse: collapse;
     text-align: center; /* 텍스트 중앙 정렬 */
@@ -73,19 +73,17 @@
 thead {
     background-color: rgb(128, 128, 128); /* 회색 처리 */
     color: white;
+    margin: 0 auto;
 }
 
 /* 검색박스 스타일 */
 #search-Box {
     padding: 0.5rem;
     margin-top: 1.5rem;
-    margin-right: 1.5rem;
+    /*margin-right: 1.5rem;*/
     margin-bottom: 1.5rem;
 }
 
-label{
-    margin-left:15%
-}
 
 /* 테이블 셀(열) 스타일 */
 .returnOrder-Data {
@@ -101,5 +99,6 @@ label{
     height: 40px;
     font-size: 1.1em;
     margin-left: 90%;
+    margin-top: 2%;
 }
 

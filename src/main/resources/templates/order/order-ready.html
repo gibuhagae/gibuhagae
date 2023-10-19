@@ -69,7 +69,7 @@
                     <span th:text="${order.optionName}" id="orderData-5"></span>
                 </td>
 
-                <td th:text="${order.paymentPrice}" id="orderData-6"></td>
+                <td th:text="${#numbers.formatInteger(order.paymentPrice, 3, 'COMMA')}" id="orderData-6"></td>
                 <td th:text="${order.orderCount}" id="orderData-7"></td>
                 <td th:text="${order.deliveryRequest}" id="orderData-8"></td>
 

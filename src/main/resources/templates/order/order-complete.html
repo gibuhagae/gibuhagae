@@ -53,7 +53,7 @@
     <div id="order-price" class="orderList-title">상품금액</div>
     <div id="order-count" class="orderList-title">수량(EA)</div>
     <div id="order-message" class="orderList-title">요청사항</div>
-    <div id="order-delivery" class="orderList-title">주소/운송장조회</div>
+    <div id="order-delivery" class="orderList-title">주소/택배사/운송장조회</div>
   </div>
 
   <div class="order-container">
@@ -73,7 +73,7 @@
           <span th:text="${order.optionName}" id="orderData-5"></span>
         </td>
 
-        <td th:text="${order.paymentPrice}" id="orderData-6"></td>
+        <td th:text="${#numbers.formatInteger(order.paymentPrice, 3, 'COMMA')}" id="orderData-6"></td>
         <td th:text="${order.orderCount}" id="orderData-7"></td>
         <td th:text="${order.deliveryRequest}" id="orderData-8"></td>
 

@@ -1,28 +1,26 @@
 package com.gibuhagae.gibuhagae.member.dao;
 
-import com.gibuhagae.gibuhagae.common.paging.SelectCriteria;
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface MemberMapper {
 
+    MemberDTO findMemberById(String memberId);
 
-    int selectTotalCount(Map<String, String> searchMap);
+    List<MemberDTO> selectFindIdInfos(String mName, String mEmail);
 
+    MemberDTO selectFindPwdInfos(String mId, String mName, String mEmail);
 
-    List<MemberDTO> selectMemberList(SelectCriteria selectCriteria);
+    int registMember(MemberDTO member);
 
-    MemberDTO findByUserId(String memberId);
+    String selectMemberId(String userId);
 
-    int insertMember(MemberDTO memberDTO);
+    int modifyMemberPwdById(String userId, String password);
 
-    String selectMemberByUserId(String userId);
+    int deleteMember(String memberId);
 
-    int deleteMember(Long no);
-
-    int modifyMember(MemberDTO member);
+    int modifyMemberInfo(MemberDTO member);
 }

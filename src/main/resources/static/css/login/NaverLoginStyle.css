@@ -59,14 +59,20 @@ html {
     left: 40%;
 }
 
-.loginForm #loginBtn {
+.loginForm #naver_id_login {
     position: absolute;
-    width: 20%;
+
     top: 59%;
     left: 40%;
 }
 
-#loginBtn:hover{
+#logoutBtn {
+    position: absolute;
+    top: 59%;
+    left: 60%;
+}
+
+#naver_id_login:hover{
     background-color: rgba(217, 217, 217, 50);
 }
 

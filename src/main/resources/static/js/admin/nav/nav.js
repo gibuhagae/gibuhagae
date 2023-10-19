@@ -46,7 +46,7 @@ if (currentPageUrl.includes("/donate/donate-admin")){
     const donationButton = document.querySelector(".donation");
     donationButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
 }
-if (currentPageUrl.includes("/totalsales/totalsale-admin")){
+if (currentPageUrl.includes("/settlementManagement/settlement")){
     const statisticsButton = document.querySelector(".statistics");
     statisticsButton.style.background = "linear-gradient(270deg, rgba(77, 94, 246, 0.20) 2.54%, rgba(246, 77, 77, 0.20) 100%)";
 }

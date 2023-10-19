@@ -85,7 +85,7 @@
                 <span th:text="${orderShipping.optionName}" id="orderData-5"></span>
             </td>
 
-            <td th:text="${orderShipping.paymentPrice}" id="orderData-6"></td>
+            <td th:text="${#numbers.formatInteger(orderShipping.paymentPrice, 3, 'COMMA')}" id="orderData-6"></td>
             <td th:text="${orderShipping.orderCount}" id="orderData-7"></td>
             <td th:text="${orderShipping.deliveryRequest}" id="orderData-8"></td>
 

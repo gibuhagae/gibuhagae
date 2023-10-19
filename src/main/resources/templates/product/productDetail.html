@@ -98,10 +98,13 @@
                         </div>
                     </div>
                     <div class="selected-option"  id="optionArea" th:text="${ item.optionName }">
+
                         <input type="hidden" id="optionCode" th:value="${ item.optionCode }>
                     </div>
                     <div class="selected-pd-price" id="priceArea" th:text="'￦ ' + ${#numbers.formatDecimal(item.salePrice, 0, 'COMMA', 0, 'POINT')}">
-                        <input id="itemPrice" th:value="${item.salePrice}">
+                        <input type="hidden" id="itemPrice" th:value="${item.salePrice}">
+
+              
                     </div>
 
                     <script>
@@ -195,7 +198,10 @@
                 </tr>
                 </tbody>
             </table>
-            <!--             후기작성 버튼 -->
+
+
+<!--             후기작성 버튼 -->
+
             <div class="write-btn">
                 <button type="button" id="modal-open">후기작성</button>
             </div>
@@ -226,7 +232,10 @@
                 </tbody>
             </table>
 
-            <!--             Q&A 작성 버튼-->
+
+
+<!--             Q&A 작성 버튼-->
+
             <div class="write-btn">
                 <button type="button" id="modal-open1">문의하기</button>
             </div>
@@ -286,7 +295,7 @@
                             <tr>
                                 <td>내용</td>
                                 <td colspan="3">
-                                    <textarea name="body" placeholder="&nbsp;&nbsp;내용을 입력해주세요." cols="80" rows="15" style="resize: none;"></textarea>
+                                    <textarea name="body" placeholder="&nbsp;&nbsp;내용을 입력해주세요." cols="80" rows="15" style="resize: none; border: rgba(108,106,106,0.3);" ></textarea>
                                 </td>
                             </tr>
                         </table>
