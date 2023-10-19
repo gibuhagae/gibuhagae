@@ -6,9 +6,4 @@ window.onload = function () {
 
 
 
-
-
-
-
-
 }
