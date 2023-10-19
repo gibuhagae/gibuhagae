@@ -84,16 +84,6 @@
     </resultMap>
 
 
-
-    <resultMap id="itemOptionMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ItemOptionDTO">
-        <id property="optionCode" column="OPTION_CODE"/>
-        <id property="itemCode" column="ITEM_CODE"/>
-        <result property="optionName" column="OPTION_NAME"/>
-        <result property="registDate" column="REGIST_DATE"/>
-        <result property="salePrice" column="SALE_PRICE"/>
-        <result property="count" column="COUNT"/>
-    </resultMap>
-
     <!-- summary 혁 2023-10-18 START-->
     <resultMap id="orderDetailDTO" type="com.gibuhagae.gibuhagae.order.dto.OrderDetailDTO">
         <id property="orderDetailCode" column="ORDER_DETAIL_CODE"/>
@@ -143,17 +133,17 @@
     <update id="updatePost" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
         UPDATE POST
         SET
-            REGISTRATION_NO = #{ trackingNumber },
-            POSTOFFICE = #{ deliveryCompany }
+            REGISTRATION_NO = #{ registrationNo },
+            POSTOFFICE = #{ deliveryCompany },
+            REGISTRATION_DATE = SYSTIMESTAMP
         WHERE ORDER_NO = #{ selectedOrderNo }
     </update>
 
-
     <update id="updateOrderStatus" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
         UPDATE ORDER_MANAGEMENT
-           SET
-               ORDER_STATUS = #{ orderStatus }
-         WHERE ORDER_NO = #{ selectedOrderNo }
+        SET
+            ORDER_STATUS = #{ orderStatus }
+        WHERE ORDER_NO = #{ selectedOrderNo }
     </update>
 
 

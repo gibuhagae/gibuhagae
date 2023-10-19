@@ -38,8 +38,6 @@ public class OrderController {
         List<OrderManagementDTO> newOrderList = orderService.selectNewOrderList();
 
 
-        log.info(newOrderList.toString());
-
         model.addAttribute("newOrderList", newOrderList);
 
         return "order/order-new";
