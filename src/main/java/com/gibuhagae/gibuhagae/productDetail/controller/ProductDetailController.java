@@ -1,6 +1,5 @@
 package com.gibuhagae.gibuhagae.productDetail.controller;
 
-import com.gibuhagae.gibuhagae.board.dto.NoticeDTO;
 import com.gibuhagae.gibuhagae.board.dto.QnaDTO;
 import com.gibuhagae.gibuhagae.board.service.BoardService;
 import org.springframework.stereotype.Controller;

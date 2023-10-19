@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>교환관리 관리 페이지입니다.</p>
+<br>
+<p>교환관리 사유를 작성하세요!</p>
+
+<p><textarea name="reasonName" id="reasonId" cols="50" rows="10"></textarea></p>
+<p><input type="button" id="reasonNameBtn" value="전송하기" ></p>
+
+<script>
+    let reasonNameBtn = document.getElementById("reasonNameBtn");
+    if (reasonNameBtn) {
+        reasonNameBtn.onclick = function () {
+            const sendData = JSON.parse(localStorage.getItem('sendData'));
+            console.log(sendData);
+
+            let sendDatas = {
+                orderDetailCode : sendData,
+                reasonText : document.getElementById("reasonId").value
+            }
+
+            console.log(sendDatas);
+
+            fetch("/order/orderSwap", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify(sendDatas)
+            }).then(result => result.text())
+                .then((result) => {
+                    alert(result);
+                    window.close();
+                })
+                .then((response) => {
+                    console.log('123456!');
+                    console.log(response);
+                });
+        }
+    }
+</script>
+
+</body>
+</html>

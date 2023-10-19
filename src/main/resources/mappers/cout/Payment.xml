@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.payment.dao.PaymentMapper">
+
+    <resultMap id="paymentResultMap" type="com.gibuhagae.gibuhagae.payment.dto.deliveryAddressDTO">
+        <id property="paymentNo" column="PAYMENT_NO"/>
+        <result property="orderNo" column="ORDER_NO"/>
+        <result property="paymentDate" column="PAYMENT_DATE"/>
+        <result property="paymentPrice" column="PAYMENT_PRICE"/>
+        <result property="paymentStatus" column="PAYMENT_STATUS"/>
+        <result property="paymentTypeCode" column="PAYMENT_TYPE_CODE"/>
+    </resultMap>
+
+    <insert id="addPayment">
+        INSERT
+        INTO PAYMENT
+        (
+          PAYMENT_NO
+        , PAYMENT_DATE
+        , PAYMENT_PRICE
+        , PAYMENT_STATUS
+        , PAYMENT_TYPE_CODE
+        , ORDER_NO
+        )
+        VALUES
+        (
+          SEQ_PAYMENT_NO.NEXTVAL
+        , SYSDATE
+        , #{totalPrice}
+        , '결제완료'
+        , 1
+        , "20231020" + SEQ_ORDER_NO.NEXTVAL
+        )
+    </insert>
+
+    <insert id="addOrderManagement">
+        INSERT
+          INTO ORDER_MANAGEMENT
+        (
+          ORDER_NO
+        , ORDER_DATE
+        , ORDER_STATUS
+        , ORDER_COUNT
+        , DONATE_YN
+        , PAYMENT_PRICE
+        , MEMBER_NO
+        , TOTAL_ORDER_PRICE
+        , DONATE_PRICE
+        )
+        VALUES
+        (
+          "20231020" + SEQ_ORDER_NO.NEXTVAL
+        , SYSDATE
+        , '신규주문'
+        , #{orderCount}
+        , #{checkReward}
+        , #{itemTotalPrice}
+        , 1
+        , #{totalPrice}
+        , #{rewardAmount}
+        )
+    </insert>
+
+    <insert id="addOrderDetail">
+        INSERT
+          INTO ORDER_DETAIL
+        (
+          ORDER_DETAIL_CODE
+        , ITEM_CODE
+        , OPTION_CODE
+        , ORDER_NO
+        , COUNT
+        , PRICE
+        )
+        VALUES
+        (
+          SEQ_ORDER_DETAIL_CODE.NEXTVAL
+        , #{itemCode}
+        , #{optionCode}
+        , "20231020" + SEQ_ORDER_NO.NEXTVAL
+        , #{count}
+        , #{itemPrice}
+        )
+    </insert>
+    
+<!--    to_number('${phon2} || '${phone3}', '0000000')   int일경우-->
+    
+    <insert id="addPost">
+        INSERT
+          INTO POST
+        (
+          ORDER_NO
+        , RECIPIENT_NAME
+        , RECIPIENT_PHONE
+        , ZIPCODE
+        , ADDRESS
+        , ADDRESS_DETAIL
+        , REGISTRATION_DATE
+        , DELIVERY_REQUEST
+        )
+        VALUES
+        (
+          "20231020" + SEQ_ORDER_NO.NEXTVAL
+        , #{name}
+        , '${phoneValue}' || '${phone1}' || '${phone2}'
+        , #{zipcode}
+        , #{addr1}
+        , #{addr2}
+        , SYSDATE
+        , #{shippingMessage}
+        )
+    </insert>
+</mapper>

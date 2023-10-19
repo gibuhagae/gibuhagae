@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <meta charset="UTF-8">
     <title>Gibuhagae(notice)</title>
@@ -26,18 +29,22 @@
         <div class="board-container">
             <select id="select1">
                 <option value="selected" selected>선택하기</option>
-                <option value="Y">활성</option>
-                <option value="N">비활성</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
             </select>
             <br>
             <div class="board-body">
-                <div class="board-tab">
-                    <button type="button" class="board-btn" th:onclick="|location.href='/board/notice'|">NOTICE
-                    </button>
-                    <button type="button" class="board-btn" th:onclick="|location.href='/board/qna'|">Q&A</button>
-                    <button type="button" class="board-btn" th:onclick="|location.href='/board/review'|">REVIEW
-                    </button>
-                </div>
+
+                <div class="board-tab"><th:block sec:authorize="hasRole('admin')">
+                    <div class="board-tab">
+                        <button type="button" class="board-btn" th:onclick="|location.href='/board/notice'|">NOTICE
+                        </button>
+                        <button type="button" class="board-btn" th:onclick="|location.href='/board/qna'|">Q&A</button>
+                        <button type="button" class="board-btn" th:onclick="|location.href='/board/review'|">REVIEW
+                        </button>
+                    </div>
+                </th:block></div>
+
                 <!-- 공지 리스트 테이블 -->
                 <table class="board-table">
                     <tr style="background-color: rgba(108,106,106,0.1); border-top: #6C6A6A 2px solid;">
@@ -88,9 +95,13 @@
                             th:onclick="'location.href=\'/board/notice?page=' + @{${paging.maxPage}} + '\''">>></button>
                 </th:block>
             </div>
-            <div class="board-button">
-                <button type="button" id="modal-open">작성하기</button>
-            </div>
+
+            <th:block sec:authorize="hasRole('admin')">
+                <div class="board-button">
+                    <button type="button" id="modal-open">작성</button>
+                </div>
+            </th:block>
+
         </div>
     </div>
 </div>

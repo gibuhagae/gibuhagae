@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Gibuhagae(notice)</title>
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/board/board.css" rel="stylesheet" type="text/css">
+    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/board.js"></script>
+</head>
+<body>
+<div id="detailForm">
+    <div th:replace="/common/board/navigation.html"></div>
+    <div style="margin-top: 100px;" class="detailForm">
+        <form method="post" action="/board/reviewDetail">
+            <table style="width: 100%">
+                <colgroup>
+                    <col width="15%"/>
+                    <col width="35%"/>
+                    <col width="15%"/>
+                    <col width="35%"/>
+                </colgroup>
+                <tr style="border-top: #6C6A6A 2px solid;">
+                    <th scope="row">글 번호</th>
+                    <td th:text="${ review.reviewNo }" ></td>
+                    <th scope="row">작성자</th>
+                    <td th:text="${ review.memberNo.memberName }"></td>
+                </tr>
+                <tr style="border-top: #6C6A6A 1px solid;">
+                    <th scope="row">평점</th>
+                    <td th:text="${ review.grade } + ' / 5'"></td>
+                    <th scope="row">작성일</th>
+                    <td th:text="${ review.registDate }"></td>
+                </tr>
+                <tr style="border-top: #6C6A6A 1px solid;">
+                    <th scope="row">상품</th>
+                    <td colspan="3">
+                        <!--                        <input type="hidden" name="noticeNo" th:value="${ qna.inquiryNo }"/>-->
+                        <input type="text" id="itemName" name="itemName" th:value="${ review.itemCode.itemName }">
+                    </td>
+                </tr>
+                <tr style="border-top: #6C6A6A 1px solid;">
+                    <th scope="row">제목</th>
+                    <td colspan="3">
+                        <input type="hidden" name="reviewNo" th:value="${ review.reviewNo }"/>
+                        <input type="text" id="title" name="reviewTitle" th:value="${ review.reviewTitle}">
+                    </td>
+                </tr>
+                <tr style="border-top: #6C6A6A 1px solid; border-bottom: #6C6A6A 1px solid; padding-left: 0;">
+                    <td colspan="4" class="notice-text">
+                        <textarea title="내용" id="content" name="reviewContent" th:text="${ review.reviewContent }"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div align="center">
+                <button type="submit" id="modify">수정</button>
+                <button><a th:href="@{/board/detail(no=${ review.reviewNo })}">삭제</a></button>
+                <button type="button" th:onclick="'location.href=\'/product/productDetail\''">목록</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

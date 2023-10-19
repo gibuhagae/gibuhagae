@@ -8,8 +8,31 @@ spring:
     username: C##GIBUHAGAE
     password: GIBUHAGAE
 
+    #mail!
+    mail:
+      # host, port는 naver에서 정해준 값
+      host: smtp.naver.com
+      port: 465
+      # 본인 naver 계정정보 삽입
+      username: songbyhyeok@naver.com
+      password: 325347SJZJJG
+      # 전송하기 위한 prop으로 ssl의 신뢰, 권한 등 사용허가
+      properties:
+        mail.smtp.auth: true
+        mail.smtp.ssl.enable: true
+        mail.smtp.ssl.trust: smtp.naver.com
+
+  # file upload config
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      location: C:/Lecture/00_Project/subproject/gibuhagae/
 
 # Mybatis config
 mybatis:
   mapper-locations: mappers/**/*.xml
 
+# image upload dir
+image:
+  image-dir: src/main/resources/static/uploadFiles/**/*.jpg

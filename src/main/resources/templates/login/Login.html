@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,47 +7,223 @@
     <title>Login</title>
     <!-- 외부 스타일 시트 -->
     <link href="/css/login/LoginStyle.css" rel="stylesheet" type="text/css">
-    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
     <!-- 리셋 CSS : 브라우저별로 디폴트로 적용 된 CSS(여백, 폰트 등)에 차이가 있으므로
    브라우저별로 다르게 보일 수 있어 리셋 CSS를 활용한다. -->
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script>
+        const message = '[[${message}]]';
+        message && alert(message);
+    </script>
+
 </head>
 
 <body>
-<!-- 헤더 부분 -->
+<!-- 헤더(로고, 상단 메뉴)-->
 <div th:replace="/common/board/navigation"></div>
 
-<p id="title">로그인</p>
 <p id="subTitle">로그인</p>
 
 <section class="sectionLogin">
 
     <hr id="uLine">
 
-    <form class="loginForm" action="/login/Login" method="post">
-        <input class="inputArea" id="loginId" type="id" name="memberId" value="ID" style="color: rgb(185, 190, 201)">
-        <input class="inputArea" id="loginPwd" type="password" name="memberPwd">
+    <form class="loginForm" id="loginFormId" action="/login/Login" method="post">
+        <input class="inputArea" id="userId" type="text" name="memberId" placeholder="  ID" value="" style="color: rgb(185, 190, 201)" required>
+        <input class="inputArea" id="password" type="password" name="memberPwd" value="Y2cKvgL8c" required>
 
         <div class="loginSave">
-            <input type="radio" name="idpwdSave" value="idSave"> 아이디 저장
-            <input type="radio" name="idpwdSave" value="pwdSave"> 비밀번호 저장
+            <input type="checkbox" id="idSave" name="idpwdSave"> 아이디 저장
+            <input type="checkbox" id="idRemember" name="rememberLogin"> 로그인 유지
         </div>
 
-        <button class="buttonArea" id="loginBtn">로그인</button>
+        <button class="buttonArea" id="loginBtn" type="submit">로그인</button>
     </form>
+
+
 
     <hr id="bLine">
 
 </section>
 
-<button class="inputArea" id="naverLogin" onclick="location.href='naverLogin.html'">네이버 로그인</button>
-<button class="inputArea" id="kakaoLogin" onclick="location.href='kakaoLogin.html'">카카오 로그인</button>
+<!-- 네이버 로그인 버튼 노출 영역 -->
+<div class="buttonArea" id="naver_id_login">로그인</div>
+
+<button type="button" class="inputArea" id="kakaoLogin" onclick="location.href='/login/KakaoLogin'">카카오 로그인</button>
 
 <div class="etcFunction">
-    <button id="idFindBtn" onclick="location.href='idFind.html'">아이디 찾기</button>
-    <button id="pwdFindBtn" onclick="location.href='pwdFind.html'">비밀번호 찾기</button>
-    <button id="joinBtn" onclick="location.href='../join/join.html'">회원가입</button>
+    <button type="button" id="idFindBtn" onclick="location.href='/login/IdFind'">아이디 찾기</button>
+    <button type="button" id="pwdFindBtn" onclick="location.href='/login/PwdFind'">비밀번호 찾기</button>
+    <button type="button" id="joinBtn" onclick="location.href='/join/Join'">회원가입</button>
 </div>
+
+<!-- //네이버 로그인 버튼 노출 영역 -->
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("PmDrXlVeXulX2pwGIV3c", "http://localhost:8080/login/NaverCallback");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 2, 40);
+    naver_id_login.setDomain("http://localhost:8080");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+</script>
+
+<script>
+    console.log("로그인 영역");
+
+    //쿠키 저장하는 함수
+    function set_cookie(name, value, unixTime) {
+        var date = new Date();
+        date.setTime(date.getTime() + unixTime);
+        document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + date.toUTCString() + ';path=/';
+    }
+
+    //쿠키 값 가져오는 함수
+    function get_cookie(name) {
+        var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return value? value[2] : null;
+    }
+
+    //쿠키 삭제하는 함수
+    function delete_cookie(name) {
+        document.cookie = encodeURIComponent(name) + '=; expires=Thu, 01 JAN 1999 00:00:10 GMT';
+    }
+
+    // 로그인 유지, 아이디 저장을 위한 쿠키 로직
+    // 1. 쿠키가 존재하지 않는다면 생성한다.
+    var cokName = 'hyeok';
+    var cokVal = 'songby';
+    if (!get_cookie(cokName)) {
+        console.log(cokName + '의 ' + "쿠키 생성");
+        set_cookie(cokName, cokVal);
+
+        // 1-1. 로컬스토리지에 id, id 저장여부, id 로그인 유지 정보가 없다면 생성한다.
+        if (localStorage.getItem("idValue") == null) {
+            localStorage.setItem("idValue", '');
+        }
+
+        if (localStorage.getItem("idSave") == null) {
+            localStorage.setItem("idSave", false);
+        }
+
+        if (localStorage.getItem("idRemember") == null) {
+            localStorage.setItem("idRemember", false);
+        }
+    }
+    // 2. 존재한다면 현재 로그인 유지 & 아이디 기억 체크박스 그리고 회원 아이디 정보를
+    // LocalStorage에서 가져온다.
+    else {
+        // 2-1 로컬 저장소의 값을 가져와 view 데이터에 넘긴다.
+
+        let idInput = document.getElementById("userId");
+        let idSave = document.getElementById("idSave");
+        let idRemember = document.getElementById("idRemember");
+
+        function stringToBoolean(str)
+        {
+            switch (str)
+            {
+                case "true":
+                    return true;
+
+                case "false":
+                    return false;
+
+                default:
+                    return undefined;
+            }
+        }
+
+        // id 저장여부가 false라면 Input에 값을 대입하지 않는다.
+        idInput.value = '';
+        console.log("idInput " + idInput.value)
+        console.log("idSave " + localStorage.getItem("idSave"))
+        if (stringToBoolean(localStorage.getItem("idSave")))
+            idInput.value = localStorage.getItem("idValue");
+
+        console.log("idInput2 " + idInput.value)
+
+        idSave.checked = stringToBoolean(localStorage.getItem("idSave"));
+        idRemember.checked = stringToBoolean(localStorage.getItem("idRemember"));
+
+        // 2-2. 현재 해당 정보들을 기입하는 상황이라면 로컬 저장소의 키 값에 갱신한다.
+        // 로그인 영역에 충돌인가?
+        if(document.getElementById("loginFormId")) {
+            loginFormId.addEventListener('mouseover', (event) => {
+                console.log("로그인 영역 충돌!");
+
+                // input 아이디 영역 충돌
+                idInput.addEventListener('mouseout', (event) => {
+                    console.log("idInput 영역 충돌!");
+                    localStorage.setItem("idValue", idInput.value);
+                })
+
+                // 아이디 저장 체크박스 충돌
+                idSave.addEventListener('click', (event) => {
+                    console.log("idSave 영역 충돌!");
+                    console.log(idSave.checked);
+                    localStorage.setItem("idSave", idSave.checked);
+                })
+
+                // 로그인 유지 체크박스 충돌
+                idRemember.addEventListener('click', (event) => {
+                    console.log("idRemember 영역 충돌!");
+                    console.log(idRemember.checked);
+                    localStorage.setItem("idRemember", idRemember.checked);
+                })
+
+            });
+        }
+
+        console.log("view 데이터 넘기는 영역");
+        console.log(localStorage.getItem("idRemember"));
+    }
+
+    console.log("쿠키" + get_cookie(cokName));
+    console.log("쿠키Info" + document.cookie);
+
+    console.log(localStorage.length);
+
+    if(document.getElementById("naver_id_login")) {
+
+        console.log("로그인 버튼 호출");
+
+        const $login = document.getElementById("naver_id_login");
+        $login.onclick = function() {
+
+            console.log("로그인 버튼 호출 눌렀다.");
+
+            const naverMember = {
+                id : localStorage.getItem("naverId"),
+                gender : localStorage.getItem("naverGender"),
+                name : localStorage.getItem("naverName"),
+                nickname : localStorage.getItem("naverNickname"),
+                age : localStorage.getItem("naverAge"),
+                email : localStorage.getItem("naverEmail"),
+                phone : localStorage.getItem("naverMobile"),
+                loginType : "naver",
+                token :localStorage.getItem("naverToken"),
+            };
+
+            fetch("/login/NaverCallback", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify(naverMember),
+            })
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+
+           location.href = "/";
+        }
+    }
+
+</script>
 
 </body>
 

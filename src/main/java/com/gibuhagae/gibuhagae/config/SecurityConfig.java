@@ -1,19 +1,23 @@
 package com.gibuhagae.gibuhagae.config;
 
+import com.gibuhagae.gibuhagae.Handler.LoginSuccessHandler;
 import com.gibuhagae.gibuhagae.member.service.AuthenticationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 // 시큐리티 설정 활성화 및 bean 등록 가능
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig  {
 
     private final AuthenticationService authenticationService;
 
@@ -33,26 +37,35 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 /* 요청에 대한 권한 체크 */
-//                .authorizeHttpRequests()
-//                .antMatchers("/static/css/**", "/js/**", "/images/**").permitAll()
-//                .antMatchers("/board/**", "/thumbnail/**", "/member/update", "/member/delete", "/myPage/MyPage").hasRole("MEMBER")
-//                /* 위에 서술 된 패턴 외의 요청은 인증 되지 않은 사용자도 요청 허가 */
-//                .anyRequest().permitAll()
-//                .and()
-//                /* 로그인 설정 */
-//                .formLogin()
-//                .loginPage("/login/Login")
-//                .defaultSuccessUrl("/")
-//                .failureForwardUrl("/member/loginfail")
-//                .usernameParameter("memberId")
-//                .passwordParameter("memberPwd")
-//                .and()
+                .authorizeHttpRequests()
+                .antMatchers("/static/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers("/board/**", "/thumbnail/**", "/member/update", "/login/delete").hasAnyRole("user", "admin")
+                .antMatchers("order/order-new").hasRole("admin")
+                /* 위에 서술 된 패턴 외의 요청은 인증 되지 않은 사용자도 요청 허가 */
+                .anyRequest().permitAll()
+                .and()
+                /* 로그인 설정 */
+                .formLogin()
+                .loginPage("/login/Login")
+                .successHandler(new LoginSuccessHandler())
+                //.defaultSuccessUrl("/")
+                .failureForwardUrl("/login/Loginfail")
+                .usernameParameter("memberId")
+                .passwordParameter("memberPwd")
+                .and()
                 /* 로그아웃 설정 */
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/")
+                .and()
+                // 세션 & 쿠키 설정
+                .rememberMe() // 사용자 계정 저장
+                .rememberMeParameter("rememberLogin") // default 파라미터는 remember-me
+                .userDetailsService(authenticationService)
+                .tokenValiditySeconds(60*60)
+                .authenticationSuccessHandler(new LoginSuccessHandler())
                 .and()
                 .build();
     }

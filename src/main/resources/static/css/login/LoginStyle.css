@@ -36,14 +36,14 @@ html {
 .sectionLogin {
 }
 
-.loginForm #loginId{
+.loginForm #userId{
     width: 20%;
     position: absolute;
     top: 50%;
     left: 40%;
 }
 
-.loginForm #loginPwd{
+.loginForm #password{
     width: 20%;
     position: absolute;
     top: 53%;
@@ -57,12 +57,11 @@ html {
     left: 40%;
 }
 
-#naverLogin {
+#naver_id_login {
     position: absolute;
-    width: 9.5%;
     top: 62%;
     left: 40%;
-    background-color: #3AB80D;
+
 }
 
 #kakaoLogin {
@@ -82,10 +81,6 @@ html {
 }
 
 #loginBtn:hover{
-    background-color: rgba(217, 217, 217, 50);
-}
-
-#naverLogin:hover {
     background-color: rgba(217, 217, 217, 50);
 }
 

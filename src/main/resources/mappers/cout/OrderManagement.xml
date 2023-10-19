@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.orderManagement.dao.OrderManagementMapper">
+
+    <resultMap id="orderManagementResultMap" type="com.gibuhagae.gibuhagae.orderManagement.dto.OrderManagementDTO">
+        <id property="orderNo" column="ORDER_NO"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderStatus" column="ORDER_STATUS"/>
+        <result property="totalOrderPrice" column="TOTAL_ORDER_PRICE"/>
+        <result property="donateYN" column="DONATE_YN"/>
+        <result property="paymentPrice" column="PAYMENT_PRICE"/>
+        <result property="orderCount" column="ORDER_COUNT"/>
+        <result property="donatePrice" column="DONATE_PRICE"/>
+    </resultMap>
+
+    <select id="selectOrderManagementList" resultMap="orderManagementResultMap">
+        SELECT
+               A.ORDER_NO
+             , B.MEMBER_NO
+             , A.ORDER_DATE
+             , A.ORDER_STATUS
+             , A.TOTAL_ORDER_PRICE
+             , A.DONATE_YN
+             , A.PAYMENT_PRICE
+             , A.ORDER_COUNT
+             , A.DONATE_PRICE
+          FROM ORDER_MANAGEMENT A
+          LEFT JOIN MEMBER B ON (A.MEMBER_NO = B.MEMBER_NO)
+    </select>
+    
+    <insert id="addOrderManagement">
+        INSERT
+          INTO ORDER_MANAGEMENT
+        (
+           ORDER_NO
+         , MEMBER_NO
+         , ORDER_DATE
+         , ORDER_STATUS
+         , ORDER_COUNT
+         , DONATE_YN
+         , PAYMENT_PRICE
+         , TOTAL_ORDER_PRICE
+        )
+        VALUES
+        (
+           SEQ_BASKET_NO.NEXTVAL
+         , 1
+         , SYSDATE
+         , "신규주문"
+         , #{orderCount}
+         , "N"
+         , #{paymentPrice}
+         , #{totalOrderPrice}
+         , "0"
+        )
+    </insert>
+</mapper>

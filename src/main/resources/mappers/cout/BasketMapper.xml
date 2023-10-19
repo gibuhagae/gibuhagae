@@ -28,6 +28,7 @@
         <result property="registDate" column="REGIST_DATE"/>
         <result property="imgSrc" column="IMG_SRC"/>
         <association property="productManagementList" resultMap="productManagementResultMap"/>
+
     </resultMap>
 
     <resultMap id="productManagementResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ProductManagementDTO">
@@ -149,10 +150,5 @@
           FROM ITEM_OPTION A
           JOIN ITEM B ON (A.ITEM_CODE = B.ITEM_CODE)
          WHERE B.ITEM_CODE = 3
-    </select>
-
-    <select id="checkBasketById" resultMap="basketResultMap">
-        SELECT
-
     </select>
 </mapper>

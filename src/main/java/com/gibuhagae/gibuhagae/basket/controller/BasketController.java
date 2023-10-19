@@ -2,14 +2,10 @@ package com.gibuhagae.gibuhagae.basket.controller;
 
 import com.gibuhagae.gibuhagae.basket.dao.BasketMapper;
 import com.gibuhagae.gibuhagae.basket.dto.BasketDTO;
-import com.gibuhagae.gibuhagae.basket.dto.BasketItemDTO;
 import com.gibuhagae.gibuhagae.basket.service.BasketService;
-import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 import com.gibuhagae.gibuhagae.productDetail.dto.ProductDetailDTO;
-import com.gibuhagae.gibuhagae.productManagement.dto.ProductManagementDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -45,12 +40,6 @@ public class BasketController {
 
         return "basket/basket";
     }
-
-//    @GetMapping("/basket/productPage")
-//    public void abc() {
-//        System.out.println("남궁혁");
-//    }
-//
 
     @PostMapping("/basket/regist")
     public ResponseEntity<String> addBasket(@RequestBody BasketDTO basket) {
@@ -129,4 +118,5 @@ public class BasketController {
 
         return ResponseEntity.ok("삭제 성공");
     }
+
 }

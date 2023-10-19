@@ -9,11 +9,11 @@ import lombok.ToString;
 @ToString
 public class BasketItemDTO {
 
-    private String itemImg;
-    private String itemName;
     private int itemCode;
     private int optionCode;
+    private int count;
+    private String itemName;
     private String optionName;
-    private int itemQty;
     private int price;
+    private String imgSrc;
 }

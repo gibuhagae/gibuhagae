@@ -1,7 +1,6 @@
 package com.gibuhagae.gibuhagae.productDetail.controller;
 
 import com.gibuhagae.gibuhagae.board.dao.BoardMapper;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // 비동기 방식 컨트롤러

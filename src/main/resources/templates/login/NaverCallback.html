@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("PmDrXlVeXulX2pwGIV3c", "http://localhost:8080/login/NaverCallback");
+
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+
+        // alert(naver_id_login.oauthParams.access_token);
+        //
+        // alert(naver_id_login.user);
+
+        // alert(naver_id_login.getProfileData('id'));
+        // alert(naver_id_login.getProfileData('gender'));
+        // alert(naver_id_login.getProfileData('mobile'));
+        // alert(naver_id_login.getProfileData('name'));
+        // alert(naver_id_login.getProfileData('birthday'));
+        // alert(naver_id_login.getProfileData('birthyear'));
+        // alert(naver_id_login.getProfileData('email'));
+        // alert(naver_id_login.getProfileData('nickname'));
+        // alert(naver_id_login.getProfileData('age'));
+
+        // 네이버 계정 정보를 객체에 담아 보내기.
+        localStorage.setItem("naverId", naver_id_login.getProfileData('id'));
+        localStorage.setItem("naverGender", naver_id_login.getProfileData('gender'));
+        localStorage.setItem("naverName", naver_id_login.getProfileData('name'));
+        localStorage.setItem("naverNickname", naver_id_login.getProfileData('nickname'));
+        localStorage.setItem("naverAge", naver_id_login.getProfileData('age'));
+        localStorage.setItem("naverEmail", naver_id_login.getProfileData('email'));
+        localStorage.setItem("naverMobile", naver_id_login.getProfileData('mobile'));
+        localStorage.setItem("naverToken", naver_id_login.oauthParams.access_token);
+
+        // fetch("/login/NaverCallback", {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=UTF-8'
+        //     },
+        //     body: JSON.stringify({})
+        // })
+        //     .then(result => result.text())
+        //     .then(result => alert(result))
+        //     .catch((error) => error.text().then((res) => alert(res)));
+
+
+
+        window.close();
+    }
+</script>
+
+</body>
+
+</html>

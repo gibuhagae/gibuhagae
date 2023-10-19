@@ -99,5 +99,29 @@ public class OrderService {
     public List<SwapRequestDTO> swapDetailList() {
         return orderMapper.swapDetailList();
     }
+
+    // summary 혁 2023-10-18
+    public List<Integer> selectOrderDetailPK(int orderManageCode) {
+        return orderMapper.selectOrderDetailPK(orderManageCode);
+    }
+
+    @Transactional
+    public boolean modifyOrderDetailStatus(Long orderManageNo, String orderStatus) {
+        int ret = orderMapper.modifyOrderDetailStatus(orderManageNo, orderStatus);
+        System.out.println("modifyOrderDetailStatus 매핑 검사 후");
+        return ret > 0;
+    }
+
+    @Transactional
+    public boolean insertRefundManagement(String reasonText, String orderDetailCode) {
+        int ret = orderMapper.insertRefundManagement(reasonText, orderDetailCode);
+        return ret > 0;
+    }
+
+    @Transactional
+    public boolean insertSwapManagement(String reasonText, String orderDetailCode) {
+        int ret = orderMapper.insertSwapManagement(reasonText, orderDetailCode);
+        return ret > 0;
+    }
 }
 

@@ -5,6 +5,7 @@ import com.gibuhagae.gibuhagae.board.dto.QnaDTO;
 import com.gibuhagae.gibuhagae.board.dto.ReviewDTO;
 import com.gibuhagae.gibuhagae.common.paging.SelectCriteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,7 +30,6 @@ public interface BoardMapper {
 
     List<QnaDTO> selectQnaList(SelectCriteria selectCriteria);
 
-
     QnaDTO selectQnaDetail(Long no);
 
     void insertQna(QnaDTO qna);
@@ -38,5 +38,5 @@ public interface BoardMapper {
 
     List<ReviewDTO> selectReviewList(SelectCriteria selectCriteria);
 
-
+    ReviewDTO selectReviewDetail(Long no);
 }
