@@ -74,7 +74,7 @@
 
 - #### 메인화면
 
- <p align="center"><img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/008740e4-4ff6-4e16-9039-a7c7294d7fef" width="1000" height="800"/></p>
+ <p align="center"><img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/ac14661d-8edb-4e0a-b951-f730ba96f43c" width="1000" height="800"/></p>
 
 
 - **슬라이드, 상품리스트**
