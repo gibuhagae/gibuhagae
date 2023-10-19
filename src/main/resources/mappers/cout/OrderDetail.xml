@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gibuhagae.gibuhagae.orderDetail.dao.OrderDetailMapper">
 
-    <resultMap id="orderDetailResultMap" type="com.gibuhagae.gibuhagae.orderDetail.dto.OrderDetailDTO">
+    <resultMap id="orderDetailResultMap" type="com.gibuhagae.gibuhagae.orderDetail.dto.OrderDetailDTOList">
         <id property="orderDetailCode" column="ORDER_DETAIL_CODE"/>
         <result property="orderNo" column="orderNo"/>
         <result property="itemCode" column="ITEM_CODE"/>
         <result property="optionCode" column="optionCode"/>
         <result property="count" column="COUNT"/>
         <result property="price" column="PRICE"/>
-        <result property="imgSrc" column="IMG_SRC"/>
+        <result property="filePath" column="FILE_PATH"/>
     </resultMap>
 
     <select id="orderDetailList" resultMap="orderDetailResultMap">
@@ -21,8 +21,12 @@
              , B.OPTION_CODE
              , A.COUNT
              , A.PRICE
+             , E.FILE_PATH
           FROM ORDER_DETAIL A
           JOIN BASKET B ON (A.OPTION_CODE = B.OPTION_CODE)
+          JOIN ITEM_OPTION C ON (B.OPTION_CODE = C.OPTION_CODE)
+          JOIN ITEM D ON (C.ITEM_CODE = D.ITEM_CODE)
+          JOIN ATTACHMENT E ON (D.ITEM_CODE = E.ITEM_CODE)
     </select>
     
     <insert id="addOrderDetail">

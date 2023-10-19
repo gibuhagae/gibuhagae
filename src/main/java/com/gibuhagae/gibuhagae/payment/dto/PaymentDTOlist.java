@@ -13,4 +13,5 @@ public class PaymentDTOlist {
     private int optionCode;
     private int count;
     private int itemPrice;
+    private String itemImg;
 }

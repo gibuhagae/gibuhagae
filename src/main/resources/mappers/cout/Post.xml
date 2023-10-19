@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gibuhagae.gibuhagae.post.dao.PostDao">
 
-    <resultMap id="postResultMap" type="com.gibuhagae.gibuhagae.post.dto.PostDTO">
+    <resultMap id="postResultMap" type="com.gibuhagae.gibuhagae.post.dto.PostDTOList">
         <id property="orderNo" column="ORDER_NO"/>
         <result property="recipientName" column="RECIPIENT_NAME"/>
         <result property="recipientPhone" column="RECIPIENT_PHONE"/>

@@ -161,8 +161,8 @@
                 </div>
                 <div id="item-category1" th:name="basketItemList" th:each="basketItem : ${itemList.basketItems}">
                     <div class="item-image">
-                        <img class="itemImg" th:src="${basketItem.imgSrc}">
-                        <input type="hidden" name="itemImg" th:value="${basketItem.imgSrc}">
+                        <img class="itemImg" th:src="${basketItem.^[fileType == 'thumbnail'].filePath}">
+                        <input type="hidden" name="itemImg" th:value="${basketItem.^[fileType == 'thumbnail'].filePath}">
                     </div>
                     <div class="detail-text">
                         <div class="top">

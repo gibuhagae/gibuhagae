@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class PostDTO {
+public class PostDTOList {
 
     private Long orderNo;
     private String recipientName;

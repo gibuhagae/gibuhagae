@@ -48,6 +48,7 @@ public class PaymentService {
             paymentDTOlist.setCount(paymentDTO.getCount().get(i));
             paymentDTOlist.setItemCode(paymentDTO.getItemCode().get(i));
             paymentDTOlist.setOptionCode(paymentDTO.getOptionCode().get(i));
+            paymentDTOlist.setItemImg(paymentDTO.getItemImg().get(i));
             System.out.println(paymentDTOlist + "@@@@@@@@@");
             int result = paymentMapper.addOrderDetail(paymentDTOlist);
 

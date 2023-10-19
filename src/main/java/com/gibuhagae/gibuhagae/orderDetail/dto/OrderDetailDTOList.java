@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class OrderDetailDTO {
+public class OrderDetailDTOList {
 
     private int orderDetailCode;
     private int orderNo;
@@ -17,5 +17,5 @@ public class OrderDetailDTO {
     private int price;
     private String itemName;
     private String optionName;
-    private String imgSrc;
+    private String filePath;
 }
