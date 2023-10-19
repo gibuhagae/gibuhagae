@@ -25,6 +25,4 @@ public interface MemberMapper {
     int deleteMember(Long no);
 
     int modifyMember(MemberDTO member);
-
-    MemberDTO findAddrByMemberNo(Map<String, Integer> map);
 }
