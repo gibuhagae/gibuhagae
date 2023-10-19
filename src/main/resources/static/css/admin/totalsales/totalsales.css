@@ -28,6 +28,16 @@
     margin-bottom: 2%;
 }
 
+.today-sales1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 90px 90px 90px 90px;
+    border: solid 1px black;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
 .today-box {
     border: solid 1px black;
     font-family: 'Noto Sans KR', sans-serif;
@@ -35,6 +45,18 @@
     padding-left: 1%;
     line-height: 70px;
 }
+
+.today-box2 {
+    border: solid 1px black;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    padding-left: 1%;
+    line-height: 90px;
+}
+
+
+
+
 #amount-price2,
 #amount-price {
     display: flex;
@@ -45,6 +67,8 @@
 #amount-price p {
     margin-left: 70%;
     color: #5591E4;
+    width: 20%;
+    text-align: center;
 }
 
 #amount-count2,
@@ -57,6 +81,8 @@
 #amount-count p {
     margin-left: 70%;
     color: #5591E4;
+    width: 20%;
+    text-align: center;
 }
 
 #return-price2,
@@ -69,31 +95,46 @@
 #return-price p {
     margin-left: 70%;
     color: #5591E4;
+    width: 20%;
+    text-align: center;
 }
 
-#cer-count2,
-#cer-count{
+#return-price2,
+#return-price {
     display: flex;
     flex-direction: row;
 }
 
-#cer-count2 p,
-#cer-count p {
-    margin-left: 60.5%;
-    color: #5591E4;
-}
-
-#delivery-count2,
-#delivery-count {
+#swap-count2,
+#swap-count {
     display: flex;
     flex-direction: row;
 }
 
-#delivery-count2 p,
-#delivery-count p {
-    margin-left: 70%;
+#swap-count2 span,
+#swap-count span {
+    margin-left: 74%;
     color: #5591E4;
+    width: 20%;
+    text-align: center;
 }
+
+
+
+#cancel-count2,
+#cancel-count{
+    display: flex;
+    flex-direction: row;
+}
+
+#cancel-count2 p,
+#cancel-count p {
+    margin-left: 69.2%;
+    color: #5591E4;
+    width: 20%;
+    text-align: center;
+}
+
 
 #delivery-complete2,
 #delivery-complete {
@@ -105,6 +146,8 @@
 #delivery-complete p {
     margin-left: 70%;
     color: #5591E4;
+    width: 20%;
+    text-align: center;
 }
 
 #net-sales2,
@@ -113,12 +156,15 @@
     flex-direction: row;
     grid-column: span 2;
     font-size: 1.2em;
+    padding-left: 0.5%;
 }
 
 #net-sales2 p,
 #net-sales p {
-    margin-left: 42.5%;
+    margin-left: 36%;
     color: #5591E4;
+    width: 20%;
+    text-align: center;
 }
 
 .selectSearch-box {
@@ -130,12 +176,35 @@
 
 .selectSearch-box h2 {
     padding-bottom: 1%;
+    margin-top: 40px;
     color: #6197e8;
+}
+
+.salesDate {
+    width: 200px;
+    cursor: pointer;
+    margin: 0 auto;
+
+}
+::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    transform: translateX(-10px);
+    padding-left: 3000px;
+    height: 100%;
 }
 
 #sales-dateSearch {
     display: flex;
     flex-direction: row;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+input {
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
 }
 
 .filterDate {
@@ -152,3 +221,4 @@
     width: 80px;
     height: 30px;
 }
+

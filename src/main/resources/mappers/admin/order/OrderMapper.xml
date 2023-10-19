@@ -251,8 +251,6 @@
            CER_STATUS = '반품',
            CANCEL_DATE = SYSTIMESTAMP
      WHERE ORDER_NO = #{ selectedOrderNo }
-
-
     </update>
 
 
