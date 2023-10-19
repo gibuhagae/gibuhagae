@@ -84,16 +84,6 @@
     </resultMap>
 
 
-
-    <resultMap id="itemOptionMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ItemOptionDTO">
-        <id property="optionCode" column="OPTION_CODE"/>
-        <id property="itemCode" column="ITEM_CODE"/>
-        <result property="optionName" column="OPTION_NAME"/>
-        <result property="registDate" column="REGIST_DATE"/>
-        <result property="salePrice" column="SALE_PRICE"/>
-        <result property="count" column="COUNT"/>
-    </resultMap>
-
     <!-- summary 혁 2023-10-18 START-->
     <resultMap id="orderDetailDTO" type="com.gibuhagae.gibuhagae.order.dto.OrderDetailDTO">
         <id property="orderDetailCode" column="ORDER_DETAIL_CODE"/>
@@ -143,48 +133,48 @@
     <update id="updatePost" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
         UPDATE POST
         SET
-            REGISTRATION_NO = #{ trackingNumber },
-            POSTOFFICE = #{ deliveryCompany }
+            REGISTRATION_NO = #{ registrationNo },
+            POSTOFFICE = #{ deliveryCompany },
+            REGISTRATION_DATE = SYSTIMESTAMP
+        WHERE ORDER_NO = #{ selectedOrderNo }
+    </update>
+
+    <update id="updateOrderStatus" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
+        UPDATE ORDER_MANAGEMENT
+        SET
+            ORDER_STATUS = #{ orderStatus }
         WHERE ORDER_NO = #{ selectedOrderNo }
     </update>
 
 
-    <update id="updateOrderStatus" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
-        UPDATE ORDER_MANAGEMENT
-           SET
-               ORDER_STATUS = #{ orderStatus }
-         WHERE ORDER_NO = #{ selectedOrderNo }
-    </update>
-
-
-<select id="selectShippingOrderList" resultMap="generalOrderListResultMap">
-    SELECT
-        OM.ORDER_NO,
-        M.USER_ID,
-        P.RECIPIENT_NAME,
-        OM.ORDER_DATE,
-        I.ITEM_NAME,
-        IO.OPTION_NAME,
-        OM.PAYMENT_PRICE,
-        OM.ORDER_COUNT,
-        CASE
-            WHEN OM.CER_STATUS = '교환' THEN SM.SWAP_REASON
-            ELSE P.DELIVERY_REQUEST
-            END AS DELIVERY_REQUEST,
-        P.REGISTRATION_NO,
-        P.POSTOFFICE,
-        P.ZIPCODE,
-        P.ADDRESS,
-        P.ADDRESS_DETAIL
-    FROM ORDER_MANAGEMENT OM
-             JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
-             JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
-             JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
-             JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
-             JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
-             LEFT JOIN SWAP_MANAGEMENT SM ON OD.ORDER_DETAIL_CODE = SM.ORDER_DETAIL_CODE
-    WHERE OM.ORDER_STATUS = '발송처리'
-</select>
+    <select id="selectShippingOrderList" resultMap="generalOrderListResultMap">
+        SELECT
+            OM.ORDER_NO,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            CASE
+                WHEN OM.CER_STATUS = '교환' THEN SM.SWAP_REASON
+                ELSE P.DELIVERY_REQUEST
+                END AS DELIVERY_REQUEST,
+            P.REGISTRATION_NO,
+            P.POSTOFFICE,
+            P.ZIPCODE,
+            P.ADDRESS,
+            P.ADDRESS_DETAIL
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                 LEFT JOIN SWAP_MANAGEMENT SM ON OD.ORDER_DETAIL_CODE = SM.ORDER_DETAIL_CODE
+        WHERE OM.ORDER_STATUS = '발송처리'
+    </select>
 
     <select id="OrderReadyList" resultMap="generalOrderListResultMap">
         SELECT
@@ -264,22 +254,22 @@
         WHERE OM.ORDER_STATUS = '취소요청'
     </select>
 
-<update id="cancelOrder" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
-    UPDATE ORDER_MANAGEMENT
-       SET
-           ORDER_STATUS = '취소 된 주문',
-           CER_STATUS = '취소',
-           CANCEL_DATE = SYSTIMESTAMP
-     WHERE ORDER_NO = #{ selectedOrderNo }
-</update>
+    <update id="cancelOrder" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
+        UPDATE ORDER_MANAGEMENT
+        SET
+            ORDER_STATUS = '취소 된 주문',
+            CER_STATUS = '취소',
+            CANCEL_DATE = SYSTIMESTAMP
+        WHERE ORDER_NO = #{ selectedOrderNo }
+    </update>
 
     <update id="returnOrder" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
-    UPDATE ORDER_MANAGEMENT
-       SET
-           ORDER_STATUS = '반품 된 주문',
-           CER_STATUS = '반품',
-           CANCEL_DATE = SYSTIMESTAMP
-     WHERE ORDER_NO = #{ selectedOrderNo }
+        UPDATE ORDER_MANAGEMENT
+        SET
+            ORDER_STATUS = '반품 된 주문',
+            CER_STATUS = '반품',
+            CANCEL_DATE = SYSTIMESTAMP
+        WHERE ORDER_NO = #{ selectedOrderNo }
     </update>
 
     <select id="selectCancelOrderList" resultMap="cancelOderListResultMap">
@@ -299,30 +289,30 @@
                  JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
                  JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
                  JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
-         WHERE OM.CER_STATUS = '취소'
+        WHERE OM.CER_STATUS = '취소'
     </select>
 
-   <select id="orderReturnList" resultMap="generalOrderListResultMap">
-       SELECT
-           RM.REFUND_NUMBER,
-           OM.ORDER_NO,
-           M.USER_ID,
-           P.RECIPIENT_NAME,
-           OM.ORDER_DATE,
-           I.ITEM_NAME,
-           IO.OPTION_NAME,
-           OM.PAYMENT_PRICE,
-           OM.ORDER_COUNT,
-           RM.REFUND_REASON
-       FROM ORDER_MANAGEMENT OM
-                JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
-                JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
-                JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
-                JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
-                JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
-                JOIN REFUND_MANAGEMENT RM ON OD.ORDER_DETAIL_CODE = RM.ORDER_DETAIL_CODE
-       WHERE OM.ORDER_STATUS = '반품요청'
-   </select>
+    <select id="orderReturnList" resultMap="generalOrderListResultMap">
+        SELECT
+            RM.REFUND_NUMBER,
+            OM.ORDER_NO,
+            M.USER_ID,
+            P.RECIPIENT_NAME,
+            OM.ORDER_DATE,
+            I.ITEM_NAME,
+            IO.OPTION_NAME,
+            OM.PAYMENT_PRICE,
+            OM.ORDER_COUNT,
+            RM.REFUND_REASON
+        FROM ORDER_MANAGEMENT OM
+                 JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
+                 JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
+                 JOIN ITEM I ON OD.ITEM_CODE = I.ITEM_CODE
+                 JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
+                 JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
+                 JOIN REFUND_MANAGEMENT RM ON OD.ORDER_DETAIL_CODE = RM.ORDER_DETAIL_CODE
+        WHERE OM.ORDER_STATUS = '반품요청'
+    </select>
 
     <select id="returnDetailList" resultMap="returnOrderListResultMap">
         SELECT
@@ -395,10 +385,10 @@
 
     <update id="swapOrder" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
         UPDATE ORDER_MANAGEMENT
-           SET
-               ORDER_STATUS = #{ orderStatus },
-               CER_STATUS = '교환'
-         WHERE ORDER_NO = #{ selectedOrderNo }
+        SET
+            ORDER_STATUS = #{ orderStatus },
+            CER_STATUS = '교환'
+        WHERE ORDER_NO = #{ selectedOrderNo }
 
     </update>
     <update id="modifyOrderDetailStatus" parameterType="com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO">
@@ -411,7 +401,7 @@
 
     </update>
 
-<!--    summary 혁 2023-10-19-->
+    <!--    summary 혁 2023-10-19-->
     <insert id="insertRefundManagement">
         INSERT
         INTO REFUND_MANAGEMENT (
@@ -420,10 +410,10 @@
             ORDER_DETAIL_CODE
         )
         VALUES (
-            SEQ_REFUND_NO.NEXTVAL,
-                #{ reasonText },
-                #{ orderDetailCode }
-        )
+                   SEQ_REFUND_NO.NEXTVAL,
+                   #{ reasonText },
+                   #{ orderDetailCode }
+               )
     </insert>
 
     <insert id="insertSwapManagement">
@@ -434,10 +424,10 @@
             ORDER_DETAIL_CODE
         )
         VALUES (
-            SEQ_SWAP_NO.NEXTVAL,
-            #{ reasonText },
-            #{ orderDetailCode }
-        )
+                   SEQ_SWAP_NO.NEXTVAL,
+                   #{ reasonText },
+                   #{ orderDetailCode }
+               )
     </insert>
 
     <select id="selectNewOrderList2" resultMap="generalOrderListResultMap">
@@ -456,7 +446,7 @@
             P.ZIPCODE,
             P.ADDRESS,
             P.ADDRESS_DETAIL,
-           OM.ORDER_STATUS
+            OM.ORDER_STATUS
         FROM ORDER_MANAGEMENT OM
                  JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
                  JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO

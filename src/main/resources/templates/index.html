@@ -31,16 +31,16 @@
             <div class="header-top-content">
 
                 <th:block sec:authorize="isAnonymous()">
-                    <div class="admin-page">
+                    <div class="admin-page-none">
                         <!-- 유저 로그인시 보일 관리자 버튼 -->
-                        <a href="order/order-new">빈여백 페이지</a>
+                        <a style="background-color: #f0f0f0"></a>
                     </div>
                 </th:block>
 
                 <th:block sec:authorize="hasRole('user')">
-                    <div class="admin-page">
+                    <div class="admin-page-none">
                         <!-- 유저 로그인시 보일 관리자 버튼 -->
-                        <a href="order/order-new">빈여백 페이지</a>
+                        <a style="background-color: #f0f0f0"></a>
                     </div>
                 </th:block>
 
@@ -64,14 +64,14 @@
                     <th:block sec:authorize="hasRole('user')">
                         <div class="admin-page">
                             <!-- 유저 로그인시 보일 관리자 버튼 -->
-                            <li><a href="11">빈여백</a></li>
+                            <li><a></a></li>
                         </div>
                     </th:block>
 
                     <th:block sec:authorize="hasRole('admin')">
-                        <div class="admin-page">
+                        <div class="admin-page-none">
                             <!-- 관리자 로그인시 보일 관리자 버튼 -->
-                            <li><a href="11">배송조회</a></li>
+                            <li><a></a></li>
                         </div>
                     </th:block>
 
