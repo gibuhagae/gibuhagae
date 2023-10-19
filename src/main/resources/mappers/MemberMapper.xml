@@ -21,7 +21,35 @@
         <result property="activationStatus" column="ACTIVATION_STATUS"/>
     </resultMap>
 
-    <select id="findMemberById" resultMap="memberResultMap">
+<!--    <resultMap id="memberFunctionInfosResultMap" type="com.gibuhagae.gibuhagae.member.dto.MemberFunctionInfosDTO">-->
+<!--        <result property="MemberId" column="MEMBER_ID"/>-->
+<!--        <result property="isSavedId" column="IS_SAVED_ID"/>-->
+<!--        <result property="isRememberedId" column="IS_REMEMBERED_ID"/>-->
+<!--    </resultMap>-->
+
+<!--    <select id="findMemberById" resultMap="memberResultMap">-->
+<!--        SELECT-->
+<!--        MEMBER_NO,-->
+<!--        MEMBER_NAME,-->
+<!--        MEMBER_PHONE,-->
+<!--        ZIPCODE,-->
+<!--        ADDRESS,-->
+<!--        REGIST_DATE,-->
+<!--        UPDATE_DATE,-->
+<!--        EMAIL,-->
+<!--        DONATE_PRICE,-->
+<!--        PASSWORD,-->
+<!--        USER_ID,-->
+<!--        USER_CODE,-->
+<!--        LOGIN_TYPE,-->
+<!--        ACTIVATION_STATUS-->
+<!--        FROM-->
+<!--        MEMBER-->
+<!--        WHERE-->
+<!--        USER_ID = #{ userId }-->
+<!--    </select>-->
+
+    <select id="findAddrByMemberNo" resultMap="memberResultMap">
         SELECT
         MEMBER_NO,
         MEMBER_NAME,
@@ -40,43 +68,116 @@
         FROM
         MEMBER
         WHERE
-        USER_ID = #{ userID }
+        MEMBER_NO = #{ memberNo }
     </select>
 
-    <insert id="registMember">
-        INSERT
-        INTO MEMBER (
-        MEMBER_NO,
-        MEMBER_NAME,
-        MEMBER_PHONE,
-        ZIP_CODE,
-        ADDRESS,
-        REGIST_DATE,
-        UPDATE_DATE,
-        EMAIL,
-        DONATE_PRICE,
-        PASSWORD,
-        USER_ID,
-        USER_CODE,
-        LOGIN_TYPE,
-        ACTIVATION_STATUS
-        )
-        VALUES (
-        1L,
-        #{ memberName },
-        #{ memberPhone },
-        #{ zipcode },
-        #{ address },
-        null,
-        null,
-        #{ email },
-        '1',
-        #{ password },
-        #{ userId },
-        1L,
-        'user',
-        'y'
-        )
-    </insert>
+<!--    <select id="selectFindIdInfos" resultMap="memberResultMap">-->
+<!--        SELECT-->
+<!--        MEMBER_NAME,-->
+<!--        REGIST_DATE,-->
+<!--        EMAIL,-->
+<!--        USER_ID,-->
+<!--        LOGIN_TYPE-->
+<!--        FROM-->
+<!--        MEMBER-->
+<!--        WHERE-->
+<!--        ACTIVATION_STATUS = 'Y' AND-->
+<!--        MEMBER_NAME = #{ mName } AND-->
+<!--        EMAIL = #{ mEmail }-->
+<!--    </select>-->
+
+<!--    <select id="selectFindPwdInfos" resultMap="memberResultMap">-->
+<!--        SELECT-->
+<!--        MEMBER_NAME,-->
+<!--        EMAIL,-->
+<!--        USER_ID,-->
+<!--        LOGIN_TYPE-->
+<!--        FROM-->
+<!--        MEMBER-->
+<!--        WHERE-->
+<!--        ACTIVATION_STATUS = 'Y' AND-->
+<!--        MEMBER_NAME = #{ mName } AND-->
+<!--        USER_ID = #{ mId } AND-->
+<!--        EMAIL = #{ mEmail }-->
+<!--    </select>-->
+
+<!--    <insert id="registMember">-->
+<!--        INSERT-->
+<!--        INTO MEMBER (-->
+<!--        MEMBER_NO,-->
+<!--        MEMBER_NAME,-->
+<!--        MEMBER_PHONE,-->
+<!--        ZIPCODE,-->
+<!--        ADDRESS,-->
+<!--        REGIST_DATE,-->
+<!--        UPDATE_DATE,-->
+<!--        EMAIL,-->
+<!--        DONATE_PRICE,-->
+<!--        PASSWORD,-->
+<!--        USER_ID,-->
+<!--        USER_CODE,-->
+<!--        LOGIN_TYPE,-->
+<!--        ACTIVATION_STATUS-->
+<!--        )-->
+<!--        VALUES (-->
+<!--        SEQ_MEMBER_NO.NEXTVAL,-->
+<!--        #{ memberName },-->
+<!--        #{ memberPhone },-->
+<!--        #{ zipcode },-->
+<!--        #{ address },-->
+<!--        sysdate,-->
+<!--        sysdate,-->
+<!--        #{ email },-->
+<!--        '1',-->
+<!--        #{ password },-->
+<!--        #{ userId },-->
+<!--        'user',-->
+<!--        '개인회원',-->
+<!--        'Y'-->
+<!--        )-->
+<!--    </insert>-->
+
+<!--    <select id="selectMemberId" resultType="string">-->
+<!--        SELECT-->
+<!--        USER_ID-->
+<!--        FROM-->
+<!--        MEMBER-->
+<!--        WHERE-->
+<!--        ACTIVATION_STATUS = 'Y' AND-->
+<!--        USER_ID = #{ userId }-->
+<!--    </select>-->
+
+<!--    <update id="modifyMemberPwdById">-->
+<!--        UPDATE-->
+<!--        MEMBER-->
+<!--        SET-->
+<!--        PASSWORD = #{ password }-->
+<!--        WHERE-->
+<!--        ACTIVATION_STATUS = 'Y' AND-->
+<!--        USER_ID = #{ userId }-->
+<!--    </update>-->
+
+<!--    <update id="modifyMemberInfo"  parameterType="com.gibuhagae.gibuhagae.member.dto.MemberDTO">-->
+<!--        UPDATE-->
+<!--        MEMBER-->
+<!--        SET-->
+<!--        MEMBER_PHONE = #{ memberPhone },-->
+<!--        ZIPCODE = #{ zipcode },-->
+<!--        ADDRESS = #{ address },-->
+<!--        EMAIL = #{ email }-->
+<!--        WHERE-->
+<!--        ACTIVATION_STATUS = 'Y' AND-->
+<!--        USER_ID = #{ userId }-->
+<!--    </update>-->
+
+<!--    <update id="deleteMember">-->
+<!--        UPDATE-->
+<!--        MEMBER-->
+<!--        SET-->
+<!--        ACTIVATION_STATUS = 'N'-->
+<!--        WHERE-->
+<!--        ACTIVATION_STATUS = 'Y' AND-->
+<!--        USER_ID = #{ userId }-->
+<!--    </update>-->
 
 </mapper>

@@ -3,6 +3,7 @@ package com.gibuhagae.gibuhagae.basket.dto;
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 import com.gibuhagae.gibuhagae.productDetail.dto.ProductDetailDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

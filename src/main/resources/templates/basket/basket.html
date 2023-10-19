@@ -71,49 +71,54 @@
                 <td></td>
             </tr>
             <tbody class="cart-items">
-            <tr class="cart-detail" th:each="cart : ${basket}">
-                <td>
-                    <input class="item-checkbox" name="check-item" type="checkbox">
-                </td>
-                <td>
-                    <img class="cart-item-img" th:src="${cart.optionDetailCode.imgSrc}">
-                </td>
-                <td class="cart-item-title" colspan="2"
-                    th:text="${cart.optionDetailCode.productManagementList.itemName}"></td>
-                <td>
-                    <div class="cart-item-option" th:text="${cart.optionDetailCode.optionName}"></div>
-                </td>
-                <td>
-                    <div class="cart-quantity-wrap">
-                        <input id="cart-quantity-input" th:value="${cart.count}" type="number" onchange="quantityChanged(event)">
-                        <div class="btn-wrap">
-                            <button class="plus-btn" onclick="plusClicked(event)">+
-                                <input type="hidden" th:value="${cart.basketNo}" id="plusBtn">
-                            </button>
-                            <button name class="minus-btn" onclick="minusClicked(event)">-
-                                <input type="hidden" th:value="${cart.basketNo}" id="minusBtn">
-                            </button>
+        <form action="/basket/items" method="post" >
+                <tr class="cart-detail" th:each="cart : ${basket}">
+                    <td>
+                        <input class="item-checkbox" name="check-item" type="checkbox">
+                    </td>
+                    <td>
+                        <img class="cart-item-img" th:src="${cart.optionDetailCode.imgSrc}">
+                    </td>
+                    <td class="cart-item-title" colspan="2"
+                        th:text="${cart.optionDetailCode.productManagementList.itemName}"></td>
+                    <input type="hidden" id="itemCode" th:value="${cart.itemCode}" name="itemCode" />
+                    <td>
+                        <div class="cart-item-option" th:text="${cart.optionDetailCode.optionName}"></div>
+                        <input type="hidden" id="optionCode" th:value="${cart.optionCode}" name="optionCode">
+                    </td>
+                    <td>
+                        <div class="cart-quantity-wrap">
+                            <input id="cart-quantity-input" th:value="${cart.count}" name="count" type="number"
+                                   onchange="quantityChanged(event)">
+                            <div class="btn-wrap">
+                                <div class="plus-btn" onclick="plusClicked(event)">+
+                                    <input type="hidden" th:value="${cart.basketNo}" id="plusBtn">
+                                </div>
+                                <div name class="minus-btn" onclick="minusClicked(event)"  >-
+                                    <input type="hidden" th:value="${cart.basketNo}" id="minusBtn">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td>
-                    <div id="cart-price" th:text="${cart.optionDetailCode.salePrice}">
-                    </div>
-                </td>
-                <td>
-                    <div class="cart-dicount-price">-</div>
-                </td>
-                <td>
-                    <div class="hasShippingPrice"></div>
-                </td>
-                <td>
-                    <div>
-                        <button class="remove-btn" type="submit" onclick="selectDel(event)">삭제
-                            <input type="hidden" id="removeBtn" th:value="${cart.basketNo}">
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        <div id="cart-price" th:text="${cart.optionDetailCode.salePrice}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cart-dicount-price">-</div>
+                    </td>
+                    <td>
+                        <div class="hasShippingPrice"></div>
+                    </td>
+                    <td>
+                        <div id="removeBtnArea">
+                            <div class="remove-btn" type="button" onclick="selectDel(event)">삭제
+                                <input type="hidden" id="removeBtn" th:value="${cart.basketNo}">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+        </form>
             </tbody>
         </table>
         <div id="total-price">
@@ -137,11 +142,11 @@
     </div>
     <div id="clear-wrapper">
         <div id="clear-area">
-            <button id="clear-button" type="submit" onclick="clearCart()">
+            <div id="clear-button" onclick="clearCart()">
                 <input type="hidden" id="clearCart" th:value="${memberNo}">
                 <img src="/images/clearcart.png">
                 <p class="message" id="throw">장바구니비우기</p>
-            </button>
+            </div>
         </div>
     </div>
     <div id="order-text">
@@ -194,7 +199,7 @@
             <div id="amount-area-right">
                 <div id="second-child">
                     <img src="/images/orderbyselect.png">
-                    <button class="purchase-btn" type="submit">
+                    <button class="purchase-btn" type="button" onclick="purchasBtn()">
                         구매하기
                     </button>
                 </div>
@@ -381,7 +386,7 @@
         let quantity = parseInt(quantityInput.value);
         if (quantity > 1) {
             console.log(minusBtn);
-            // console.log(optionCode);}&optionCode=${optionCode}
+
             fetch(`/quantity/minus?basketNo=${minusBtn}`, {
                 method: 'POST',
                 headers: {
@@ -389,8 +394,7 @@
                 },
                 body: JSON.stringify({
                     "basketNo": minusBtn
-                    // "itemCode": itemCode,
-                    // "optionCode": optionCode
+
                 })
             })
                 .then(result => result.text())
@@ -401,8 +405,7 @@
                 .catch(error => {
                     console.log(error);
                 });
-        }
-        else {
+        } else {
             quantityInput.value = 1;
         }
 
@@ -453,8 +456,6 @@
             },
             body: JSON.stringify({
                 "basketNo": selectBtn
-                // "itemCode": itemCode,
-                // "optionCode": optionCode
             })
         })
             .then(result => result.text())
@@ -473,7 +474,7 @@
         let memberNo = document.getElementById("clearCart").value;
 
         console.log(memberNo);
-        // console.log(optionCode);}&optionCode=${optionCode}
+
         fetch(`/clear/cart?memberNo=${memberNo}`, {
             method: 'POST',
             headers: {
@@ -512,10 +513,12 @@
 
                 itemsPrice += price * count;
 
-                if (itemsPrice >= 30000) {
+                if (itemsPrice < 50000) {
 
                     shippingPrice = 3000;
 
+                } else if (itemsPrice >= 50000) {
+                    shippingPrice = 0;
                 }
             }
         }
@@ -523,7 +526,6 @@
         let originItemsPrice = itemsPrice.toLocaleString();
         let originTotalPrice = totalPrice.toLocaleString();
 
-        console.log(shippingPrice)
 
         document.querySelector('.cart-item-price').innerText = originItemsPrice;
         document.querySelector('#cart-item-price').innerText = originItemsPrice;
@@ -531,10 +533,123 @@
         document.querySelector(".cart-total-price").innerText = originTotalPrice;
         document.querySelector(".total-shipping-price1").innerText = shippingPrice;
         document.querySelector(".total-shipping-price2").innerText = shippingPrice;
+    }
 
+
+
+        function purchasBtn() {
+
+            const cartRows = document.getElementsByClassName("cart-detail");
+            const basketItems = [];
+            console.log(cartRows)
+            for (let i = 0; i < cartRows.length; i++) {
+
+                let cartRow = cartRows[i];
+                let checkbox = cartRow.querySelector(".item-checkbox");
+
+                if (checkbox.checked) {
+                    const $itemCode = parseInt(cartRow.querySelector("#itemCode").value);
+                    const $optionCode = parseInt(cartRow.querySelector("#optionCode").value);
+                    const $count = parseInt(cartRow.querySelector("#cart-quantity-input").value);
+                    const $itemName = cartRow.querySelector(".cart-item-title").textContent;
+                    const $optionName = cartRow.querySelector(".cart-item-option").textContent;
+                    const $price = cartRow.querySelector("#cart-price").textContent;
+                    const $imgSrc = cartRow.querySelector(".cart-item-img").src;
+                    console.log($count);
+
+                    const basketItem = {
+                        itemCode: $itemCode,
+                        optionCode: $optionCode,
+                        count: $count,
+                        itemName: $itemName,
+                        optionName: $optionName,
+                        price: $price,
+                        imgSrc: $imgSrc
+                    }
+
+                    basketItems.push(basketItem); // 배열에 장바구니 아이템 추가
+                }
+
+            }
+
+            console.log(basketItems);
+            // 폼 엘리먼트를 동적으로 생성
+            let newForm = document.createElement('form');
+            newForm.name = "basketItems";
+            newForm.method = 'post';
+            newForm.action = '/basket/items';
+            newForm.encoding = 'UTF-8';
+
+            for (let i = 0; i < basketItems.length; i++) {
+                let basketItem = basketItems[i];
+
+                let itemCodeInput = document.createElement('input');
+                itemCodeInput.setAttribute("type", "hidden");
+                itemCodeInput.setAttribute("name", "basketItems[" + i + "].itemCode");
+                itemCodeInput.setAttribute("value", basketItem.itemCode);
+
+                let optionCodeInput = document.createElement('input');
+                optionCodeInput.setAttribute("type", "hidden");
+                optionCodeInput.setAttribute("name", "basketItems[" + i + "].optionCode");
+                optionCodeInput.setAttribute("value", basketItem.optionCode);
+
+                let countInput = document.createElement('input');
+                countInput.setAttribute("type", "hidden");
+                countInput.setAttribute("name", "basketItems[" + i + "].count");
+                countInput.setAttribute("value", basketItem.count);
+
+                let itemNameInput = document.createElement('input');
+                itemNameInput.setAttribute("type", "hidden");
+                itemNameInput.setAttribute("name", "basketItems[" + i + "].itemName");
+                itemNameInput.setAttribute("value", basketItem.itemName);
+
+                let optionNameInput = document.createElement('input');
+                optionNameInput.setAttribute("type", "hidden");
+                optionNameInput.setAttribute("name", "basketItems[" + i + "].optionName");
+                optionNameInput.setAttribute("value", basketItem.optionName);
+
+                let priceInput = document.createElement('input');
+                priceInput.setAttribute("type", "hidden");
+                priceInput.setAttribute("name", "basketItems[" + i + "].price");
+                priceInput.setAttribute("value", basketItem.price);
+
+                let imgSrcInput = document.createElement('input');
+                imgSrcInput.setAttribute("type", "hidden");
+                imgSrcInput.setAttribute("name", "basketItems[" + i + "].imgSrc");
+                imgSrcInput.setAttribute("value", basketItem.imgSrc);
+
+                newForm.appendChild(itemCodeInput);
+                newForm.appendChild(optionCodeInput);
+                newForm.appendChild(countInput);
+                newForm.appendChild(itemNameInput);
+                newForm.appendChild(optionNameInput);
+                newForm.appendChild(priceInput);
+                newForm.appendChild(imgSrcInput);
+            }
+
+            // 폼을 문서의 body에 추가
+            document.body.appendChild(newForm);
+
+            alert("주문페이지로 이동");
+            // 폼 제출
+            newForm.submit();
+            // fetch("/basket/items", {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json; charset=UTF-8'
+            //         },
+            //         body: JSON.stringify(basketItems)
+            //     })
+            //         .then(res => res.text())
+            //         .then(res => {
+            //             alert(res);
+            //             location.href="/payment";
+            //         }
+            //         )
+            //         .catch(error => {
+            //             console.log(error);
+            //         });
         }
-
-
 </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.gibuhagae.gibuhagae.basket.dao;
 
 import com.gibuhagae.gibuhagae.basket.dto.BasketDTO;
+import com.gibuhagae.gibuhagae.basket.dto.BasketItemDTO;
 import com.gibuhagae.gibuhagae.productDetail.dto.ProductDetailDTO;
 import org.apache.ibatis.annotations.Mapper;
 
