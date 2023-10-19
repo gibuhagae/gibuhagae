@@ -81,7 +81,7 @@ public class MyPageController {
         else
             System.out.println("회원 수정 실패!");
 
-        return "redirect:/myPage/MyPage";
+        return "redirect:/member/logout";
     }
 
     @GetMapping("/OrderDetail")
