@@ -1,5 +1,4 @@
 package com.gibuhagae.gibuhagae.payment.service;
-l
 
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 
