@@ -50,5 +50,7 @@ public interface OrderMapper {
 
     int insertRefundManagement(String reasonText, String orderDetailCode);
     int insertSwapManagement(String reasonText, String orderDetailCode);
+
+    List<OrderManagementDTO> selectNewOrderList2();
 }
 
