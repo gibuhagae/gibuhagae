@@ -15,5 +15,5 @@ public class BasketItemDTO {
     private String itemName;
     private String optionName;
     private int price;
-    private String imgSrc;
+    private String filePath;
 }

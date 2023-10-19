@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<form action="basket/regist" method="post">
 <!-- 상품 상세 페이지 -->
 <div class="productDetail" id="productDetail">
     <!-- 헤더(로고, 상단 메뉴)-->
@@ -27,11 +28,12 @@
             <!-- 상품 썸네일 사진 -->
             <div class="pd-container-thumbnail">
                 <img th:src="${ item.attachmentList.^[fileType == 'thumbnail'].filePath}">
+                <input id="itemImg" type="hidden" th:src="${ item.attachmentList.^[fileType == 'thumbnail'].filePath}">
             </div>
             <!-- 정보 구역 -->
             <div class="pd-container-info">
                 <span class="pd-container-title" style="font-size: 22px; padding-bottom: 20px;"
-                th:text="${ item.itemName }"></span>
+                      th:text="${ item.itemName }"></span>
                 <div class="pd-container-price" style="padding-bottom: 20px;"
                      th:text="${#numbers.formatDecimal(item.salePrice, 0, 'COMMA', 0, 'POINT')} + '원'">
 
@@ -68,14 +70,16 @@
                                 <th scope="row">· 상품코드</th>
                                 <td>
                                     <span th:text="${ item.itemCode }"></span>
+                                    <input id="itemCode" type="hidden" name="optionDetailCode.productManagementList.itemCode" th:value="${item.itemCode}">
                                 </td>
                             </tr>
                             <tr rel="옵션" class="product-option">
                                 <th scope="row">· 옵션</th>
                                 <td>
-                                    <select id="pdOption">
-                                        <option value="selected" selected>-[필수] 옵션을 선택해 주세요.</option>
-                                        <option value="1">1EA</option>
+                                    <select id="pdOption" onchange="numBtn()">
+                                        <option value="" selected >-[필수] 옵션을 선택해 주세요.</option>
+                                        <option value=""> ------------------------- </option>
+                                        <option th:value="${ item.optionName }" th:text="${ item.optionName }"></option>
                                     </select>
                                 </td>
                             </tr>
@@ -83,6 +87,7 @@
                     </div>
                     <div class="explain">
                         <span>· 최소 주문 수량 1개 이상</span><br>
+                        <input type="hidden" id="itemQty" type="number" th:value="${1}">
                         <span>· 1세트 갯수가 정해져 있는 상품은 낱개 판매가 불가합니다.</span>
                     </div>
                     <div class="pd-price-title" style="border-bottom: rgba(108,106,106,0.1) 1px solid;">
@@ -92,12 +97,51 @@
                             <span style="font-size: 14px; font-weight: 400;">선택하신 옵션 입니다.</span>
                         </div>
                     </div>
-                    <div class="selected-option" style="height: 50px; border: #6C757D 1px solid;">
-                        선택한 옵션 들어갈 구간
+                    <div class="selected-option"  id="optionArea" th:text="${ item.optionName }">
+                        <input type="hidden" id="optionCode" th:value="${ item.optionCode }>
                     </div>
-                    <div class="selected-pd-price" style="height: 50px;  border: #6C757D 1px solid;">
-                        선택한 옵션 금액 들어갈 구간
+                    <div class="selected-pd-price" id="priceArea" th:text="'￦ ' + ${#numbers.formatDecimal(item.salePrice, 0, 'COMMA', 0, 'POINT')}">
+                        <input id="itemPrice" th:value="${item.salePrice}">
                     </div>
+
+                    <script>
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', ready)
+                        } else {
+                            ready();
+                        }
+
+                        function ready() {
+
+
+                            priceInit();
+                            optionInit();
+                        }
+
+                        function priceInit() {
+                            let $priceArea = document.getElementById('priceArea');
+                            $priceArea.style.display = 'none';
+                        }
+
+                        function optionInit() {
+                            let $optionArea = document.getElementById('optionArea');
+                            $optionArea.style.display = 'none';
+                        }
+
+                        function numBtn() {
+
+                            let option = document.getElementById("pdOption");
+                            let $option = option.options[option.selectedIndex].value;
+                            option.textContent = $option;
+
+                            let optionArea = document.getElementById("optionArea");
+                            optionArea.style.display = 'block';
+
+                            let priceArea = document.getElementById("priceArea");
+                            priceArea.style.display = 'block';
+                        }
+                    </script>
+
                     <div class="pd-buy-button">
                         <ul style="display: flex">
                             <li class="buy" style="width: 280px; background-color: #DDC6C6;">
@@ -105,26 +149,26 @@
                                     <strong id="buyBtn">B U Y</strong>
                                 </span>
                             </li>
-                            <li class="cart" style="width: 230px; border: rgba(108,106,106,0.3) 2px solid ">C A R T</li>
+                            <button type="button" class="cart" style="width: 230px; border: rgba(108,106,106,0.3) 2px solid " onclick="addBasket()">C A R T</button>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div class="pd-container-nav">
-        <ul class="pd-container-navnav">
-            <li><a>|</a></li>
-            <li><a href="#sunImg">상품정보</a></li>
-            <li><a>|</a></li>
-            <li><a href="#review">상품후기</a></li>
-            <li><a>|</a></li>
-            <li><a href="#qna">상품문의</a></li>
-            <li><a>|</a></li>
-        </ul>
+            <ul class="pd-container-navnav">
+                <li><a>|</a></li>
+                <li><a href="#sunImg">상품정보</a></li>
+                <li><a>|</a></li>
+                <li><a href="#review">상품후기</a></li>
+                <li><a>|</a></li>
+                <li><a href="#qna">상품문의</a></li>
+                <li><a>|</a></li>
+            </ul>
         </div>
         <div class="detailInfo showStep" id="sunImg">
             <div class="content">
-                    <img th:src="${ item.attachmentList.^[fileType == 'main'].filePath}"/>
+                <img th:src="${ item.attachmentList.^[fileType == 'main'].filePath}"/>
             </div>
         </div>
 
@@ -143,51 +187,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>2</td>
-                    <td>두우우우웅우우번째</td>
-                    <td>5/5</td>
-                    <td>뽀둥뽀둥</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글첫번째글</td>
-                    <td>4.5/5</td>
-                    <td>흑임자</td>
+                <tr th:each="review : ${ reviewList }">
+                    <td th:text="${ review.reviewNo }"></td>
+                    <td th:text="${ review.reviewTitle}" th:onclick="|location.href='/board/QnaDetail?no=${ qna.inquiryNo }'|" style="cursor: pointer;"></td>
+                    <td th:text="${ review.grade } + ' / 5'"></td>
+                    <td th:text="${ qna.memberNo.memberName }"></td>
                 </tr>
                 </tbody>
             </table>
-<!--             후기 페이징바-->
-<!--            <div id="paging1" align="center" style="margin-top: 20px;">-->
-<!--                <th:block>-->
-<!--                    &lt;!&ndash; 맨 앞으로 이동 &ndash;&gt;-->
-<!--                    <button th:onclick="'location.href=\'/product/notice?page=1\''">&lt;&lt;</button>-->
-
-<!--                    &lt;!&ndash; 이전 페이지로 이동 &ndash;&gt;-->
-<!--                    <button-->
-<!--                            th:onclick="'location.href=\'/board/notice?page=' + @{${paging.page - 1}} + '\''"-->
-<!--                            th:disabled="${ paging.page <= 1 }">&lt;</button>-->
-
-<!--                    &lt;!&ndash; 숫자 버튼 &ndash;&gt;-->
-<!--                    <th:block-->
-<!--                            th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">-->
-<!--                        <button-->
-<!--                                th:onclick="'location.href=\'/board/notice?page=' + @{${page}} + '\''"-->
-<!--                                th:text="${ page }" th:disabled="${ paging.page eq page }">-->
-<!--                        </button>-->
-<!--                    </th:block>-->
-
-<!--                    &lt;!&ndash; 다음 페이지로 이동 &ndash;&gt;-->
-<!--                    <button-->
-<!--                            th:onclick="'location.href=\'/board/notice?page=' + @{${paging.page + 1}} + '\''"-->
-<!--                            th:disabled="${ paging.page >= paging.maxPage }">></button>-->
-
-<!--                    &lt;!&ndash; 맨 끝으로 이동 &ndash;&gt;-->
-<!--                    <button-->
-<!--                            th:onclick="'location.href=\'/board/notice?page=' + @{${paging.maxPage}} + '\''">>></button>-->
-<!--                </th:block>-->
-<!--            </div>-->
-            <!-- 후기작성 버튼 -->
+            <!--             후기작성 버튼 -->
             <div class="write-btn">
                 <button type="button" id="modal-open">후기작성</button>
             </div>
@@ -217,100 +225,23 @@
                 </tr>
                 </tbody>
             </table>
-<!--             Q&A 페이징바-->
-<!--            <div id="paging" align="center" style="margin-top: 20px;">-->
-<!--                <th:block>-->
-<!--                    &lt;!&ndash; 맨 앞으로 이동 &ndash;&gt;-->
-<!--                    <button th:onclick="'location.href=\'/product/productDetail?no=1\''">&lt;&lt;</button>-->
 
-<!--                    &lt;!&ndash; 이전 페이지로 이동 &ndash;&gt;-->
-<!--                    <button-->
-<!--                            th:onclick="'location.href=\'/product/productDetail?page=' + @{${paging.page - 1}} + '\''"-->
-<!--                            th:disabled="${ paging.page <= 1 }">&lt;</button>-->
-
-<!--                    &lt;!&ndash; 숫자 버튼 &ndash;&gt;-->
-<!--                    <th:block-->
-<!--                            th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">-->
-<!--                        <button-->
-<!--                                th:onclick="'location.href=\'/product/productDetail?page=' + @{${page}} + '\''"-->
-<!--                                th:text="${ page }" th:disabled="${ paging.page eq page }">-->
-<!--                        </button>-->
-<!--                    </th:block>-->
-
-<!--                    &lt;!&ndash; 다음 페이지로 이동 &ndash;&gt;-->
-<!--                    <button-->
-<!--                            th:onclick="'location.href=\'/product/productDetail?page=' + @{${paging.page + 1}} + '\''"-->
-<!--                            th:disabled="${ paging.page >= paging.maxPage }">></button>-->
-
-<!--                    &lt;!&ndash; 맨 끝으로 이동 &ndash;&gt;-->
-<!--                    <button-->
-<!--                            th:onclick="'location.href=\'/product/productDetail?page=' + @{${paging.maxPage}} + '\''">>></button>-->
-<!--                </th:block>-->
-<!--            </div>-->
-<!--             Q&A 작성 버튼-->
+            <!--             Q&A 작성 버튼-->
             <div class="write-btn">
                 <button type="button" id="modal-open1">문의하기</button>
             </div>
         </div>
-        </div>
+    </div>
     <div class="PageMoveButton" id="pageMoveButton">
         <a class="up-logo" style="margin-bottom: 40px">▲</a>
         <a class="down-logo">▼</a>
     </div>
+
+    <!-- footer-->
     <footer>
-        <div id="footer-area">
-            <div id="footer-main">
-                <div class="footer-logo">
-                    <img src="/images/navigation/menu-logo.png">
-                </div>
-                <div id="footer-icon">
-                    <div>
-                        <img src="/images/main/instagram.png">
-                    </div>
-                    <div>
-                        <img src="/images/main/kakao.png">
-                    </div>
-                    <div>
-                        <img src="/images/main/facebook.png">
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div>
-                    팀: 그루브 펫 가디언즈
-                </div>
-                <div>
-                    사업자 등록 번호 : 000-00-00000
-                </div>
-                <div>
-                    사업자 정보 확인 통신판매업 : 제 2023-서울종로H-1511호
-                </div>
-            </div>
-            <div>
-                <div>
-                    사업장소재지 : 서울특별시 종로구 종로2가 탑골공원
-                </div>
-                <div>
-                    대표번호 : 000-000
-                </div>
-                <div>
-                    이메일 : hihello@gmail.com
-                </div>
-            </div>
-            <div>
-                <p>(주) 야옹아!기부하개는 통신판매 중개자로서 통신판매의 당사자가 아닙니다. 본 상품은 개별판마재 등록 상품으로 상품정보, 거래에 관한 의무와 책임은 각 판매자에게 있습니다.</p>
-            </div>
-            <div>
-                <div>
-                    <img src="/images/main/symbol.png">
-                </div>
-                <div>
-                    2023. 야옹아!기부하개 All rights reserved designed by 야옹아!기부하개
-                </div>
-            </div>
-        </div>
+        <div th:replace="/common/footer"></div>
     </footer>
-    </div>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -332,10 +263,10 @@
 <!--후기작성 모달 -->
 <div class="popup-wrap" id="popup"> <!-- //모달을 감쌀 박스 -->
     <div class="popup"> <!--실질적 모달팝업 -->
-        <div class="popup-head">	<!-- 로고 영역 -->
+        <div class="popup-head">   <!-- 로고 영역 -->
             <span class="head-title">후기작성</span>
         </div>
-        <div class="popup-body">	<!--컨텐츠 영역 -->
+        <div class="popup-body">   <!--컨텐츠 영역 -->
             <div class="body-content">
                 <div class="body-contentbox">
                     <form id="registForm">
@@ -363,7 +294,7 @@
                 </div>
             </div>
             <div id="registButton">
-                <button id="pop-btn-close" type="button" th:onclick="'location.href=\'/product/productDetail\''">
+                <button id="pop-btn-close" type="button" th:onclick="'#'">
                     취소</button>
                 <button type="submit" id="pop-btn-confirm">등록하기</button>
             </div>
@@ -374,10 +305,10 @@
 <!-- Q&A 모달 -->
 <div class="popup-wrap" id="popup1"> <!-- //모달을 감쌀 박스 -->
     <div class="popup"> <!--실질적 모달팝업 -->
-        <div class="popup-head">	<!-- 로고 영역 -->
+        <div class="popup-head">   <!-- 로고 영역 -->
             <span class="head-title">문의하기</span>
         </div>
-        <div class="popup-body">	<!--컨텐츠 영역 -->
+        <div class="popup-body">   <!--컨텐츠 영역 -->
             <div class="body-content">
                 <div class="body-contentbox">
                     <form id="registForm1" action="/board/qna" method="post">
@@ -385,19 +316,19 @@
                             <tr>
                                 <th scope="row">카테고리</th>
                                 <td name="qnaCategory" style="width: 200px;">
-                                <select id="select" name="inquiryType">
-                                    <option value="selected" selected>선택하세요</option>
-                                    <option value="상품문의">상품문의</option>
-                                    <option value="기타문의">기타문의</option>
-                                </select>
+                                    <select id="select" name="inquiryType">
+                                        <option value="selected" selected>선택하세요</option>
+                                        <option value="상품문의">상품문의</option>
+                                        <option value="기타문의">기타문의</option>
+                                    </select>
                                     <input type="text" id="qnaCategoryInput">
 
                                 </td>
                             </tr>
-<!--                            <tr>-->
-<!--                                <th scope="row">작성자</th>-->
-<!--                                <td><input type="text" name="writer" style="width: 200px;"></td>-->
-<!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <th scope="row">작성자</th>-->
+                            <!--                                <td><input type="text" name="writer" style="width: 200px;"></td>-->
+                            <!--                            </tr>-->
                             <tr>
                                 <th>상품</th>
                                 <td colspan="3" name="itemCode"  style="width: 750px;" th:text="${ item.itemName }"></td>
@@ -436,6 +367,51 @@
             document.getElementById('qnaCategoryInput').value = '';
         }
     });
+
+    const $tocart = document.getElementsByClassName('tocart');
+    const $cartImg = document.getElementById('itemImg').src;
+    const $cartItemTitle = document.getElementsByClassName('cart-item-title');
+    const $itemCode = document.getElementById('itemCode').value;
+    const $optionCode = document.getElementById('optionCode').value;
+    const $optionName = document.getElementsByClassName('cart-item-option');
+    const $count = document.getElementById('itemQty').value;
+    const $price = document.getElementsByClassName('cart-price');
+
+    function addBasket() {
+        const basket = {
+            itemImg: $cartImg,
+            // "itemName": $cartItemTitle,
+            itemCode: $itemCode,
+            // "optionName": $optionName,
+            optionCode: $optionCode,
+            count: $count
+            // "price": $price
+        }
+        fetch("/basket/regist", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify(basket)
+        })
+            .then(result => result.text())
+            .then(result => {
+                alert(result);
+                if (result === "실패") {
+                    alert("장바구니에 이미 있습니다.");
+                } else if (result === "성공"){
+                    console.log(basket);
+                    alert("장바구니에 담았습니다.")
+
+                }
+                location.reload();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
 </script>
+</form>
 </body>
 </html>

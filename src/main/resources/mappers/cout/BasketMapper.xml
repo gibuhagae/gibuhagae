@@ -26,9 +26,7 @@
         <result property="optionName" column="OPTION_NAME"/>
         <result property="salePrice" column="SALE_PRICE"/>
         <result property="registDate" column="REGIST_DATE"/>
-        <result property="imgSrc" column="IMG_SRC"/>
         <association property="productManagementList" resultMap="productManagementResultMap"/>
-
     </resultMap>
 
     <resultMap id="productManagementResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ProductManagementDTO">
@@ -36,7 +34,23 @@
         <result property="itemName" column="ITEM_NAME"/>
         <result property="saleStatus" column="SALE_STATUS"/>
         <result property="registDate" column="REGIST_DATE"/>
+        <collection property="attachmentList" resultMap="attachmentListResultMap"/>
     </resultMap>
+
+    <resultMap id="attachmentListResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.AttachmentDTO">
+        <id property="fileNo" column="FILE_NO"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="filePath" column="FILE_PATH"/>
+        <result property="fileSave" column="FILE_SAVE"/>
+        <result property="fileExt" column="FILE_EXT"/>
+        <result property="fileVolume" column="FILE_VOLUME"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="reviewNo" column="REVIEW_NO"/>
+        <result property="bannerNo" column="BANNER_NO"/>
+        <result property="refundNo" column="REFUND_NO"/>
+    </resultMap>
+
 
     <select id="selectItems" parameterType="hashmap" resultMap="basketResultMap">
         SELECT
@@ -44,7 +58,7 @@
              , A.COUNT
              , B.OPTION_NAME
              , B.SALE_PRICE
-             , B.IMG_SRC
+             , E.FILE_PATH
              , C.ITEM_NAME
              , D.MEMBER_NO
              , B.OPTION_CODE
@@ -54,6 +68,7 @@
         LEFT JOIN ITEM_OPTION B ON (A.OPTION_CODE = B.OPTION_CODE)
         JOIN ITEM C ON (B.ITEM_CODE = C.ITEM_CODE)
         JOIN MEMBER D ON (A.MEMBER_NO = D.MEMBER_NO)
+        JOIN ATTACHMENT E ON (C.ITEM_CODE = E.ITEM_CODE)
 
         <where>
             <if test="optCode != null">
@@ -61,7 +76,7 @@
             </if>
 
             <if test="memberNo != null">
-                AND D.MEMBER_NO = 1
+                AND D.MEMBER_NO = #{memberNo}
             </if>
 
         </where>
@@ -128,7 +143,7 @@
     <delete id="clearCart">
         DELETE
           FROM BASKET A
-         WHERE A.MEMBER_NO = 1
+         WHERE A.MEMBER_NO = #{memberNo}
     </delete>
 
     <delete id="selectDel">
@@ -145,10 +160,10 @@
              , A.OPTION_NAME
              , A.SALE_PRICE
              , B.REGIST_DATE
-             , A.IMG_SRC
+             , C.FILE_PATH
              , B.ITEM_NAME
           FROM ITEM_OPTION A
           JOIN ITEM B ON (A.ITEM_CODE = B.ITEM_CODE)
-         WHERE B.ITEM_CODE = 3
+          JOIN ATTACHMENT C ON (B.ITEM_CODE = C.ITEM_CODE)
     </select>
 </mapper>

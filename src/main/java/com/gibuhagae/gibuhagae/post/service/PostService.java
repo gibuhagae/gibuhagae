@@ -1,7 +1,7 @@
 package com.gibuhagae.gibuhagae.post.service;
 
 import com.gibuhagae.gibuhagae.post.dao.PostMapper;
-import com.gibuhagae.gibuhagae.post.dto.PostDTO;
+import com.gibuhagae.gibuhagae.post.dto.PostDTOList;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +14,7 @@ public class PostService {
     public PostService(PostMapper postMapper) {
         this.postMapper = postMapper;
     }
-    public void addPost(PostDTO postDTO) {
+    public void addPost(PostDTOList postDTO) {
 
         postMapper.addPost(postDTO);
     }

@@ -1,5 +1,6 @@
 package com.gibuhagae.gibuhagae.productDetail.dto;
 
+import com.gibuhagae.gibuhagae.productManagement.dto.ItemDTO;
 import com.gibuhagae.gibuhagae.productManagement.dto.ProductManagementDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,6 @@ public class ProductDetailDTO {
    private String optionName;
    private int salePrice;
    private Date registDate;
-   private String imgSrc;
    private ProductManagementDTO productManagementList;
 
 }

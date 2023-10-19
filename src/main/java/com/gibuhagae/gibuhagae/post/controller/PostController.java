@@ -1,7 +1,7 @@
 package com.gibuhagae.gibuhagae.post.controller;
 
 import com.gibuhagae.gibuhagae.payment.dto.PaymentDTO;
-import com.gibuhagae.gibuhagae.post.dto.PostDTO;
+import com.gibuhagae.gibuhagae.post.dto.PostDTOList;
 import com.gibuhagae.gibuhagae.post.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class PostController {
     }
 
     @PostMapping("/post/regist")
-    public ResponseEntity<String> addPost(@RequestBody PostDTO postDTO) {
+    public ResponseEntity<String> addPost(@RequestBody PostDTOList postDTO) {
 
         postService.addPost(postDTO);
 

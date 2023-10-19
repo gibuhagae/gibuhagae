@@ -32,7 +32,7 @@ public class paymentController {
 
     @PostMapping("/payment/confirm")
     public String getOrder(@ModelAttribute PaymentDTO payment,
-                           @RequestParam String itemImg,
+                           @RequestParam List<String> itemImg,
                            @RequestParam String itemName,
                            @RequestParam String optionName,
                            @RequestParam List<Integer> optionCode,
@@ -55,6 +55,7 @@ public class paymentController {
         payment.setCount(count);
         payment.setOptionCode(optionCode);
         payment.setItemPrice(itemPrice);
+        payment.setItemImg(itemImg);
 
         
 

@@ -33,6 +33,7 @@ public class PaymentDTO {
     private List<Integer> itemCode;
     private List<Integer> optionCode;
     private List<Integer> itemPrice;
+    private List<String> itemImg;
 //    private int orderNo;
     private int orderCount;
 //    private int count;

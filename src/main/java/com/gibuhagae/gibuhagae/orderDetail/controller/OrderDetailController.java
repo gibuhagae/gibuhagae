@@ -4,15 +4,12 @@ import com.gibuhagae.gibuhagae.basket.dto.BasketDTO;
 
 import com.gibuhagae.gibuhagae.basket.dto.BasketItemDTOList;
 import com.gibuhagae.gibuhagae.orderDetail.dao.OrderDetailMapper;
-import com.gibuhagae.gibuhagae.orderDetail.dto.OrderDetailDTO;
 import com.gibuhagae.gibuhagae.orderDetail.service.OrderDetailService;
-import com.gibuhagae.gibuhagae.orderManagement.dto.OrderManagementDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;

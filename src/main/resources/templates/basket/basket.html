@@ -77,7 +77,7 @@
                         <input class="item-checkbox" name="check-item" type="checkbox">
                     </td>
                     <td>
-                        <img class="cart-item-img" th:src="${cart.optionDetailCode.imgSrc}">
+                        <img class="cart-item-img" th:src="${cart.optionDetailCode.productManagementList.attachmentList.^[fileType == 'thumbnail'].filePath}">
                     </td>
                     <td class="cart-item-title" colspan="2"
                         th:text="${cart.optionDetailCode.productManagementList.itemName}"></td>

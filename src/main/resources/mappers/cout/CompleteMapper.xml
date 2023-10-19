@@ -17,7 +17,7 @@
         <result property="optionName" column="OPTION_NAME"/>
         <result property="count" column="COUNT"/>
         <result property="orderDetailCode" column="ORDER_DETAIL_CODE"/>
-        <result property="imgSrc" column="IMG_SRC"/>
+        <result property="filePath" column="filePath"/>
     </resultMap>
 
     <select id="selectOrder" resultMap="orderListResultMap" parameterType="hashmap">
@@ -34,12 +34,13 @@
              , C.ORDER_DETAIL_CODE
              , D.OPTION_NAME
              , E.ITEM_NAME
-             , D.IMG_SRC
+             , F.FILE_PATH
           FROM PAYMENT A
           LEFT JOIN ORDER_MANAGEMENT B ON (A.ORDER_NO = B.ORDER_NO)
           JOIN ORDER_DETAIL C ON (B.ORDER_NO = C.ORDER_NO)
           JOIN ITEM_OPTION D ON (C.OPTION_CODE = D.OPTION_CODE)
           JOIN ITEM E ON (D.ITEM_CODE = E.ITEM_CODE)
-         WHERE B.MEMBER_NO = 1
+          JOIN ATTACHMENT F ON (E.ITEM_CODE = F.ATTACHMENT)
+         WHERE B.MEMBER_NO = #{memberNo}
     </select>
 </mapper>

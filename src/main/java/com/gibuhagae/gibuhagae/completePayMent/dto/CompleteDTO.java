@@ -27,5 +27,5 @@ public class CompleteDTO {
     private String paymentStatus;
     private String itemName;
     private String optionName;
-    private String imgSrc;
+    private String filePath;
 }
