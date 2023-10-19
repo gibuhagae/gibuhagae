@@ -9,10 +9,10 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
 	public String errorView(Exception e, Model model) {
-		
+
 		model.addAttribute("errorMessage", e.getMessage());
-		
+
 		return "common/error";
 	}
-	
+
 }

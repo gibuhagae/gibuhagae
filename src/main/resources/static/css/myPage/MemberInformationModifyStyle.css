@@ -91,6 +91,7 @@ html {
 #inputName {
     position: relative;
     left: 8.2%;
+    background-color: rgb(103, 196, 145);
 }
 
 #inputPhone1, #inputPhone2, #inputPhone3 {
@@ -162,7 +163,7 @@ html {
     background-color: rgb(103, 196, 145, 0);
 }
 
-#withdrawalBtn {
+#withdraw {
     position: relative;
     top: 5%;
     left: 70%;
@@ -192,7 +193,7 @@ html {
     left: 10%;
 }
 
-#withdrawalBtn:hover,
+#withdraw:hover,
 #checkBtn:hover,
 #cancelBtn:hover {
     background-color: rgba(217, 217, 217, 50);

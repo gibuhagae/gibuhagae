@@ -12,13 +12,13 @@ public class OrderManagementDTO {
  private String orderStatus;
  private int orderCount;
  private String donateYN;
- private String paymentPrice;
+ private int paymentPrice;
  private Long orderNo;
  private Long memberNo;
  private Date cancelDate;
  private String cerStatus;
- private String totalOrderPrice;
- private String donatePrice;
+ private int totalOrderPrice;
+ private int donatePrice;
  private String address;
  private String addressDetail;
  private String zipCode;

@@ -51,7 +51,7 @@
                 <span class="close" id="closeModal">&times;</span>
                 <h2>주문 취소 내역</h2>
                 <label for="search-Box">
-                    <strong>검색</strong>
+                    <strong>검색(모든 키워드)</strong>
                 </label>
                 <input type="search" id="search-Box" placeholder="검색">
                 <table class="cancelListArea">
@@ -74,7 +74,7 @@
                         <td th:text="${cancel.userId}" class="cancelOrder-Data"></td>
                         <td th:text="${cancel.recipientName}" class="cancelOrder-Data"></td>
                         <td th:text="${ cancel.itemName +' '+cancel.optionName }" class="cancelOrder-Data"></td>
-                        <td th:text="${ cancel.paymentPrice }" class="cancelOrder-Data"></td>
+                        <td th:text="${#numbers.formatInteger(cancel.paymentPrice, 3, 'COMMA')}" class="cancelOrder-Data"></td>
                         <td th:text="${ cancel.orderCount}" class="cancelOrder-Data"></td>
                         <td th:text="${ #dates.format(cancel.cancelDate, 'yyyy-MM-dd HH:mm:ss') }" class="cancelOrder-Data"></td>
                     </tr>
@@ -111,7 +111,7 @@
                     <span th:text="${order.optionName}" id="orderData-5"></span>
                 </td>
 
-                <td th:text="${order.paymentPrice}" id="orderData-6"></td>
+                <td th:text="${#numbers.formatInteger(order.paymentPrice, 3, 'COMMA')}" id="orderData-6"></td>
                 <td th:text="${order.orderCount}" id="orderData-7"></td>
                 <td th:text="${order.deliveryRequest}" id="orderData-8"></td>
 

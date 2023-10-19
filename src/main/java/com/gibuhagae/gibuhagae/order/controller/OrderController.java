@@ -7,11 +7,13 @@ import com.gibuhagae.gibuhagae.order.dto.ReturnRequestDTO;
 import com.gibuhagae.gibuhagae.order.dto.SwapRequestDTO;
 import com.gibuhagae.gibuhagae.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.annotation.Order;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -216,5 +218,56 @@ public class OrderController {
         orderService.swapOrder(selectedOrderNo, orderStatus);
 
         return "redirect:/order/order-swap";
+    }
+
+
+    // summary 혁 작성 2023-10-18
+    @GetMapping("/orderRefund")
+    public void moveOrderRefund() {
+        System.out.println("Get orderRefund");
+    }
+
+    @PostMapping("/orderRefund")
+    public ResponseEntity<String> modifyOrderRefund(@RequestBody HashMap<String, Object> datas) {
+
+        String ret = "성공";
+        System.out.println("Post orderRefund");
+
+        List<String> orderDetailCodeList = (ArrayList<String>)datas.get("orderDetailCode");
+        String reasonText = (String)datas.get("reasonText");
+
+        for (String orderDetailCode : orderDetailCodeList) {
+            if (!orderService.insertRefundManagement(reasonText, orderDetailCode)) {
+                System.out.println("환불매니지먼트 실패!");
+                ret = "실패";
+                break;
+            }
+        }
+
+        return ResponseEntity.ok(ret);
+    }
+
+    // summary 혁 작성 2023-10-18
+    @GetMapping("/orderSwap")
+    public void moveOrderSwap() {
+        System.out.println("Get orderSwap");
+    }
+
+    @PostMapping("/orderSwap")
+    public ResponseEntity<String> modifyOrderSwap(@RequestBody HashMap<String, Object> datas) {
+        String ret = "성공";
+
+        List<String> orderDetailCodeList = (ArrayList<String>)datas.get("orderDetailCode");
+        String reasonText = (String)datas.get("reasonText");
+
+        for (String orderDetailCode : orderDetailCodeList) {
+            if (!orderService.insertSwapManagement(reasonText, orderDetailCode)) {
+                System.out.println("교환 매니지먼트 실패!");
+                ret = "실패";
+                break;
+            }
+        }
+
+        return ResponseEntity.ok(ret);
     }
 }

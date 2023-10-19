@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.post.dao.PostDao">
+
+    <resultMap id="postResultMap" type="com.gibuhagae.gibuhagae.post.dto.PostDTO">
+        <id property="orderNo" column="ORDER_NO"/>
+        <result property="recipientName" column="RECIPIENT_NAME"/>
+        <result property="recipientPhone" column="RECIPIENT_PHONE"/>
+        <result property="zipCode" column="ZIP_CODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="deliveryRequest" column="DELIVERY_REQUEST"/>
+        <result property="registrationNo" column="REGISTRATION_NO"/>
+        <result property="postOffice" column="POST_OFFICE"/>
+        <result property="addressDetail" column="ADDRESS_DETAIL"/>
+    </resultMap>
+
+    <select id="selectPostList" resultMap="postResultMap">
+        SELECT
+               B.ORDER_NO
+             , A.RECIPIENT_NAME
+             , A.RECIPIENT_PHONE
+             , A.ZIP_CODE
+             , A.ADDRESS
+             , A.REGISTRATION_DATE
+             , A.DELIVERY_REQUEST
+             , A.REGISTRATION_NO
+             , A.POSTOFFICE
+             , A.ADDRESS_DETAIL
+          FROM POST A
+          LEFT JOIN ORDER_MANAGEMENT B ON (A.ORDER_NO = B.ORDER_NO)
+    </select>
+
+    <insert id="addPost">
+        INSERT
+          INTO POST
+        (
+          ORDER_NO
+        , RECIPIENT_NAME
+        , RECIPIENT_PHONE
+        , ZIPCODE
+        , ADDRESS
+        , REGISTRATION_DATE
+        , DELIVERY_REQUEST
+        , REGISTRATION_NO
+        , POSTOFFICE
+        , ADDRESS_DETAIL
+        )
+    </insert>
+</mapper>

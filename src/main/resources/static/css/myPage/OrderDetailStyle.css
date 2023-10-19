@@ -44,7 +44,7 @@ html {
 .myOrderList {
     position: absolute;
     top: 38%;
-    left: 17%;
+    left: 14%;
 }
 
 #orderListTitle {
@@ -86,7 +86,7 @@ html {
 }
 
 .orderCatName:not(#orderImgTxt){
-    width: 120px;
+    width: 145px;
 }
 
 .orderListText {
@@ -94,28 +94,45 @@ html {
     height: 100px;
 }
 
+.orderSTitle {
+    width: 150px;
+}
+
 #orderInfor1 {
     width: 280px;
     color: #9B9DA1;
 }
 
-#uLine {
-    position: absolute;
-    border: 1px solid black(128, 18, 18);
-    width: 100%;
-    top: 57%;
+.orderCatArea{
+    width: 80px;
 }
 
-#mLine {
-    position: absolute;
-    border: 1px solid black(128, 18, 18);
-    width: 100%;
-    top: 65%;
+/*#ercThId {*/
+/*    position: relative;*/
+/*    width: 145px;*/
+/*}*/
+
+.orderDetailTextArea {
+    position: relative;
+    left: 33px;
 }
 
-#bLine {
-    position: absolute;
-    border: 1px solid black(128, 18, 18);
-    width: 100%;
-    top: 100%;
+#orderDateN {
+    position: relative;
+    right: 30px;
+}
+
+#orderImgTextId {
+    position: relative;
+    right: 15px;
+}
+
+#orderCntTextId {
+    position: relative;
+    left: 30px;
+}
+
+#itemReturn {
+    position: relative;
+    right: 123px;
 }

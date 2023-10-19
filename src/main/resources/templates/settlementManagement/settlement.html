@@ -1,0 +1,121 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리자 페이지 - 정산 관리</title>
+
+    <link rel="stylesheet" href="/css/admin/admin_nav.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin/totalsales/totalsales.css" type="text/css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@600&display=swap"
+          rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+
+    <script src="/js/admin/settlement/settlement.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div th:replace="/common/admin/admin-nav.html"></div>
+
+<div id="salesContainer">
+    <h1 id="totalSales-title">정산관리</h1>
+    <hr>
+    <h2 id="todaySales-title">Today매출</h2>
+
+    <div class="today-sales">
+        <div id="amount-price" class="today-box">결제금액<p class="today-data" th:text="${#lists.isEmpty(todayPayment) ? 0 : todayPayment[0].paymentPrice} + ' 원'"></p></div>
+        <div id="return-price" class="today-box">환불금액<p class="today-data" th:text="${#lists.isEmpty(CancelAndReturnAndSwap) ? 0 : CancelAndReturnAndSwap[0].cancelAndReturnPrice} + ' 원'"></p></div>
+        <div id="amount-count" class="today-box">결제건수<p class="today-data" th:text="${#lists.isEmpty(todayPayment)? 0 : todayPayment[0].paymentCount} + ' 건'"></p></div>
+        <div id="cancel-count" class="today-box">취소/반품<p class="today-data" th:text="${#lists.isEmpty(CancelAndReturnAndSwap) ? 0 : CancelAndReturnAndSwap[0].cancelAndReturnCount} + ' 건'"></p></div>
+        <div id="swap-count" class="today-box">교환<span class="today-data" th:text="${#lists.isEmpty(Swap) ? 0 : Swap[0].swapCount} + ' 건'"></span></div>
+        <div id="delivery-complete" class="today-box">배송완료<p class="today-data" th:text="${#lists.isEmpty(todayPayment) ? 0 : todayPayment[0].completeDelivery} + ' 건'"></p></div>
+        <div id="net-sales" class="today-box">순매출<p class="today-data" th:text="${#lists.isEmpty(todayPayment) ? 0 : (todayPayment[0].paymentPrice - (#lists.isEmpty(CancelAndReturnAndSwap) ? 0 : CancelAndReturnAndSwap[0].cancelAndReturnPrice)) + ' 원'}"></p></div>
+    </div>
+
+    <div class="selectSearch-box">
+    <h2>기간별 매출 검색</h2>
+
+        <div id="sales-dateSearch">
+            <label for="sales-StartDate"> 시작날짜
+            <input id="sales-StartDate" class="salesDate" type="date" name="startDate"> ~&nbsp;&nbsp;
+            </label>
+            <label for="sales-endDate"> 종료날짜
+                <input id="sales-endDate" class="salesDate" type="date" name="endDate">
+            </label>
+                <input id="searchBtn"  type="button" value="조회">
+
+
+        </div>
+    </div>
+            <div class="today-sales1" id="searchSettlement">
+                <div id="amount-price2" class="today-box2" >결제금액<p class="today-data" ></p></div>
+                <div id="return-price2" class="today-box2" >환불금액<p class="today-data" ></p></div>
+                <div id="amount-count2" class="today-box2" >결제건수<p class="today-data" ></p></div>
+                <div id="cancel-count2" class="today-box2" >취소/반품<p class="today-data" ></p></div>
+                <div id="swap-count2" class="today-box2" >교환<span class="today-data" ></span></div>
+                <div id="delivery-complete2" class="today-box2" >배송완료<p class="today-data"></p></div>
+                <div id="net-sales2" class="today-box2" >순매출<p class="today-data"></p></div>
+            </div>
+</div>
+
+    <script>
+
+        var payMentP = document.getElementsByClassName("today-sales1").item(0).children.item(0).children.item(0);
+        var returnPriceP = document.getElementsByClassName("today-sales1").item(0).children.item(1).children.item(0);
+        var paymentCntP = document.getElementsByClassName("today-sales1").item(0).children.item(2).children.item(0);
+        var crContentsP = document.getElementsByClassName("today-sales1").item(0).children.item(3).children.item(0);
+        var swapP = document.getElementsByClassName("today-sales1").item(0).children.item(4).children.item(0);
+        var postCompleteP = document.getElementsByClassName("today-sales1").item(0).children.item(5).children.item(0);
+        var netPriceP = document.getElementsByClassName("today-sales1").item(0).children.item(6).children.item(0);
+
+        $(document).ready(function() {
+        $('#searchBtn').click(function() {
+            // 조회 버튼 클릭 이벤트 처리
+            $.ajax({
+                type: 'POST', // 또는 'GET', 요청 메서드 선택
+                url: '/settlementManagement/settlement', // 서버 API 엔드포인트 지정
+                data: {
+                    startDate: $('#sales-StartDate').val(),
+                    endDate: $('#sales-endDate').val()
+                },
+                success: function(response) {
+
+                   console.log("조회성공");
+                   console.log(response.searchDateAndPayment);
+                   console.log(response.searchCancelAndReturn);
+                   console.log(response.searchSwap);
+
+                    let searchDateAndPayment = response.searchDateAndPayment[0];
+                    let searchCancelAndReturn = response.searchCancelAndReturn[0];
+                    let searchSwap = response.searchSwap[0];
+
+                    payMentP.innerHTML = searchDateAndPayment.searchTotalPrice + ' 원';
+                    returnPriceP.innerHTML = searchCancelAndReturn.searchCancelAndReturnPrice + ' 원';
+                    paymentCntP.innerHTML = searchDateAndPayment.searchTotalCount + ' 건';
+                    crContentsP.innerHTML = searchCancelAndReturn.searchCancelAndReturnCount + ' 건';
+                    swapP.innerHTML = searchSwap.searchSwapCount + ' 건';
+                    postCompleteP.innerHTML = searchDateAndPayment.searchDeliveryCount + ' 건';
+                    netPriceP.innerHTML =  searchDateAndPayment.searchTotalPrice - searchCancelAndReturn.searchCancelAndReturnPrice + ' 원 ';
+                },
+                error: function() {
+                    // 실패 시 처리
+                    alert('조회에 실패했습니다.');
+                }
+            });
+        });
+
+        // 시작 라인
+    });
+
+</script>
+
+</body>
+</html>
