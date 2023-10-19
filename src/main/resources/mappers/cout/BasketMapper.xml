@@ -150,9 +150,4 @@
           JOIN ITEM B ON (A.ITEM_CODE = B.ITEM_CODE)
          WHERE B.ITEM_CODE = 3
     </select>
-
-    <select id="checkBasketById" resultMap="basketResultMap">
-        SELECT
-
-    </select>
 </mapper>

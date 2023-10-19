@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.completePayMent.dao.CompleteMapper">
+
+    <resultMap id="orderListResultMap" type="com.gibuhagae.gibuhagae.completePayMent.dto.CompleteDTO">
+        <id property="paymentNo" column="PAYMENT_NO"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="orderNo" column="ORDER_NO"/>
+        <result property="paymentDate" column="PAYMENT_DATE"/>
+        <result property="paymentPrice" column="PAYMENT_PRICE"/>
+        <result property="totalOrderPrice" column="TOTAL_ORDER_PRICE"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="optionCode" column="OPTION_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="count" column="COUNT"/>
+        <result property="orderDetailCode" column="ORDER_DETAIL_CODE"/>
+        <result property="imgSrc" column="IMG_SRC"/>
+    </resultMap>
+
+    <select id="selectOrder" resultMap="orderListResultMap" parameterType="hashmap">
+        SELECT
+               A.PAYMENT_NO
+             , B.MEMBER_NO
+             , TO_CHAR(A.PAYMENT_DATE, 'YYYY-MM-DD') AS PAYMENT_DATE
+             , A.PAYMENT_PRICE
+             , B.TOTAL_ORDER_PRICE
+             , C.ITEM_CODE
+             , C.OPTION_CODE
+             , C.COUNT
+             , C.PRICE
+             , C.ORDER_DETAIL_CODE
+             , D.OPTION_NAME
+             , E.ITEM_NAME
+             , D.IMG_SRC
+          FROM PAYMENT A
+          LEFT JOIN ORDER_MANAGEMENT B ON (A.ORDER_NO = B.ORDER_NO)
+          JOIN ORDER_DETAIL C ON (B.ORDER_NO = C.ORDER_NO)
+          JOIN ITEM_OPTION D ON (C.OPTION_CODE = D.OPTION_CODE)
+          JOIN ITEM E ON (D.ITEM_CODE = E.ITEM_CODE)
+         WHERE B.MEMBER_NO = 1
+    </select>
+</mapper>

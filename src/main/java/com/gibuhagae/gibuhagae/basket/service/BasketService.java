@@ -2,6 +2,7 @@ package com.gibuhagae.gibuhagae.basket.service;
 
 import com.gibuhagae.gibuhagae.basket.dao.BasketMapper;
 import com.gibuhagae.gibuhagae.basket.dto.BasketDTO;
+import com.gibuhagae.gibuhagae.basket.dto.BasketItemDTO;
 import com.gibuhagae.gibuhagae.productDetail.dto.ProductDetailDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,4 +83,5 @@ public class BasketService {
 
         basketMapper.qtyChanged(basketNo);
     }
+
 }

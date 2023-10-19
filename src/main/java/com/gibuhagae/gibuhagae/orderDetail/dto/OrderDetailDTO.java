@@ -1,19 +1,21 @@
-package com.gibuhagae.gibuhagae.basket.dto;
+package com.gibuhagae.gibuhagae.orderDetail.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
 @Getter
+@Setter
 @ToString
-public class BasketItemDTO {
+public class OrderDetailDTO {
 
+    private int orderDetailCode;
+    private int orderNo;
     private int itemCode;
     private int optionCode;
     private int count;
+    private int price;
     private String itemName;
     private String optionName;
-    private int price;
     private String imgSrc;
 }

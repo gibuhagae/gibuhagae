@@ -1,4 +1,4 @@
-package com.gibuhagae.gibuhagae.order.dto;
+package com.gibuhagae.gibuhagae.orderManagement.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +26,8 @@ public class OrderManagementDTO {
  private String registrationNo;
  private String postOffice;
  private String deliveryRequest;
+ private int optionCode;
+ private int itemCode;
 
  
 

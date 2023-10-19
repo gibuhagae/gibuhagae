@@ -1,7 +1,7 @@
 package com.gibuhagae.gibuhagae.member.controller;
 
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
-import com.gibuhagae.gibuhagae.member.service.AuthenticationService;
+//import com.gibuhagae.gibuhagae.member.service.AuthenticationService;
 import com.gibuhagae.gibuhagae.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -16,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -64,5 +67,18 @@ public class MemberController {
     @GetMapping("/MyPage")
     public void myPage() {
         System.out.println("마이페이지");
+    }
+
+    @GetMapping("/payment/address")
+    public String findAddrByMemberNo(Model model) {
+
+        int memberNo = 1;
+        Map<String, Integer> map = new HashMap<>();
+        map.put("memberNo", memberNo);
+
+        MemberDTO memberAddr = memberService.findAddrByMemberNo(map);
+        model.addAttribute("memberAddr", memberAddr);
+
+        return "/payment/payment";
     }
 }

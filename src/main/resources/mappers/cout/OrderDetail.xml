@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gibuhagae.gibuhagae.orderDetail.dao.OrderDetailMapper">
+
+    <resultMap id="orderDetailResultMap" type="com.gibuhagae.gibuhagae.orderDetail.dto.OrderDetailDTO">
+        <id property="orderDetailCode" column="ORDER_DETAIL_CODE"/>
+        <result property="orderNo" column="orderNo"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="optionCode" column="optionCode"/>
+        <result property="count" column="COUNT"/>
+        <result property="price" column="PRICE"/>
+        <result property="imgSrc" column="IMG_SRC"/>
+    </resultMap>
+
+    <select id="orderDetailList" resultMap="orderDetailResultMap">
+        SELECT
+               A.ORDER_DETAIL_CODE
+             , B.ITEM_CODE
+             , B.OPTION_CODE
+             , A.COUNT
+             , A.PRICE
+          FROM ORDER_DETAIL A
+          JOIN BASKET B ON (A.OPTION_CODE = B.OPTION_CODE)
+    </select>
+    
+    <insert id="addOrderDetail">
+        INSERT
+          INTO ORDER_DETAIL
+        (
+         , ORDEER_DETAIL_CODE
+         , ITEM_CODE
+         , OPTION_CODE
+         , ORDER_NO
+         , COUNT
+         , PRICE
+        )
+        VALUES
+        (
+          SEQ_ORDER_DETAIL_CODE.NEXTVAL
+        , #{itemCode}
+        , #{optionCode}
+        , "20231020" + SEQ_ORDER_NO.NEXTVAL
+        , #{count}
+        , #{price}
+        )
+    </insert>
+</mapper>
