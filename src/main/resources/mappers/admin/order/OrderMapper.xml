@@ -78,6 +78,13 @@
     <resultMap id="itemOptionMap" type="com.gibuhagae.gibuhagae.product.dto.ItemDTO">
         <id property="optionCode" column="OPTION_CODE"/>
         <id property="itemCode" column="ITEM_CODE"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="registDate" column="REGIST_DATE"/>
+        <result property="salePrice" column="SALE_PRICE"/>
+        <result property="count" column="COUNT"/>
+
+    </resultMap>
+
 
     <resultMap id="swapOrderListResultMap" type="com.gibuhagae.gibuhagae.order.dto.SwapRequestDTO">
         <id property="orderNo" column="ORDER_NO"/>

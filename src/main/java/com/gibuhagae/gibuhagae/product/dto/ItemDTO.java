@@ -21,12 +21,8 @@ public class ItemDTO {
     private Long totalCount;
 
     private Long refCategoryCode;
-    private Long optionCode;
+    private String optionName;
     private Long salePrice;
 
     private List<AttachmentDTO> attachmentList;
-//    private Long fileNo;
-//    private String fileName;
-//    private String fileType;
-//    private String filePath;
 }
