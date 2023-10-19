@@ -28,6 +28,7 @@
         <result property="registDate" column="REGIST_DATE"/>
         <result property="imgSrc" column="IMG_SRC"/>
         <association property="productManagementList" resultMap="productManagementResultMap"/>
+
     </resultMap>
 
     <resultMap id="productManagementResultMap" type="com.gibuhagae.gibuhagae.productManagement.dto.ProductManagementDTO">

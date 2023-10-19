@@ -1,6 +1,6 @@
 package com.gibuhagae.gibuhagae.orderManagement.service;
 
-import com.gibuhagae.gibuhagae.orderManagement.dao.OrderMapper;
+import com.gibuhagae.gibuhagae.orderManagement.dao.OrderManagementMapper;
 import com.gibuhagae.gibuhagae.orderManagement.dto.OrderManagementDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,11 +9,11 @@ import java.util.List;
 
 @Service
 @Transactional
-public class OrderService {
+public class OrderManagementService {
 
-    private final OrderMapper orderMapper;
+    private final OrderManagementMapper orderMapper;
 
-    public OrderService(OrderMapper orderMapper) { this.orderMapper = orderMapper;}
+    public OrderManagementService(OrderManagementMapper orderMapper) { this.orderMapper = orderMapper;}
 
 
     public List<OrderManagementDTO> selectNewOrderList() {
