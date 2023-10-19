@@ -15,4 +15,5 @@ public interface ProductMapper {
 
     ItemDTO selectProductDetail(Long no);
 
+    List<ItemDTO> selectItems();
 }

@@ -2,6 +2,7 @@ package com.gibuhagae.gibuhagae.board.controller;
 
 import com.gibuhagae.gibuhagae.board.dto.NoticeDTO;
 import com.gibuhagae.gibuhagae.board.dto.QnaDTO;
+import com.gibuhagae.gibuhagae.board.dto.ReviewDTO;
 import com.gibuhagae.gibuhagae.board.service.BoardService;
 import com.gibuhagae.gibuhagae.member.dto.MemberDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -102,17 +103,26 @@ public class BoardController {
         return "redirect:/product/productDetail";
     }
 
-@GetMapping("/review")             // 기본 페이지는 1페이지로
-public String getReview(@RequestParam(defaultValue = "1") int page,
-                     Model model){
+    @GetMapping("/review")             // 기본 페이지는 1페이지로
+    public String getReview(@RequestParam(defaultValue = "1") int page,
+                         Model model){
 
-    Map<String, Object> reviewListAndPaging = boardService.selectReview(page);
+        Map<String, Object> reviewListAndPaging = boardService.selectReview(page);
 
-    model.addAttribute("paging", reviewListAndPaging.get("paging"));
-    model.addAttribute("reviewList", reviewListAndPaging.get("reviewList"));
+        model.addAttribute("paging", reviewListAndPaging.get("paging"));
+        model.addAttribute("reviewList", reviewListAndPaging.get("reviewList"));
 
-    return "board/review";
-}
+        return "board/review";
+    }
+
+    @GetMapping("/reviewDetail")
+    public String getReviewDetail(@RequestParam Long no, Model model){
+
+        ReviewDTO reviewDetail = boardService.selectReviewDetail(no);
+        model.addAttribute("review", reviewDetail);
+
+        return "board/reviewDetail";
+    }
 
 
 

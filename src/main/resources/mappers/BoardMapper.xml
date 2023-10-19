@@ -341,5 +341,26 @@
         WHERE A.RNUM >= #{startRow}
         ORDER BY A.REVIEW_NO DESC
     </select>
+
+
+    <select id="selectReviewDetail" resultMap="generalReviewResultMap">
+        SELECT
+               A.REVIEW_NO
+             , A.REVIEW_TITLE
+             , A.GRADE
+             , A.REGIST_DATE
+             , C.ITEM_NAME
+             , A.REVIEW_CONTENT
+             , C.ITEM_NAME
+             , A.SHOW_STATUS
+             , B.MEMBER_NAME
+             , A.REVIEW_CONTENT
+        FROM REVIEW A
+                 JOIN MEMBER B ON (A.MEMBER_NO = B.MEMBER_NO)
+                 JOIN ITEM C On(A.ITEM_CODE = C.ITEM_CODE)
+        WHERE A.REVIEW_NO = #{ reviewNo }
+    </select>
+
+
 </mapper>
 

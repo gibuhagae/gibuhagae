@@ -28,8 +28,6 @@ public class ProductController {
     public String getProduct(@RequestParam(defaultValue = "1") int page,
                              Model model){
 
-        log.info("productList page : {}", page);
-
 
         Map<String, Object> productListAndPaging = productService.selectProduct(page);
 
@@ -44,7 +42,7 @@ public class ProductController {
 
         ItemDTO itemDetail = productService.selectProductDetail(no);
 
-        log.info("productDetail : {}", itemDetail);
+
         model.addAttribute("item", itemDetail);
 
         return "product/productDetail";

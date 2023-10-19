@@ -54,7 +54,7 @@
                         <td th:text="${ review.showStatus}"></td>
                         <td th:text="${ review.reviewNo }"></td>
                         <td th:text="${ review.itemCode.itemName }"></td>
-                        <td th:text="${ review.reviewTitle }"></td>
+                        <td th:text="${ review.reviewTitle }" th:onclick="|location.href='/board/reviewDetail?no=${ review.reviewNo }'|" style="cursor: pointer;"></td>
                         <td th:text="${ review.memberNo.memberName }"></td>
                         <td th:text="${ review.registDate }"></td>
                         <td th:text="${ review.grade }"></td>
