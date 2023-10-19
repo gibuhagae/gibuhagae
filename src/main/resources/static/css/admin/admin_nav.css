@@ -80,6 +80,7 @@ img {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .tomain {
