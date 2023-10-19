@@ -141,48 +141,33 @@
                     <!-- 슬라이드 사진 -->
                     <div class="slider-wrapper">
                         <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog1.jpg" alt="Image 1">
+                            <a href="#">
+                                <img src="/images/product/pd1.jpg" alt="Image 1">
                             </a>
                         </div>
                         <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog2.jpg" alt="Image 2">
+                            <a href="#">
+                                <img src="/images/product/pd3.jpg" alt="Image 2">
                             </a>
                         </div>
                         <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog3.jpg" alt="Image 3">
+                            <a href="#">
+                                <img src="/images/product/pd6.jpg" alt="Image 3">
                             </a>
                         </div>
                         <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog4.jpg" alt="Image 4">
+                            <a href="#">
+                                <img src="/images/product/pd5.jpg" alt="Image 4">
                             </a>
                         </div>
                         <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog5.jpg" alt="Image 5">
+                            <a href="#">
+                                <img src="/images/product/pd4.jpg" alt="Image 5">
                             </a>
                         </div>
                         <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog6.jpg" alt="Image 6">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog7.jpg" alt="Image 7">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog8.jpg" alt="Image 8">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="123">
-                                <img src="/images/main/dog9.jpg" alt="Image 9">
+                            <a href="#">
+                                <img src="/images/product/pd2.jpg" alt="Image 6">
                             </a>
                         </div>
                     </div>
@@ -204,108 +189,22 @@
         </div>
         <div class="new-product-container">
             <div class="new-product-wrapper">
+                <th:block th:each="item : ${itemList}">
                 <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/1.jpg">
+                    <a th:onclick="|location.href='/product/productDetail?no=${ item.itemCode }'|" style="cursor: pointer;">
+                        <img th:src="${ item.attachmentList[0].filePath }">
+                        <div class="list-info-wrapper">
+                            <span class="pd-title"
+                                  style="font-size: 18px; padding-bottom: 5px; border-bottom: rgba(108,106,106,0.3) 1px solid"
+                                  th:text="${ item.itemName }"></span>
+                            <div class="pd-price" style="padding-top: 5px;">
+                                <span class="price" th:text="'￦ ' + ${#numbers.formatDecimal(item.salePrice, 0, 'COMMA', 0, 'POINT')}"></span>
+                            </div>
+                        </div>
                     </a>
                 </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/2.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/3.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/4.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/5.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/6.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/7.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/8.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/9.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/10.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/11.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/12.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/13.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/14.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/15.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/16.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/17.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/18.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/19.jpg">
-                    </a>
-                </div>
-                <div class="new-product">
-                    <a href="123">
-                        <img src="/images/main/20.jpg">
-                    </a>
-                </div>
+                </th:block>
             </div>
-
         </div>
     </div>
         <div class="PageMoveButton" id="pageMoveButton">

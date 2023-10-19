@@ -123,4 +123,45 @@
                  JOIN ATTACHMENT C ON (A.ITEM_CODE = C.ITEM_CODE)
         WHERE A.ITEM_CODE = #{ itemCode }
     </select>
+
+    <select id="selectItems" resultMap="productResultMap">
+        SELECT
+               A.ITEM_CODE
+             , A.ITEM_NAME
+             , A.SALE_STATUS
+             , A.REGIST_DATE
+             , A.CATEGORY_CODE
+             , A.TOTAL_COUNT
+             , E.REF_CATEGORY_CODE
+             , D.OPTION_CODE
+             , D.SALE_PRICE
+             , F.FILE_PATH
+             , F.FILE_TYPE
+        FROM (
+                 SELECT
+                     ROWNUM RNUM
+                      , B.ITEM_CODE
+                      , B.ITEM_NAME
+                      , B.SALE_STATUS
+                      , B.REGIST_DATE
+                      , B.CATEGORY_CODE
+                      , B.TOTAL_COUNT
+                 FROM (
+                          SELECT
+                              C.ITEM_CODE
+                               , C.ITEM_NAME
+                               , C.SALE_STATUS
+                               , C.REGIST_DATE
+                               , C.CATEGORY_CODE
+                               , C.TOTAL_COUNT
+                          FROM ITEM C
+                      )B
+
+                  )A
+                 JOIN ITEM_OPTION D ON (A.ITEM_CODE = D.ITEM_CODE)
+                 JOIN ITEM_CATEGORY E ON (A.CATEGORY_CODE = E.CATEGORY_CODE)
+                 JOIN ATTACHMENT F ON (A.ITEM_CODE = F.ITEM_CODE)
+        WHERE FILE_TYPE = 'thumbnail'
+        ORDER BY 1 desc
+    </select>
 </mapper>

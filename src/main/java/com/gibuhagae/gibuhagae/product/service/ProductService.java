@@ -31,17 +31,14 @@ public class ProductService {
 
         int totalCount = productMapper.selectTotalProductCount();
 
-        log.info("productList totalCount : {}", totalCount);
 
         int limit = 16;
         int buttonAmount = 5;
         SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
 
-        log.info("productList selectCriteria : {}", selectCriteria);
-
         List<ItemDTO> itemList = productMapper.selectProductList(selectCriteria);
 
-        log.info("itemList : {}", itemList);
+
 
         Map<String, Object> productListAndPaging = new HashMap<>();
         productListAndPaging.put("paging", selectCriteria);
@@ -53,7 +50,7 @@ public class ProductService {
 
     public ItemDTO selectProductDetail(Long no) {
 
-        log.info("productDetail : {}", no);
+
         return productMapper.selectProductDetail(no);
 
     }

@@ -120,6 +120,13 @@ public class BoardService {
         return reviewListAndPaging;
     }
 
+    public ReviewDTO selectReviewDetail(Long no) {
+
+        return boardMapper.selectReviewDetail(no);
+    }
+
+
+
     public void registQna(QnaDTO qna) {
 
         boardMapper.insertQna(qna);

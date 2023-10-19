@@ -17,7 +17,7 @@
 <div id="detailForm">
     <div th:replace="/common/board/navigation.html"></div>
     <div style="margin-top: 100px;" class="detailForm">
-        <form method="post" action="/board/qnaDetail">
+        <form method="post" action="/board/reviewDetail">
             <table style="width: 100%">
                 <colgroup>
                     <col width="15%"/>
@@ -27,39 +27,39 @@
                 </colgroup>
                 <tr style="border-top: #6C6A6A 2px solid;">
                     <th scope="row">글 번호</th>
-                    <td th:text="${ qna.inquiryNo }" ></td>
+                    <td th:text="${ review.reviewNo }" ></td>
                     <th scope="row">작성자</th>
-                    <td th:text="${ qna.memberNo.memberName }"></td>
+                    <td th:text="${ review.memberNo.memberName }"></td>
                 </tr>
                 <tr style="border-top: #6C6A6A 1px solid;">
-                    <th scope="row">카테고리</th>
-                    <td th:text="${ qna.inquiryType }"></td>
+                    <th scope="row">평점</th>
+                    <td th:text="${ review.grade } + ' / 5'"></td>
                     <th scope="row">작성일</th>
-                    <td th:text="${ qna.writeDate }"></td>
+                    <td th:text="${ review.registDate }"></td>
                 </tr>
                 <tr style="border-top: #6C6A6A 1px solid;">
                     <th scope="row">상품</th>
                     <td colspan="3">
-<!--                        <input type="hidden" name="noticeNo" th:value="${ qna.inquiryNo }"/>-->
-                        <input type="text" id="itemName" name="itemName" th:value="${ qna.itemCode.itemName }">
+                        <!--                        <input type="hidden" name="noticeNo" th:value="${ qna.inquiryNo }"/>-->
+                        <input type="text" id="itemName" name="itemName" th:value="${ review.itemCode.itemName }">
                     </td>
                 </tr>
                 <tr style="border-top: #6C6A6A 1px solid;">
                     <th scope="row">제목</th>
                     <td colspan="3">
-                        <input type="hidden" name="noticeNo" th:value="${ qna.inquiryNo }"/>
-                        <input type="text" id="title" name="noticeTitle" th:value="${ qna.inquiryTitle}">
+                        <input type="hidden" name="reviewNo" th:value="${ review.reviewNo }"/>
+                        <input type="text" id="title" name="reviewTitle" th:value="${ review.reviewTitle}">
                     </td>
                 </tr>
                 <tr style="border-top: #6C6A6A 1px solid; border-bottom: #6C6A6A 1px solid; padding-left: 0;">
                     <td colspan="4" class="notice-text">
-                        <textarea title="내용" id="content" name="noticeContent" th:text="${ qna.inquiryContent }"></textarea>
+                        <textarea title="내용" id="content" name="reviewContent" th:text="${ review.reviewContent }"></textarea>
                     </td>
                 </tr>
             </table>
             <div align="center">
                 <button type="submit" id="modify">수정</button>
-                <button><a th:href="@{/board/detail(no=${ qna.inquiryNo })}">삭제</a></button>
+                <button><a th:href="@{/board/detail(no=${ review.reviewNo })}">삭제</a></button>
                 <button type="button" th:onclick="'location.href=\'/product/productDetail\''">목록</button>
             </div>
         </form>

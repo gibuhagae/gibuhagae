@@ -38,5 +38,5 @@ public interface BoardMapper {
 
     List<ReviewDTO> selectReviewList(SelectCriteria selectCriteria);
 
-
+    ReviewDTO selectReviewDetail(Long no);
 }
