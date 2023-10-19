@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,13 @@
     <script type="text/javascript" src="/js/button.js"></script>
     <script type="text/javascript" src="/js/event.js"></script>
 
+    <script>
+        const message = '[[${message}]]';
+        message && alert(message);
+    </script>
+
 </head>
+
 <body>
 <!-- 메인페이지 -->
 <div id="main" class="main">
@@ -22,18 +29,62 @@
         <!-- 헤더 상단 로고 및 메뉴  -->
         <div class="main-header-top">
             <div class="header-top-content">
-                <div class="admin-page">
-                    <!-- 관리자 로그인시 보일 관리자 버튼 -->
-                    <a href="order/order-new">관리자 페이지</a>
-                </div>
+
+                <th:block sec:authorize="isAnonymous()">
+                    <div class="admin-page">
+                        <!-- 유저 로그인시 보일 관리자 버튼 -->
+                        <a href="order/order-new">빈여백 페이지</a>
+                    </div>
+                </th:block>
+
+                <th:block sec:authorize="hasRole('user')">
+                    <div class="admin-page">
+                        <!-- 유저 로그인시 보일 관리자 버튼 -->
+                        <a href="order/order-new">빈여백 페이지</a>
+                    </div>
+                </th:block>
+
+                <th:block sec:authorize="hasRole('admin')">
+                    <div class="admin-page">
+                        <!-- 관리자 로그인시 보일 관리자 버튼 -->
+                        <a href="order/order-new">관리자 페이지</a>
+                    </div>
+                </th:block>
+
                 <!-- 상단 네비 -->
                 <ul class="navigation">
-                    <li><a href="11">로그인</a></li>
-                    <li><a href="11">/&nbsp;&nbsp;&nbsp;&nbsp;회원가입</a></li>
-                    <li><a href="11">배송조회</a></li>
-                    <li><a href="11">마이샵</a></li>
-                    <li><a href="/board/notice">게시판관리</a></li>
+                    <!--                    <li><a href="11">로그인</a></li>-->
+                    <!--                    <li><a href="11">/&nbsp;&nbsp;&nbsp;&nbsp;회원가입</a></li>-->
+                    <th:block sec:authorize="isAnonymous()">
+                        <li><button type="button" id="indexLogBtn">로그인</button></li>
+                        <span>/&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <li><button onclick="location.href='/join/Join'">회원가입</button></li>
+                    </th:block>
+
+                    <th:block sec:authorize="hasRole('user')">
+                        <div class="admin-page">
+                            <!-- 유저 로그인시 보일 관리자 버튼 -->
+                            <li><a href="11">빈여백</a></li>
+                        </div>
+                    </th:block>
+
+                    <th:block sec:authorize="hasRole('admin')">
+                        <div class="admin-page">
+                            <!-- 관리자 로그인시 보일 관리자 버튼 -->
+                            <li><a href="11">배송조회</a></li>
+                        </div>
+                    </th:block>
+
+                    <!--                    <li><a href="11">마이샵</a></li>-->
+                    <li><button type="button" id="indexMyPageBtn">마이샵</button></li>
+
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li><button type="button" id="logout">로그아웃</button></li>
+                        <li><a href="/board/notice">게시판관리</a></li>
+                    </th:block>
+
                     <!------------------------관리자 로그인 시 게시판 관리 보일 예정 평소에 없음 --------------------------->
+
                 </ul>
             </div>
         </div>
@@ -283,26 +334,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- 로그인 시 생기는 창! 혁이가 만들었음! -->
-
-<!--<th:block sec:authorize="isAnonymous()">-->
-<!--    <div>-->
-<!--        <input type="button" value="로그인" id="login">-->
-<!--        <input type="button" value="회원가입" id="join">-->
-<!--    </div>-->
-<!--</th:block>-->
-
-<!--<th:block sec:authorize="isAuthenticated()">-->
-<!--    <div>-->
-<!--        <h3><span sec:authentication="principal.nickname"></span>님의 방문을 환영합니다.</h3>-->
-<!--        <div>-->
-<!--            <input type="button" value="마이페이지" id="myPage">-->
-<!--        </div>-->
-<!-- </div>-->
-<!--</th:block>-->
-
-
 </div>
 
 <!-- 슬라이드 이동 JS -->
