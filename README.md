@@ -2,9 +2,23 @@
 
 
 <div align="center">
-<img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/f7e5260a-29bf-441b-bb70-f2fc1d8f02cc">
+  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/f7e5260a-29bf-441b-bb70-f2fc1d8f02cc"/>
 </div>
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FHAHYEONLEE&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)         
+
+<br><br><br>
+
+<p align="center">
+  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/281ebcf8-029b-400a-888d-88bce79151a8" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/956e797b-0a72-4fc6-b6ac-adae9606a45a" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/0c8f6abb-e857-4e01-acfc-656b4e65f81e" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/12a7b9d6-93a9-4b5f-bad9-509892567a0a" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+</p>
+
+
+
+<p align="center">HAHYEON &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; HYEOK&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;JUNHONG &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;WOOSEOK</p>
+
+      
 <div align=center><h2>📚 STACKS</h2></div>
 
 <div align=center> 
