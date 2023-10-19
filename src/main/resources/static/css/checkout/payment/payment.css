@@ -80,15 +80,15 @@ img {
 }
 
 #addr-box {
-    background-color: wheat;
+    /*background-color: wheat;*/
     width: 95%;
     margin: 0 auto;
     margin-top: 40px;
 }
 
 .addr-header {
-    background-color: aqua;
-    border-bottom: 1px solid #c8c9cb;
+    /*background-color: aqua;*/
+    /*border-bottom: 1px solid #c8c9cb;*/
 }
 
 #left-addr, #right-addr {
@@ -143,6 +143,7 @@ input {
 #zip-code {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
 #zip-code-write {
@@ -150,8 +151,14 @@ input {
 }
 
 #search-addr {
-    margin: 0 0 0 -6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 -20px;
+    width: 70px;
     cursor: pointer;
+    border: 1px solid black;
+    background-color: rgba(217, 217, 217, 1);
 }
 
 #phone-num {
@@ -231,7 +238,7 @@ input {
     background-size: cover;
 }
 
-#item-detail {
+.item-detail {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -537,12 +544,20 @@ input {
     border-bottom: 1px solid black;
 }
 
-#reward-amount em {
-    color: #AAE0AA;
+#reward-amount > div:nth-child(2) {
+    display: flex;
+}
+
+#donation-box > div > div {
+    display: flex;
+}
+
+#reward1, #reward2{
+    color: black;
 }
 
 #donation-area {
-    background-color: antiquewhite;
+    /*background-color: antiquewhite;*/
     width: 100%;
 }
 

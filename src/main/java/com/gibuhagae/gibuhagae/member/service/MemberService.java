@@ -17,12 +17,12 @@ import java.util.Map;
 @Slf4j
 public class MemberService {
 
-//    private final MemberMapper memberMapper;
-//
-//    public MemberService(MemberMapper memberMapper) {
-//        this.memberMapper = memberMapper;
-//    }
-//
+    private final MemberMapper memberMapper;
+
+    public MemberService(MemberMapper memberMapper) {
+        this.memberMapper = memberMapper;
+    }
+
 //    public Map<String, Object> selectMemberList(Map<String, String> searchMap, int page) {
 //
 //        /* 전체 회원 수 확인 (검색어가 있는 경우 포함) => 페이징 처리를 위해 */
@@ -47,29 +47,36 @@ public class MemberService {
 //
 //        return memberListAndPaging;
 //    }
-//
-//    /* 관리자 회원 insert*/
-//    public void insertMember(MemberDTO member) throws MemberRegistException {
-//
-//        int result = memberMapper.insertMember(member);
-//
-//        if(!(result > 0)) throw new MemberRegistException("회원 가입에 실패하였습니다.");
-//    }
-//
-//    /* id 중복체크 - id 가져오기*/
-//    public boolean selectMemberByUserId(String userId) {
-//
-//        String result = memberMapper.selectMemberByUserId(userId);
-//
-//        return result != null;
-//    }
-//
-//
-//    /* 회원 상세 정보 조회 및 수정 */
-//    public void modifyMember(MemberDTO member) throws MemberModifyException {
-//
-//        int result = memberMapper.modifyMember(member);
-//
-//        if(!(result > 0)) throw new MemberModifyException("회원 정보 수정 실패");
-//    }
+
+    /* 관리자 회원 insert*/
+    public void insertMember(MemberDTO member) throws MemberRegistException {
+
+        int result = memberMapper.insertMember(member);
+
+        if(!(result > 0)) throw new MemberRegistException("회원 가입에 실패하였습니다.");
+    }
+
+    /* id 중복체크 - id 가져오기*/
+    public boolean selectMemberByUserId(String userId) {
+
+        String result = memberMapper.selectMemberByUserId(userId);
+
+        return result != null;
+    }
+
+
+    /* 회원 상세 정보 조회 및 수정 */
+    public void modifyMember(MemberDTO member) throws MemberModifyException {
+
+        int result = memberMapper.modifyMember(member);
+
+        if(!(result > 0)) throw new MemberModifyException("회원 정보 수정 실패");
+    }
+
+    public MemberDTO findAddrByMemberNo(Map<String, Integer> map) {
+
+        MemberDTO memberAddr = memberMapper.findAddrByMemberNo(map);
+
+        return memberAddr;
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
                 <img src="/images/line.png">
             </div>
             <div class="cart-wrap">
-                <div class="img-wrap" ><img src="/images/fluent-payment-24-regular.png">
+                <div class="img-wrap"><img src="/images/fluent-payment-24-regular.png">
                 </div>
                 <div><p>주문/결제</p></div>
             </div>
@@ -37,67 +37,131 @@
         <table>
             <thead>
             <tr id="head">
-                <th><div><h2>주문 목록</h2></div><br></th>
+                <th>
+                    <div><h2>주문 목록</h2></div>
+                    <br></th>
             </tr>
             </thead>
             <tbody>
             <tr id="name-bar">
-                <td colspan="2">상품정보</td><td>주문일자</td><td>주문번호</td><td>주문금액(수량)</td><td>주문상태</td>            </tr>
-            <tr class="order-detail">
-                <td><a href=""><img src="/images/image-3.jpg"></a></td>
-                <td><div><a href="">특수견 15kg 영양사료</a></div></td>
-                <td><div date-sale>2023.09.12</div></td>
-                <td><div date-sale-no>1012345123</div></td>
+                <td colspan="2">상품정보</td>
+                <td>주문일자</td>
+                <td>주문번호</td>
+                <td>주문금액(수량)</td>
+                <td>주문상태</td>
+            </tr>
+            <tr class="order-detail" th:each="orderCart : ${orderList}">
+                <td><a href=""><img th:src="${orderCart.imgSrc}"></a></td>
                 <td>
-                    <div data-sale-price="46,700">46,700</div>
-                    <div class="item-amount"><em>1</em>개</div>
+                    <div><a href="" th:text="${orderCart.itemName} + ${orderCart.optionName}"></a></div>
                 </td>
-                <td><div order-condition>입금완료</div></td>
-            </tr>
-            </tr>
-            <tr class="order-detail">
-                <td><a href=""><img src="/images/image-2.jpg"></a></td>
-                <td><div><a href="">라오네스 반려동물 하네스</a></div></td>
-                <td><div date-sale>2023.09.12</div></td>
-                <td><div date-sale-no>10012345124</div></td>
                 <td>
-                    <div data-sale-price="20,200">20,200</div>
-                    <div class="item-amount"><em>1</em>개</div>
+                    <div th:text="${orderCart.paymentDate}"></div>
                 </td>
-                <td><div order-condition>입금완료</div></td>
+                <td>
+                    <div th:text="${orderCart.orderNo}"></div>
+                </td>
+                <td>
+                    <div id="itemPrice" th:text="${orderCart.price}"></div>
+                    <div class="item-amount"><em id="qty" th:text="${orderCart.count}"></em>개</div>
+                </td>
+                <td>
+                    <div th:text="${orderCart.paymentStatus}"></div>
+                </td>
             </tr>
+<!--            <tr class="order-detail">-->
+<!--                <td><a href=""><img src="/images/image-2.jpg"></a></td>-->
+<!--                <td>-->
+<!--                    <div><a href="">라오네스 반려동물 하네스</a></div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <div date-sale>2023.09.12</div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <div date-sale-no>10012345124</div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <div data-sale-price="20,200">20,200</div>-->
+<!--                    <div class="item-amount"><em>1</em>개</div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <div order-condition>입금완료</div>-->
+<!--                </td>-->
+<!--            </tr>-->
             </tbody>
         </table>
     </div>
     <div id="total-amount-area">
         <div id="total-amount">
             <div>합계</div>
-            <div><em>66,900</em>원</div>
+            <div><em class="totalPrice"></em>원</div>
         </div>
         <div id="price-detail">
             <div id="detail1" class="details">
                 <div class="cal-detail">할인금액</div>
-                <div><em>10,200</em>원</div>
+                <div><em id="dis"></em>원</div>
             </div>
             <div id="detail2" class="details">
                 <div class="cal-detail">배송비</div>
-                <div><em>0</em>원</div>
+                <div><em id="shippingPrice"></em>원</div>
             </div>
             <div id="detail3" class="details">
                 <div class="cal-detail">적립금</div>
-                <div><em>1000</em>원</div>
+                <div><em id="rew"></em>원</div>
             </div>
             <div id="detail4" class="details">
                 <div>합계</div>
-                <div><em>66,900</em>원</div>
+                <div><em class="totalPrice"></em>원</div>
             </div>
         </div>
     </div>
     <div id="to-main">
         <div id="to-main-box">
-            <button type="button" id="main-button">메인으로</button>
+            <button type="button" id="main-button" onclick="toMain()">메인으로</button>
         </div>
     </div>
 </div>
+<script>
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ready)
+    } else {
+        ready();
+    }
+
+    function ready() {
+
+        updateOrderTotal();
+    }
+
+    function updateOrderTotal() {
+        let cartRows = document.querySelectorAll(".order-detail");
+        let itemsPrice = 0;
+        let shippingPrice = 0;
+
+        for (let i = 0; i < cartRows.length; i++) {
+            let cartRow = cartRows[i];
+            let qty = parseInt(cartRow.querySelector("#qty").innerText);
+            let price = parseInt(cartRow.querySelector("#itemPrice").innerText);
+            itemsPrice += price * qty;
+
+            if (itemsPrice < 50000) {
+                shippingPrice = 3000;
+            } else if (itemsPrice >= 50000) {
+                shippingPrice = 0;
+            }
+        }
+
+        let totalPrice = itemsPrice + shippingPrice;
+
+        let totalPriceElements = document.querySelectorAll('.totalPrice');
+        for (let i = 0; i < totalPriceElements.length; i++) {
+            totalPriceElements[i].innerText = totalPrice;
+        }
+
+        document.querySelector('#shippingPrice').innerText = shippingPrice;
+        document.querySelector('#dis').innerText = 0;
+        document.querySelector('#rew').innerText = 0;
+    }
+</script>
 </body>
 </html>

@@ -1,15 +1,14 @@
-package com.gibuhagae.gibuhagae.order.controller;
+package com.gibuhagae.gibuhagae.orderManagement.controller;
 
 
-import com.gibuhagae.gibuhagae.order.dto.OrderManagementDTO;
-import com.gibuhagae.gibuhagae.order.service.OrderService;
+import com.gibuhagae.gibuhagae.basket.dto.BasketDTO;
+import com.gibuhagae.gibuhagae.orderManagement.dto.OrderManagementDTO;
+import com.gibuhagae.gibuhagae.orderManagement.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -88,5 +87,13 @@ public class OrderController {
     public String getOrderSwap() {
 
         return "/order/order-swap";
+    }
+
+    @PostMapping("/orderManagement/regist")
+    public ResponseEntity<String> addOrderManagement(@RequestBody OrderManagementDTO orderManagementDTO) {
+
+        orderService.addOrderManagement(orderManagementDTO);
+
+        return ResponseEntity.ok("성공");
     }
 }
