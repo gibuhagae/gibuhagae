@@ -1,21 +1,22 @@
 <div align=center> 
   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/3d078492-4cc5-4b4f-8060-bd35f78f8359.PNG" width="300" height="150"/></div>
 
-<p align="center">HAHYEON &nbsp; &nbsp; &nbsp; &nbsp;  HYEOK &nbsp; &nbsp; &nbsp; &nbsp;  JUNHONG &nbsp; &nbsp; &nbsp; &nbsp;  WOOSEOK</p>
-
 <br>
+<br>
+
 <div align="center">
- 
+    HAHYEON &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HYEOK &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    JUNHONG &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    WOOSEOK &nbsp;&nbsp;&nbsp;
+    <br>
+    <br>
+    <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/281ebcf8-029b-400a-888d-88bce79151a8" width="130" height="130"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/956e797b-0a72-4fc6-b6ac-adae9606a45a" width="130" height="130"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/0c8f6abb-e857-4e01-acfc-656b4e65f81e" width="130" height="130"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/12a7b9d6-93a9-4b5f-bad9-509892567a0a" width="130" height="130"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </a>
 </div>
-
-<br>
-
-<p align="center">
-  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/281ebcf8-029b-400a-888d-88bce79151a8" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/956e797b-0a72-4fc6-b6ac-adae9606a45a" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/0c8f6abb-e857-4e01-acfc-656b4e65f81e" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-  <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/12a7b9d6-93a9-4b5f-bad9-509892567a0a" width="130" height="130"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-</p>
 <br><br>
 
 ## :clipboard: 개요
