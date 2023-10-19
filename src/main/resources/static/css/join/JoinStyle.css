@@ -35,11 +35,17 @@ html {
     background-color: #d7d7d7;
 }
 
-#inputPhone1 {
+#inputPhone1, #duplicationCheck {
     -webkit-appearance:button;
 }
 
-#inputId, #inputName, #inputPhone1, inputPhone2, inputPhone3,
+#duplicationCheck {
+    position: relative;
+    margin-left: 75px;
+
+ }
+
+#inputId, #inputPwd, #inputName, #inputPhone1, inputPhone2, inputPhone3,
 #inputPost, #inputBasicAddr, #inputRAddr, #inputEmail {
     font-weight: bold;
 }
@@ -57,6 +63,11 @@ html {
 #inputName {
     position: relative;
     left: 8.3%;
+}
+
+#nameSpan {
+    position: relative;
+    left: 8.4%;
 }
 
 #inputPhone1, #inputPhone2, #inputPhone3 {
@@ -111,12 +122,12 @@ html {
 
 #idSpan {
     position: relative;
-    left: 7.6%;
+    left: 1%;
 }
 
 #pwdSpan {
     position: relative;
-    left: 5.2%;
+    left: 13.2%;
 }
 
 #inputPostBtn {

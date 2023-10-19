@@ -4,46 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>네이버 로그인</title>
     <!-- 외부 스타일 시트 -->
-    <link href="/src/main/resources/css/login/naverLoginStyle.css" rel="stylesheet" type="text/css">
-    <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
+    <link href="/css/login/NaverLoginStyle.css" rel="stylesheet" type="text/css">
     <!-- 리셋 CSS : 브라우저별로 디폴트로 적용 된 CSS(여백, 폰트 등)에 차이가 있으므로
    브라우저별로 다르게 보일 수 있어 리셋 CSS를 활용한다. -->
-   <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 </head>
-<!-- 헤더 부분 -->
+
+<body>
+<!-- 헤더(로고, 상단 메뉴)-->
 <div th:replace="/common/board/navigation"></div>
 
-    <p id="title">NAVER</p>
-    <p id="subTitle">로그인</p>
+<p id="title">NAVER</p>
+<p id="subTitle">로그인</p>
 
-    <section class="sectionLogin">
+<section class="sectionLogin">
 
-        <hr id="uLine">
+    <hr id="uLine">
 
-        <form class="loginForm" class="joinInfor" caction="/member/join" method="post">
-            <input class="inputArea" id="loginId" type="id" name="id" value="아이디" style="color: rgb(185, 190, 201)">
-            <input class="inputArea" id="loginPwd" type="password" name="pwd">
+    <form class="loginForm" action="/login/NaverLogin" method="post">
+        <input class="inputArea" id="loginId" type="id" name="id" value="아이디" style="color: rgb(185, 190, 201)">
+        <input class="inputArea" id="loginPwd" type="password" name="pwd">
 
-            <div class="loginSave">
-                <input type="radio" name="idpwdSave" value="idSave"> 아이디 저장
-                <input type="radio" name="idpwdSave" value="pwdSave"> 비밀번호 저장
-            </div>
+        <div class="loginSave">
+            <input type="radio" name="idpwdSave" value="idSave"> 아이디 저장
+            <input type="radio" name="idpwdSave" value="pwdSave"> 비밀번호 저장
+        </div>
 
-            <button class="buttonArea" id="loginBtn" onclick="location.href='join.html'">로그인</button>
-        </form>
+        <!-- 네이버 로그인 버튼 노출 영역 -->
+        <div class="buttonArea" id="naver_id_login">로그인</div>
 
-        <hr id="bLine">
+    </form>
 
-    </section>
+    <hr id="bLine">
 
-    <div class="etcFunction">
-        <button id="idFindBtn" onclick="location.href='idFind.html'">아이디 찾기</button>
-        <button id="pwdFindBtn" onclick="location.href='pwdFind.html'">비밀번호 찾기</button>
-        <button id="joinBtn" onclick="location.href='../join/join.html'">회원가입</button>
-    </div>
-    
+</section>
+
+<div class="etcFunction">
+    <button id="idFindBtn" onclick="location.href='/login/IdFind'">아이디 찾기</button>
+    <button id="pwdFindBtn" onclick="location.href='/login/PwdFind'">비밀번호 찾기</button>
+    <button id="joinBtn" onclick="location.href='/join/Join'">회원가입</button>
+</div>
+
+
+
+
 </body>
 
 </html>

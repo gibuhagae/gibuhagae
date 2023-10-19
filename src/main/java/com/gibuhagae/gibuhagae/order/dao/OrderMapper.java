@@ -42,5 +42,13 @@ public interface OrderMapper {
     void swapOrder(Long selectedOrderNo, String orderStatus);
 
     List<SwapRequestDTO> swapDetailList();
+
+    int modifyOrderDetailStatus(Long orderManageNo, String orderStatus);
+
+    // summary 혁 2023-10-18
+    List<Integer> selectOrderDetailPK(int orderManageCode);
+
+    int insertRefundManagement(String reasonText, String orderDetailCode);
+    int insertSwapManagement(String reasonText, String orderDetailCode);
 }
 
