@@ -159,15 +159,16 @@
 
     <update id="modifyMemberInfo"  parameterType="com.gibuhagae.gibuhagae.member.dto.MemberDTO">
         UPDATE
-        MEMBER
+            MEMBER
         SET
-        MEMBER_PHONE = #{ memberPhone },
-        ZIPCODE = #{ zipcode },
-        ADDRESS = #{ address },
-        EMAIL = #{ email }
+            MEMBER_PHONE = #{ memberPhone },
+            ZIPCODE = #{ zipcode },
+            ADDRESS = #{ address },
+            EMAIL = #{ email },
+            PASSWORD = #{ password }
         WHERE
-        ACTIVATION_STATUS = 'Y' AND
-        USER_ID = #{ userId }
+            ACTIVATION_STATUS = 'Y' AND
+            USER_ID = #{ userId }
     </update>
 
     <update id="deleteMember">
