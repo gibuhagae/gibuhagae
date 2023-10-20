@@ -8,9 +8,9 @@
     <link href="/css/board/board.css" rel="stylesheet" type="text/css">
     <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="/js/button.js"></script>
-    <script src="/js/productDetail.js" type="text/javascript"></script>
-    <script src="/js/productDetail2.js" type="text/javascript"></script>
+<!--    <script type="text/javascript" src="/js/button.js"></script>-->
+<!--    <script src="/js/productDetail.js" type="text/javascript"></script>-->
+<!--    <script src="/js/productDetail2.js" type="text/javascript"></script>-->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -87,7 +87,7 @@
                     </div>
                     <div class="explain">
                         <span>· 최소 주문 수량 1개 이상</span><br>
-                        <input type="hidden" id="itemQty" type="number" th:value="${1}">
+                        <input type="hidden" id="itemQty" type="number" th:value="1">
                         <span>· 1세트 갯수가 정해져 있는 상품은 낱개 판매가 불가합니다.</span>
                     </div>
                     <div class="pd-price-title" style="border-bottom: rgba(108,106,106,0.1) 1px solid;">
@@ -98,52 +98,11 @@
                         </div>
                     </div>
                     <div class="selected-option"  id="optionArea" th:text="${ item.optionName }">
-
-                        <input type="hidden" id="optionCode" th:value="${ item.optionCode }>
-                    </div>
-                    <div class="selected-pd-price" id="priceArea" th:text="'￦ ' + ${#numbers.formatDecimal(item.salePrice, 0, 'COMMA', 0, 'POINT')}">
-                        <input type="hidden" id="itemPrice" th:value="${item.salePrice}">
-
-              
                     </div>
 
-                    <script>
-                        if (document.readyState === 'loading') {
-                            document.addEventListener('DOMContentLoaded', ready)
-                        } else {
-                            ready();
-                        }
-
-                        function ready() {
-
-
-                            priceInit();
-                            optionInit();
-                        }
-
-                        function priceInit() {
-                            let $priceArea = document.getElementById('priceArea');
-                            $priceArea.style.display = 'none';
-                        }
-
-                        function optionInit() {
-                            let $optionArea = document.getElementById('optionArea');
-                            $optionArea.style.display = 'none';
-                        }
-
-                        function numBtn() {
-
-                            let option = document.getElementById("pdOption");
-                            let $option = option.options[option.selectedIndex].value;
-                            option.textContent = $option;
-
-                            let optionArea = document.getElementById("optionArea");
-                            optionArea.style.display = 'block';
-
-                            let priceArea = document.getElementById("priceArea");
-                            priceArea.style.display = 'block';
-                        }
-                    </script>
+                    <input type="hidden" id="optionCode" th:value="${ item.optionCode }>
+                    <div class="selected-pd-price" id="priceArea" th:text="'￦ ' + ${#numbers.formatDecimal(item.salePrice, 0, 'COMMA', 0, 'POINT')}"></div>
+                      <input type="hidden" id="itemPrice" th:value="${item.salePrice}">
 
                     <div class="pd-buy-button">
                         <ul style="display: flex">
@@ -252,23 +211,6 @@
     </footer>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const topBtn = document.querySelector(".up-logo");
-
-        topBtn.onclick = () => {
-            window.scrollTo({ top: 0, behavior: "auto" });
-        };
-    });
-    document.addEventListener("DOMContentLoaded", () => {
-        const topBtn = document.querySelector(".down-logo");
-
-        topBtn.onclick = () => {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: "auto" });
-        };
-    });
-</script>
-
 <!--후기작성 모달 -->
 <div class="popup-wrap" id="popup"> <!-- //모달을 감쌀 박스 -->
     <div class="popup"> <!--실질적 모달팝업 -->
@@ -343,7 +285,7 @@
                             <!--                            </tr>-->
                             <tr>
                                 <th>상품</th>
-                                <td colspan="3" name="itemCode"  style="width: 750px;" th:text="${ item.itemName }"></td>
+                                <td colspan="3" name="itemCode" style="width: 750px;" th:text="${ item.itemName }"></td>
                             </tr>
                             <tr>
                                 <th>제목</th>
@@ -369,6 +311,60 @@
 </div>
 
 <script>
+
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ready)
+    } else {
+        ready();
+    }
+
+    function ready() {
+
+
+        priceInit();
+        optionInit();
+    }
+
+    function priceInit() {
+        let $priceArea = document.getElementById('priceArea');
+        $priceArea.style.display = 'none';
+    }
+
+    function optionInit() {
+        let $optionArea = document.getElementById('optionArea');
+        $optionArea.style.display = 'none';
+    }
+
+    function numBtn() {
+
+        let option = document.getElementById("pdOption");
+        let $option = option.options[option.selectedIndex].value;
+        option.textContent = $option;
+
+        let optionArea = document.getElementById("optionArea");
+        optionArea.style.display = 'block';
+
+        let priceArea = document.getElementById("priceArea");
+        priceArea.style.display = 'block';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const topBtn = document.querySelector(".up-logo");
+
+        topBtn.onclick = () => {
+            window.scrollTo({ top: 0, behavior: "auto" });
+        };
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const topBtn = document.querySelector(".down-logo");
+
+        topBtn.onclick = () => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "auto" });
+        };
+    });
+
     document.getElementById('select').addEventListener('change', function() {
         var selectedValue = document.getElementById('select').value;
         if (selectedValue === '상품문의') {
@@ -377,6 +373,52 @@
             document.getElementById('qnaCategoryInput').value = '기타문의';
         } else {
             document.getElementById('qnaCategoryInput').value = '';
+        }
+    });
+
+    // 메인페이지 스크롤 위치에 따른 버튼 생성
+    $(function (){
+        $("#pageMoveButton").hide();
+
+        $(window).scroll(function (){
+            if($(this).scrollTop() > 600){$("#pageMoveButton").fadeIn();}
+            else{$("#pageMoveButton").fadeOut();}
+        });
+    });
+
+    // 상품상세리스트 내 후기작성 모달
+    $(function(){
+        $("#confirm1").click(function(){
+            modalClose();
+            //컨펌 이벤트 처리
+        });
+        $("#modal-open1").click(function(){
+            $("#popup1").css('display','flex');
+        });
+
+        $("#close1").click(function(){
+            modalClose();
+        });
+        function modalClose(){
+            $("#popup1").fadeOut();
+        }
+    });
+
+    // 상품상세리스트 내 문의하기 모달
+    $(function(){
+        $("#confirm").click(function(){
+            modalClose();
+            //컨펌 이벤트 처리
+        });
+        $("#modal-open").click(function(){
+            $("#popup").css('display','flex');
+        });
+
+        $("#close").click(function(){
+            modalClose();
+        });
+        function modalClose(){
+            $("#popup").fadeOut();
         }
     });
 
@@ -422,6 +464,8 @@
                 console.log(error);
             });
     }
+
+
 
 </script>
 </form>

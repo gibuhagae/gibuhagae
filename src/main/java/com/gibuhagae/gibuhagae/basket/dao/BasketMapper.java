@@ -13,7 +13,7 @@ import java.util.Map;
 public interface BasketMapper {
 
     /* 카트 목록 조회 */
-    List<BasketDTO> selectItems(Map<String, Integer> map);
+    List<BasketDTO> selectAllItems(Map<String, Integer> map);
 
     ProductDetailDTO selectOption(Map<String, Integer> map);
 

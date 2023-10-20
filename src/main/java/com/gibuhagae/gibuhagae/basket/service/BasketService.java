@@ -21,9 +21,9 @@ public class BasketService {
         this.basketMapper = basketMapper;
     }
 
-    public List<BasketDTO> selectItems(Map<String, Integer> map) {
+    public List<BasketDTO> selectAllItems(Map<String, Integer> map) {
 
-        List<BasketDTO> basketDTO = basketMapper.selectItems(map);
+        List<BasketDTO> basketDTO = basketMapper.selectAllItems(map);
         if (basketDTO == null) {
             System.out.println("객체 NULL!");
             return null;
@@ -43,9 +43,6 @@ public class BasketService {
     }
 
     public boolean addBasket(BasketDTO basket) {
-
-//        basket.setItemCode(5);
-//        basket.setOptionCode(1);
 
         if(basketMapper.checkCart(basket)) {
 

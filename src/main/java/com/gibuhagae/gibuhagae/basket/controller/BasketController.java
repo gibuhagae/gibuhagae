@@ -35,7 +35,7 @@ public class BasketController {
         Map<String, Integer> map = new HashMap<>();
         map.put("memberNo", memberNo);
 
-        List<BasketDTO> basket = basketService.selectItems(map);
+        List<BasketDTO> basket = basketService.selectAllItems(map);
         model.addAttribute("basket", basket);
 
         return "basket/basket";

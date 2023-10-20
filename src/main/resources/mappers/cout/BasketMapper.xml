@@ -52,7 +52,7 @@
     </resultMap>
 
 
-    <select id="selectItems" parameterType="hashmap" resultMap="basketResultMap">
+    <select id="selectAllItems" parameterType="hashmap" resultMap="basketResultMap">
         SELECT
                A.BASKET_NO
              , A.COUNT

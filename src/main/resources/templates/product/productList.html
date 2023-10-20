@@ -6,7 +6,7 @@
     <title>Gibuhagae(productList)</title>
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="/js/button.js"></script>
+<!--    <script type="text/javascript" src="/js/button.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="/css/product/product.css" rel="stylesheet" type="text/css">
     <link href="/css/main/navigation.css" rel="stylesheet" type="text/css">
@@ -148,6 +148,17 @@
                     window.scrollTo({top: document.body.scrollHeight, behavior: "auto"});
                 };
             });
+
+            // 메인페이지 스크롤 위치에 따른 버튼 생성
+            $(function (){
+                $("#pageMoveButton").hide();
+
+                $(window).scroll(function (){
+                    if($(this).scrollTop() > 600){$("#pageMoveButton").fadeIn();}
+                    else{$("#pageMoveButton").fadeOut();}
+                });
+            });
+
         </script>
 
         <!-- footer-->
