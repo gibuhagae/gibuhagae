@@ -64,11 +64,6 @@
 ## :link: ERD 설계
 * [shopping mall ERD](https://github.com/didrlgus/springboot-shoppingmall/issues/1)
 
-## :link: 디자인 설계
-* [shopping mall FIGMA](https://github.com/didrlgus/springboot-shoppingmall/issues/1)
-
-## :link: 업무 흐름도
-* [shopping mall FIGJAM](https://github.com/didrlgus/springboot-shoppingmall/issues/1)
 
 # 화면
 
@@ -112,22 +107,19 @@
 
 
 - #### 장바구니
+
    
  - **장바구니, 구매하기 기능**
    
    1. 장바구니 클릭 시 선택한 상품이 장바구니 리스트에 등록된후 팝업창 알림.
    
    2. 중복값 저장 불가.
-   
-
-    
-- #### 주문, 결제
-
- - **장바구니 기능**
-   
-  1. Json을 이용해 장바구니내 상품 수정.
   
-  2. 체크박스와 form태그 생성을 이용하여 주문페이지 전송.
+   3. Json을 이용해 장바구니내 상품 수정.
+  
+   4. 체크박스와 form태그 생성을 이용하여 주문페이지 전송.
+  
+  
   
 
  - **주문페이지**
@@ -166,9 +158,46 @@
     4. 회원가입 처리 버튼 입력 시 회원DB 저장
   
  - **마이페이지 회원정보 수정**
+ 
   1. 로그인된 멤버 정보를 불러와 수정 시 DB 재 갱신
   2. 회원탈퇴 버튼 누를 경우 DB 활성화 상태를 비활성화로 만들어 탈퇴 유저로 처리
 
 - **마이페이지 주문내역 조회**
+
   1. 주문내역 아이템들을 부분 선택 혹은 전체 선택 가능이 하고, 선택된 만큼 교환/반품/주문취소 상태로 사유와 함께 전송할 수 있게 처리
+
+
+
+- #### 정산관리
+
+
+ <p align="center">
+   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/952f52d7-a3ff-4253-a2ff-1db286e2cccc" width="400" height="250"/>
+ </p>
+
+
+ - **매출 조회**
  
+  1. List<>와 타임리프를를 활용한 Today 매출 조회.
+
+
+ - **기간별 매출 검색**
+ 
+   1. JSON을 활용한 서버연결, 동적 쿼리문 문법으로 조회.
+
+
+
+
+<p align="center">
+   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/2176c2b1-dc27-420f-a509-5bd56b6095b7" width="600" height="250"/>
+ </p>
+
+
+
+- #### 배송관리  
+
+ 1. Mybatis 동적 쿼리문 Between,  활용한 운송장 등록, 조회, 배송상태 수정.
+
+ 2. Modal창을 활용한 취소 내역 조회 기능 활성화.
+
+ 3. 
