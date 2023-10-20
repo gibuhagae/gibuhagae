@@ -16,6 +16,24 @@ $(function(){
     }
 });
 
+$(function(){
+    $("#confirm").click(function(){
+        modalClose();
+        //컨펌 이벤트 처리
+    });
+    $("#modal-open").click(function(){
+        $("#popup").css('display','flex');
+    });
+
+    $("#close").click(function(){
+        modalClose();
+    });
+    function modalClose(){
+        $("#popup").fadeOut();
+    }
+});
+
+
 // 문의하기 유형 선택
 //     document.getElementById('select').addEventListener('change', function() {
 //     var selectedValue = document.getElementById('select').value;
@@ -27,3 +45,4 @@ $(function(){
 //     document.getElementById('inquiryTypeInput').value = '';
 // }
 // });
+
