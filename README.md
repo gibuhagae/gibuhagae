@@ -131,15 +131,6 @@
 
 
 
-
- <p align="left">
-   <img src="  https://github.com/gibuhagae/gibuhagae/assets/138549312/9be01715-7bc9-40ca-8335-8be80d1328f4" width="400" height="250"/>
- </p>
-
-
-
-
-
 - #### 로그인, 회원가입, 마이페이지
 
  - **로그인 기능**
@@ -214,8 +205,7 @@
 
 
 <p align="left">
-   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/fe02c1c4-907a-4b48-88d8-e93aaeac3e4e
-" width="600" height="250"/>
+   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/fe02c1c4-907a-4b48-88d8-e93aaeac3e4e" width="600" height="250"/>
  </p>
 
 
