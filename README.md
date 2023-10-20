@@ -128,14 +128,31 @@
   
   2. 적립금 후원여부 확인 후 전송.
 
-  
+
+
+
+
+ <p align="left">
+   <img src="  https://github.com/gibuhagae/gibuhagae/assets/138549312/9be01715-7bc9-40ca-8335-8be80d1328f4" width="400" height="250"/>
+ </p>
+
+
+
+
 
 - #### 로그인, 회원가입, 마이페이지
 
  - **로그인 기능**
  
-    1. Spring Security 프레임워크를 통한 세션방식의 인증&인가 기능 처리
-      
+    1. Spring Security 프레임워크를 통한 세션방식의 인증&인가 기능 처리.
+
+
+ - **회원가입 기능**  
+
+    1. 입력된 폼 양식 데이터를 바탕으로 회원 DB에 저장.
+    2. JS문법 또는 정규식으로 통한 입력 조건 제한 로직 구현.    
+
+
     
  - **아이디 저장 기능, 로그인 유지 기능**
  
@@ -149,6 +166,14 @@
  - **아이디 찾기 기능, 비밀번호 찾기 기능**
 
    1. 회원 DB 정보들을 바탕으로 아이디를 조회 가능, 비밀번호는 임시 비밀번호를 발급 및 암호화 처리
+
+- **마이페이지 기능**
+
+   1. MyBatis를 활용한 회원 교환, 환불 취소, 상태 변경.
+ 
+   2. 교환, 환불 시 사유 입력후 DB에 저장.
+
+
   
  - **회원가입 기능**
 
@@ -171,8 +196,8 @@
 - #### 정산관리
 
 
- <p align="center">
-   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/952f52d7-a3ff-4253-a2ff-1db286e2cccc" width="400" height="250"/>
+ <p align="left">
+   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/10e8fbd3-4f1a-4297-bd55-8b751b21b6ba" width="400" height="250"/>
  </p>
 
 
@@ -188,15 +213,16 @@
 
 
 
-<p align="center">
-   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/2176c2b1-dc27-420f-a509-5bd56b6095b7" width="600" height="250"/>
+<p align="left">
+   <img src="https://github.com/gibuhagae/gibuhagae/assets/138549312/fe02c1c4-907a-4b48-88d8-e93aaeac3e4e
+" width="600" height="250"/>
  </p>
 
 
 
 - #### 배송관리  
 
- 1. Mybatis 동적 쿼리문 Between,  활용한 운송장 등록, 조회, 배송상태 수정.
+ 1. Mybatis 동적 쿼리문 문법들을 활용한 운송장 등록, 조회, 배송상태 수정.
 
  2. Modal창을 활용한 취소 내역 조회 기능 활성화.
 
