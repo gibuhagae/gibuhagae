@@ -16,7 +16,7 @@ html {
     background-color: white;
     display: flex;
     justify-content: center;
-    margin-top: 15%;
+    margin-top: 10%;
 }
 
 .joinArea .joinForm {
@@ -33,6 +33,7 @@ html {
 
 .inputBG, .inputBG2, .inputBG3 {
     background-color: #d7d7d7;
+    font-weight: bold;
 }
 
 #inputPhone1, #duplicationCheck {
@@ -139,7 +140,7 @@ html {
 .joinFunBtns {
     position: absolute;
     margin-top: 3%;
-    top: 85%;
+    top: 87%;
     left: 50%;
 
 }

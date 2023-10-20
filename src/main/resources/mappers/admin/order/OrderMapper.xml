@@ -456,7 +456,7 @@
             P.ZIPCODE,
             P.ADDRESS,
             P.ADDRESS_DETAIL,
-           OM.ORDER_STATUS
+            OM.ORDER_STATUS
         FROM ORDER_MANAGEMENT OM
                  JOIN POST P ON OM.ORDER_NO = P.ORDER_NO
                  JOIN ORDER_DETAIL OD ON OM.ORDER_NO = OD.ORDER_NO
@@ -464,4 +464,5 @@
                  JOIN ITEM_OPTION IO ON OD.OPTION_CODE = IO.OPTION_CODE
                  JOIN MEMBER M ON OM.MEMBER_NO = M.MEMBER_NO
     </select>
+
 </mapper>

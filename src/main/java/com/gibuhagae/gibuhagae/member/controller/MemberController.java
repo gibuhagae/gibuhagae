@@ -239,9 +239,12 @@ public class MemberController {
 
         String result = "사용 가능한 아이디입니다.";
 
-        if (memberService.selectMemberId(member.getUserId())) {
-            result = "중복 된 아이디가 존재합니다.";
+        if (member.getUserId().length() == 0) {
+            result = "아이디를 입력하세요!";
+        }
 
+        else if (memberService.selectMemberId(member.getUserId())) {
+            result = "중복 된 아이디가 존재합니다.";
         }
 
         return ResponseEntity.ok(result);

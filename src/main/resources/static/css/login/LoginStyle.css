@@ -29,7 +29,7 @@ html {
 
 #uLine {
     width: 20%;
-    margin-top: 2.5%;
+    margin-top: 15.8%;
     margin-left: 40%;
 }
 
@@ -39,29 +39,30 @@ html {
 .loginForm #userId{
     width: 20%;
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 40%;
+
+    font-weight: bold;
 }
 
 .loginForm #password{
     width: 20%;
     position: absolute;
-    top: 53%;
+    top: 55%;
     left: 40%;
 }
 
 .loginForm .loginSave{
     width: 20%;
     position: absolute;
-    top: 56%;
+    top: 58%;
     left: 40%;
 }
 
 #naver_id_login {
     position: absolute;
-    top: 62%;
+    top: 65%;
     left: 40%;
-
 }
 
 #kakaoLogin {
@@ -75,7 +76,7 @@ html {
 .loginForm #loginBtn {
     position: absolute;
     width: 20%;
-    top: 59%;
+    top: 62%;
     left: 40%;
     background-color: rgb(77, 77, 77);
 }
@@ -90,7 +91,7 @@ html {
 
 #bLine {
     width: 20%;
-    margin-top: 9%;
+    margin-top: 11.5%;
     margin-left: 40%;
 }
 
@@ -99,7 +100,7 @@ html {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 25px;
     position: absolute;
-    top: 67%;
+    top: 74%;
     left: 39%;
 }
 

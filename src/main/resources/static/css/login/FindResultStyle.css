@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+html {
+    background-color: white;
+    font-size: 100%;
+}
+
+body{
+    font-weight: bold;
+}
+
+.memberInfoArea {
+    text-align: center;
+}
+
+.memberInfoArea2 {
+    position: absolute;
+    left: 41%;
+}
+
+#bLine {
+    position: absolute;
+    bottom: 38%;
+    text-align: center;
+    left: 17%;
+}

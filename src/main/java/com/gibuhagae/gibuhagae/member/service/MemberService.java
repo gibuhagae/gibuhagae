@@ -132,7 +132,6 @@ public class MemberService {
 
     public String generatePwd() {
         // 8 ~ 16자의 숫자 + 영문 조합을 생성한다.
-
         // 임시 비밀번호 객체를 생성한다.
         StringBuilder tempPwd = new StringBuilder();
 
