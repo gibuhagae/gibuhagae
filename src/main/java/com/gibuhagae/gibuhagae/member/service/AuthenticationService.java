@@ -53,7 +53,6 @@ public class AuthenticationService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + findMember.getUserCode()));
 
-
         log.info("처리전");
 
         /* UserDetails를 구현한 User 객체에 id, pwd, 권한을 전달해서 객체를 생성하고 반환한다. */

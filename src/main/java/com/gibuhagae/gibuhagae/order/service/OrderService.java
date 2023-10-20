@@ -124,8 +124,6 @@ public class OrderService {
     }
 
     public List<OrderManagementDTO> selectNewOrderList2() {
-
-
         return orderMapper.selectNewOrderList2();
     }
 }

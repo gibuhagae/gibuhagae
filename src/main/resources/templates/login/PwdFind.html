@@ -42,7 +42,7 @@
 
 <div class="etcFunction">
     <button type="button" id="pwdFindBtn">비밀번호 찾기</button>
-    <button type="button" id="cancelBtn" onclick="location.href='/'">취소</button>
+    <button type="button" id="cancelBtn" onclick="location.href='/login/Login'">취소</button>
 </div>
 
 <script>
@@ -59,7 +59,7 @@
         };
 
         if (idAndNameAndEmail.id === "" || idAndNameAndEmail.name === "" || idAndNameAndEmail.email === "") {
-            alert("아이디 or 이름 or 이메일을 입력하세요.");
+            alert("아이디 && 이름 && 이메일을 입력하세요.");
             return;
         }
 

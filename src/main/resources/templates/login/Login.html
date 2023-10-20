@@ -34,7 +34,7 @@
 
     <form class="loginForm" id="loginFormId" action="/login/Login" method="post">
         <input class="inputArea" id="userId" type="text" name="memberId" placeholder="  ID" value="" style="color: rgb(185, 190, 201)" required>
-        <input class="inputArea" id="password" type="password" name="memberPwd" value="Y2cKvgL8c" required>
+        <input class="inputArea" id="password" type="password" name="memberPwd" value="" required>
 
         <div class="loginSave">
             <input type="checkbox" id="idSave" name="idpwdSave"> 아이디 저장
@@ -44,8 +44,6 @@
         <button class="buttonArea" id="loginBtn" type="submit">로그인</button>
     </form>
 
-
-
     <hr id="bLine">
 
 </section>
@@ -53,7 +51,7 @@
 <!-- 네이버 로그인 버튼 노출 영역 -->
 <div class="buttonArea" id="naver_id_login">로그인</div>
 
-<button type="button" class="inputArea" id="kakaoLogin" onclick="location.href='/login/KakaoLogin'">카카오 로그인</button>
+<!--<button type="button" class="inputArea" id="kakaoLogin" onclick="location.href='/login/KakaoLogin'">카카오 로그인</button>-->
 
 <div class="etcFunction">
     <button type="button" id="idFindBtn" onclick="location.href='/login/IdFind'">아이디 찾기</button>
@@ -118,7 +116,6 @@
     // LocalStorage에서 가져온다.
     else {
         // 2-1 로컬 저장소의 값을 가져와 view 데이터에 넘긴다.
-
         let idInput = document.getElementById("userId");
         let idSave = document.getElementById("idSave");
         let idRemember = document.getElementById("idRemember");
@@ -140,12 +137,8 @@
 
         // id 저장여부가 false라면 Input에 값을 대입하지 않는다.
         idInput.value = '';
-        console.log("idInput " + idInput.value)
-        console.log("idSave " + localStorage.getItem("idSave"))
         if (stringToBoolean(localStorage.getItem("idSave")))
             idInput.value = localStorage.getItem("idValue");
-
-        console.log("idInput2 " + idInput.value)
 
         idSave.checked = stringToBoolean(localStorage.getItem("idSave"));
         idRemember.checked = stringToBoolean(localStorage.getItem("idRemember"));
@@ -154,33 +147,24 @@
         // 로그인 영역에 충돌인가?
         if(document.getElementById("loginFormId")) {
             loginFormId.addEventListener('mouseover', (event) => {
-                console.log("로그인 영역 충돌!");
 
                 // input 아이디 영역 충돌
                 idInput.addEventListener('mouseout', (event) => {
-                    console.log("idInput 영역 충돌!");
                     localStorage.setItem("idValue", idInput.value);
                 })
 
                 // 아이디 저장 체크박스 충돌
                 idSave.addEventListener('click', (event) => {
-                    console.log("idSave 영역 충돌!");
-                    console.log(idSave.checked);
                     localStorage.setItem("idSave", idSave.checked);
                 })
 
                 // 로그인 유지 체크박스 충돌
                 idRemember.addEventListener('click', (event) => {
-                    console.log("idRemember 영역 충돌!");
-                    console.log(idRemember.checked);
                     localStorage.setItem("idRemember", idRemember.checked);
                 })
 
             });
         }
-
-        console.log("view 데이터 넘기는 영역");
-        console.log(localStorage.getItem("idRemember"));
     }
 
     console.log("쿠키" + get_cookie(cokName));

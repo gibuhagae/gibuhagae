@@ -210,20 +210,74 @@ window.onload = function() {
 
         // 비밀번호 체크
         let pwdVal = pwd.value;
-        pwdSpan.innerHTML = "대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자 검사";
+        pwdSpan.innerHTML = "대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자";
 
         if (0 < pwdVal.length ) {
-            var inputLeg = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~"!@#$%^()*_/{}|;:<>,.?\-\[\]])[A-Za-z\d~`!@#$%^()*_/{}|;:<>,.?\-\[\]]{8,16}$/;
+            console.log(pwdVal);
+
+            var sSymbolLeg = /[~"!@#$%^()*_/{}|;:<>,.?\-\[\]]/;
+            var lowOrUpperLeg =/[a-zA-Z]/;
+            var numberLeg = /[0-9]/;
             var gapLeg = /[\s]/;
-            let isPwdSpanChanged = false;
+            let isPwdSpanChanged = true;
 
             // 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자 검사
-            if (inputLeg.test(pwdVal)) {
-                pwdSpan.innerHTML = "비번 입력 조건 통과";
-            } else {
-                pwdSpan.innerHTML = "비번 입력 조건 불통과";
+            let lowOrUpperCaseChk = false;
+            let numberChk = false;
+            let specialSymbolChk = false;
+
+            for (let i = 0; i < pwdVal.length; i++) {
+                let val = pwdVal.charAt(i);
+
+                console.log("현재 입력 값: " + val);
+                console.log("after 대소문자 여부 " + lowOrUpperCaseChk);
+                console.log("숫자 여부 " + numberChk);
+                console.log("특수문자 여부 " + specialSymbolChk);
+
+                // 숫자
+                if (numberLeg.test(val)) {
+                    numberChk = true;
+                    console.log("숫자다.")
+                }
+
+                else if (lowOrUpperLeg.test(val)) {
+                    lowOrUpperCaseChk = true;
+                    console.log("대소문자다!");
+                }
+
+                // 특수문자
+                else if (sSymbolLeg.test(val)) {
+                    specialSymbolChk = true;
+                    console.log("특수문자다.")
+                }
+
+                console.log("after 현재 입력 값: " + val);
+                console.log("after 대소문자 여부 " + lowOrUpperCaseChk);
+                console.log("after 숫자 여부 " + numberChk);
+                console.log("after 특수문자 여부 " + specialSymbolChk);
+
+                let isPass = false;
+                // 모든 조합이 들어가 있다면 검사할 이유 x
+                if ( lowOrUpperCaseChk && specialSymbolChk && numberChk) {
+                    console.log("모든 조합이 들어갔다");
+                    pwdSpan.innerHTML = "대소문자/숫자/특수문자 중 3가지 이상 조합 성공";
+                    isPass = true;
+                }
+
+                // 8자 이상 입력과 조합 조건이 통과된 경우 더이상 검사할 필요가 없다.
+                if (isPass && 7 <= i) {
+                    console.log("길이, 조건 통과!");
+                    pwdSpan.innerHTML = "대소문자/숫자/특수문자 중 3가지 이상 조합 성공";
+                    isPwdSpanChanged = false;
+                    break;
+                }
+            }
+
+            if (isPwdSpanChanged) {
+                pwdSpan.innerHTML = "대소문자/숫자/특수문자, 길이가 충족되지 못했습니다. 혹은 동일한 값";
+                console.log("모든 조합이 들어가지 못했다.");
                 isAuth = false;
-                isPwdSpanChanged = true;
+                return;
             }
 
             // 공백 포함일 경우
@@ -231,30 +285,12 @@ window.onload = function() {
                 pwdSpan.innerHTML = "공백이 포함";
                 isAuth = false;
                 isPwdSpanChanged = true;
-            }
 
-            // // 연속된 문자, 숫자 혹은 동일한 문자, 숫자를 반복해서 사용 불가능
-            // for(let i = 0; i < pwdVal.length - 2; i++) {
-            //     let selectedVal = pwdVal.charAt(i);
-            //     console.log(i + "는" + selectedVal + 1);
-            //
-            //     // let cnt = 0;
-            //     // while(true) {
-            //     //     let nextVal = pwdVal.charAt(i + 1);
-            //     //     if (selectedVal === nextVal || )
-            //     // }
-            //
-            // }
-
-            // 아이디 포함 불가능
-            if (pwdVal === id.val) {
-                pwdSpan.innerHTML = "아이디 포함 불가능";
-                isAuth = false;
-                isPwdSpanChanged = true;
+                return;
             }
 
             if (!isPwdSpanChanged)
-                pwdSpan.innerHTML = "";
+                pwdSpan.innerHTML = "조건 통과!";
         }
 
         // 이름 체크

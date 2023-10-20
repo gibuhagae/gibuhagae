@@ -62,7 +62,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
             <label class="joinInput">비밀번호 : </label>
             <img src="/images/asterisk.png" alt="test" width="10" height="10">
             <input class="inputBG" id="inputPwd" type="password" name="pwd" value="">
-            <span id="pwdSpan">(영문 대소문자/숫자/특수 문자 중 세 가지 이상 8자~16자)</span>
+            <span id="pwdSpan"></span>
         </div>
 
             <hr class="joinHr">
@@ -120,7 +120,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
             <div class="emailArea">
             <label class="joinInput">이메일 : </label>
             <img src="/images/asterisk.png" alt="test" width="10" height="10">
-            <input class="inputBG" id="inputEmail" type="text" name="email" placeholder="  songbyhyeok@gmail.com" th:value="${userEmail}"
+            <input class="inputBG" id="inputEmail" type="text" name="email" placeholder="" th:value="${userEmail}"
                 style="color: rgb(185, 190, 201)">
             </div>
 

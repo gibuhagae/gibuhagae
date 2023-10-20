@@ -61,7 +61,7 @@ html {
     background-color: white;
     display: flex;
     justify-content: center;
-    margin-top: 17%;
+    margin-top: 10%;
 }
 
 .joinArea .joinForm {
@@ -70,6 +70,7 @@ html {
 
 .joinInput {
     color: rgb(185, 190, 201);
+    font-weight: bold;
 }
 
 .inputBG, .inputBG2, .inputBG3 {
@@ -176,25 +177,29 @@ html {
 .modifyFunBtns {
     position: absolute;
     margin-top: 6%;
-    top: 85%;
-    left: 50%;
+    top: 92%;
+    left: 45%;
 }
 
-.modifyFunBtns #checkBtn {
+.modifyFunBtns #modifyCheckBtn {
     position: relative;
     right: 70%;
     width: 80px;
     height: 30px;
+
+    font-weight: bold;
 }
 
 .modifyFunBtns #cancelBtn {
     width: 80px;
     height: 30px;
     left: 10%;
+
+    font-weight: bold;
 }
 
 #withdraw:hover,
-#checkBtn:hover,
+#modifyCheckBtn:hover,
 #cancelBtn:hover {
     background-color: rgba(217, 217, 217, 50);
 }
