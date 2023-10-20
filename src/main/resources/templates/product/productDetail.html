@@ -28,7 +28,7 @@
             <!-- 상품 썸네일 사진 -->
             <div class="pd-container-thumbnail">
                 <img th:src="${ item.attachmentList.^[fileType == 'thumbnail'].filePath}">
-                <input id="itemImg" type="hidden" th:src="${ item.attachmentList.^[fileType == 'thumbnail'].filePath}">
+
             </div>
             <!-- 정보 구역 -->
             <div class="pd-container-info">
@@ -70,7 +70,6 @@
                                 <th scope="row">· 상품코드</th>
                                 <td>
                                     <span th:text="${ item.itemCode }"></span>
-                                    <input id="itemCode" type="hidden" name="optionDetailCode.productManagementList.itemCode" th:value="${item.itemCode}">
                                 </td>
                             </tr>
                             <tr rel="옵션" class="product-option">
@@ -87,7 +86,7 @@
                     </div>
                     <div class="explain">
                         <span>· 최소 주문 수량 1개 이상</span><br>
-                        <input type="hidden" id="itemQty" type="number" th:value="1">
+                        <input type="hidden" id="itemQty" th:value="1">
                         <span>· 1세트 갯수가 정해져 있는 상품은 낱개 판매가 불가합니다.</span>
                     </div>
                     <div class="pd-price-title" style="border-bottom: rgba(108,106,106,0.1) 1px solid;">
@@ -99,11 +98,11 @@
                     </div>
                     <div class="selected-option"  id="optionArea" th:text="${ item.optionName }">
                     </div>
+<!--<input name="1b" th:value="${basket.optionDetailCode.productManagementList.itemCode}">-->
+<!--<input name="1b" th:value="${basket.optionDetailCode.optionCode}">-->
+<!--<input name="1b" th:value="${basket.optionDetailCode.count}">-->
 
-                    <input type="hidden" id="optionCode" th:value="${ item.optionCode }>
                     <div class="selected-pd-price" id="priceArea" th:text="'￦ ' + ${#numbers.formatDecimal(item.salePrice, 0, 'COMMA', 0, 'POINT')}"></div>
-                      <input type="hidden" id="itemPrice" th:value="${item.salePrice}">
-
                     <div class="pd-buy-button">
                         <ul style="display: flex">
                             <li class="buy" style="width: 280px; background-color: #DDC6C6;">
@@ -422,48 +421,48 @@
         }
     });
 
-    const $tocart = document.getElementsByClassName('tocart');
-    const $cartImg = document.getElementById('itemImg').src;
-    const $cartItemTitle = document.getElementsByClassName('cart-item-title');
-    const $itemCode = document.getElementById('itemCode').value;
-    const $optionCode = document.getElementById('optionCode').value;
-    const $optionName = document.getElementsByClassName('cart-item-option');
-    const $count = document.getElementById('itemQty').value;
-    const $price = document.getElementsByClassName('cart-price');
-
-    function addBasket() {
-        const basket = {
-            itemImg: $cartImg,
-            // "itemName": $cartItemTitle,
-            itemCode: $itemCode,
-            // "optionName": $optionName,
-            optionCode: $optionCode,
-            count: $count
-            // "price": $price
-        }
-        fetch("/basket/regist", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify(basket)
-        })
-            .then(result => result.text())
-            .then(result => {
-                alert(result);
-                if (result === "실패") {
-                    alert("장바구니에 이미 있습니다.");
-                } else if (result === "성공"){
-                    console.log(basket);
-                    alert("장바구니에 담았습니다.")
-
-                }
-                location.reload();
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+    // const $tocart = document.getElementsByClassName('tocart');
+    // const $cartImg = document.getElementById('itemImg').src;
+    // const $cartItemTitle = document.getElementsByClassName('cart-item-title');
+    // const $itemCode = document.getElementById('itemCode').value;
+    // const $optionCode = document.getElementById('optionCode').value;
+    // const $optionName = document.getElementsByClassName('cart-item-option');
+    // const $count = document.getElementById('itemQty').value;
+    // const $price = document.getElementsByClassName('cart-price');
+    //
+    // function addBasket() {
+    //     const basket = {
+    //         // itemImg: $cartImg,
+    //         // "itemName": $cartItemTitle,
+    //         itemCode: $itemCode,
+    //         // "optionName": $optionName,
+    //         optionCode: $optionCode,
+    //         count: $count
+    //         // "price": $price
+    //     }
+    //     fetch("/basket/regist", {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json; charset=UTF-8'
+    //         },
+    //         body: JSON.stringify(basket)
+    //     })
+    //         .then(result => result.text())
+    //         .then(result => {
+    //             alert(result);
+    //             if (result === "실패") {
+    //                 alert("장바구니에 이미 있습니다.");
+    //             } else if (result === "성공"){
+    //                 console.log(basket);
+    //                 alert("장바구니에 담았습니다.")
+    //
+    //             }
+    //             location.reload();
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // }
 
 
 

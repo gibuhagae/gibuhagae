@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @ToString
 public class ProductManagementDTO {
-    private int itemCode;
+    private Long itemCode;
     private String itemName;
     private String saleStatus;
     private Date registDate;

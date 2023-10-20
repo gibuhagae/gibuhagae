@@ -1,0 +1,206 @@
+@charset "UTF-8";  
+
+html {
+    background-color: white;
+    font-size: 100%;
+}
+
+.joinHr {
+    border: solid 1px rgb(210, 214, 222);
+    margin-top: 1%;
+}
+
+#joinHr1 {
+    position: relative;
+    bottom: 4%;
+}
+
+.pwdArea, .pwdChkArea, .nameArea, .phoneArea, .addrArea, .emailArea {
+    margin-top: 2%;
+}
+
+.myPageCategory {
+    position: absolute;
+    top: 32%;
+    left: 3%;
+}
+
+#categoryTitle {
+    font-size: 2.3rem;
+    position: relative;
+    margin-bottom: 10%;
+}
+
+.categoryBtn {
+    width: 100%;
+    height: 30px;
+}
+
+.categoryBtn:not(#orderHistoryInquiry){
+    margin-top: 10%;
+}
+
+.categoryBtn:not(#mInforModify){
+    background-color: #d9d9d9;
+}
+
+#mInforModify {
+    background-color: ivory;
+}
+
+#orderHistoryInquiry:hover, 
+#creInquiry:hover,
+#mInforModify:hover,
+#interestProduct:hover,
+#recentViewedProduct:hover,
+#savedMoney:hover {
+    background-color: rgba(217, 217, 217, 0);
+}
+
+.joinArea {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+.joinArea .joinForm {
+    width: 55%;
+}
+
+.joinInput {
+    color: rgb(185, 190, 201);
+    font-weight: bold;
+}
+
+.inputBG, .inputBG2, .inputBG3 {
+    background-color: #d7d7d7;
+    font-weight: bold;
+}
+
+#inputId {
+    position: relative;
+    left: 6.4%;
+    background-color: rgb(103, 196, 145);
+}
+
+#inputPwd {
+    position: relative;
+    left: 4.5%;
+}
+
+#inputName {
+    position: relative;
+    left: 8.2%;
+    background-color: rgb(103, 196, 145);
+}
+
+#inputPhone1, #inputPhone2, #inputPhone3 {
+    position: relative;
+    left: 4.5%;
+}
+
+#inputPhone1 {
+    -webkit-appearance:button;
+}
+
+#inputPost, #inputPostBtn, #inputBasicAddr, #inputRAddr {
+    position: relative;
+    left: 8.2%;
+}
+
+#inputBasicAddr {
+    margin-top: 1%;
+    margin-left: 7.4%;
+    width: 40%;
+}
+
+#inputRAddr {
+    margin-top: 1%;
+    margin-left: 7.4%;
+    width: 60%;
+}
+
+#inputEmail {
+    position: relative;
+    left: 6.3%;
+}
+
+.joinArea .joinTitle {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 28%;
+    left: 45%;
+}
+
+.inputBG {
+    width: 30%;
+}
+
+.inputBG2 {
+    width: 10%;
+}
+
+.InputBG3 {
+    width: 10%;
+}
+
+#inputPost {
+    width: 13%;
+}
+
+#pwdSpan {
+    position: relative;
+    left: 5.2%;
+}
+
+#inputPostBtn {
+    background-color: rgb(103, 196, 145);
+    border: solid 1px;
+    width: 12%;
+}
+
+#inputPostBtn:hover {
+    background-color: rgb(103, 196, 145, 0);
+}
+
+#withdraw {
+    position: relative;
+    top: 5%;
+    left: 70%;
+    width: 80px;
+    height: 30px;
+    color: rgb(102, 216, 195);
+    font-weight: bold;
+}
+
+.modifyFunBtns {
+    position: absolute;
+    margin-top: 6%;
+    top: 92%;
+    left: 45%;
+}
+
+.modifyFunBtns #modifyCheckBtn {
+    position: relative;
+    right: 70%;
+    width: 80px;
+    height: 30px;
+
+    font-weight: bold;
+}
+
+.modifyFunBtns #cancelBtn {
+    width: 80px;
+    height: 30px;
+    left: 10%;
+
+    font-weight: bold;
+}
+
+#withdraw:hover,
+#modifyCheckBtn:hover,
+#cancelBtn:hover {
+    background-color: rgba(217, 217, 217, 50);
+}
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네이버 로그인</title>
+    <!-- 외부 스타일 시트 -->
+    <link href="/css/login/NaverLoginStyle.css" rel="stylesheet" type="text/css">
+    <!-- 리셋 CSS : 브라우저별로 디폴트로 적용 된 CSS(여백, 폰트 등)에 차이가 있으므로
+   브라우저별로 다르게 보일 수 있어 리셋 CSS를 활용한다. -->
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+</head>
+
+<body>
+<!-- 헤더(로고, 상단 메뉴)-->
+<div th:replace="/common/board/navigation"></div>
+
+<p id="title">NAVER</p>
+<p id="subTitle">로그인</p>
+
+<section class="sectionLogin">
+
+    <hr id="uLine">
+
+    <form class="loginForm" action="/login/NaverLogin" method="post">
+        <input class="inputArea" id="loginId" type="id" name="id" value="아이디" style="color: rgb(185, 190, 201)">
+        <input class="inputArea" id="loginPwd" type="password" name="pwd">
+
+        <div class="loginSave">
+            <input type="radio" name="idpwdSave" value="idSave"> 아이디 저장
+            <input type="radio" name="idpwdSave" value="pwdSave"> 비밀번호 저장
+        </div>
+
+        <!-- 네이버 로그인 버튼 노출 영역 -->
+        <div class="buttonArea" id="naver_id_login">로그인</div>
+
+    </form>
+
+    <hr id="bLine">
+
+</section>
+
+<div class="etcFunction">
+    <button id="idFindBtn" onclick="location.href='/login/IdFind'">아이디 찾기</button>
+    <button id="pwdFindBtn" onclick="location.href='/login/PwdFind'">비밀번호 찾기</button>
+    <button id="joinBtn" onclick="location.href='/join/Join'">회원가입</button>
+</div>
+
+
+
+
+</body>
+
+</html>

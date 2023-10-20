@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>취소 반품 교환 조회</title>
+    <!-- 외부 스타일 시트 -->
+    <link href="/css/myPage/CancelReturnExchangeStyle.css" rel="stylesheet" type="text/css">
+    <!-- 리셋 CSS : 브라우저별로 디폴트로 적용 된 CSS(여백, 폰트 등)에 차이가 있으므로
+   브라우저별로 다르게 보일 수 있어 리셋 CSS를 활용한다. -->
+   <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<!-- 헤더(로고, 상단 메뉴)-->
+<div th:replace="/common/board/navigation"></div>
+
+    <nav class="myPageCategory">
+        <p id="categoryTitle">마이쇼핑</p>
+        <br>
+        <button class="categoryBtn" id="orderHistoryInquiry" onclick="location.href='OrderDetail'">주문내역 조회</button> <br>
+        <button class="categoryBtn" id="creInquiry" onclick="location.href='CancelReturnExchange'">취소 반품 교환 조회</button> <br>
+        <button class="categoryBtn" id="mInforModify" onclick="location.href='MemberInformationModify'">회원정보 수정</button> <br>
+        <button class="categoryBtn" id="interestProduct" onclick="location.href='InterestProduct'">관심 상품</button> <br>
+        <button class="categoryBtn" id="recentViewedProduct" onclick="location.href='RecentViewedProduct'">최근 본 상품</button> <br>
+        <button class="categoryBtn" id="savedMoney" onclick="location.href='SavedMoney'">적립금</button>
+    </nav>
+
+    <main class="myOrderList">
+
+        <p id="orderListTitle">취소/반품/교환</p>
+
+        <div class="myOrderButton">
+            <button class="inqueryBtn" id="inqueryBtn1" onclick="location.href='join.html'">전체 주문처리 상태</button>
+            <button class="inqueryBtn" id="inqueryBtn2" onclick="location.href='join.html'">오늘</button>
+            <button class="inqueryBtn" id="inqueryBtn3" onclick="location.href='join.html'">1주일</button>
+            <button class="inqueryBtn" id="inqueryBtn4" onclick="location.href='join.html'">1개월</button>
+            <button class="inqueryBtn" id="inqueryBtn5" onclick="location.href='join.html'">3개월</button>
+            <button class="inqueryBtn" id="inqueryBtn6" onclick="location.href='join.html'">6개월</button>
+            <button class="inqueryBtn" id="inqueryBtn7" onclick="location.href='join.html'">시작 날짜</button>
+            <button class="inqueryBtn" id="inqueryBtn8" onclick="location.href='join.html'">끝 날짜</button>
+            <button class="inqueryBtn" id="inqueryBtn9" onclick="location.href='join.html'">조회하기</button>
+        </div>
+
+        <div class="myOrderDesc">
+        <table summary="주문 상품 정보란 서술">
+            <tbody>
+                <tr>
+                    <th scope="" class="orderSTitle">취소/반품/교환</th>
+                    <th scope="" class="orderSTitle" id="orderInfor1">아래 주문 상품 정보를 확인하세요.</th>
+                </tr>
+
+                <hr id="uLine">
+
+                <tr>
+                    <th scope="" class="orderCatName">주문일자/주문번호</th>
+                    <th scope="" class="orderCatName" id="orderImgTxt">이미지</th>
+                    <th scope="" class="orderCatName">상품정보</th>
+                    <th scope="" class="orderCatName">수량</th>
+                    <th scope="" class="orderCatName">상품구매금액</th>
+                    <th scope="" class="orderCatName">주문처리상태</th>
+                    <th scope="" class="orderCatName">끝 날짜</th>
+                    <th scope="" class="orderCatName">취소/교환/반품</th>
+                </tr>
+
+                <hr id="mLine">
+
+                <tr>
+                    <th scope="" class="orderListText">주문 내역이 없습니다.</th>
+                </tr>
+
+                <hr id="bLine">
+
+            </tbody>
+        </table>
+    </div>
+    </main>
+
+</body>
+
+</html>

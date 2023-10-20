@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <!-- 외부 스타일 시트 -->
+    <link href="/css/join/JoinStyle.css" rel="stylesheet" type="text/css">
+    <!-- 리셋 CSS : 브라우저별로 디폴트로 적용 된 CSS(여백, 폰트 등)에 차이가 있으므로
+   브라우저별로 다르게 보일 수 있어 리셋 CSS를 활용한다. -->
+    <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/event.js"></script>
+
+    <script>
+        const message = '[[${message}]]';
+        message && alert(message);
+    </script>
+
+</head>
+
+<body>
+<!-- 헤더(로고, 상단 메뉴)-->
+<div th:replace="/common/board/navigation"></div>
+
+    <section class="joinArea">
+
+        <p class="joinTitle">회원가입</p>
+
+        <form class="joinForm" id="joinFormId" action="/join/Join" method="post">
+
+            <div id="joinFormArea">
+            <hr class="joinHr" id="joinHr1">
+
+            <div class="idArea" id="idAreaId">
+                <label class="joinInput">아이디</label>
+                <img src="/images/asterisk.png" alt="test" width="10" height="10">
+                <input class="inputBG" id="inputId" type="text" name="userId" value="" placeholder="  ID" style="color: rgb(185, 190, 201)" required>
+                <input type="button" value="중복확인" id="duplicationCheck">
+                <span id="idSpan">아이디를 입력해 주세요. (영문소문자/숫자, 4~16자)</span>
+            </div>
+
+            <hr class="joinHr">
+
+            <div class="pwdArea">
+                <label class="joinInput">비밀번호</label>
+                <img src="/images/asterisk.png" alt="test" width="10" height="10">
+                <input class="inputBG" id="inputPwd" type="password" name="password" value="" placeholder="  비밀번호를 입력하세요." style="color: rgb(185, 190, 201)" required>
+                <span id="pwdSpan">(영문 대소문자/숫자/특수 문자 중 세 가지 이상 8자~16자)</span>
+            </div>
+
+            <hr class="joinHr">
+
+            <div class="pwdChkArea">
+                <label class="joinInput">비밀번호 확인</label>
+                <img src="/images/asterisk.png" alt="test" width="10" height="10">
+                <input class="inputBG" id="inputPwdChk" type="password" name="passwordCheck" value="" placeholder="" required>
+                <span id="pwdChkSpan"></span>
+            </div>
+
+            <hr class="joinHr">
+
+            <div class="nameArea">
+                <label class="joinInput">이름</label>
+                <img src="/images/asterisk.png" alt="test" width="10" height="10">
+                <input class="inputBG" id="inputName" type="text" name="memberName" value="" placeholder="  홍길동"
+                    style="color: rgb(185, 190, 201)" required>
+                <span id="nameSpan"></span>
+            </div>
+
+            <hr class="joinHr">
+
+            <div class="phoneArea">
+                <label class="joinInput">휴대전화</label>
+                <img src="/images/asterisk.png" alt="test" width="10" height="10">
+                <select class="inputBG2" id="inputPhone1" name="memberPhone"  style="color: rgb(185, 190, 201)">
+
+                    <option value="010" selected>010</option>
+                    <option value="011">011</option>
+                    <option value="016">016</option>
+                    <option value="017">017</option>
+                    <option value="018">018</option>
+                    <option value="019">019</option>
+                </select>
+
+                <input class="inputBG2" id="inputPhone2" name="memberPhone2" value="" type="text" required>
+                <input class="inputBG2" id="inputPhone3" name="memberPhone3" value="" type="text" required>
+                <span id="phoneSpan"></span>
+            </div>
+
+            <hr class="joinHr">
+
+            <div class="addrArea">
+            <label class="joinInput">주소</label>
+            <img src="/images/asterisk.png" alt="test" width="10" height="10">
+            <input class="inputBG3" id="inputPost" type="text" name="zipcode" placeholder="  우편번호" readonly
+                style="color: rgb(185, 190, 201)" required>
+            <button type="button" id="inputPostBtn">주소검색</button>
+            <br>
+            <input class="inputBG" id="inputBasicAddr" type="text" name="address" placeholder="  기본주소" readonly
+                style="color: rgb(185, 190, 201)" required>
+            <br>
+            <input class="inputBG" id="inputRAddr" type="text" name="rAddress" value="" placeholder="  나머지 주소(선택 입력 가능)"
+                style="color: rgb(185, 190, 201)" required>
+            </div>
+
+            <hr class="joinHr">
+
+            <div class="emailArea">
+            <label class="joinInput">이메일</label>
+            <img src="/images/asterisk.png" alt="test" width="10" height="10">
+            <input class="inputBG" id="inputEmail" type="text" name="email" value="" placeholder="  abcd@gmail.com"
+                style="color: rgb(185, 190, 201)" required>
+                <span id="emailSpan"></span>
+            </div>
+            
+            <hr class="joinHr">
+
+            <div class="joinFunBtns">
+                <button type="button" id="joinBtn">회원가입</button>
+                <button type="button" id="cancelBtn" onclick="location.href='/login/Login'">취소</button>
+            </div>
+
+            </div>
+        </form>
+
+    </section>
+
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        const $searchZipCode = document.getElementById("inputPostBtn");
+
+        $searchZipCode.onclick = function(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    document.getElementById("inputPost").value = data.zonecode;
+                    document.getElementById("inputBasicAddr").value = data.address;
+                    document.getElementById("inputRAddr").focus();
+                }
+            }).open();
+        }
+    </script>
+
+</body>
+
+</html>

@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
+@RequestMapping("/basket")
 public class BasketController {
 
     private final BasketMapper basketMapper;

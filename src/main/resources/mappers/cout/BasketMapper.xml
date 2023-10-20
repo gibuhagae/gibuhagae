@@ -70,13 +70,14 @@
         JOIN MEMBER D ON (A.MEMBER_NO = D.MEMBER_NO)
         JOIN ATTACHMENT E ON (C.ITEM_CODE = E.ITEM_CODE)
 
+
         <where>
             <if test="optCode != null">
                 B.OPTION_CODE = #{optionCode}
             </if>
 
             <if test="memberNo != null">
-                AND D.MEMBER_NO = #{memberNo}
+                AND D.MEMBER_NO = 1
             </if>
 
         </where>

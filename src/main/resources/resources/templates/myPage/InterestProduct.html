@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>관심 상품</title>
+    <!-- 외부 스타일 시트 -->
+    <link href="/css/myPage/InterestProductStyle.css" rel="stylesheet" type="text/css">
+    <!-- 리셋 CSS : 브라우저별로 디폴트로 적용 된 CSS(여백, 폰트 등)에 차이가 있으므로
+   브라우저별로 다르게 보일 수 있어 리셋 CSS를 활용한다. -->
+   <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<!-- 헤더(로고, 상단 메뉴)-->
+<div th:replace="/common/board/navigation"></div>
+
+    <nav class="myPageCategory">
+        <p id="categoryTitle">마이쇼핑</p>
+        <br>
+        <button class="categoryBtn" id="orderHistoryInquiry" onclick="location.href='OrderDetail'">주문내역 조회</button> <br>
+        <button class="categoryBtn" id="creInquiry" onclick="location.href='CancelReturnExchange'">취소 반품 교환 조회</button> <br>
+        <button class="categoryBtn" id="mInforModify" onclick="location.href='MemberInformationModify'">회원정보 수정</button> <br>
+        <button class="categoryBtn" id="interestProduct" onclick="location.href='InterestProduct'">관심 상품</button> <br>
+        <button class="categoryBtn" id="recentViewedProduct" onclick="location.href='RecentViewedProduct'">최근 본 상품</button> <br>
+        <button class="categoryBtn" id="savedMoney" onclick="location.href='SavedMoney'">적립금</button>
+    </nav>
+
+    <main class="myOrderList">
+
+        <p id="orderListTitle">관심상품 목록</p>
+
+        <div class="myOrderDesc">
+            <table summary="관심상품 목록">
+
+                <hr id="uLine">
+
+                <tr>
+                    <td class="orderCatName">이미지</th>
+                    <td class="orderCatName">상품명</th>
+                    <td class="orderCatName">판매가</th>
+                    <td class="orderCatName">수량</th>
+                    <td class="orderCatName">적립금</th>
+                    <td class="orderCatName">주문</th>
+                </tr>
+    
+                <tr>
+                    <td colspan="5" class=""></th>
+                    <th><button class="orderCatBtn" id="putBtn" onclick="location.href='join.html'">담기</button></th>
+                </tr>
+    
+                <div class="myOrderContent">
+                <tr>
+                    <td class="orderCatName">이미지 내용</th>
+                    <td class="orderCatName">상품명 서술</th>
+                    <td class="orderCatName">판매가</th>
+                    <td class="orderCatName">가격</th>
+                    <td class="orderCatName">230원(1%)</th>
+                        <th><button class="orderCatBtn" id="orderBtn" onclick="location.href='join.html'">주문</button></th>
+                </tr>
+            </div>
+                <tr>
+                    <td colspan="5" class=""></th>
+                        <th><button class="orderCatBtn" id="deleteBtn" onclick="location.href='join.html'">삭제</button></th>
+                </tr>
+
+                <hr id="bLine">
+
+            </table>
+    </div>
+    </main>
+
+</body>
+
+</html>

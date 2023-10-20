@@ -1,5 +1,6 @@
 package com.gibuhagae.gibuhagae.product.controller;
 
+import com.gibuhagae.gibuhagae.basket.dto.BasketDTO;
 import com.gibuhagae.gibuhagae.product.dto.ItemDTO;
 import com.gibuhagae.gibuhagae.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,10 @@ public class ProductController {
         ItemDTO itemDetail = productService.selectProductDetail(no);
 
 
+        BasketDTO basketDTO = new BasketDTO();
+
         model.addAttribute("item", itemDetail);
+        model.addAttribute("basket", basketDTO);
 
         return "product/productDetail";
     }

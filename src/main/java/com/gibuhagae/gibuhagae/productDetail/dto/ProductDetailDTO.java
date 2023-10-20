@@ -12,9 +12,9 @@ import java.util.Date;
 @Setter
 @ToString
 public class ProductDetailDTO {
-   private int optionCode;
-   private int itemCode;
-   private int count;
+   private Long optionCode;
+   private Long itemCode;
+   private Long count;
    private String optionName;
    private int salePrice;
    private Date registDate;

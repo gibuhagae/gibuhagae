@@ -14,12 +14,12 @@ import java.util.List;
 @Setter
 @ToString
 public class BasketDTO {
-    private int basketNo;
-    private int count;
+    private Long basketNo;
+    private Long count;
     private ProductDetailDTO optionDetailCode;
     private MemberDTO member;
     private int memberNo;
-    private int optionCode;
-    private int itemCode;
+    private Long optionCode;
+    private Long itemCode;
     private List<BasketDTO> basketItems;
 }
